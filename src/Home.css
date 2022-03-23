@@ -1,0 +1,82 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+body #home{
+    padding: 0 8%;
+}
+
+#home button{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#home a{
+    color: black;
+    text-decoration: none;
+}
+
+/* Navbar */
+
+#home nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+#home nav ul{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+#home nav ul li{
+    margin: 0 15px;
+}
+
+#home nav button{
+    background-color: transparent;
+    border: 1px solid black;
+}
+
+/* hero sect */
+
+#home #hero{
+    display: flex;
+}
+
+#home #hero > div:first-of-type{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#home #hero div:first-of-type p{
+    margin: 5px 0;
+    opacity: .7;
+}
+
+#home #hero h2{
+    font-size: 3rem;
+}
+
+#home #hero img{
+    max-width: 55vw;
+}
+
+#home #hero button{
+    color: white;
+    background-color: #6fc580;
+    border: none;
+    padding: 11px 25px;
+    margin-top: 15px;
+}
