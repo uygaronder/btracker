@@ -1,0 +1,88 @@
+/* General */
+
+#console {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+}
+
+#console ul li {
+    margin: 0 5px;
+}
+
+/* Nav */
+
+#console nav img {
+    height: 36px;
+    width: 36px;
+    filter: invert(1);
+    margin-right: 10px;
+}
+
+#console nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 15px;
+    background-color: var(--darkBlue);
+}
+
+#console nav li a {
+    color: white;
+    text-decoration: none;
+}
+
+#console nav > * {
+    display: flex;
+    align-items: center;
+}
+
+#console ul {
+    display: flex;
+    list-style: none;
+}
+
+#console #user #avatar {
+    height: 24px;
+    width: 24px;
+    display: block;
+    background-image: url("./res/svg/user.svg");
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* screen */
+
+#console #screen {
+    display: flex;
+    flex-grow: 1;
+}
+
+/* Side Nav */
+#console #sideNav {
+    background-color: #001316;
+    padding: 5px 0;
+}
+
+#console #sideNav ul {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+#console #sideNav ul li a {
+    color: white;
+    text-decoration: none;
+}
+#console #sideNav ul li a div {
+    text-align: center;
+}
+
+#console #sideNav ul li a div img {
+    height: 30px;
+    width: 30px;
+    filter: brightness(0) invert(1);
+}
+
+#console #sideNav ul li a div p {
+    font-size: 0.8rem;
+}

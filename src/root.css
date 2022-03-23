@@ -1,0 +1,24 @@
+:root {
+    --monospace: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+
+    --green: #6fc580;
+    --lightBlue: rgb(206, 255, 239);
+    --darkBlue: #02353c;
+
+    --BGGradient: linear-gradient(
+        236deg,
+        rgba(111, 197, 128, 1) 0%,
+        rgba(3, 80, 91, 1) 100%
+    );
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: black;
+}

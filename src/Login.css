@@ -1,0 +1,101 @@
+#login * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#login {
+    display: flex;
+    align-items: center;
+}
+
+#login button {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+#loginHero {
+    background-color: var(--green);
+    width: 50vw;
+    height: 100vh;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 30px;
+    flex: 1;
+    padding: 0 10%;
+}
+
+#loginForm > * {
+    margin: 10px 0;
+}
+
+#loginForm .formDiv {
+    display: flex;
+    flex-direction: column;
+}
+#loginForm form {
+    display: flex;
+    flex-direction: column;
+}
+#loginForm form > * {
+    margin: 5px 0;
+}
+
+#loginForm p,
+#loginForm h1 {
+    text-align: center;
+}
+
+#loginForm input {
+    background-color: transparent;
+    border: none;
+}
+
+#loginForm .formText {
+    background-color: var(--lightBlue);
+    border-radius: 3px;
+    padding: 5px 10px;
+    display: flex;
+}
+
+#loginForm input {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    font-size: 1rem;
+    outline: none;
+    font-family: var(--monospace);
+}
+#loginForm input:focus {
+    border: none;
+}
+
+#loginForm button {
+    background-color: var(--green);
+    border: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    width: 50%;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#loginForm .buttonSpan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loginForm .buttonSpan div {
+    display: flex;
+    text-align: center;
+    margin: 0 2px;
+}
+#loginForm .buttonSpan div > * {
+    margin: 0 1px;
+}
