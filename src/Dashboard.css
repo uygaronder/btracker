@@ -1,0 +1,46 @@
+#dashboard{
+    display: grid;
+    padding: 15px;
+}
+
+#dashboard #dashboardInfo{
+    display: flex;
+    align-items: center;
+}
+
+#dashboard #dashboardInfo #dashboardSearch{
+    display: flex;
+    align-items: center;
+    background-color: var(--searchBack);
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+#dashboard #dashboardInfo #dashboardSearch input{
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    font-family: var(--monospace);
+    color: black;
+}
+
+#dashboard #dashboardInfo #dashboardSearch input:focus{
+    outline: none;
+}
+
+#dashboard #dashboardInfo #dashboardSearch input::placeholder{
+    color: black;
+}
+#dashboard #dashboardInfo #dashboardSearch input:-ms-input-placeholder{
+    color: black;
+}
+#dashboard #dashboardInfo #dashboardSearch input::-ms-input-placeholder{
+    color: black;
+}
+
+
+#dashboard #dashboardInfo #dashboardSearch img{
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
