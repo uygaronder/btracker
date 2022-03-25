@@ -65,21 +65,18 @@
     text-align: center;
 }
 
-#console #user #avatar {
-    height: 24px;
-    width: 24px;
-    display: block;
-    background-image: url("./res/svg/user.svg");
-    background-color: white;
-    border-radius: 50%;
-}
-
 /* screen */
 
 #console #screen {
     display: flex;
     flex-grow: 1;
 }
+
+#console #screen #consoleScreen{
+    display: flex;
+    flex-grow: 1;
+}
+
 
 /* Side Nav */
 #console #sideNav {

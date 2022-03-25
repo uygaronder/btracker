@@ -46,7 +46,7 @@ class Login extends React.Component {
                             </li>
                             <li id="user">
                                 <a href="*">
-                                    <span id="avatar"></span>
+                                    <span className="avatar"></span>
                                 </a>
                             </li>
                         </ul>
