@@ -41,17 +41,17 @@
     list-style: none;
 }
 
-#console #notificationsItem{
+#console #notificationsItem {
     position: relative;
 }
 
-#console #notificationsItem img{
+#console #notificationsItem img {
     margin: 0;
     height: 24px;
     width: 24px;
 }
 
-#console #notificationsItem #notification{
+#console #notificationsItem #notification {
     position: absolute;
     height: 15px;
     width: 15px;
@@ -59,7 +59,7 @@
     right: -5px;
     background-color: #00191d;
     color: white;
-    font-size: .6rem;
+    font-size: 0.6rem;
     padding: 2px;
     border-radius: 50%;
     text-align: center;
@@ -72,11 +72,10 @@
     flex-grow: 1;
 }
 
-#console #screen #consoleScreen{
+#console #screen #consoleScreen {
     display: flex;
     flex-grow: 1;
 }
-
 
 /* Side Nav */
 #console #sideNav {
@@ -91,16 +90,16 @@
 #console #sideNav ul {
     display: flex;
     flex-direction: column;
-    
 }
 
 #console #sideNav ul li {
     padding: 5px;
-    transition: .2s ease;
+    transition: 0.2s ease;
 }
 
-#console #sideNav ul li:hover{
+#console #sideNav ul li:hover {
     background-color: #00252b;
+    cursor: pointer;
 }
 
 #console #sideNav ul li a {
@@ -119,6 +118,10 @@
     height: 30px;
     width: 30px;
     filter: brightness(0) invert(1);
+}
+
+#console ul .activeTab {
+    background-color: #00252b;
 }
 
 #console #sideNav ul li a p {

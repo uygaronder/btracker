@@ -1,47 +1,44 @@
-#dashboard{
+#dashboard {
     display: grid;
     grid-gap: 10px;
     padding: 15px;
     grid-template-columns: 7fr 4fr;
     grid-template-rows: 1fr 1fr 4fr 1fr 1fr;
-    grid-template-areas: 
+    grid-template-areas:
         "header status"
         "dBugs status"
         "dBugs feed"
         "dBugs feed"
-        "dBugs feed"
-    ;
+        "dBugs feed";
     width: 100%;
-
 }
 
-#dashboard #dashboardInfo{
+#dashboard #dashboardInfo {
     display: flex;
     align-items: center;
     grid-area: header;
     justify-content: space-between;
 }
 
-#dashboard #dashboardInfo h2{
+#dashboard #dashboardInfo h2 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.747);
     margin-right: 5px;
 }
 
-#dashboard #dashboardTitle{
+#dashboard #dashboardTitle {
     display: flex;
     align-items: center;
 }
 
-#dashboard #dashboardInfo #dashboardSearch{
+#dashboard #dashboardInfo #dashboardSearch {
     display: flex;
     align-items: center;
     background-color: var(--searchBack);
     padding: 5px 10px;
     border-radius: 8px;
-    
 }
 
-#dashboard #dashboardInfo #dashboardSearch input{
+#dashboard #dashboardInfo #dashboardSearch input {
     background-color: transparent;
     border: none;
     font-size: 1rem;
@@ -49,22 +46,21 @@
     color: black;
 }
 
-#dashboard #dashboardInfo #dashboardSearch input:focus{
+#dashboard #dashboardInfo #dashboardSearch input:focus {
     outline: none;
 }
 
-#dashboard #dashboardInfo #dashboardSearch input::placeholder{
+#dashboard #dashboardInfo #dashboardSearch input::placeholder {
     color: black;
 }
-#dashboard #dashboardInfo #dashboardSearch input:-ms-input-placeholder{
+#dashboard #dashboardInfo #dashboardSearch input:-ms-input-placeholder {
     color: black;
 }
-#dashboard #dashboardInfo #dashboardSearch input::-ms-input-placeholder{
+#dashboard #dashboardInfo #dashboardSearch input::-ms-input-placeholder {
     color: black;
 }
 
-
-#dashboard #dashboardInfo #dashboardSearch img{
+#dashboard #dashboardInfo #dashboardSearch img {
     height: 24px;
     width: 24px;
     cursor: pointer;
@@ -72,7 +68,7 @@
 
 /* table */
 
-#dashboard #dashboardBugs{
+#dashboard #dashboardBugs {
     grid-area: dBugs;
     display: flex;
     flex-direction: column;
@@ -84,52 +80,50 @@
     position: relative;
 }
 
-#dashboard #dashboardBugs table{
+#dashboard #dashboardBugs table {
     font-size: 1rem;
     border-collapse: collapse;
 }
 
-#dashboard #dashboardBugs table tr{
+#dashboard #dashboardBugs table tr {
     border-bottom: 1px solid rgba(126, 126, 126, 0.438);
-    transition: .2s ease;
+    transition: 0.2s ease;
 }
 
-#dashboard #dashboardBugs table tr:first-of-type{
+#dashboard #dashboardBugs table tr:first-of-type {
     text-transform: uppercase;
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: 600;
-
 }
 
-#dashboard #dashboardBugs table tr:last-of-type{
+#dashboard #dashboardBugs table tr:last-of-type {
     border-bottom: none;
 }
 
-
-#dashboard #dashboardBugs table tr:first-of-type:hover{
+#dashboard #dashboardBugs table tr:first-of-type:hover {
     background-color: white;
 }
 
-#dashboard #dashboardBugs table tr:hover{
+#dashboard #dashboardBugs table tr:hover {
     background-color: rgb(238, 238, 238);
 }
 
-#dashboard #dashboardBugs table td{
+#dashboard #dashboardBugs table td {
     padding: 5px 8px;
     cursor: pointer;
 }
 
-#dashboard #dashboardBugs table td:first-of-type{
+#dashboard #dashboardBugs table td:first-of-type {
     width: 8ch;
 }
 
-#dashboard #dashboardBugs table td:last-of-type{
-    width: 11ch;
+#dashboard #dashboardBugs table td:last-of-type {
+    width: 13ch;
 }
 
-#dashboard #dashboardBugs .status{
+#dashboard #dashboardBugs .status {
     padding: 3px;
-    font-size: .6rem;
+    font-size: 0.6rem;
     font-weight: 600;
     display: flex;
     background-color: #e4e4e4;
@@ -138,33 +132,33 @@
     text-transform: uppercase;
 }
 
-#dashboard #dashboardBugs .ongoing .status{
+#dashboard #dashboardBugs .ongoing .status {
     background-color: rgb(214, 212, 58);
     color: rgb(82, 82, 0);
 }
 
-#dashboard #dashboardBugs .complete .status{
+#dashboard #dashboardBugs .complete .status {
     background-color: rgb(115, 214, 58);
     color: rgb(0, 75, 0);
 }
 
-#dashboard #dashboardBugs .overdue .status{
+#dashboard #dashboardBugs .overdue .status {
     background-color: rgb(252, 81, 58);
     color: rgb(75, 9, 0);
 }
 
-#dashboard #dashboardBugs .pending .status{
+#dashboard #dashboardBugs .pending .status {
     background-color: rgb(58, 158, 252);
     color: rgb(6, 0, 83);
 }
 
-#dashboard #dashboardBugs .new .status{
+#dashboard #dashboardBugs .new .status {
     background-color: rgb(58, 213, 252);
     color: rgb(6, 0, 83);
 }
 
-#dashboard .priority{
-    font-size: .6rem;
+#dashboard .priority {
+    font-size: 0.6rem;
     text-transform: uppercase;
     display: flex;
     justify-content: center;
@@ -177,19 +171,19 @@
     margin: auto;
 }
 
-#dashboard .low .priority{
+#dashboard .low .priority {
     background-color: green;
 }
 
-#dashboard .med .priority{
+#dashboard .med .priority {
     background-color: rgb(172, 117, 0);
 }
 
-#dashboard .high .priority{
+#dashboard .high .priority {
     background-color: rgb(170, 0, 0);
 }
 
-#dashboard #dashboardBugs button{
+#dashboard #dashboardBugs button {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -201,15 +195,15 @@
     border: none;
     background-color: rgb(0, 31, 7);
     color: white;
-    transition: .2s ease;
+    transition: 0.2s ease;
     font-weight: 600;
 }
 
-#dashboard #dashboardBugs button:hover{
+#dashboard #dashboardBugs button:hover {
     background-color: rgb(0, 49, 11);
 }
 
-#dashboard #dashboardBugs button img{
+#dashboard #dashboardBugs button img {
     height: 20px;
     width: 20px;
     margin-right: 3px;
@@ -218,71 +212,63 @@
 
 /* bug status */
 
-#dashboard #dashboardStats{
+#dashboard #dashboardStats {
     grid-area: status;
 }
 
-#dashboard #dashboardStatus{
+#dashboard #dashboardStatus {
     display: flex;
     justify-content: space-between;
     margin-top: 12px;
 }
 
-#dashboard #dashboardStatus li{
+#dashboard #dashboardStatus li {
     background-color: #e4e4e4;
     padding: 10px 5px;
     text-align: center;
     border-radius: 12px;
     cursor: pointer;
-    transition: .2s ease;
+    transition: 0.2s ease;
 }
 
-#dashboard #dashboardStatus li:hover{
-    opacity: .75;
+#dashboard #dashboardStatus li:hover {
+    opacity: 0.75;
 }
 
-#dashboard #dashboardStatus li p{
-    font-size: .6rem;
-    width: 13ch;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-#dashboard #dashboardStatus #openStatus{
+#dashboard #dashboardStatus #openStatus {
     background-color: rgb(103, 204, 103);
     color: rgb(0, 88, 0);
 }
 
-#dashboard #dashboardStatus #closeStatus{
+#dashboard #dashboardStatus #closeStatus {
     background-color: rgba(103, 204, 103, 0.548);
     color: rgba(0, 88, 0, 0.541);
 }
 
-#dashboard #dashboardStatus #overStatus{
+#dashboard #dashboardStatus #overStatus {
     background-color: rgb(219, 103, 68);
     color: rgb(65, 13, 0);
 }
 
-#dashboard #dashboardStatus #dayStatus{
+#dashboard #dashboardStatus #dayStatus {
     background-color: rgb(204, 197, 103);
     color: rgb(70, 59, 0);
 }
 
-#dashboard #dashboardStatus #weekStatus{
+#dashboard #dashboardStatus #weekStatus {
     background-color: rgb(154, 253, 154);
     color: rgb(0, 88, 0);
 }
 
 /* feed */
 
-#dashboard #dashboardFeed{
+#dashboard #dashboardFeed {
     grid-area: feed;
     display: flex;
     flex-direction: column;
-    
 }
 
-#dashboard #dashboardFeed #dashboardFeedText{
+#dashboard #dashboardFeed #dashboardFeedText {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -291,19 +277,18 @@
     padding: 15px;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText .feedItem{
+#dashboard #dashboardFeed #dashboardFeedText .feedItem {
     margin: 5px 0;
     align-items: center;
 }
 
-
-#dashboard #dashboardFeed #dashboardFeedText .feedItem .updateTime{
-    font-size: .6rem;
-    opacity: .5;
+#dashboard #dashboardFeed #dashboardFeedText .feedItem .updateTime {
+    font-size: 0.6rem;
+    opacity: 0.5;
     font-weight: 600;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText .feedItem > div{
+#dashboard #dashboardFeed #dashboardFeedText .feedItem > div {
     display: flex;
     justify-content: space-between;
     align-items: center;

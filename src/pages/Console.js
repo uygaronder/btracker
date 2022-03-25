@@ -10,14 +10,34 @@ import feed from "../res/svg/feed.svg";
 import notification from "../res/svg/notification.svg";
 
 import Dashboard from "./console-pages/Dashboard";
+import Bugs from "./console-pages/Bugs";
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { page: "dashboard" };
+    }
+    changePage(page) {
+        this.setState({ page: page });
+    }
+    serveComponent = () => {
+        switch (this.state.page) {
+            case "dashboard":
+                return <Dashboard />;
+            case "bugs":
+                return <Bugs />;
+            default:
+                return <Dashboard />;
+        }
+    };
     render() {
         return (
             <div id="console">
                 <nav>
                     <div>
-                        <a href="/"><img src={bug} alt="Logo" /></a>
+                        <a href="/">
+                            <img src={bug} alt="Logo" />
+                        </a>
                         <ul>
                             <li>
                                 <a href="*">Home</a>
@@ -36,13 +56,11 @@ class Login extends React.Component {
                                 <a href="*">Settings</a>
                             </li>
                             <li id="notificationsItem">
-                                <img src={notification}/>
+                                <img src={notification} />
                                 <span id="notification">
                                     <p>3</p>
                                 </span>
-                                <div id="notificationsBox">
-
-                                </div>
+                                <div id="notificationsBox"></div>
                             </li>
                             <li id="user">
                                 <a href="*">
@@ -56,14 +74,22 @@ class Login extends React.Component {
                     <div id="sideNav">
                         <ul>
                             <li>
-                                <a href="*">
+                                <a
+                                    onClick={() => {
+                                        this.changePage("dashboard");
+                                    }}
+                                >
                                     <img src={dashboard} alt="Home" />
                                     <p>Dashboard</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="*">
-                                    <img src={bug} alt="Home" />
+                                <a
+                                    onClick={() => {
+                                        this.changePage("bugs");
+                                    }}
+                                >
+                                    <img src={bug} alt="Bugs" />
                                     <p>Bugs</p>
                                 </a>
                             </li>
@@ -89,14 +115,15 @@ class Login extends React.Component {
                         <ul>
                             <li>
                                 <a href="*">
-                                    <img src={cog}/>
+                                    <img src={cog} />
                                     <p>Settings</p>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div id="consoleScreen">
-                        <Dashboard />
+                        {/*<Dashboard />*/}
+                        {this.serveComponent()}
                     </div>
                 </div>
             </div>

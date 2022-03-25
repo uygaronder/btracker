@@ -24,7 +24,6 @@ a {
     color: black;
 }
 
-
 .avatar {
     height: 24px;
     width: 24px;
@@ -32,4 +31,109 @@ a {
     background-image: url("./res/svg/user.svg");
     background-color: white;
     border-radius: 50%;
+}
+
+/* table */
+
+table {
+    font-size: 1rem;
+    border-collapse: collapse;
+}
+
+table tr {
+    border-bottom: 1px solid rgba(126, 126, 126, 0.438);
+    transition: 0.2s ease;
+}
+
+table tr:first-of-type {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+table tr:last-of-type {
+    border-bottom: none;
+}
+
+table tr:first-of-type:hover {
+    background-color: white;
+}
+
+table tr:hover {
+    background-color: rgb(238, 238, 238);
+}
+
+table td {
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+table td:first-of-type {
+    width: 8ch;
+}
+
+table td:last-of-type {
+    width: 13ch;
+}
+
+.status {
+    padding: 3px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    display: flex;
+    background-color: #e4e4e4;
+    border-radius: 8px;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.ongoing .status {
+    background-color: rgb(214, 212, 58);
+    color: rgb(82, 82, 0);
+}
+
+.complete .status {
+    background-color: rgb(115, 214, 58);
+    color: rgb(0, 75, 0);
+}
+
+.overdue .status {
+    background-color: rgb(252, 81, 58);
+    color: rgb(75, 9, 0);
+}
+
+.pending .status {
+    background-color: rgb(58, 158, 252);
+    color: rgb(6, 0, 83);
+}
+
+.new .status {
+    background-color: rgb(58, 213, 252);
+    color: rgb(6, 0, 83);
+}
+
+.priority {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(27, 27, 0);
+    width: 5ch;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    padding: 4px 5px;
+    margin: auto;
+}
+
+.low .priority {
+    background-color: green;
+}
+
+.med .priority {
+    background-color: rgb(172, 117, 0);
+}
+
+.high .priority {
+    background-color: rgb(170, 0, 0);
 }

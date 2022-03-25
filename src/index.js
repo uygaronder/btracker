@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Console from "./pages/Console.js";
+import "./root.css";
 
 //const dotenv = require("dotenv");
 //dotenv.config();
