@@ -14,6 +14,7 @@ class Bugs extends React.Component {
                         <h4>Total Bugs: 11</h4>
                     </div>
                     <div id="bugsButton">
+                        <h4>(Bug select option)</h4>
                         <button>
                             <img src={plus} alt="+" /> Submit a bug
                         </button>

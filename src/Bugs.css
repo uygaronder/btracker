@@ -15,8 +15,13 @@
     justify-content: space-between;
 }
 
-#bugsUp #bugsInfo {
+#bugsUp div{
     display: flex;
+    align-items: center;
+}
+
+#bugsUp #bugsButton button{
+    margin-left: 5px;
 }
 
 #bugsUp #bugsInfo span {
