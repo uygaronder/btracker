@@ -15,7 +15,7 @@ import Bugs from "./console-pages/Bugs";
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { page: "dashboard" };
+        this.state = { page: "bugs" };
     }
     changePage(page) {
         this.setState({ page: page });
@@ -73,22 +73,18 @@ class Login extends React.Component {
                 <div id="screen">
                     <div id="sideNav">
                         <ul>
-                            <li>
-                                <a
-                                    onClick={() => {
+                            <li onClick={() => {
                                         this.changePage("dashboard");
-                                    }}
-                                >
+                                    }}>
+                                <a>
                                     <img src={dashboard} alt="Home" />
                                     <p>Dashboard</p>
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    onClick={() => {
+                            <li onClick={() => {
                                         this.changePage("bugs");
-                                    }}
-                                >
+                                    }}>
+                                <a>
                                     <img src={bug} alt="Bugs" />
                                     <p>Bugs</p>
                                 </a>

@@ -5,6 +5,9 @@ import plus from "../../res/svg/plus.svg";
 import Submit from "./SubmitBug";
 
 class Bugs extends React.Component {
+    openSubmit=()=>{
+        document.getElementById("submitBugPopup").classList.remove("submitClosed")
+    }
     render() {
         return (
             <div id="bugs">
@@ -16,10 +19,10 @@ class Bugs extends React.Component {
                     </div>
                     <div id="bugsButton">
                         <h4>(Bug select option)</h4>
-                        <button>
+                        <button onClick={()=>{this.openSubmit()}}>
                             <img src={plus} alt="+" /> Submit a bug
                         </button>
-                        <span id="submitBugPopup">
+                        <span id="submitBugPopup" className="submitClosed">
                             <Submit />
                         </span>
                     </div>

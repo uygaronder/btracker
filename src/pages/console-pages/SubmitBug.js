@@ -2,12 +2,18 @@ import React from "react";
 import "../../SubmitBug.css"
 
 class Submit extends React.Component{
+    closeSubmit=()=>{
+        document.getElementById("submitBugPopup").classList.add("submitClosed")
+    }
+    openSubmit=()=>{
+        document.getElementById("submitBugPopup").classList.remove("submitClosed")
+    }
     render(){
         return(
             <div id="submitBug">
                 <div id="newBug">
                     <h3>Submit a New Bug</h3>
-                    <div id="submitClose">&#10005;</div>
+                    <div id="submitClose" onClick={()=>{this.closeSubmit()}}>&#10005;</div>
                 </div>
                 <form method="post" action="*" autocomplete="off">
                     <span>
@@ -24,7 +30,7 @@ class Submit extends React.Component{
                     </span>
                     <span>
                         <label htmlFor="due">Due:</label>
-                        <input type={"date"} />
+                        <input type={"date"}/>
                     </span>
                     <input type={"submit"} />
                 </form>
