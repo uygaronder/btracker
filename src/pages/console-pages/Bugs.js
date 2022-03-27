@@ -2,6 +2,7 @@ import React from "react";
 import "../../Bugs.css";
 
 import plus from "../../res/svg/plus.svg";
+import Submit from "./SubmitBug";
 
 class Bugs extends React.Component {
     render() {
@@ -18,6 +19,9 @@ class Bugs extends React.Component {
                         <button>
                             <img src={plus} alt="+" /> Submit a bug
                         </button>
+                        <span id="submitBugPopup">
+                            <Submit />
+                        </span>
                     </div>
                 </div>
                 <table>

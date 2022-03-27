@@ -1,0 +1,21 @@
+#submitBug{
+    display: flex;
+    flex-direction: column;
+}
+
+#newBug{
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    width: 100%;
+}
+
+#newBug #submitClose{
+    cursor: pointer;
+}
+
+#submitBug form{
+    display: flex;
+    flex-direction: column;
+    
+}

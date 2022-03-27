@@ -137,3 +137,14 @@ table td:last-of-type {
 .high .priority {
     background-color: rgb(170, 0, 0);
 }
+
+/* submit bug popup */
+#submitBugPopup{
+    position: absolute;
+    top: 120%;
+    right: 0;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.719);
+    border-radius: 8px;
+}

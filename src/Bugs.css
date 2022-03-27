@@ -32,6 +32,10 @@
     margin: 0 10px;
 }
 
+#bugsButton{
+    position: relative;
+}
+
 #bugsUp #bugsButton button {
     display: flex;
     padding: 5px 8px;
