@@ -4,12 +4,24 @@ import "../../Dashboard.css";
 import Search from "../../res/svg/search.svg";
 import plus from "../../res/svg/plus.svg";
 
-import Submit from "./SubmitBug"
+import Submit from "./SubmitBug";
 
 class Dashboard extends React.Component {
-    openSubmit=()=>{
-        document.getElementById("submitBugPopup").classList.remove("submitClosed")
-    }
+    openSubmit = () => {
+        if (
+            !document
+                .getElementById("submitBugPopup")
+                .classList.contains("submitClosed")
+        ) {
+            document
+                .getElementById("submitBugPopup")
+                .classList.add("submitClosed");
+        } else {
+            document
+                .getElementById("submitBugPopup")
+                .classList.remove("submitClosed");
+        }
+    };
     render() {
         return (
             <div id="dashboard">
@@ -99,11 +111,16 @@ class Dashboard extends React.Component {
                             <td>27 Mar 2022</td>
                         </tr>
                     </table>
-                    <button id="submitBug" onClick={()=>{this.openSubmit()}}>
+                    <button
+                        id="submitBug"
+                        onClick={() => {
+                            this.openSubmit();
+                        }}
+                    >
                         <img src={plus} alt="+" /> <p>Submit a Bug</p>
                     </button>
                     <span id="submitBugPopup" className="submitClosed">
-                            <Submit />
+                        <Submit />
                     </span>
                 </div>
                 <div id="dashboardStats">

@@ -21,7 +21,16 @@ ReactDOM.render(
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Login register={true} />} />
                 <Route path="/signin" element={<Login register={false} />} />
-                <Route path="/console" element={<Console />} />
+                <Route path="/console/*" element={<Console />} />
+                <Route
+                    path="/console/dashboard"
+                    element={<Console page={"dashboard"} />}
+                />
+                <Route
+                    path="/console/bugs"
+                    element={<Console page={"bugs"} />}
+                />
+                <Route path="/console/*" element={<Console />} />
             </Routes>
         </Router>
     </React.StrictMode>,

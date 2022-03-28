@@ -1,4 +1,7 @@
 import React from "react";
+
+import { BrowserRouter as Link } from "react-router-dom";
+
 import "../console.css";
 import bug from "../res/svg/bug.svg";
 import dashboard from "../res/svg/dashboard.svg";
@@ -15,7 +18,7 @@ import Bugs from "./console-pages/Bugs";
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { page: "bugs" };
+        this.state = { page: this.props.page ? this.props.page : "dashboard" };
     }
     changePage(page) {
         this.setState({ page: page });
@@ -73,18 +76,14 @@ class Login extends React.Component {
                 <div id="screen">
                     <div id="sideNav">
                         <ul>
-                            <li onClick={() => {
-                                        this.changePage("dashboard");
-                                    }}>
-                                <a>
+                            <li>
+                                <a href="/console/dashboard">
                                     <img src={dashboard} alt="Home" />
                                     <p>Dashboard</p>
                                 </a>
                             </li>
-                            <li onClick={() => {
-                                        this.changePage("bugs");
-                                    }}>
-                                <a>
+                            <li>
+                                <a href="/console/bugs">
                                     <img src={bug} alt="Bugs" />
                                     <p>Bugs</p>
                                 </a>

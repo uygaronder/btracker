@@ -9,18 +9,31 @@
 #bugs table td:nth-of-type(4) {
     width: 9ch;
 }
+#bugs table td:nth-of-type(5) {
+    width: 15ch;
+}
+#bugs table td:nth-of-type(6),
+#bugs table td:nth-of-type(7) {
+    width: 24px;
+    text-align: center;
+}
 
 #bugsUp {
     display: flex;
     justify-content: space-between;
 }
 
-#bugsUp div{
+#bugs table tr:first-of-type img {
+    max-height: 24px;
+    max-width: 24px;
+}
+
+#bugsUp div {
     display: flex;
     align-items: center;
 }
 
-#bugsUp #bugsButton button{
+#bugsUp #bugsButton button {
     margin-left: 5px;
 }
 
@@ -32,7 +45,7 @@
     margin: 0 10px;
 }
 
-#bugsButton{
+#bugsButton {
     position: relative;
 }
 
@@ -61,11 +74,11 @@
     filter: brightness(0) invert(1);
 }
 
-.submitClosed{
+.submitClosed {
     display: none;
 }
 
-#bugs #submitBugPopup{
+#bugs #submitBugPopup {
     position: absolute;
     top: 120%;
     right: 0;
