@@ -3,6 +3,10 @@ import "../Login.css";
 import at from "../res/svg/at.svg";
 import asterisk from "../res/svg/asterisk.svg";
 
+const apiUrl = process.env.REACT_APP_APIURL;
+
+
+
 function Register() {
     return (
         <div className="formDiv">
@@ -11,7 +15,7 @@ function Register() {
                 You can register down below or if you already have an account{" "}
                 <a href="./signin">sign in</a>
             </p>
-            <form method="post" action="/api/signIn">
+            <form method="get" action={`./console`}>
                 <span className="formText">
                     <input
                         type={"text"}
@@ -95,6 +99,9 @@ class Login extends React.Component {
         this.state = {
             register: this.props.register,
         };
+        this.register = ()=>{
+            console.log("test")
+        }
     }
     render() {
         return (
