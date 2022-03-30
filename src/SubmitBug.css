@@ -1,21 +1,60 @@
-#submitBug{
+#submitBug {
     display: flex;
     flex-direction: column;
+    padding: 10px;
 }
 
-#newBug{
+#newBug {
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
     width: 100%;
+    margin-bottom: 12px;
 }
 
-#newBug #submitClose{
+#newBug #submitClose {
     cursor: pointer;
 }
 
-#submitBug form{
+#submitBug form {
     display: flex;
     flex-direction: column;
-    
+    font-size: 1.2rem;
+    align-items: center;
+}
+
+#submitBug form > * {
+    margin: 3px 0;
+    width: 100%;
+}
+
+#submitBug form > span > span {
+    margin: 5px 5px;
+}
+#submitBug form span {
+    display: flex;
+    justify-content: space-between;
+}
+
+#submitBug select {
+    font-size: 1.2rem;
+    border: none;
+    text-align: end;
+}
+
+#submitBug input[type="text"],
+#submitBug textarea {
+    padding: 5px;
+    font-size: 1.2rem;
+    border: none;
+    resize: none;
+}
+
+#submitBug input[type="submit"] {
+    color: white;
+    border: none;
+    background-color: #001f07;
+    padding: 10px;
+    border-radius: 16px;
+    width: 20ch;
 }

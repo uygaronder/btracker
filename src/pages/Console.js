@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter as Link } from "react-router-dom";
+//import { BrowserRouter as Link } from "react-router-dom";
 
 import "../console.css";
 import bug from "../res/svg/bug.svg";
@@ -33,6 +33,12 @@ class Login extends React.Component {
                 return <Dashboard />;
         }
     };
+    notificationhandle = () => {
+        const notBox = document.getElementById("notificationsBox");
+        notBox.classList.contains("hidden")
+            ? notBox.classList.remove("hidden")
+            : notBox.classList.add("hidden");
+    };
     render() {
         return (
             <div id="console">
@@ -46,7 +52,9 @@ class Login extends React.Component {
                                 <a href="*">Home</a>
                             </li>
                             <li>
-                                <a href="*">Projects</a>
+                                <select name="project" id="currentProject">
+                                    <option value="#">Current Project</option>
+                                </select>
                             </li>
                         </ul>
                     </div>
@@ -59,11 +67,41 @@ class Login extends React.Component {
                                 <a href="*">Settings</a>
                             </li>
                             <li id="notificationsItem">
-                                <img src={notification} />
-                                <span id="notification">
-                                    <p>3</p>
+                                <span
+                                    id="notificationButton"
+                                    onClick={this.notificationhandle}
+                                >
+                                    <img src={notification} />
+                                    <span id="notification">
+                                        <p>3</p>
+                                    </span>
                                 </span>
-                                <div id="notificationsBox"></div>
+
+                                <div id="notificationsBox" className="hidden">
+                                    <div className="notificationItem">
+                                        <p>This is a test notification</p>
+                                        <p className="notifDate">
+                                            12:11 30/3/2022
+                                        </p>
+                                    </div>
+                                    <div className="notificationItem">
+                                        <p>
+                                            This is a test notification and this
+                                            is a longer notification as well to
+                                            see how it handles longer
+                                            notifications
+                                        </p>
+                                        <p className="notifDate">
+                                            12:11 30/3/2022
+                                        </p>
+                                    </div>
+                                    <div className="notificationItem">
+                                        <p>This is a test notification</p>
+                                        <p className="notifDate">
+                                            12:11 30/3/2022
+                                        </p>
+                                    </div>
+                                </div>
                             </li>
                             <li id="user">
                                 <a href="*">

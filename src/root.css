@@ -122,7 +122,7 @@ table td:last-of-type {
     border-radius: 8px;
     color: white;
     font-weight: 600;
-    padding: 4px 5px;
+    padding: 4px 16px;
     margin: auto;
 }
 
@@ -136,6 +136,10 @@ table td:last-of-type {
 
 .high .priority {
     background-color: rgb(170, 0, 0);
+}
+
+.hidden {
+    display: none;
 }
 
 /* submit bug popup */

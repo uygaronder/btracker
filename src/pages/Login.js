@@ -5,9 +5,32 @@ import asterisk from "../res/svg/asterisk.svg";
 
 const apiUrl = process.env.REACT_APP_APIURL;
 
-
-
 function Register() {
+    function handleRegister(e) {
+        e.preventDefault();
+        console.log(apiUrl);
+        //console.log(document.getElementById("regEmail").value);
+
+        const params = {
+            username: document.getElementById("regEmail").value,
+            password: document.getElementById("regPassword").value,
+        };
+
+        fetch(`${apiUrl}register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json " },
+            //mode: "cors",
+            body: JSON.stringify(params),
+        })
+            .then((res) => {
+                res.json().then((parsedJson) => {
+                    console.log(parsedJson);
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
     return (
         <div className="formDiv">
             <h1>Register</h1>
@@ -15,11 +38,11 @@ function Register() {
                 You can register down below or if you already have an account{" "}
                 <a href="./signin">sign in</a>
             </p>
-            <form method="get" action={`./console`}>
+            <form onSubmit={handleRegister}>
                 <span className="formText">
                     <input
                         type={"text"}
-                        id="email"
+                        id="regEmail"
                         name="email"
                         placeholder="E-Mail"
                     />
@@ -29,7 +52,7 @@ function Register() {
                 </span>
                 <span className="formText">
                     <input
-                        id="password"
+                        id="regPassword"
                         type={"password"}
                         name="password"
                         placeholder="********"
@@ -99,9 +122,6 @@ class Login extends React.Component {
         this.state = {
             register: this.props.register,
         };
-        this.register = ()=>{
-            console.log("test")
-        }
     }
     render() {
         return (

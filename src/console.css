@@ -41,8 +41,22 @@
     list-style: none;
 }
 
+#console li select {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 0.9rem;
+    font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+}
+
 #console #notificationsItem {
     position: relative;
+}
+
+#console #notificationButton {
+    cursor: pointer;
 }
 
 #console #notificationsItem img {
@@ -63,6 +77,33 @@
     padding: 2px;
     border-radius: 50%;
     text-align: center;
+}
+
+#console #notificationsBox {
+    position: absolute;
+    top: 100%;
+    width: 300px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0px 0px 5px black;
+    right: 0;
+    z-index: 999;
+}
+#console .notificationItem {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.26);
+    padding: 20px;
+    padding-bottom: 8px;
+}
+
+#console .notificationItem:last-of-type {
+    border: none;
+}
+
+#console .notificationItem .notifDate {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-align: end;
+    padding: 8px 0 3px 0;
 }
 
 /* screen */
