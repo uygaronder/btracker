@@ -6,32 +6,6 @@ import asterisk from "../res/svg/asterisk.svg";
 const apiUrl = process.env.REACT_APP_APIURL;
 
 function Register() {
-    function handleRegister(e) {
-        e.preventDefault();
-        const params = {
-            user : {
-                username: document.getElementById("regEmail").value,
-                password: document.getElementById("regPassword").value
-            }
-            
-        };
-        console.log(JSON.stringify(params))
-
-        fetch(`${apiUrl}register`, {
-            method: "post",
-            headers: {'Content-Type': 'application/json'},
-            mode: "cors",
-            body: JSON.stringify(params),
-        })
-            .then((res) => {
-                res.json().then((parsedJson) => {
-                    console.log(parsedJson);
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
     return (
         <div className="formDiv">
             <h1>Register</h1>
@@ -39,7 +13,7 @@ function Register() {
                 You can register down below or if you already have an account{" "}
                 <a href="./signin">sign in</a>
             </p>
-            <form onSubmit={handleRegister}>
+            <form method="post" action={`${apiUrl}register`} >
                 <span className="formText">
                     <input
                         value="test"
@@ -47,6 +21,7 @@ function Register() {
                         id="regEmail"
                         name="email"
                         placeholder="E-Mail"
+                        required
                     />
                     <label htmlFor="email">
                         <img src={at} alt="@" />
@@ -59,6 +34,7 @@ function Register() {
                         type={"password"}
                         name="password"
                         placeholder="********"
+                        required
                     />
                     <label htmlFor="password">
                         <img src={asterisk} alt="*" />
@@ -77,36 +53,6 @@ function Register() {
 }
 
 function SignIn() {
-    function handleSignIn(e) {
-        e.preventDefault();
-        const params = {
-            user : {
-                username: document.getElementById("signEmail").value,
-                password: document.getElementById("signPassword").value
-            }
-            
-        };
-        
-        //console.log(JSON.stringify(params))
-
-        fetch(`${apiUrl}signin`, {
-            method: "post",
-            headers: {'Content-Type': 'application/json'},
-            mode: "cors",
-            body: JSON.stringify(params),
-        })
-            .then((res) => {
-                res.json().then((parsedJson) => {
-                    console.log(parsedJson);
-                    if(parsedJson.errCode == 0){
-                        window.location = "console";
-                    }
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
     return (
         <div className="formDiv">
             <h1>Login</h1>
@@ -114,13 +60,15 @@ function SignIn() {
                 You can sign in below or <a href="./register">register</a> a new
                 account
             </p>
-            <form onSubmit={handleSignIn}>
+            <form method="POST" action={`${apiUrl}login`}>
                 <span className="formText">
                     <input
                         type={"text"}
                         id="signEmail"
                         name="email"
                         placeholder="E-Mail"
+                        value="test"
+                        required
                     />
                     <label htmlFor="email">
                         <img src={at} alt="@" />
@@ -132,13 +80,15 @@ function SignIn() {
                         type={"password"}
                         name="password"
                         placeholder="********"
+                        value="test"
+                        required
                     />
                     <label htmlFor="password">
                         <img src={asterisk} alt="*" />
                     </label>
                 </span>
                 <span className="buttonSpan">
-                    <button>Submit</button>
+                    <button type="submit">Submit</button>
                     <div>
                         <p>or</p>
                         <a href="/register">register</a>
