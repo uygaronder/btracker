@@ -8,18 +8,19 @@ const apiUrl = process.env.REACT_APP_APIURL;
 function Register() {
     function handleRegister(e) {
         e.preventDefault();
-        console.log(apiUrl);
-        //console.log(document.getElementById("regEmail").value);
-
         const params = {
-            username: document.getElementById("regEmail").value,
-            password: document.getElementById("regPassword").value,
+            user : {
+                username: document.getElementById("regEmail").value,
+                password: document.getElementById("regPassword").value
+            }
+            
         };
+        console.log(JSON.stringify(params))
 
         fetch(`${apiUrl}register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json " },
-            //mode: "cors",
+            method: "post",
+            headers: {'Content-Type': 'application/json'},
+            mode: "cors",
             body: JSON.stringify(params),
         })
             .then((res) => {
@@ -41,6 +42,7 @@ function Register() {
             <form onSubmit={handleRegister}>
                 <span className="formText">
                     <input
+                        value="test"
                         type={"text"}
                         id="regEmail"
                         name="email"
@@ -52,6 +54,7 @@ function Register() {
                 </span>
                 <span className="formText">
                     <input
+                        value="test"
                         id="regPassword"
                         type={"password"}
                         name="password"
@@ -74,6 +77,36 @@ function Register() {
 }
 
 function SignIn() {
+    function handleSignIn(e) {
+        e.preventDefault();
+        const params = {
+            user : {
+                username: document.getElementById("signEmail").value,
+                password: document.getElementById("signPassword").value
+            }
+            
+        };
+        
+        //console.log(JSON.stringify(params))
+
+        fetch(`${apiUrl}signin`, {
+            method: "post",
+            headers: {'Content-Type': 'application/json'},
+            mode: "cors",
+            body: JSON.stringify(params),
+        })
+            .then((res) => {
+                res.json().then((parsedJson) => {
+                    console.log(parsedJson);
+                    if(parsedJson.errCode == 0){
+                        window.location = "console";
+                    }
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
     return (
         <div className="formDiv">
             <h1>Login</h1>
@@ -81,11 +114,11 @@ function SignIn() {
                 You can sign in below or <a href="./register">register</a> a new
                 account
             </p>
-            <form method="post" action="/api/signIn">
+            <form onSubmit={handleSignIn}>
                 <span className="formText">
                     <input
                         type={"text"}
-                        id="email"
+                        id="signEmail"
                         name="email"
                         placeholder="E-Mail"
                     />
@@ -95,7 +128,7 @@ function SignIn() {
                 </span>
                 <span className="formText">
                     <input
-                        id="password"
+                        id="signPassword"
                         type={"password"}
                         name="password"
                         placeholder="********"

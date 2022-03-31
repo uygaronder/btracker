@@ -66,6 +66,9 @@ class Login extends React.Component {
                             <li>
                                 <a href="*">Settings</a>
                             </li>
+                            <li>
+                                <a href="*">Log Out</a>
+                            </li>
                             <li id="notificationsItem">
                                 <span
                                     id="notificationButton"
