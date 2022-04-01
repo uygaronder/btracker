@@ -1,9 +1,10 @@
 import React from "react";
+
 import at from "../../res/svg/at.svg";
 import asterisk from "../../res/svg/asterisk.svg";
 const apiUrl = process.env.REACT_APP_APIURL;
 
-function SignIn() {
+const signin = function () {
     return (
         <div className="formDiv">
             <h1>Login</h1>
@@ -11,7 +12,7 @@ function SignIn() {
                 You can sign in below or <a href="./register">register</a> a new
                 account
             </p>
-            <form method="POST" action={`${apiUrl}login`}>
+            <form method="POST" action={`${apiUrl}/login`}>
                 <span className="formText">
                     <input
                         type={"text"}
@@ -48,6 +49,6 @@ function SignIn() {
             </form>
         </div>
     );
-}
+};
 
-export default SignIn();
+export default signin;

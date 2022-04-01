@@ -1,9 +1,10 @@
 import React from "react";
+
 import at from "../../res/svg/at.svg";
 import asterisk from "../../res/svg/asterisk.svg";
 const apiUrl = process.env.REACT_APP_APIURL;
 
-function Register() {
+const register = function () {
     return (
         <div className="formDiv">
             <h1>Register</h1>
@@ -11,7 +12,7 @@ function Register() {
                 You can register down below or if you already have an account{" "}
                 <a href="./signin">sign in</a>
             </p>
-            <form method="post" action={`${apiUrl}register`}>
+            <form method="post" action={`${apiUrl}/register`}>
                 <span className="formText">
                     <input
                         value="test"
@@ -48,6 +49,6 @@ function Register() {
             </form>
         </div>
     );
-}
+};
 
-export default Register();
+export default register;

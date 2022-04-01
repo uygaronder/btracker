@@ -11,16 +11,25 @@ import Console from "./pages/Console.js";
 import "./root.css";
 
 const apiUrl = process.env.REACT_APP_APIURL;
-
 //const dotenv = require("dotenv");
 //dotenv.config();
 //console.log(process.env)
+/*
+const checkAuth = () => {
+    return fetch(`${apiUrl}/auth`)
+        .then((response) => {
+            console.log(response.json());
+            return response ? <Console /> : <Login register={false} />;
+        })
+        .catch((e) => console.log(e));
+};*/
 
-const checkAuth = (element) => {
-    return fetch(`${apiUrl}/auth`).then((response) => {
-        return response ? element : <Login register={false} />;
+async function checkAuth() {
+    const response = await fetch(`${apiUrl}/auth`).then((res) => {
+        return res.json;
     });
-};
+    return false;
+}
 
 ReactDOM.render(
     <React.StrictMode>
@@ -31,7 +40,7 @@ ReactDOM.render(
                 <Route path="/signin" element={<Login register={false} />} />
                 <Route
                     path="/console/*"
-                    element={() => checkAuth(<Console />)}
+                    element={checkAuth() ? <Console /> : <Link to="/signin" />}
                 />
                 <Route
                     path="/console/dashboard"

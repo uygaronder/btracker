@@ -1,8 +1,8 @@
 import React from "react";
 import "../Login.css";
 
-const { SignIn } = require("./login/SignIn");
-const { Register } = require("./login/Register");
+import register from "../pages/login/register";
+import signin from "../pages/login/signin";
 
 class Login extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Login extends React.Component {
                 <div id="loginHero"></div>
                 <div id="loginForm">
                     {/*<h3>Welcome</h3>*/}
-                    {this.props.register ? Register : SignIn}
+                    {this.props.register ? register() : signin()}
                     <button>Google</button>
                 </div>
             </span>
