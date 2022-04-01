@@ -67,7 +67,9 @@ class Login extends React.Component {
                                 <a href="*">Settings</a>
                             </li>
                             <li>
-                                <form action="/logout?_method=DELETE"><button type="submit">Log Out</button></form>
+                                <form action="/logout?_method=DELETE">
+                                    <button type="submit">Log Out</button>
+                                </form>
                             </li>
                             <li id="notificationsItem">
                                 <span

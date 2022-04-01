@@ -10,9 +10,17 @@ import Login from "./pages/Login.js";
 import Console from "./pages/Console.js";
 import "./root.css";
 
+const apiUrl = process.env.REACT_APP_APIURL;
+
 //const dotenv = require("dotenv");
 //dotenv.config();
 //console.log(process.env)
+
+const checkAuth = (element) => {
+    return fetch(`${apiUrl}/auth`).then((response) => {
+        return response ? element : <Login register={false} />;
+    });
+};
 
 ReactDOM.render(
     <React.StrictMode>
@@ -21,7 +29,10 @@ ReactDOM.render(
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Login register={true} />} />
                 <Route path="/signin" element={<Login register={false} />} />
-                <Route path="/console/*" element={<Console />} />
+                <Route
+                    path="/console/*"
+                    element={() => checkAuth(<Console />)}
+                />
                 <Route
                     path="/console/dashboard"
                     element={<Console page={"dashboard"} />}
