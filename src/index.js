@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "./root.css";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Home from "./pages/Home.js";
@@ -11,24 +10,14 @@ import Console from "./pages/Console.js";
 import "./root.css";
 
 const apiUrl = process.env.REACT_APP_APIURL;
-//const dotenv = require("dotenv");
-//dotenv.config();
-//console.log(process.env)
-/*
-const checkAuth = () => {
-    return fetch(`${apiUrl}/auth`)
-        .then((response) => {
-            console.log(response.json());
-            return response ? <Console /> : <Login register={false} />;
-        })
-        .catch((e) => console.log(e));
-};*/
 
-async function checkAuth() {
-    const response = await fetch(`${apiUrl}/auth`).then((res) => {
-        return res.json;
-    });
-    return false;
+function checkAuth() {
+    fetch(`${apiUrl}/auth`)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            return data.err === 0 ? true : false;
+        });
 }
 
 ReactDOM.render(
@@ -40,7 +29,9 @@ ReactDOM.render(
                 <Route path="/signin" element={<Login register={false} />} />
                 <Route
                     path="/console/*"
-                    element={checkAuth() ? <Console /> : <Link to="/signin" />}
+                    element={
+                        checkAuth() ? <Console /> : <Login register={false} />
+                    }
                 />
                 <Route
                     path="/console/dashboard"
@@ -56,8 +47,3 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

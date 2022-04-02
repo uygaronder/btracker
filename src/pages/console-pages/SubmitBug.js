@@ -24,7 +24,7 @@ class Submit extends React.Component {
                         &#10005;
                     </div>
                 </div>
-                <form method="post" action="*" autocomplete="off">
+                <form method="post" action="*" autoComplete="off">
                     <select name="project" id="">
                         <option value="p1">Current Project</option>
                     </select>
