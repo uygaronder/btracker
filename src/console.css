@@ -138,6 +138,16 @@
     transition: 0.2s ease;
 }
 
+#console nav button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-family: var(--defFont);
+    cursor: pointer;
+}
+
+
 #console #sideNav ul li:hover {
     background-color: #00252b;
     cursor: pointer;
