@@ -12,12 +12,8 @@ import "./root.css";
 const apiUrl = process.env.REACT_APP_APIURL;
 
 function checkAuth() {
-    fetch(`${apiUrl}/auth`)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            return data.err === 0 ? true : false;
-        });
+    const promise = fetch(`${apiUrl}/auth`).then((res) => res.json());
+    return promise.then((res) => res.err) === 0 ? true : false;
 }
 
 ReactDOM.render(
@@ -30,18 +26,26 @@ ReactDOM.render(
                 <Route
                     path="/console/*"
                     element={
-                        checkAuth() ? <Console /> : <Login register={false} />
+                        checkAuth() ? (
+                            <Routes>
+                                <Route
+                                    path="/console"
+                                    element={<Console page={"dashboard"} />}
+                                />
+                                <Route
+                                    path="/console/dashboard"
+                                    element={<Console page={"dashboard"} />}
+                                />
+                                <Route
+                                    path="/console/bugs"
+                                    element={<Console page={"bugs"} />}
+                                />
+                            </Routes>
+                        ) : (
+                            <Login register={false} />
+                        )
                     }
                 />
-                <Route
-                    path="/console/dashboard"
-                    element={<Console page={"dashboard"} />}
-                />
-                <Route
-                    path="/console/bugs"
-                    element={<Console page={"bugs"} />}
-                />
-                <Route path="/console/*" element={<Console />} />
             </Routes>
         </Router>
     </React.StrictMode>,

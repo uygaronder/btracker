@@ -2,7 +2,7 @@ import React from "react";
 
 import at from "../../res/svg/at.svg";
 import asterisk from "../../res/svg/asterisk.svg";
-const apiUrl = process.env.REACT_APP_APIURL;
+var apiUrl = process.env.REACT_APP_APIURL;
 
 const sign = function () {
     return (
