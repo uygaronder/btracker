@@ -19,7 +19,6 @@ const sign = function () {
                         id="signEmail"
                         name="email"
                         placeholder="E-Mail"
-                        value="test"
                         required
                     />
                     <label htmlFor="email">
@@ -32,7 +31,6 @@ const sign = function () {
                         type={"password"}
                         name="password"
                         placeholder="********"
-                        value="test"
                         required
                     />
                     <label htmlFor="password">

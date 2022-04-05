@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "./root.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route , Navigate} from "react-router-dom";
 
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
@@ -13,7 +13,8 @@ const apiUrl = process.env.REACT_APP_APIURL;
 
 function checkAuth() {
     const promise = fetch(`${apiUrl}/auth`).then((res) => res.json());
-    return promise.then((res) => res.err) === 0 ? true : false;
+    console.log(promise.then(res=> console.log(res)))
+    return promise.then((res) => res.err) !== 0 ? true : false;
 }
 
 ReactDOM.render(
@@ -25,7 +26,7 @@ ReactDOM.render(
                 <Route path="/signin" element={<Login register={false} />} />
                 <Route
                     path="/console/*"
-                    element={
+                    >
                         checkAuth() ? (
                             <Routes>
                                 <Route
@@ -42,10 +43,9 @@ ReactDOM.render(
                                 />
                             </Routes>
                         ) : (
-                            <Login register={false} />
+                            <Navigate to="signin" />
                         )
-                    }
-                />
+                </Route>
             </Routes>
         </Router>
     </React.StrictMode>,
