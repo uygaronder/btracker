@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import at from "../../res/svg/at.svg";
 import asterisk from "../../res/svg/asterisk.svg";
@@ -10,7 +11,7 @@ const register = function () {
             <h1>Register</h1>
             <p>
                 You can register down below or if you already have an account{" "}
-                <a href="./signin">sign in</a>
+                <Link to="/login">sign in</Link>
             </p>
             <form method="post" action={`${apiUrl}/register`}>
                 <span className="formText">
@@ -43,7 +44,7 @@ const register = function () {
                     <button>Submit</button>
                     <div>
                         <p>or</p>
-                        <a href="/signin">login</a>
+                        <Link to="/login">login</Link>
                     </div>
                 </span>
             </form>

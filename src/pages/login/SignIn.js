@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import at from "../../res/svg/at.svg";
 import asterisk from "../../res/svg/asterisk.svg";
@@ -9,7 +10,7 @@ const sign = function () {
         <div className="formDiv">
             <h1>Login</h1>
             <p>
-                You can sign in below or <a href="./register">register</a> a new
+                You can sign in below or <Link to="/login/register">register</Link> a new
                 account
             </p>
             <form method="POST" action={`${apiUrl}/login`}>
@@ -41,7 +42,7 @@ const sign = function () {
                     <button type="submit">Submit</button>
                     <div>
                         <p>or</p>
-                        <a href="/register">register</a>
+                        <Link to="/login/register">register</Link>
                     </div>
                 </span>
             </form>

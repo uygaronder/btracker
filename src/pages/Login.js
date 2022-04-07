@@ -1,8 +1,11 @@
 import React from "react";
+
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import "../Login.css";
 
 import register from "../pages/login/Register";
-import signin from "../pages/login/SignIn";
+import sign from "../pages/login/SignIn";
 
 class Login extends React.Component {
     constructor(props) {
@@ -16,8 +19,11 @@ class Login extends React.Component {
             <span id="login">
                 <div id="loginHero"></div>
                 <div id="loginForm">
-                    {/*<h3>Welcome</h3>*/}
-                    {this.props.register ? register() : signin()}
+                    <Routes>
+                        <Route path="signin" element={sign()}/>
+                        <Route path="register" element={register()}/>
+                        <Route path="" element={<Navigate to={"signin"}/>}/>
+                    </Routes>
                     <button>Google</button>
                 </div>
             </span>

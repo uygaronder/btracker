@@ -1,6 +1,6 @@
 import React from "react";
 
-//import { BrowserRouter as Link } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 
 import "../console.css";
 import bug from "../res/svg/bug.svg";
@@ -18,38 +18,26 @@ import Bugs from "./console-pages/Bugs";
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { page: this.props.page ? this.props.page : "dashboard" };
     }
-    changePage(page) {
-        this.setState({ page: page });
-    }
-    serveComponent = () => {
-        switch (this.state.page) {
-            case "dashboard":
-                return <Dashboard />;
-            case "bugs":
-                return <Bugs />;
-            default:
-                return <Dashboard />;
-        }
-    };
+    
     notificationhandle = () => {
         const notBox = document.getElementById("notificationsBox");
         notBox.classList.contains("hidden")
             ? notBox.classList.remove("hidden")
             : notBox.classList.add("hidden");
     };
+    
     render() {
         return (
             <div id="console">
                 <nav>
                     <div>
-                        <a href="/">
+                        <Link to="/">
                             <img src={bug} alt="Logo" />
-                        </a>
+                        </Link>
                         <ul>
                             <li>
-                                <a href="*">Home</a>
+                                <Link to="*">Home</Link>
                             </li>
                             <li>
                                 <select name="project" id="currentProject">
@@ -61,10 +49,10 @@ class Login extends React.Component {
                     <div>
                         <ul>
                             <li>
-                                <a href="*">Team</a>
+                                <Link to="*">Team</Link>
                             </li>
                             <li>
-                                <a href="*">Settings</a>
+                                <Link to="*">Settings</Link>
                             </li>
                             <li>
                                 <form action="/logout?_method=DELETE">
@@ -120,28 +108,28 @@ class Login extends React.Component {
                     <div id="sideNav">
                         <ul>
                             <li>
-                                <a href="/console/dashboard">
+                                <Link to="/console/dashboard">
                                     <img src={dashboard} alt="Home" />
                                     <p>Dashboard</p>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/console/bugs">
+                                <Link to="/console/bugs">
                                     <img src={bug} alt="Bugs" />
                                     <p>Bugs</p>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="*">
+                                <Link to="*">
                                     <img src={calendar} alt="Home" />
                                     <p>Calendar</p>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="*">
+                                <Link to="*">
                                     <img src={stopwatch} alt="Home" />
                                     <p>Timesheet</p>
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a href="*">
@@ -160,8 +148,12 @@ class Login extends React.Component {
                         </ul>
                     </div>
                     <div id="consoleScreen">
-                        {/*<Dashboard />*/}
-                        {this.serveComponent()}
+                        <Routes>
+                            <Route path="" element={<Dashboard />}/>
+                            <Route path="dashboard" element={<Dashboard />}/>
+                            <Route path="bugs" element={<Bugs />}/>
+                            {/*<Route path="*" element={<Dashboard />}/>*/}
+                        </Routes>
                     </div>
                 </div>
             </div>
