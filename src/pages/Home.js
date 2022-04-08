@@ -2,16 +2,18 @@ import React from "react";
 import "../Home.css";
 import bugSvg from "../res/svg/bugPic.svg";
 
+import { Link } from "react-router-dom";
+
 class Home extends React.Component {
     render() {
         return (
             <div id="home">
                 <nav>
-                    <a href="*">
+                    <Link to="/">
                         <h2>
                             <i className="fas fa-bug"></i> BTrack
                         </h2>
-                    </a>
+                    </Link>
                     <ul id="anchors">
                         <li>
                             <a href="*">Features</a>
@@ -25,12 +27,12 @@ class Home extends React.Component {
                     </ul>
                     <ul id="navButtons">
                         <li>
-                            <a href="/signin">Sign In</a>
+                            <Link to="/login">Sign In</Link>
                         </li>
                         <li>
-                            <a href="/register">
+                            <Link to="/login/register">
                                 <button>Get Started</button>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>
@@ -44,9 +46,9 @@ class Home extends React.Component {
                             dolor, sit amet
                         </p>
                         <div>
-                            <a href="/register">
+                            <Link to="login/register">
                                 <button>Get Started</button>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div>

@@ -15,6 +15,8 @@ import notification from "../res/svg/notification.svg";
 import Dashboard from "./console-pages/Dashboard";
 import Bugs from "./console-pages/Bugs";
 
+var apiUrl = process.env.REACT_APP_APIURL;
+
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,7 @@ class Login extends React.Component {
             ? notBox.classList.remove("hidden")
             : notBox.classList.add("hidden");
     };
-    
+
     render() {
         return (
             <div id="console">
@@ -55,7 +57,7 @@ class Login extends React.Component {
                                 <Link to="*">Settings</Link>
                             </li>
                             <li>
-                                <form action="/logout?_method=DELETE">
+                                <form action={`${apiUrl}/logout?_method=DELETE`} method="post">
                                     <button type="submit">Log Out</button>
                                 </form>
                             </li>

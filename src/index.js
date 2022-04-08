@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "./root.css";
@@ -11,11 +11,17 @@ import "./root.css";
 
 const apiUrl = process.env.REACT_APP_APIURL;
 
-const checkAuth = () => {
-    const promise = fetch(`${apiUrl}/auth`).then((res) => res.json());
-    console.log(promise.then(res=> console.log(res)))
-    return promise.then((res) => res.err) !== 0 ? true : false;
+var authed;
+
+async function checkAuth(){
+    const promise = await fetch(`${apiUrl}/auth`,{credentials: "include"}).then((res) => res.json());
+    authed = promise.then((res) => res.err) === 0 ? true : false;
+    console.log(authed)
+
+    
 }
+checkAuth()
+
 
 ReactDOM.render(
     <React.StrictMode>
@@ -23,7 +29,9 @@ ReactDOM.render(
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login/*" element={<Login />} />
-                <Route path="/console/*" element={checkAuth() ? <Console />:<Navigate to={"/login/signin"}/>} />
+                <Route path="/console/*" element={
+                    authed ? <Console />: <Navigate to="/login"/>
+                } />
             </Routes>
         </Router>
     </React.StrictMode>,
