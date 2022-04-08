@@ -21,11 +21,18 @@ ReactDOM.render(
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/login/*" element={<Login />} />
+                <Route
+                    path="/login/*"
+                    element={
+                        <ProtectedRoute toSend={"/console"} loggedIn={false}>
+                            <Login />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route
                     path="/console/*"
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute toSend={"/login"} loggedIn={true}>
                             <Console />
                         </ProtectedRoute>
                     }
@@ -36,7 +43,7 @@ ReactDOM.render(
     document.getElementById("root")
 );
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ toSend, loggedIn, children }) {
     const [isAuthenticated, setAuth] = useState(null);
     const [fetched, setFetch] = useState(false);
     useEffect(() => {
@@ -55,10 +62,16 @@ function ProtectedRoute({ children }) {
         auth();
     }, []);
     return fetched ? (
-        isAuthenticated ? (
-            <Console />
+        loggedIn ? (
+            isAuthenticated ? (
+                children
+            ) : (
+                <Navigate to={toSend} />
+            )
+        ) : isAuthenticated ? (
+            <Navigate to={toSend} />
         ) : (
-            <Navigate to={"/login"} />
+            children
         )
     ) : (
         <Loading />

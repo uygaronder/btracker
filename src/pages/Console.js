@@ -14,6 +14,9 @@ import notification from "../res/svg/notification.svg";
 
 import Dashboard from "./console-pages/Dashboard";
 import Bugs from "./console-pages/Bugs";
+import Team from "./console-pages/Team";
+import NewTeam from "./console-pages/NewTeam";
+import NotFound from "./NotFound";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 
@@ -21,7 +24,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
     }
-    
+
     notificationhandle = () => {
         const notBox = document.getElementById("notificationsBox");
         notBox.classList.contains("hidden")
@@ -51,13 +54,19 @@ class Login extends React.Component {
                     <div>
                         <ul>
                             <li>
-                                <Link to="*">Team</Link>
+                                <Link to="newTeam">Create Or Join Team</Link>
+                            </li>
+                            <li>
+                                <Link to="team">Team</Link>
                             </li>
                             <li>
                                 <Link to="*">Settings</Link>
                             </li>
                             <li>
-                                <form action={`${apiUrl}/logout?_method=DELETE`} method="post">
+                                <form
+                                    action={`${apiUrl}/logout?_method=DELETE`}
+                                    method="post"
+                                >
                                     <button type="submit">Log Out</button>
                                 </form>
                             </li>
@@ -151,10 +160,12 @@ class Login extends React.Component {
                     </div>
                     <div id="consoleScreen">
                         <Routes>
-                            <Route path="" element={<Dashboard />}/>
-                            <Route path="dashboard" element={<Dashboard />}/>
-                            <Route path="bugs" element={<Bugs />}/>
-                            {/*<Route path="*" element={<Dashboard />}/>*/}
+                            <Route path="" element={<Dashboard />} />
+                            <Route path="dashboard" element={<Dashboard />} />
+                            <Route path="bugs" element={<Bugs />} />
+                            <Route path="team" element={<Team />} />
+                            <Route path="newTeam" element={<NewTeam />} />
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>
                 </div>
