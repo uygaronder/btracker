@@ -6,14 +6,14 @@
 }
 
 #bugs table td:nth-of-type(3),
-#bugs table td:nth-of-type(4) {
+#bugs table td:nth-of-type(4),#bugs table td:nth-of-type(5) {
     width: 9ch;
 }
-#bugs table td:nth-of-type(5) {
+#bugs table td:nth-of-type(6) {
     width: 15ch;
 }
-#bugs table td:nth-of-type(6),
-#bugs table td:nth-of-type(7) {
+#bugs table td:nth-of-type(7),
+#bugs table td:nth-of-type(8) {
     width: 24px;
     text-align: center;
 }

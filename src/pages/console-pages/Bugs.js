@@ -55,6 +55,7 @@ class Bugs extends React.Component {
                     <tr>
                         <td id="bId">#</td>
                         <td>Bug</td>
+                        <td>Assigned</td>
                         <td>Priority</td>
                         <td>Status</td>
                         <td>Due</td>
@@ -68,6 +69,7 @@ class Bugs extends React.Component {
                     <tr className="ongoing high">
                         <td id="bId">TP-101</td>
                         <td>This is a test bug text to fill space</td>
+                        <td>test</td>
                         <td>
                             <span className="priority">High</span>
                         </td>
