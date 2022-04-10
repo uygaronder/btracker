@@ -37,6 +37,9 @@ class Bugs extends React.Component {
                         <span />
                         <h4>Total Bugs: 11</h4>
                     </div>
+                    <div id="bugsFilter">
+                        <input id="filter" placeholder="Filter labels,ids,etc"/>
+                    </div>
                     <div id="bugsButton">
                         <h4>(Bug select option)</h4>
                         <button
@@ -55,21 +58,17 @@ class Bugs extends React.Component {
                     <tr>
                         <td id="bId">#</td>
                         <td>Bug</td>
+                        <td>Labels</td>
                         <td>Assigned</td>
                         <td>Priority</td>
                         <td>Status</td>
                         <td>Due</td>
-                        <td>
-                            <img src={complete} />
-                        </td>
-                        <td>
-                            <img src={edit} />
-                        </td>
                     </tr>
                     <tr className="ongoing high">
                         <td id="bId">TP-101</td>
                         <td>This is a test bug text to fill space</td>
-                        <td>test</td>
+                        <td>front-end</td>
+                        <td>Usera</td>
                         <td>
                             <span className="priority">High</span>
                         </td>
@@ -77,21 +76,6 @@ class Bugs extends React.Component {
                             <span className="status">ongoing</span>
                         </td>
                         <td>27 Mar 2022</td>
-
-                        <td
-                            onClick={() => {
-                                this.complete();
-                            }}
-                        >
-                            &#10003;
-                        </td>
-                        <td
-                            onClick={() => {
-                                this.edit(this);
-                            }}
-                        >
-                            Edit
-                        </td>
                     </tr>
                 </table>
             </div>

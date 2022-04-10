@@ -37,6 +37,7 @@ class Submit extends React.Component {
                         cols="30"
                         rows="10"
                     ></textarea>
+                    <input type={"text"} placeholder="Labels (usage:label1,label2)"/>
                     <span>
                         <span>
                             <label htmlFor="priority">Priority:</label>
@@ -51,7 +52,6 @@ class Submit extends React.Component {
                             <input type={"date"} />
                         </span>
                     </span>
-
                     <input type={"submit"} value="Submit Bug" />
                 </form>
             </div>

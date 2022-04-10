@@ -2,6 +2,8 @@ import React from "react";
 import "../../Bug.css";
 
 import Search from "../../res/svg/search.svg";
+import bell from "../../res/svg/bell.svg";
+import bellOn from "../../res/svg/notification.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
 
 class Bug extends React.Component {
@@ -11,14 +13,19 @@ class Bug extends React.Component {
                 <div id="bugTexts">
                     <div id="bugUpper">
                         <div id="bugInfo">
-                            <p>Posted by (Posted user) at (post date)</p>
+                            <p>Posted by (author) at (post date)</p>
                         </div>
                         <div id="bugTitleStuff">
                             <div id="bugTitleDiv">
                                 <h2 id="bugTitle">Fix testing text</h2>
-                                <span className="high">High</span>
+                                <div id="identifiers">
+                                    <span className="high">High</span>
+                                    <span>Label</span>
+                                </div>
+                                
                             </div>
                             <div id="bugButtons">
+                                <span id="notify">{<img src={bell}/>}</span>
                                 <button id="complete">Mark As Complete</button>
                             </div>
                         </div>
@@ -38,6 +45,25 @@ class Bug extends React.Component {
 
                 <div id="comments">
                     <h3>Comments</h3>
+                    <div id="commentsDiv">
+                        <div className="comment">
+                            <div className="commentAuthorInfo">
+                                <p className="author">Author</p>
+                                <p className="postDate">posted date</p>
+                            </div>
+                            <p className="commentText">Lorem ipsum doler sit amet dis is a comment</p>
+                            <div className="commentOptions">
+                                
+                            </div>
+                            <div className="comment">
+                                <div className="commentAuthorInfo">
+                                    <p className="author">Author</p>
+                                    <p className="postDate">posted date</p>
+                                </div>
+                                <p className="commentText">this is a reply</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

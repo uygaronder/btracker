@@ -39,7 +39,7 @@
 #submitBug select {
     font-size: 1.2rem;
     border: none;
-    text-align: end;
+    text-align: start;
 }
 
 #submitBug input[type="text"],
@@ -48,6 +48,8 @@
     font-size: 1.2rem;
     border: none;
     resize: none;
+    background-color: rgb(245, 245, 245);
+    border-radius: 3px;
 }
 
 #submitBug input[type="submit"] {
@@ -58,3 +60,4 @@
     border-radius: 16px;
     width: 20ch;
 }
+
