@@ -16,6 +16,7 @@ import Dashboard from "./console-pages/Dashboard";
 import Bugs from "./console-pages/Bugs";
 import Team from "./console-pages/Team";
 import NewTeam from "./console-pages/NewTeam";
+import Bug from "./console-pages/Bug";
 import NotFound from "./NotFound";
 
 var apiUrl = process.env.REACT_APP_APIURL;
@@ -165,6 +166,7 @@ class Login extends React.Component {
                             <Route path="bugs" element={<Bugs />} />
                             <Route path="team" element={<Team />} />
                             <Route path="newTeam" element={<NewTeam />} />
+                            <Route path="bug" element={<Bug />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>

@@ -1,0 +1,106 @@
+#bug{
+    padding: 20px;
+}
+
+#bug #bugUpper #bugInfo p{
+    font-size: .8rem;
+    opacity: .8;
+}
+
+#bug .low {
+    background-color: green;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    width: 5ch;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    padding: 4px 16px;
+}
+
+#bug .med {
+    background-color: rgb(172, 117, 0);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    width: 5ch;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    padding: 4px 16px;
+}
+
+#bug .high {
+    background-color: rgb(170, 0, 0);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    width: 5ch;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    padding: 4px 16px;
+}
+
+#bug #bugTitleStuff{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#bugTitleDiv{
+    display: flex;
+    align-items: center;
+}
+
+#bug #bugButtons button{
+    padding: 5px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--green);
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+#bug #bugTitle{
+    margin-right: 5px;
+}
+
+#bug #bugDescDiv{
+    padding: 5px 0;
+    
+}
+
+#bug #addComment {
+    box-shadow: 0px 0px 5px black;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    border-radius: 6px;
+}
+
+#bug #addComment button{
+    padding: 5px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#bug #addComment textarea{
+    resize: none;
+    height: 100px;
+    width: 50ch;
+    border: none;
+    padding: 10px;
+}
+
+#bug #addComment textarea:focus{
+    outline: none;
+}
