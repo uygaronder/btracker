@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import at from "../../res/svg/at.svg";
 import asterisk from "../../res/svg/asterisk.svg";
+import letter from "../../res/svg/letter.svg";
 const apiUrl = process.env.REACT_APP_APIURL;
 
 const register = function () {
@@ -16,7 +17,18 @@ const register = function () {
             <form method="post" action={`${apiUrl}/register`}>
                 <span className="formText">
                     <input
-                        value="test"
+                        type={"text"}
+                        id="reqName"
+                        name="name"
+                        placeholder="Name"
+                        required
+                    />
+                    <label htmlFor="name">
+                        <img src={letter} alt="name" />
+                    </label>
+                </span>
+                <span className="formText">
+                    <input
                         type={"text"}
                         id="regEmail"
                         name="email"
@@ -29,7 +41,6 @@ const register = function () {
                 </span>
                 <span className="formText">
                     <input
-                        value="test"
                         id="regPassword"
                         type={"password"}
                         name="password"

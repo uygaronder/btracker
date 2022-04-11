@@ -2,29 +2,65 @@ import React from "react";
 import "../../Team.css";
 
 import Search from "../../res/svg/search.svg";
+import more from "../../res/svg/more.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
 
 class Team extends React.Component {
     render() {
         return (
             <div id="team">
-                <div>
+                <div id="teamHeader">
                     <h3>Team Name Placeholder</h3>
-                    <button>Invite</button>
                 </div>
+                <div id="teamTabs">
+                    <div id="teamUsers">
+                        <form action="post">
+                            <input
+                                type="text"
+                                name="inviteUsernameInput"
+                                id="inviteUsernameInput"
+                                placeholder="Username"
+                            />
+                            <button type="submit">Invite</button>
+                        </form>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Bug #</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th>Test Person</th>
+                                <th>Dev</th>
+                                <th>0</th>
+                                <th>
+                                    <img src={more} alt="..." />
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
 
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Assigned Bug #</th>
-                    </tr>
-                    <tr>
-                        <th>Test Person</th>
-                        <th>Submit</th>
-                        <th>4</th>
-                    </tr>
-                </table>
+                    <div id="teamProjects">
+                        <form action="post">
+                            <input
+                                type="text"
+                                name="newProjectName"
+                                id="projectNameInput"
+                                placeholder="New Project Name"
+                            />
+                            <button type="submit">New Project</button>
+                        </form>
+                        <table>
+                            <tr>
+                                <th>Project Name</th>
+                                <th>Open Bugs</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         );
     }

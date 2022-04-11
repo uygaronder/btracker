@@ -145,4 +145,20 @@ table td:last-of-type {
     display: none;
 }
 
-/* submit bug popup */
+.down{
+    transform: rotate(180deg);
+}
+
+.label{
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(27, 27, 0);
+    width: 10ch;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    padding: 4px 16px;
+    margin: auto;
+}

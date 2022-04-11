@@ -1,22 +1,83 @@
 #team{
     padding: 20px;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-#team table {
-    width: 100%;
-    max-width: 700px;
-    text-align: left;
-}
-
-
-#team > div {
+#team #teamHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(185, 185, 185);
     padding-bottom: 10px;
     margin-bottom: 15px;
+}
+
+#team #teamTabs{
+    display: flex;
+    flex-grow: 1;
+}
+
+#team #teamTabs > div{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+
+
+#team table {
+    width: 100%;
+    max-width: 700px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+#team table tr {
+    display: flex;
+}
+
+#team table th{
+    min-width:10ch;
+    
+}
+
+#team table th:last-of-type{
+    align-self: flex-end;
+}
+
+
+
+#team table th:last-of-type{
+    background-color: transparent;
+    width: 5px;  
+    cursor: pointer;
+}
+#team table th img{
+    height: 15px;
+    width: 15px;
+}
+
+#team table th:nth-of-type(3){
+    min-width: 5ch;
+}
+
+#team table th:first-of-type{
+    min-width: 20ch;
+}
+
+#team form{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 5px;
+}
+
+#team form input{
+    font-size: 1rem;
+    padding: 5px;
+    margin-right: 3px;
 }
 
 #team > div button{
@@ -35,4 +96,7 @@
 
 #team table tr th{
     max-width: 10ch;
+}
+#team #teamTabs table tr th:last-of-type{
+    width: 5px;
 }

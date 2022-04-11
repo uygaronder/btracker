@@ -2,11 +2,25 @@
     padding: 20px;
 }
 
+#bug #bugUpper #bugInfo{
+    display: flex;
+    align-items: center;
+}
+
+#bug #bugInfo span:first-of-type{
+    margin: 0 5px;
+}
+
 #bug #bugUpper #bugInfo p{
     font-size: .8rem;
     opacity: .8;
 }
 
+#bug #bugUpper #bugInfo #due {
+    opacity: .8;
+    font-size: .8rem;
+    margin-right: 10px;
+}
 
 #bug #identifiers{
     display: flex;
@@ -16,18 +30,6 @@
     margin: 0 2px;   
 }
 
-#bug #identifiers span{
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    width: 5ch;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-    padding: 4px 20px;
-    background-color: rgb(41, 41, 41);
-}
 
 #bug #identifiers .low {
     background-color: green;
@@ -58,6 +60,7 @@
     align-items: center;   
 }
 
+
 #bug #bugButtons #notify{
     display: flex;
     
@@ -87,6 +90,34 @@
 #bug #bugDescDiv{
     padding: 5px 0;
     
+}
+
+#bug #assigned #assignedText{
+    display: flex;
+}
+#bug #assigned #assignedText h4{
+    margin-right: 5px;
+}
+#bug #assigned #assignedText #assignedUsers span{
+    margin-left: 2px;
+}
+
+#bug #assigned #assignedButtons{
+    display: flex;
+}
+#bug #assigned #assignedButtons button{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: .7;
+    margin-right: 10px;
+}
+#bug #assigned #assignedButtons img{
+    height: 14px;
+    width: 14px;
+    margin-right: 3px;
 }
 
 #bug #addComment {
@@ -125,8 +156,13 @@
 
 #bug #comments .comment .commentAuthorInfo{
     display: flex;
+    align-items: center;
 }
 
 #bug #comments .comment .commentAuthorInfo > *{
     margin-right: 10px;
+}
+#bug #comments .comment .commentAuthorInfo .postDate{
+    font-size: .8rem;
+    opacity: .8;
 }

@@ -38,7 +38,10 @@ class Bugs extends React.Component {
                         <h4>Total Bugs: 11</h4>
                     </div>
                     <div id="bugsFilter">
-                        <input id="filter" placeholder="Filter labels,ids,etc"/>
+                        <input
+                            id="filter"
+                            placeholder="Filter labels,ids,etc"
+                        />
                     </div>
                     <div id="bugsButton">
                         <h4>(Bug select option)</h4>
@@ -67,7 +70,9 @@ class Bugs extends React.Component {
                     <tr className="ongoing high">
                         <td id="bId">TP-101</td>
                         <td>This is a test bug text to fill space</td>
-                        <td>front-end</td>
+                        <td>
+                            <span className="label">front-end</span>
+                        </td>
                         <td>Usera</td>
                         <td>
                             <span className="priority">High</span>

@@ -21,9 +21,12 @@ import NotFound from "./NotFound";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 
-class Login extends React.Component {
+class Console extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            theme: "default",
+        };
     }
 
     notificationhandle = () => {
@@ -31,6 +34,10 @@ class Login extends React.Component {
         notBox.classList.contains("hidden")
             ? notBox.classList.remove("hidden")
             : notBox.classList.add("hidden");
+    };
+
+    darkmode = () => {
+        console.log("darkmode");
     };
 
     render() {
@@ -50,6 +57,11 @@ class Login extends React.Component {
                                     <option value="#">Current Project</option>
                                 </select>
                             </li>
+                            <li>
+                                <select name="teamSelect" id="teamSelect">
+                                    <option value="#">Current Team</option>
+                                </select>
+                            </li>
                         </ul>
                     </div>
                     <div>
@@ -59,6 +71,11 @@ class Login extends React.Component {
                             </li>
                             <li>
                                 <Link to="team">Team</Link>
+                            </li>
+                            <li>
+                                <button onClick={() => this.darkmode()}>
+                                    Dark Mode
+                                </button>
                             </li>
                             <li>
                                 <Link to="*">Settings</Link>
@@ -176,4 +193,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default Console;
