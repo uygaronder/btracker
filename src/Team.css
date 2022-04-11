@@ -37,6 +37,11 @@
 
 #team table tr {
     display: flex;
+    
+}
+
+#team table tr {
+    display: flex;
 }
 
 #team table th{

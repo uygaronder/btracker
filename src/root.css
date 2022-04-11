@@ -50,7 +50,9 @@ table tr {
 
 table tr:first-of-type {
     text-transform: uppercase;
+    /*
     font-size: 0.9rem;
+    */
     font-weight: 600;
 }
 
