@@ -44,7 +44,7 @@ class Console extends React.Component {
 
     fetchInfo = () => {
             
-        fetch(`${apiUrl}/getConsoleInfo`).then(res => console.log(res))
+        fetch(`${apiUrl}/getConsoleInfo`, {credentials: "include"}).then(res => console.log(res))
     }
     
     componentDidMount(){
