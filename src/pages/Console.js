@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import Select from "react-select"
 
 import { Link, Routes, Route } from "react-router-dom";
 
@@ -27,6 +28,7 @@ class Console extends React.Component {
         this.state = {
             theme: "default",
         };
+        
     }
 
     notificationhandle = () => {
@@ -39,6 +41,18 @@ class Console extends React.Component {
     darkmode = () => {
         console.log("darkmode");
     };
+
+    fetchInfo = () => {
+            
+        fetch(`${apiUrl}/getConsoleInfo`).then(res => console.log(res))
+    }
+    
+    componentDidMount(){
+        
+        this.fetchInfo()
+    }
+
+    
 
     render() {
         return (
