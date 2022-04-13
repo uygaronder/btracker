@@ -52,7 +52,7 @@ const register = function () {
                     </label>
                 </span>
                 <span className="buttonSpan">
-                    <button>Submit</button>
+                    <button type="submit">Submit</button>
                     <div>
                         <p>or</p>
                         <Link to="/login">login</Link>

@@ -38,7 +38,7 @@ class NewTeam extends React.Component {
                                 <div className="formField">
                                     <input
                                         className="CustomInput"
-                                        type="teamName"
+                                        type="text"
                                         name="teamName"
                                         placeholder="Team Name"
                                     />
