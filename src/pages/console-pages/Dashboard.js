@@ -5,8 +5,16 @@ import Search from "../../res/svg/search.svg";
 import plus from "../../res/svg/plus.svg";
 
 import Submit from "./SubmitBug";
-
+import Loading from "../Loading";
+var apiUrl = process.env.REACT_APP_APIURL;
 class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+        };
+    }
+
     openSubmit = () => {
         if (
             !document
@@ -22,13 +30,36 @@ class Dashboard extends React.Component {
                 .classList.remove("submitClosed");
         }
     };
+
+    setData = async () => {
+        console.log("props ", this.props);
+        const { name } = this.props.team;
+
+        await fetch(`${apiUrl}/getProjectInfo`, {
+            method: "post",
+            credentials: "include",
+            body: JSON.stringify({ projectId: `${this.props.activeProject}` }),
+        })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+
+        this.setState({ loading: false });
+    };
+
+    componentDidMount() {
+        this.setData();
+    }
+
     render() {
+        if (this.state.loading) {
+            return <Loading />;
+        }
         return (
             <div id="dashboard">
                 <div id="dashboardInfo">
                     <div id="dashboardTitle">
                         <h2>Dashboard</h2>
-                        <h4>Test Project</h4>
+                        <h4>{this.state.name}</h4>
                     </div>
 
                     <span id="dashboardSearch">

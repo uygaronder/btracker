@@ -42,14 +42,15 @@ class Team extends React.Component {
                     </div>
 
                     <div id="teamProjects">
-                        <form action="post">
+                        <form method="post" action={`${apiUrl}/createProject`}>
                             <input
                                 type="text"
                                 name="newProjectName"
                                 id="projectNameInput"
                                 placeholder="New Project Name"
+                                required
                             />
-                            <button type="submit">New Project</button>
+                            <button>New Project</button>
                         </form>
                         <table>
                             <tr>

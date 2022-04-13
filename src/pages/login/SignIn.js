@@ -10,8 +10,8 @@ const sign = function () {
         <div className="formDiv">
             <h1>Login</h1>
             <p>
-                You can sign in below or <Link to="/login/register">register</Link> a new
-                account
+                You can sign in below or{" "}
+                <Link to="/login/register">register</Link> a new account
             </p>
             <form method="POST" action={`${apiUrl}/login`}>
                 <span className="formText">

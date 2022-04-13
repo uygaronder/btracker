@@ -18,6 +18,7 @@ import Team from "./console-pages/Team";
 import NewTeam from "./console-pages/NewTeam";
 import Bug from "./console-pages/Bug";
 import NotFound from "./NotFound";
+import Loading from "./Loading";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 
@@ -26,6 +27,10 @@ class Console extends React.Component {
         super(props);
         this.state = {
             theme: "default",
+            teamOptions: [["tOptHold", "phold"]],
+            teamProjects: [["pName", "pIdHold"]],
+            notifications: [["nTextHold", "phold"]],
+            loading: true,
         };
     }
 
@@ -40,7 +45,32 @@ class Console extends React.Component {
         console.log("darkmode");
     };
 
+    fetchInfo = async () => {
+        var response;
+        await fetch(`${apiUrl}/getConsoleInfo`, { credentials: "include" })
+            .then((res) => res.json())
+            .then((data) => (response = data));
+
+        console.log(response);
+        this.setState({
+            notifications: response.user.notifications,
+            teamOptions: response.user.teams,
+            loading: false,
+            activeTeam: response.user.activeTeam,
+            activeProject: "",
+            team: response.team,
+        });
+    };
+
+    componentDidMount() {
+        this.fetchInfo();
+        console.log(this.state);
+    }
+
     render() {
+        if (this.state.loading) {
+            return <Loading />;
+        }
         return (
             <div id="console">
                 <nav>
@@ -58,8 +88,14 @@ class Console extends React.Component {
                                 </select>
                             </li>
                             <li>
-                                <select name="teamSelect" id="teamSelect">
-                                    <option value="#">Current Team</option>
+                                <select>
+                                    {this.state.teamOptions.map((team) => {
+                                        return (
+                                            <option value={team[1]}>
+                                                {team[0]}
+                                            </option>
+                                        );
+                                    })}
                                 </select>
                             </li>
                         </ul>
@@ -95,34 +131,29 @@ class Console extends React.Component {
                                 >
                                     <img src={notification} />
                                     <span id="notification">
-                                        <p>3</p>
+                                        {this.state.notifications.length}
                                     </span>
                                 </span>
 
                                 <div id="notificationsBox" className="hidden">
+                                    {this.state.notifications.map((notif) => {
+                                        return (
+                                            <div className="notificationItem">
+                                                <p>{notif[0]}</p>
+                                                <p className="notifDate">
+                                                    {notif[1]}
+                                                </p>
+                                            </div>
+                                        );
+                                    })}
+                                    {/*
                                     <div className="notificationItem">
                                         <p>This is a test notification</p>
                                         <p className="notifDate">
                                             12:11 30/3/2022
                                         </p>
                                     </div>
-                                    <div className="notificationItem">
-                                        <p>
-                                            This is a test notification and this
-                                            is a longer notification as well to
-                                            see how it handles longer
-                                            notifications
-                                        </p>
-                                        <p className="notifDate">
-                                            12:11 30/3/2022
-                                        </p>
-                                    </div>
-                                    <div className="notificationItem">
-                                        <p>This is a test notification</p>
-                                        <p className="notifDate">
-                                            12:11 30/3/2022
-                                        </p>
-                                    </div>
+                                    */}
                                 </div>
                             </li>
                             <li id="user">
@@ -178,10 +209,31 @@ class Console extends React.Component {
                     </div>
                     <div id="consoleScreen">
                         <Routes>
-                            <Route path="" element={<Dashboard />} />
-                            <Route path="dashboard" element={<Dashboard />} />
-                            <Route path="bugs" element={<Bugs />} />
-                            <Route path="team" element={<Team />} />
+                            <Route
+                                path=""
+                                element={
+                                    <Dashboard
+                                        team={this.state}
+                                        activeProject={this.state.activeProject}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="dashboard"
+                                element={<Dashboard team={this.state.team} />}
+                            />
+                            <Route
+                                path="bugs"
+                                element={
+                                    <Bugs activeTeam={this.state.activeTeam} />
+                                }
+                            />
+                            <Route
+                                path="team"
+                                element={
+                                    <Team activeTeam={this.state.activeTeam} />
+                                }
+                            />
                             <Route path="newTeam" element={<NewTeam />} />
                             <Route path="bug" element={<Bug />} />
                             <Route path="*" element={<NotFound />} />

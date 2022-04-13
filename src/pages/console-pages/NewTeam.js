@@ -34,7 +34,7 @@ class NewTeam extends React.Component {
                     <div id="createAndInvitations">
                         <div id="createTeam">
                             <h2>Create Team</h2>
-                            <form method="post" action="createTeam">
+                            <form method="post" action={`${apiUrl}/createTeam`}>
                                 <div className="formField">
                                     <input
                                         className="CustomInput"
