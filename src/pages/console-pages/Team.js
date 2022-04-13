@@ -4,7 +4,7 @@ import "../../Team.css";
 import Search from "../../res/svg/search.svg";
 import more from "../../res/svg/more.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
-console.log(apiUrl)
+console.log(apiUrl);
 class Team extends React.Component {
     render() {
         return (
@@ -42,11 +42,7 @@ class Team extends React.Component {
                     </div>
 
                     <div id="teamProjects">
-<<<<<<< HEAD
                         <form method="post" action={`${apiUrl}/createProject`}>
-=======
-                        <form method="post">
->>>>>>> f9f3b513c60bed9967c36f9774fb29e7ef9169a8
                             <input
                                 type="text"
                                 name="newProjectName"

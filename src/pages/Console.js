@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import Select from "react-select"
+import React, { useState } from "react";
+import Select from "react-select";
 
 import { Link, Routes, Route } from "react-router-dom";
 
@@ -33,7 +33,6 @@ class Console extends React.Component {
             notifications: [["nTextHold", "phold"]],
             loading: true,
         };
-        
     }
 
     notificationhandle = () => {
@@ -47,7 +46,6 @@ class Console extends React.Component {
         console.log("darkmode");
     };
 
-<<<<<<< HEAD
     fetchInfo = async () => {
         var response;
         await fetch(`${apiUrl}/getConsoleInfo`, { credentials: "include" })
@@ -70,20 +68,6 @@ class Console extends React.Component {
         console.log(this.state);
     }
 
-=======
-    fetchInfo = () => {
-            
-        fetch(`${apiUrl}/getConsoleInfo`, {credentials: "include"}).then(res => console.log(res))
-    }
-    
-    componentDidMount(){
-        
-        this.fetchInfo()
-    }
-
-    
-
->>>>>>> f9f3b513c60bed9967c36f9774fb29e7ef9169a8
     render() {
         if (this.state.loading) {
             return <Loading />;
