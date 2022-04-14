@@ -34,14 +34,15 @@ class Dashboard extends React.Component {
     setData =  () => {
         console.log("props ", this.props);
         const { name } = this.props.team;
-
+        const projectId = this.props.activeProject != undefined ? this.props.activeProject : ""
+        console.log(projectId)
         fetch(`${apiUrl}/getProjectInfo`, {
             method: "post",
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify({ projectId: `${this.props.activeProject}` }),
+            body: { projectId: `${projectId}` },
         })
             .then((res) => res.json())
             .then((data) => console.log(data));
