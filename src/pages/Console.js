@@ -52,13 +52,14 @@ class Console extends React.Component {
             .then((res) => res.json())
             .then((data) => (response = data));
 
-        console.log(response);
+        const activeProject = response.user.activeProject == "" ? response.team.projects[0][1]:response.user.activeProject
+
         this.setState({
             notifications: response.user.notifications,
             teamOptions: response.user.teams,
             loading: false,
             activeTeam: response.user.activeTeam,
-            activeProject: "",
+            activeProject: activeProject,
             team: response.team,
         });
     };
@@ -85,7 +86,9 @@ class Console extends React.Component {
                             </li>
                             <li>
                                 <select name="project" id="currentProject">
-                                    <option value="#">Current Project</option>
+                                    {this.state.team.projects.map(project => {
+                                        return <option value={project[1]}>{project[0]}</option>
+                                    })}
                                 </select>
                             </li>
                             <li>

@@ -31,13 +31,16 @@ class Dashboard extends React.Component {
         }
     };
 
-    setData = async () => {
+    setData =  () => {
         console.log("props ", this.props);
         const { name } = this.props.team;
 
-        await fetch(`${apiUrl}/getProjectInfo`, {
+        fetch(`${apiUrl}/getProjectInfo`, {
             method: "post",
             credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+              },
             body: JSON.stringify({ projectId: `${this.props.activeProject}` }),
         })
             .then((res) => res.json())
