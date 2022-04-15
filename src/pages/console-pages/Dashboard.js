@@ -42,7 +42,7 @@ class Dashboard extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: { projectId: `${projectId}` },
+            body: JSON.stringify({ projectId: `${projectId}` }),
         })
             .then((res) => res.json())
             .then((data) => console.log(data));
