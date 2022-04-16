@@ -32,22 +32,21 @@ class Dashboard extends React.Component {
     };
 
     setData =  () => {
-        console.log("props ", this.props);
-        const { name } = this.props.team;
-        const projectId = this.props.activeProject != undefined ? this.props.activeProject : ""
-        console.log(projectId)
+        console.log(this.props.consoleState)
+        const { name } = this.props.consoleState;
+        const projectId = this.props.consoleState.activeProject != undefined ? this.props.consoleState.activeProject : ""
+        //console.log(this.props.consoleState.teamProjects)
         fetch(`${apiUrl}/getProjectInfo`, {
             method: "post",
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify({ projectId: `${projectId}` }),
+            body: JSON.stringify({ projectId: `${projectId}` ,activeTeam:this.props.consoleState.activeTeam }),
         })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => this.setState({ project:data ,loading: false }));
 
-        this.setState({ loading: false });
     };
 
     componentDidMount() {
@@ -87,6 +86,7 @@ class Dashboard extends React.Component {
                             <td>Status</td>
                             <td>Due</td>
                         </tr>
+                        
                         <tr className="ongoing high">
                             <td id="bId">TP-101</td>
                             <td>This is a test bug text to fill space</td>

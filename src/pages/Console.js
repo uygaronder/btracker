@@ -52,7 +52,8 @@ class Console extends React.Component {
             .then((res) => res.json())
             .then((data) => (response = data));
 
-        const activeProject = response.user.activeProject == "" ? response.team.projects[0][1]:response.user.activeProject
+        console.log(response)
+        const activeProject = response.user.activeProject != "" ? response.team.projects[0][1]:response.user.activeProject
 
         this.setState({
             notifications: response.user.notifications,
@@ -217,14 +218,13 @@ class Console extends React.Component {
                                 path=""
                                 element={
                                     <Dashboard
-                                        team={this.state}
-                                        activeProject={this.state.activeProject}
+                                        consoleState={this.state}
                                     />
                                 }
                             />
                             <Route
                                 path="dashboard"
-                                element={<Dashboard team={this.state.team} />}
+                                element={<Dashboard consoleState={this.state} />}
                             />
                             <Route
                                 path="bugs"
