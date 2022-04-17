@@ -20,6 +20,7 @@ import NewTeam from "./console-pages/NewTeam";
 import Bug from "./console-pages/Bug";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
+import { act } from "react-dom/test-utils";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 
@@ -52,8 +53,8 @@ class Console extends React.Component {
             .then((res) => res.json())
             .then((data) => (response = data));
 
-        console.log(response)
-        const activeProject = response.user.activeProject != "" ? response.team.projects[0][1]:response.user.activeProject
+        var activeProject = response.team.projects.filter(project => project[0][1]==response.user.activeProject)[0]
+        if(activeProject == undefined){activeProject = response.team.projects[0][1]}
 
         this.setState({
             notifications: response.user.notifications,

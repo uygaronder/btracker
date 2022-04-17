@@ -14,7 +14,7 @@ class Team extends React.Component {
                 </div>
                 <div id="teamTabs">
                     <div id="teamUsers">
-                        <form action="post">
+                        <form method="post">
                             <input
                                 type="text"
                                 name="inviteUsernameInput"

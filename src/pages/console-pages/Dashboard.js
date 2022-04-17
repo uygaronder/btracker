@@ -155,7 +155,7 @@ class Dashboard extends React.Component {
                         <img src={plus} alt="+" /> <p>Submit a Bug</p>
                     </button>
                     <span id="submitBugPopup" className="submitClosed">
-                        <Submit />
+                        <Submit consoleState={this.props.consoleState}/>
                     </span>
                 </div>
                 <div id="dashboardStats">
