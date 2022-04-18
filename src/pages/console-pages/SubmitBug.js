@@ -9,13 +9,9 @@ class Submit extends React.Component {
         document
             .getElementById("submitBugPopup")
             .classList.remove("submitClosed");
-            
     };
-    
-    
 
     render() {
-        console.log(this.props)
         return (
             <div id="submitBug">
                 <div id="newBug">
@@ -29,7 +25,11 @@ class Submit extends React.Component {
                         &#10005;
                     </div>
                 </div>
-                <form method="post" action={`${apiUrl}/postBug`} autoComplete="off">
+                <form
+                    method="post"
+                    action={`${apiUrl}/postBug`}
+                    autoComplete="off"
+                >
                     <input type="text" name="bug" id="bug" placeholder="Bug" />
 
                     <textarea
@@ -39,7 +39,11 @@ class Submit extends React.Component {
                         cols="30"
                         rows="10"
                     ></textarea>
-                    <input name="labels" type={"text"} placeholder="Labels (usage:label1,label2)"/>
+                    <input
+                        name="labels"
+                        type={"text"}
+                        placeholder="Labels (usage:label1,label2)"
+                    />
                     <span>
                         <span>
                             <label htmlFor="priority">Priority:</label>
@@ -51,10 +55,14 @@ class Submit extends React.Component {
                         </span>
                         <span>
                             <label htmlFor="due">Due:</label>
-                            <input type={"date"} />
+                            <input name="due" type={"date"} />
                         </span>
                     </span>
-                    <input type = "hidden" name = "project" value={this.props.consoleState.activeProject} />
+                    <input
+                        type="hidden"
+                        name="project"
+                        value={this.props.consoleState.activeProject}
+                    />
                     <input type={"submit"} value="Submit Bug" />
                 </form>
             </div>

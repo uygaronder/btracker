@@ -31,27 +31,33 @@ class Dashboard extends React.Component {
         }
     };
 
-    setData =  () => {
-        console.log(this.props.consoleState)
-        const { name } = this.props.consoleState;
-        const projectId = this.props.consoleState.activeProject != undefined ? this.props.consoleState.activeProject : ""
+    setData = () => {
+        console.log(this.props.consoleState);
+        const projectId =
+            this.props.consoleState.activeProject != undefined
+                ? this.props.consoleState.activeProject
+                : "";
         //console.log(this.props.consoleState.teamProjects)
         fetch(`${apiUrl}/getProjectInfo`, {
             method: "post",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({ projectId: `${projectId}` ,activeTeam:this.props.consoleState.activeTeam }),
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                projectId: `${projectId}`,
+                activeTeam: this.props.consoleState.activeTeam,
+            }),
         })
             .then((res) => res.json())
-            .then((data) => this.setState({ project:data ,loading: false }));
-
+            .then((data) => this.setState({ project: data, loading: false }));
     };
 
     componentDidMount() {
         this.setData();
     }
+
+    handleClick(bId) {}
 
     render() {
         if (this.state.loading) {
@@ -86,7 +92,30 @@ class Dashboard extends React.Component {
                             <td>Status</td>
                             <td>Due</td>
                         </tr>
-                        
+                        {this.state.project.bugs.map((bug) => {
+                            let due = new Date(bug.due).toLocaleDateString();
+                            return (
+                                <tr
+                                    onClick={() => this.handleClick(bug._id)}
+                                    className={`${bug.priority} ${bug.status}`}
+                                >
+                                    <td>{bug.bugId}</td>
+                                    <td>{bug.bugTitle}</td>
+                                    <td>
+                                        <span className="priority">
+                                            {bug.priority}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span className="status">
+                                            {bug.status}
+                                        </span>
+                                    </td>
+                                    <td>{due}</td>
+                                </tr>
+                            );
+                        })}
+                        {/*
                         <tr className="ongoing high">
                             <td id="bId">TP-101</td>
                             <td>This is a test bug text to fill space</td>
@@ -98,53 +127,8 @@ class Dashboard extends React.Component {
                             </td>
                             <td>27 Mar 2022</td>
                         </tr>
-                        <tr className="complete high">
-                            <td id="bId">TP-102</td>
-                            <td>
-                                This is a test bug text to fill space this is
-                                even longer to make it double rows
-                            </td>
-                            <td>
-                                <span className="priority">High</span>
-                            </td>
-                            <td>
-                                <span className="status">Complete</span>
-                            </td>
-                            <td>27 Mar 2022</td>
-                        </tr>
-                        <tr className="overdue low">
-                            <td id="bId">TP-104</td>
-                            <td>This is a test bug text to fill space</td>
-                            <td>
-                                <span className="priority">Low</span>
-                            </td>
-                            <td>
-                                <span className="status">overdue</span>
-                            </td>
-                            <td>27 Mar 2022</td>
-                        </tr>
-                        <tr className="pending med">
-                            <td id="bId">TP-111</td>
-                            <td>This is a test bug text to fill space</td>
-                            <td>
-                                <span className="priority">med</span>
-                            </td>
-                            <td>
-                                <span className="status">pending</span>
-                            </td>
-                            <td>27 Mar 2022</td>
-                        </tr>
-                        <tr className="new low">
-                            <td id="bId">TP-111</td>
-                            <td>This is a test bug text to fill space</td>
-                            <td>
-                                <span className="priority">Low</span>
-                            </td>
-                            <td>
-                                <span className="status">new</span>
-                            </td>
-                            <td>27 Mar 2022</td>
-                        </tr>
+                        
+                        */}
                     </table>
                     <button
                         id="submitBug"
@@ -155,7 +139,7 @@ class Dashboard extends React.Component {
                         <img src={plus} alt="+" /> <p>Submit a Bug</p>
                     </button>
                     <span id="submitBugPopup" className="submitClosed">
-                        <Submit consoleState={this.props.consoleState}/>
+                        <Submit consoleState={this.props.consoleState} />
                     </span>
                 </div>
                 <div id="dashboardStats">

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Select from "react-select";
 
 import { Link, Routes, Route } from "react-router-dom";
 
@@ -20,7 +19,6 @@ import NewTeam from "./console-pages/NewTeam";
 import Bug from "./console-pages/Bug";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
-import { act } from "react-dom/test-utils";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 
@@ -53,8 +51,12 @@ class Console extends React.Component {
             .then((res) => res.json())
             .then((data) => (response = data));
 
-        var activeProject = response.team.projects.filter(project => project[0][1]==response.user.activeProject)[0]
-        if(activeProject == undefined){activeProject = response.team.projects[0][1]}
+        var activeProject = response.team.projects.filter(
+            (project) => project[0][1] == response.user.activeProject
+        )[0];
+        if (activeProject == undefined) {
+            activeProject = response.team.projects[0][1];
+        }
 
         this.setState({
             notifications: response.user.notifications,
@@ -88,8 +90,12 @@ class Console extends React.Component {
                             </li>
                             <li>
                                 <select name="project" id="currentProject">
-                                    {this.state.team.projects.map(project => {
-                                        return <option value={project[1]}>{project[0]}</option>
+                                    {this.state.team.projects.map((project) => {
+                                        return (
+                                            <option value={project[1]}>
+                                                {project[0]}
+                                            </option>
+                                        );
                                     })}
                                 </select>
                             </li>
@@ -218,29 +224,28 @@ class Console extends React.Component {
                             <Route
                                 path=""
                                 element={
-                                    <Dashboard
-                                        consoleState={this.state}
-                                    />
+                                    <Dashboard consoleState={this.state} />
                                 }
                             />
                             <Route
                                 path="dashboard"
-                                element={<Dashboard consoleState={this.state} />}
+                                element={
+                                    <Dashboard consoleState={this.state} />
+                                }
                             />
                             <Route
                                 path="bugs"
-                                element={
-                                    <Bugs activeTeam={this.state.activeTeam} />
-                                }
+                                element={<Bugs consoleState={this.state} />}
                             />
                             <Route
                                 path="team"
-                                element={
-                                    <Team activeTeam={this.state.activeTeam} />
-                                }
+                                element={<Team consoleState={this.state} />}
                             />
                             <Route path="newTeam" element={<NewTeam />} />
-                            <Route path="bug" element={<Bug />} />
+                            <Route
+                                path="bug/:bId"
+                                element={<Bug consoleState={this.state} />}
+                            />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>

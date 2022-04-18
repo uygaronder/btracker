@@ -92,7 +92,7 @@ table td:last-of-type {
     text-transform: uppercase;
 }
 
-.ongoing .status {
+.open .status {
     background-color: rgb(214, 212, 58);
     color: rgb(82, 82, 0);
 }
@@ -163,4 +163,8 @@ table td:last-of-type {
     font-weight: 600;
     padding: 4px 16px;
     margin: auto;
+}
+
+table a{
+    text-decoration: none;
 }
