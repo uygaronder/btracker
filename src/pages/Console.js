@@ -28,7 +28,6 @@ class Console extends React.Component {
         this.state = {
             theme: "default",
             teamOptions: [["tOptHold", "phold"]],
-            teamProjects: [["pName", "pIdHold"]],
             notifications: [["nTextHold", "phold"]],
             loading: true,
         };
@@ -57,8 +56,8 @@ class Console extends React.Component {
         if (activeProject == undefined) {
             activeProject = response.team.projects[0][1];
         }
-
         this.setState({
+            usrName: response.user.name,
             notifications: response.user.notifications,
             teamOptions: response.user.teams,
             loading: false,

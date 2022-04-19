@@ -57,7 +57,9 @@ class Dashboard extends React.Component {
         this.setData();
     }
 
-    handleClick(bId) {}
+    handleClick(bId) {
+        window.location.href = `/console/bug/${bId}`;
+    }
 
     render() {
         if (this.state.loading) {

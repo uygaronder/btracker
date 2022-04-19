@@ -6,11 +6,12 @@ class Submit extends React.Component {
         document.getElementById("submitBugPopup").classList.add("submitClosed");
     };
     openSubmit = () => {
+        console.log(this.props.consoleState)
         document
             .getElementById("submitBugPopup")
             .classList.remove("submitClosed");
     };
-
+    
     render() {
         return (
             <div id="submitBug">
@@ -62,6 +63,11 @@ class Submit extends React.Component {
                         type="hidden"
                         name="project"
                         value={this.props.consoleState.activeProject}
+                    />
+                    <input
+                        type="hidden"
+                        name="name"
+                        value={this.props.consoleState.usrName}
                     />
                     <input type={"submit"} value="Submit Bug" />
                 </form>
