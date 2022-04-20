@@ -60,7 +60,7 @@ const Bug = ({consoleState}) => {
             <div id="bugTexts">
                 <div id="bugUpper">
                     <div id="bugInfo">
-                        <p>Posted by {data.author} at (post date)</p>
+                        <p>Posted by {data.author.authorName} at {data.postDate}</p>
                         <span>|</span>
                         <span id="due">due in 5 days</span>
                     </div>
@@ -87,14 +87,15 @@ const Bug = ({consoleState}) => {
                     </p>
                 </div>
                 <div id="assigned">
-                    <div id="assignedText">
+                    {data.assignedTo>0?<div id="assignedText">
                         <h4>Assigned To:</h4>
                         <div id="assignedUsers">
                             {data.assigned.map(person=>{
                                 return <span>{person}</span>
                             })}
                         </div>
-                    </div>
+                    </div>:""}
+                    
                     <div id="assignedButtons">
                         <button>
                             <img src={assign} /> Assign This Bug
