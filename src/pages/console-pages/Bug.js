@@ -12,11 +12,29 @@ import bellOn from "../../res/svg/notification.svg";
 import del from "../../res/svg/delete.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
 
+function renderComment(comment){
+    return comment.map(comment => {
+        return (<div className="comment">
+            <div className="commentAuthorInfo">
+                            <p className="author">{comment.author.authorName}</p>
+                            <p className="postDate">{comment.date}</p>
+                        </div>
+                        <p className="commentText">
+                            {comment.commentText}
+                        </p>
+                        <div className="commentOptions"></div>
+                        <div className="comment">
+                            {renderComment(comment.comments)}
+                        </div>
+        </div>)
+    })
+}
 
 const Bug = ({consoleState}) => {
 
     const { bId } = useParams()
     const [data, setData] = useState()
+    console.log(consoleState)
     useEffect(()=>{
         fetch(`${apiUrl}/getBug`, {
             
@@ -93,34 +111,22 @@ const Bug = ({consoleState}) => {
                 </div>
             </div>
 
-            <div id="addComment">
+            <form id="addComment" method="post" action={`${apiUrl}/postComment`}>
                 <textarea
                     id="commentBox"
+                    name="comment"
                     placeholder="Type a comment"
-                ></textarea>
-                <button>Post Comment</button>
-            </div>
+                />
+                <input type={"hidden"} name={"bugId"} value={data._id}/>
+                <input type={"hidden"} name={"project"} value={consoleState.activeProject}/>
+                <input type={"hidden"} name={"name"} value={consoleState.usrName}/>
+                <button type={"submit"}>Post Comment</button>
+            </form>
 
             <div id="comments">
                 <h3>Comments</h3>
                 <div id="commentsDiv">
-                    <div className="comment">
-                        <div className="commentAuthorInfo">
-                            <p className="author">Author</p>
-                            <p className="postDate">posted date</p>
-                        </div>
-                        <p className="commentText">
-                            Lorem ipsum doler sit amet dis is a comment
-                        </p>
-                        <div className="commentOptions"></div>
-                        <div className="comment">
-                            <div className="commentAuthorInfo">
-                                <p className="author">Author</p>
-                                <p className="postDate">posted date</p>
-                            </div>
-                            <p className="commentText">this is a reply</p>
-                        </div>
-                    </div>
+                    {data.comments.length>0 ? renderComment(data.comments):<p>No comments yet</p>}
                 </div>
             </div>
         </div>
