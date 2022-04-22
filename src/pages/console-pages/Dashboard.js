@@ -37,7 +37,6 @@ class Dashboard extends React.Component {
             this.props.consoleState.activeProject != undefined
                 ? this.props.consoleState.activeProject
                 : "";
-        //console.log(this.props.consoleState.teamProjects)
         fetch(`${apiUrl}/getProjectInfo`, {
             method: "post",
             credentials: "include",
@@ -101,7 +100,7 @@ class Dashboard extends React.Component {
                                     onClick={() => this.handleClick(bug._id)}
                                     className={`${bug.priority} ${bug.status}`}
                                 >
-                                    <td>{bug.bugId}</td>
+                                    <td className="bId">{bug.bugId}</td>
                                     <td>{bug.bugTitle}</td>
                                     <td>
                                         <span className="priority">

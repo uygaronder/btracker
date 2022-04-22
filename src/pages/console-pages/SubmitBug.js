@@ -6,12 +6,12 @@ class Submit extends React.Component {
         document.getElementById("submitBugPopup").classList.add("submitClosed");
     };
     openSubmit = () => {
-        console.log(this.props.consoleState)
+        console.log(this.props.consoleState);
         document
             .getElementById("submitBugPopup")
             .classList.remove("submitClosed");
     };
-    
+
     render() {
         return (
             <div id="submitBug">
@@ -50,7 +50,7 @@ class Submit extends React.Component {
                             <label htmlFor="priority">Priority:</label>
                             <select name="priority" id="priority">
                                 <option value={"low"}>Low</option>
-                                <option value={"medium"}>Medium</option>
+                                <option value={"med"}>Medium</option>
                                 <option value={"high"}>High</option>
                             </select>
                         </span>
