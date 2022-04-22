@@ -12,8 +12,9 @@ import bellOn from "../../res/svg/notification.svg";
 import del from "../../res/svg/delete.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
 
-function renderComment(comment) {
-    return comment.map((comment) => {
+function renderComment(comments, state, data) {
+    console.log(comments);
+    return comments.map((comment) => {
         return (
             <div className="comment">
                 <div className="commentAuthorInfo">
@@ -36,14 +37,38 @@ function renderComment(comment) {
                         id={comment._id}
                         style={{ display: "none" }}
                     >
-                        <form className={`replyTextbox`} action="">
+                        <form
+                            className={`replyTextbox`}
+                            action={`${apiUrl}/postReply`}
+                            method="post"
+                        >
                             <textarea
-                                name=""
+                                name="comment"
                                 id={`${comment._id}:tarea`}
                                 cols="30"
                                 rows="5"
                                 placeholder="What do you think?"
                             ></textarea>
+                            <input
+                                type="hidden"
+                                name="commentId"
+                                value={comment._id}
+                            />
+                            <input
+                                type={"hidden"}
+                                name={"bugId"}
+                                value={data._id}
+                            />
+                            <input
+                                type={"hidden"}
+                                name={"project"}
+                                value={state.activeProject}
+                            />
+                            <input
+                                type={"hidden"}
+                                name={"name"}
+                                value={state.usrName}
+                            />
                             <div className="replyButtons">
                                 <button
                                     type="button"
@@ -59,7 +84,11 @@ function renderComment(comment) {
                     </div>
                 </div>
 
-                <div className="comment">{renderComment(comment.comments)}</div>
+                <div className="comment">
+                    {comment.comments.length > 0
+                        ? renderComment(comment.comments, state, data)
+                        : []}
+                </div>
             </div>
         );
     });
@@ -80,7 +109,6 @@ function handleReplyDiv(id) {
 const Bug = ({ consoleState }) => {
     const { bId } = useParams();
     const [data, setData] = useState();
-    console.log(consoleState);
     useEffect(() => {
         fetch(`${apiUrl}/getBug`, {
             method: "post",
@@ -200,7 +228,7 @@ const Bug = ({ consoleState }) => {
                 <h3>Comments</h3>
                 <div id="commentsDiv">
                     {data.comments.length > 0 ? (
-                        renderComment(data.comments)
+                        renderComment(data.comments, consoleState, data)
                     ) : (
                         <p>No comments yet</p>
                     )}
