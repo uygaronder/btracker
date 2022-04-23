@@ -106,12 +106,15 @@ function handleReplyDiv(id) {
 }
 
 function confirmationBox(action, id, state) {
-    console.log(action);
+    //console.log(action);
     document.getElementById("confirmationBoxDiv").style.display = "flex";
     switch (action) {
         case "deleteBug":
             document.getElementById("confirmationP").innerText =
                 "Are you sure you want to delete this bug?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
             break;
     }
 }
@@ -218,7 +221,11 @@ const Bug = ({ consoleState }) => {
                         </button>
                         <button
                             onClick={() => {
-                                confirmationBox("deleteBug", data.id);
+                                confirmationBox(
+                                    "deleteBug",
+                                    data._id,
+                                    consoleState
+                                );
                             }}
                         >
                             <img src={del} />
@@ -262,13 +269,13 @@ const Bug = ({ consoleState }) => {
                     )}
                 </div>
             </div>
-            <div id="confirmationBoxDiv" style={{ display: "flex" }}>
+            <div id="confirmationBoxDiv" style={{ display: "none" }}>
                 <div id="confirmationBox">
                     <div id="confirmationInfo">
                         <p id="confirmationP"></p>
                     </div>
                     <div className="confirmationButtons">
-                        <button>Accept</button>
+                        <button id="confirmButton">Accept</button>
                         <button
                             type="button"
                             onClick={() => {

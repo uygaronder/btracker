@@ -31,7 +31,12 @@ class Submit extends React.Component {
                     action={`${apiUrl}/postBug`}
                     autoComplete="off"
                 >
-                    <input type="text" name="bug" id="bug" placeholder="Bug" />
+                    <input
+                        type="text"
+                        name="bug"
+                        id="bugTitle"
+                        placeholder="Bug"
+                    />
 
                     <textarea
                         name="description"
