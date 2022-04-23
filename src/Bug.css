@@ -1,6 +1,8 @@
 #bug{
     padding: 20px;
     width: 100%;
+    height: 90.5vh;
+    overflow-y: auto;
 }
 
 #bug #bugUpper #bugInfo{

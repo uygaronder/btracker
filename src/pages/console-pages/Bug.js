@@ -13,7 +13,6 @@ import del from "../../res/svg/delete.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
 
 function renderComment(comments, state, data) {
-    console.log(comments);
     return comments.map((comment) => {
         return (
             <div className="comment">
@@ -84,7 +83,7 @@ function renderComment(comments, state, data) {
                     </div>
                 </div>
 
-                <div className="comment">
+                <div>
                     {comment.comments.length > 0
                         ? renderComment(comment.comments, state, data)
                         : []}
@@ -104,6 +103,31 @@ function handleReplyDiv(id) {
             break;
     }
     document.getElementById(`${id}:tarea`).value = "";
+}
+
+function confirmationBox(action, id, state) {
+    console.log(action);
+    document.getElementById("confirmationBoxDiv").style.display = "flex";
+    switch (action) {
+        case "deleteBug":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you want to delete this bug?";
+            break;
+    }
+}
+
+function confirmedAction(action, id, state) {
+    fetch(`${apiUrl}/${action}`, {
+        method: "post",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            bugId: `${id}`,
+            projectId: state.activeProject,
+        }),
+    });
 }
 
 const Bug = ({ consoleState }) => {
@@ -192,7 +216,11 @@ const Bug = ({ consoleState }) => {
                             <img className="down" src={chevronUp} /> Self Assign
                             This Bug
                         </button>
-                        <button>
+                        <button
+                            onClick={() => {
+                                confirmationBox("deleteBug", data.id);
+                            }}
+                        >
                             <img src={del} />
                             Delete This Bug
                         </button>
@@ -232,6 +260,26 @@ const Bug = ({ consoleState }) => {
                     ) : (
                         <p>No comments yet</p>
                     )}
+                </div>
+            </div>
+            <div id="confirmationBoxDiv" style={{ display: "flex" }}>
+                <div id="confirmationBox">
+                    <div id="confirmationInfo">
+                        <p id="confirmationP"></p>
+                    </div>
+                    <div className="confirmationButtons">
+                        <button>Accept</button>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                document.getElementById(
+                                    "confirmationBoxDiv"
+                                ).style.display = "none";
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

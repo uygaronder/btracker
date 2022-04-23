@@ -53,7 +53,7 @@ class Bugs extends React.Component {
                             <img src={plus} alt="+" /> Submit a bug
                         </button>
                         <span id="submitBugPopup" className="submitClosed">
-                            <Submit consoleState={this.props.consoleState}/>
+                            <Submit consoleState={this.props.consoleState} />
                         </span>
                     </div>
                 </div>
