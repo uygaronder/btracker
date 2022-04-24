@@ -116,6 +116,13 @@ function confirmationBox(action, id, state) {
                 confirmedAction(action, id, state);
             };
             break;
+        case "markBugComplete":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you want to mark this bug complete?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
+            break;
     }
 }
 
@@ -190,7 +197,13 @@ const Bug = ({ consoleState }) => {
                         </div>
                         <div id="bugButtons">
                             <span id="notify">{<img src={bell} />}</span>
-                            <button id="complete">Mark As Complete</button>
+                            <button id="complete" onClick={() => {
+                                confirmationBox(
+                                    "markBugComplete",
+                                    data._id,
+                                    consoleState
+                                );
+                            }}>Mark As Complete</button>
                         </div>
                     </div>
                 </div>
