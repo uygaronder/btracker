@@ -6,7 +6,42 @@ import edit from "../../res/svg/edit.svg";
 import complete from "../../res/svg/complete.svg";
 
 import Submit from "./SubmitBug";
+import Loading from "../Loading";
+const apiUrl = process.env.REACT_APP_APIURL;
+
 class Bugs extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+        };
+    }
+
+    setData = () => {
+        console.log(this.props.consoleState);
+        const projectId =
+            this.props.consoleState.activeProject != undefined
+                ? this.props.consoleState.activeProject
+                : "";
+        fetch(`${apiUrl}/getProjectInfo`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                projectId: `${projectId}`,
+                activeTeam: this.props.consoleState.activeTeam,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => this.setState({ project: data, loading: false }));
+    };
+
+    componentDidMount() {
+        this.setData();
+    }
+
     openSubmit = () => {
         if (
             !document
@@ -22,20 +57,20 @@ class Bugs extends React.Component {
                 .classList.remove("submitClosed");
         }
     };
-    edit = (bugId) => {
-        console.log(bugId);
-    };
-    complete = () => {
-        console.log("complete");
-    };
+
+    handleClick(bId) {
+        window.location.href = `/console/bug/${bId}`;
+    }
+
     render() {
+        if(this.state.loading) return <Loading />
         return (
             <div id="bugs">
                 <div id="bugsUp">
                     <div id="bugsInfo">
-                        <h3>Project Name</h3>
+                        <h3>{this.state.project.name}</h3>
                         <span />
-                        <h4>Total Bugs: 11</h4>
+                        <h4>Total Bugs: {this.state.project.bugs.length}</h4>
                     </div>
                     <div id="bugsFilter">
                         <input
@@ -67,6 +102,40 @@ class Bugs extends React.Component {
                         <td>Status</td>
                         <td>Due</td>
                     </tr>
+                    {this.state.project.bugs.map((bug) => {
+                            let due = new Date(bug.due).toLocaleDateString();
+                            return (
+                                <tr
+                                    onClick={() => this.handleClick(bug._id)}
+                                    className={`${bug.priority} ${bug.status}`}
+                                >
+                                    <td className="bId">{bug.bugId}</td>
+                                    <td>{bug.bugTitle}</td>
+                                    <td>
+                                        {bug.labels.map(label=>{
+                                            return (<span className="label">{label}</span>)
+                                        })}
+                                    </td>
+                                    <td>
+                                        {bug.assigned.map(assigned=>{
+                                            return (<span className="assigned">{assigned}</span>)
+                                        })}
+                                    </td>
+                                    <td>
+                                        <span className="priority">
+                                            {bug.priority}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span className="status">
+                                            {bug.status}
+                                        </span>
+                                    </td>
+                                    <td>{due}</td>
+                                </tr>
+                            );
+                        })}
+                    {/*
                     <tr className="ongoing high">
                         <td id="bId">TP-101</td>
                         <td>This is a test bug text to fill space</td>
@@ -82,6 +151,8 @@ class Bugs extends React.Component {
                         </td>
                         <td>27 Mar 2022</td>
                     </tr>
+                    */}
+                    
                 </table>
             </div>
         );

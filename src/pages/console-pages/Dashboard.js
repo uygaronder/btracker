@@ -6,7 +6,7 @@ import plus from "../../res/svg/plus.svg";
 
 import Submit from "./SubmitBug";
 import Loading from "../Loading";
-var apiUrl = process.env.REACT_APP_APIURL;
+const apiUrl = process.env.REACT_APP_APIURL;
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
