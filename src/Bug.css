@@ -219,7 +219,7 @@
     color: rgb(82, 82, 0);
 }
 
-#bug .complete {
+#bug .closed {
     background-color: rgb(115, 214, 58);
     color: rgb(0, 75, 0);
 }
@@ -237,4 +237,10 @@
 #bug .new {
     background-color: rgb(58, 213, 252);
     color: rgb(6, 0, 83);
+}
+
+#submit{
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }

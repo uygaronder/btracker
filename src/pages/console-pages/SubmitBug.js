@@ -6,7 +6,6 @@ class Submit extends React.Component {
         document.getElementById("submitBugPopup").classList.add("submitClosed");
     };
     openSubmit = () => {
-        console.log(this.props.consoleState);
         document
             .getElementById("submitBugPopup")
             .classList.remove("submitClosed");
@@ -16,7 +15,7 @@ class Submit extends React.Component {
         return (
             <div id="submitBug">
                 <div id="newBug">
-                    <h3>New Bug</h3>
+                    <h3>{!this.props.bug ? "New Bug" : "Edit Bug"} </h3>
                     <div
                         id="submitClose"
                         onClick={() => {
@@ -28,7 +27,9 @@ class Submit extends React.Component {
                 </div>
                 <form
                     method="post"
-                    action={`${apiUrl}/postBug`}
+                    action={`${apiUrl}/${
+                        this.props.bug ? "editBug" : "postBug"
+                    }`}
                     autoComplete="off"
                 >
                     <input
@@ -36,6 +37,9 @@ class Submit extends React.Component {
                         name="bug"
                         id="bugTitle"
                         placeholder="Bug"
+                        defaultValue={
+                            this.props.bug ? this.props.bug.bugTitle : ""
+                        }
                     />
 
                     <textarea
@@ -44,7 +48,9 @@ class Submit extends React.Component {
                         placeholder="Description..."
                         cols="30"
                         rows="10"
-                    ></textarea>
+                    >
+                        {this.props.bug ? this.props.bug.description : ""}
+                    </textarea>
                     <input
                         name="labels"
                         type={"text"}
@@ -53,7 +59,15 @@ class Submit extends React.Component {
                     <span>
                         <span>
                             <label htmlFor="priority">Priority:</label>
-                            <select name="priority" id="priority">
+                            <select
+                                name="priority"
+                                id="priority"
+                                defaultValue={
+                                    this.props.bug
+                                        ? this.props.bug.priority
+                                        : "low"
+                                }
+                            >
                                 <option value={"low"}>Low</option>
                                 <option value={"med"}>Medium</option>
                                 <option value={"high"}>High</option>
@@ -74,6 +88,15 @@ class Submit extends React.Component {
                         name="name"
                         value={this.props.consoleState.usrName}
                     />
+                    {this.props.bug ? (
+                        <input
+                            type={"hidden"}
+                            name="bugId"
+                            value={this.props.bug._id}
+                        />
+                    ) : (
+                        <input type={"hidden"} />
+                    )}
                     <input type={"submit"} value="Submit Bug" />
                 </form>
             </div>

@@ -6,6 +6,7 @@ import asterisk from "../../res/svg/asterisk.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
 
 const sign = function () {
+    document.title = `BTrack | Login`;
     return (
         <div className="formDiv">
             <h1>Login</h1>

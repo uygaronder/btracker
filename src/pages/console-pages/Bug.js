@@ -8,9 +8,22 @@ import Search from "../../res/svg/search.svg";
 import assign from "../../res/svg/assign.svg";
 import chevronUp from "../../res/svg/chevron-up.svg";
 import bell from "../../res/svg/bell.svg";
+import edit from "../../res/svg/edit.svg";
 import bellOn from "../../res/svg/notification.svg";
 import del from "../../res/svg/delete.svg";
+
+import Submit from "./SubmitBug";
+
 var apiUrl = process.env.REACT_APP_APIURL;
+
+function editBug() {
+    const submitDiv = document.getElementById("submit");
+    submitDiv.style.display == "none"
+        ? (submitDiv.style.display = "block")
+        : (submitDiv.style.display = "none");
+}
+
+function filterBugs(bugs, filter) {}
 
 function renderComment(comments, state, data) {
     return comments.map((comment) => {
@@ -106,7 +119,6 @@ function handleReplyDiv(id) {
 }
 
 function confirmationBox(action, id, state) {
-    //console.log(action);
     document.getElementById("confirmationBoxDiv").style.display = "flex";
     switch (action) {
         case "deleteBug":
@@ -119,6 +131,13 @@ function confirmationBox(action, id, state) {
         case "markBugComplete":
             document.getElementById("confirmationP").innerText =
                 "Are you sure you want to mark this bug complete?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
+            break;
+        case "openBug":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you want to open this bug?";
             document.getElementById("confirmButton").onclick = () => {
                 confirmedAction(action, id, state);
             };
@@ -164,6 +183,10 @@ const Bug = ({ consoleState }) => {
     if (!data) return <Loading />;
     return (
         <div id="bug">
+            <div id="submit" style={{ display: "none" }}>
+                <Submit consoleState={consoleState} bug={data} />
+            </div>
+
             <div id="bugTexts">
                 <div id="bugUpper">
                     <div id="bugInfo">
@@ -172,7 +195,9 @@ const Bug = ({ consoleState }) => {
                             {new Date(data.postDate).toLocaleDateString()}
                         </p>
                         <span>|</span>
-                        <span id="due">due in 5 days</span>
+                        <span id="due">
+                            due at {new Date(data.due).toLocaleDateString()}
+                        </span>
                     </div>
                     <div id="bugTitleStuff">
                         <div id="bugTitleDiv">
@@ -196,14 +221,42 @@ const Bug = ({ consoleState }) => {
                             </div>
                         </div>
                         <div id="bugButtons">
-                            <span id="notify">{<img src={bell} />}</span>
-                            <button id="complete" onClick={() => {
-                                confirmationBox(
-                                    "markBugComplete",
-                                    data._id,
-                                    consoleState
-                                );
-                            }}>Mark As Complete</button>
+                            <span id="notify">
+                                {data.followedBy &&
+                                data.followedBy.contains(
+                                    consoleState.user._id
+                                ) ? (
+                                    <img src={bellOn} />
+                                ) : (
+                                    <img src={bell} />
+                                )}
+                            </span>
+                            {data.status != "closed" ? (
+                                <button
+                                    id="complete"
+                                    onClick={() => {
+                                        confirmationBox(
+                                            "markBugComplete",
+                                            data._id,
+                                            consoleState
+                                        );
+                                    }}
+                                >
+                                    Mark As Complete
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        confirmationBox(
+                                            "openBug",
+                                            data.id,
+                                            consoleState
+                                        );
+                                    }}
+                                >
+                                    Open This Bug
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -221,7 +274,7 @@ const Bug = ({ consoleState }) => {
                             </div>
                         </div>
                     ) : (
-                        ""
+                        <div />
                     )}
 
                     <div id="assignedButtons">
@@ -243,6 +296,13 @@ const Bug = ({ consoleState }) => {
                         >
                             <img src={del} />
                             Delete This Bug
+                        </button>
+                        <button
+                            onClick={() => {
+                                editBug();
+                            }}
+                        >
+                            <img src={edit} /> Edit This Bug
                         </button>
                     </div>
                 </div>

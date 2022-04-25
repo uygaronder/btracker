@@ -98,7 +98,7 @@ table td:last-of-type {
     color: rgb(82, 82, 0);
 }
 
-.complete .status {
+.closed .status {
     background-color: rgb(115, 214, 58);
     color: rgb(0, 75, 0);
 }

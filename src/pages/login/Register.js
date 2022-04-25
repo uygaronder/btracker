@@ -7,6 +7,7 @@ import letter from "../../res/svg/letter.svg";
 const apiUrl = process.env.REACT_APP_APIURL;
 
 const register = function () {
+    document.title = `BTrack | Register`;
     return (
         <div className="formDiv">
             <h1>Register</h1>

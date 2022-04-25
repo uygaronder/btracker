@@ -12,6 +12,11 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {
             loading: true,
+            open: 0,
+            closed: 0,
+            overdue: 0,
+            dueDay: 0,
+            dueWeek: 0,
         };
     }
 
@@ -95,6 +100,28 @@ class Dashboard extends React.Component {
                         </tr>
                         {this.state.project.bugs.map((bug) => {
                             let due = new Date(bug.due).toLocaleDateString();
+                            console.log(bug);
+                            if (bug.status == "open") {
+                                this.state.open++;
+                            } else if (bug.status == "closed") {
+                                this.state.closed++;
+                            }
+                            if (bug.status != "closed") {
+                                if (Date.parse(bug.due) < Date.now()) {
+                                    this.state.overdue++;
+                                } else if (
+                                    Date.parse(bug.due) <
+                                    Date.now() + 1000 * 60 * 60 * 24 * 1
+                                ) {
+                                    this.state.dueDay++;
+                                } else if (
+                                    Date.parse(bug.due) <
+                                    Date.now() + 1000 * 60 * 60 * 24 * 7
+                                ) {
+                                    this.state.dueWeek++;
+                                }
+                            }
+
                             return (
                                 <tr
                                     onClick={() => this.handleClick(bug._id)}
@@ -147,23 +174,23 @@ class Dashboard extends React.Component {
                     <h2>Bug Status</h2>
                     <ul id="dashboardStatus">
                         <li id="openStatus">
-                            <h2>12</h2>
+                            <h2>{this.state.open}</h2>
                             <p>Open Bugs</p>
                         </li>
                         <li id="closeStatus">
-                            <h2>5</h2>
+                            <h2>{this.state.closed}</h2>
                             <p>Closed Bugs</p>
                         </li>
                         <li id="overStatus">
-                            <h2>3</h2>
+                            <h2>{this.state.overdue}</h2>
                             <p>Overdue</p>
                         </li>
                         <li id="dayStatus">
-                            <h2>2</h2>
+                            <h2>{this.state.dueDay}</h2>
                             <p>Due Today</p>
                         </li>
                         <li id="weekStatus">
-                            <h2>6</h2>
+                            <h2>{this.state.dueWeek}</h2>
                             <p>Due This Week</p>
                         </li>
                     </ul>

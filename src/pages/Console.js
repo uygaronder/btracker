@@ -70,6 +70,7 @@ class Console extends React.Component {
     componentDidMount() {
         this.fetchInfo();
         console.log(this.state);
+        document.title = "Console";
     }
 
     render() {

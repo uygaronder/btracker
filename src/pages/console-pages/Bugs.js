@@ -2,10 +2,10 @@ import React from "react";
 import "../../Bugs.css";
 
 import plus from "../../res/svg/plus.svg";
-import Submit from "./SubmitBug";
 import edit from "../../res/svg/edit.svg";
 import complete from "../../res/svg/complete.svg";
 
+import Submit from "./SubmitBug";
 class Bugs extends React.Component {
     openSubmit = () => {
         if (

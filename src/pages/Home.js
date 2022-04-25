@@ -5,6 +5,9 @@ import bugSvg from "../res/svg/bugPic.svg";
 import { Link } from "react-router-dom";
 
 class Home extends React.Component {
+    componentDidMount() {
+        document.title = "BTrack";
+    }
     render() {
         return (
             <div id="home">
