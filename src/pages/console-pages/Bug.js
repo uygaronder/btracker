@@ -155,6 +155,7 @@ function confirmedAction(action, id, state) {
         body: JSON.stringify({
             bugId: `${id}`,
             projectId: state.activeProject,
+            state: state
         }),
     });
 }
@@ -176,6 +177,7 @@ const Bug = ({ consoleState }) => {
         })
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 setData(data);
             });
     }, []);

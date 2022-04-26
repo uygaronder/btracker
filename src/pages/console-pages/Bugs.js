@@ -135,24 +135,6 @@ class Bugs extends React.Component {
                                 </tr>
                             );
                         })}
-                    {/*
-                    <tr className="ongoing high">
-                        <td id="bId">TP-101</td>
-                        <td>This is a test bug text to fill space</td>
-                        <td>
-                            <span className="label">front-end</span>
-                        </td>
-                        <td>Usera</td>
-                        <td>
-                            <span className="priority">High</span>
-                        </td>
-                        <td>
-                            <span className="status">ongoing</span>
-                        </td>
-                        <td>27 Mar 2022</td>
-                    </tr>
-                    */}
-                    
                 </table>
             </div>
         );

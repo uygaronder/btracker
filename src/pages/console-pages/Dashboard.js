@@ -37,7 +37,6 @@ class Dashboard extends React.Component {
     };
 
     setData = () => {
-        console.log(this.props.consoleState);
         const projectId =
             this.props.consoleState.activeProject != undefined
                 ? this.props.consoleState.activeProject
@@ -143,20 +142,6 @@ class Dashboard extends React.Component {
                                 </tr>
                             );
                         })}
-                        {/*
-                        <tr className="ongoing high">
-                            <td id="bId">TP-101</td>
-                            <td>This is a test bug text to fill space</td>
-                            <td>
-                                <span className="priority">High</span>
-                            </td>
-                            <td>
-                                <span className="status">ongoing</span>
-                            </td>
-                            <td>27 Mar 2022</td>
-                        </tr>
-                        
-                        */}
                     </table>
                     <button
                         id="submitBug"
@@ -198,6 +183,23 @@ class Dashboard extends React.Component {
                 <div id="dashboardFeed">
                     <h2>Feed</h2>
                     <div id="dashboardFeedText">
+                        {this.props.consoleState.team.feed.map((item) => {
+                            const dateObj = new Date(item.date)
+                            const date = dateObj.toLocaleDateString();
+                            const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`
+                            return (
+                                <div className="feedItem">
+                                    <div>
+                                        <h4>{item.source.sourceString}</h4>
+                                        <span className="updateTime">
+                                            {`${time} ${date}`}
+                                        </span>
+                                    </div>
+                                    <p>{item.feedText}</p>
+                                </div>
+                            )
+                        })}
+                        {/*
                         <div className="feedItem">
                             <div>
                                 <h4>Update Source</h4>
@@ -219,6 +221,8 @@ class Dashboard extends React.Component {
                                 just like the upper one except longer
                             </p>
                         </div>
+                         */}
+                        
                     </div>
                 </div>
             </div>
