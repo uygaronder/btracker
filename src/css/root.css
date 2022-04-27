@@ -11,6 +11,12 @@
     --darkBlue: #02353c;
     --searchBack: #e0d5e1;
 
+    /* default theme colors */
+    --consoleUpper: #02353c;
+    --consoleSide: #001316;
+    --fontColor: #000;
+    --backgroundColor: #fff;
+
     --BGGradient: linear-gradient(
         236deg,
         rgba(111, 197, 128, 1) 0%,
@@ -22,6 +28,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    transition: .2s ease;
 }
 
 a {

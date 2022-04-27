@@ -160,10 +160,7 @@ function confirmedAction(action, id, state) {
             state: state,
         }),
     })
-        .then((res) => {
-            res.json();
-        })
-        .then((data) => (window.location.href = data.link));
+        .then(() => {window.location.reload()});
 }
 
 const Bug = ({ consoleState }) => {

@@ -40,9 +40,22 @@ class Console extends React.Component {
             : (notBox.style.display = "none");
     };
 
-    darkmode = () => {
-        console.log("darkmode");
+    darkmodeApi = () => {
+        const darkCheck = document.getElementById("darkCheck")
+        fetch(`${apiUrl}/darkmode`, { method: "post",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            darkTheme: darkCheck.checked
+        }),})
+
     };
+
+    darkTheme = () => {
+
+    }
 
     handleConsoleDropdown = () => {
         const consoleDropdown = document.getElementById("dropdownDiv");
@@ -105,22 +118,22 @@ class Console extends React.Component {
                         </Link>
                         <ul>
                             <li>
-                                <select name="project" id="currentProject">
-                                    {this.state.team.projects.map((project) => {
+                                <select>
+                                    {this.state.teamOptions.map((team) => {
                                         return (
-                                            <option value={project[1]}>
-                                                {project[0]}
+                                            <option value={team[1]}>
+                                                {team[0]}
                                             </option>
                                         );
                                     })}
                                 </select>
                             </li>
                             <li>
-                                <select>
-                                    {this.state.teamOptions.map((team) => {
+                                <select name="project" id="currentProject">
+                                    {this.state.team.projects.map((project) => {
                                         return (
-                                            <option value={team[1]}>
-                                                {team[0]}
+                                            <option value={project[1]}>
+                                                {project[0]}
                                             </option>
                                         );
                                     })}
@@ -199,6 +212,7 @@ class Console extends React.Component {
                                                 <p>Dark Mode</p>
                                                 <label className="switch">
                                                     <input
+                                                        id="darkCheck"
                                                         style={{
                                                             display: "none",
                                                         }}
