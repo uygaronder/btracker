@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Bugs.css";
+import "../../css/Bugs.css";
 
 import plus from "../../res/svg/plus.svg";
 import edit from "../../res/svg/edit.svg";
@@ -63,7 +63,7 @@ class Bugs extends React.Component {
     }
 
     render() {
-        if(this.state.loading) return <Loading />
+        if (this.state.loading) return <Loading />;
         return (
             <div id="bugs">
                 <div id="bugsUp">
@@ -103,38 +103,44 @@ class Bugs extends React.Component {
                         <td>Due</td>
                     </tr>
                     {this.state.project.bugs.map((bug) => {
-                            let due = new Date(bug.due).toLocaleDateString();
-                            return (
-                                <tr
-                                    onClick={() => this.handleClick(bug._id)}
-                                    className={`${bug.priority} ${bug.status}`}
-                                >
-                                    <td className="bId">{bug.bugId}</td>
-                                    <td>{bug.bugTitle}</td>
-                                    <td>
-                                        {bug.labels.map(label=>{
-                                            return (<span className="label">{label}</span>)
-                                        })}
-                                    </td>
-                                    <td>
-                                        {bug.assigned.map(assigned=>{
-                                            return (<span className="assigned">{assigned}</span>)
-                                        })}
-                                    </td>
-                                    <td>
-                                        <span className="priority">
-                                            {bug.priority}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className="status">
-                                            {bug.status}
-                                        </span>
-                                    </td>
-                                    <td>{due}</td>
-                                </tr>
-                            );
-                        })}
+                        let due = new Date(bug.due).toLocaleDateString();
+                        return (
+                            <tr
+                                onClick={() => this.handleClick(bug._id)}
+                                className={`${bug.priority} ${bug.status}`}
+                            >
+                                <td className="bId">{bug.bugId}</td>
+                                <td>{bug.bugTitle}</td>
+                                <td>
+                                    {bug.labels.map((label) => {
+                                        return (
+                                            <span className="label">
+                                                {label}
+                                            </span>
+                                        );
+                                    })}
+                                </td>
+                                <td>
+                                    {bug.assigned.map((assigned) => {
+                                        return (
+                                            <span className="assigned">
+                                                {assigned}
+                                            </span>
+                                        );
+                                    })}
+                                </td>
+                                <td>
+                                    <span className="priority">
+                                        {bug.priority}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span className="status">{bug.status}</span>
+                                </td>
+                                <td>{due}</td>
+                            </tr>
+                        );
+                    })}
                 </table>
             </div>
         );

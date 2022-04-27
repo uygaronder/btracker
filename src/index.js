@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import "./root.css";
+import "./css/index.css";
+import "./css/root.css";
 import {
     BrowserRouter as Router,
     Routes,

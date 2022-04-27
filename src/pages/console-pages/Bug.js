@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../Bug.css";
+import "../../css/Bug.css";
 
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
@@ -22,6 +22,8 @@ function editBug() {
         ? (submitDiv.style.display = "block")
         : (submitDiv.style.display = "none");
 }
+
+function handleNotif() {}
 
 function filterBugs(bugs, filter) {}
 
@@ -155,12 +157,17 @@ function confirmedAction(action, id, state) {
         body: JSON.stringify({
             bugId: `${id}`,
             projectId: state.activeProject,
-            state: state
+            state: state,
         }),
-    });
+    })
+        .then((res) => {
+            res.json();
+        })
+        .then((data) => (window.location.href = data.link));
 }
 
 const Bug = ({ consoleState }) => {
+    console.log(consoleState.usrId);
     const { bId } = useParams();
     const [data, setData] = useState();
     useEffect(() => {
@@ -177,7 +184,7 @@ const Bug = ({ consoleState }) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
+                console.log(data);
                 setData(data);
             });
     }, []);
@@ -225,9 +232,7 @@ const Bug = ({ consoleState }) => {
                         <div id="bugButtons">
                             <span id="notify">
                                 {data.followedBy &&
-                                data.followedBy.contains(
-                                    consoleState.user._id
-                                ) ? (
+                                data.followedBy.includes(consoleState.usrId) ? (
                                     <img src={bellOn} />
                                 ) : (
                                     <img src={bell} />
@@ -251,7 +256,7 @@ const Bug = ({ consoleState }) => {
                                     onClick={() => {
                                         confirmationBox(
                                             "openBug",
-                                            data.id,
+                                            data._id,
                                             consoleState
                                         );
                                     }}

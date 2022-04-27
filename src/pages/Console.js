@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Link, Routes, Route } from "react-router-dom";
 
-import "../console.css";
+import "../css/console.css";
 import bug from "../res/svg/bug.svg";
 import dashboard from "../res/svg/dashboard.svg";
 import calendar from "../res/svg/calendar.svg";
 import stopwatch from "../res/svg/stopwatch.svg";
 import cog from "../res/svg/cog.svg";
 import feed from "../res/svg/feed.svg";
-//import home from "../res/svg/home.svg";
 import notification from "../res/svg/notification.svg";
 
 import Dashboard from "./console-pages/Dashboard";
@@ -19,6 +18,7 @@ import NewTeam from "./console-pages/NewTeam";
 import Bug from "./console-pages/Bug";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
+import Settings from "./Settings";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 
@@ -35,13 +35,20 @@ class Console extends React.Component {
 
     notificationhandle = () => {
         const notBox = document.getElementById("notificationsBox");
-        notBox.classList.contains("hidden")
-            ? notBox.classList.remove("hidden")
-            : notBox.classList.add("hidden");
+        notBox.style.display == "none"
+            ? (notBox.style.display = "block")
+            : (notBox.style.display = "none");
     };
 
     darkmode = () => {
         console.log("darkmode");
+    };
+
+    handleConsoleDropdown = () => {
+        const consoleDropdown = document.getElementById("dropdownDiv");
+        consoleDropdown.style.display == "none"
+            ? (consoleDropdown.style.display = "block")
+            : (consoleDropdown.style.display = "none");
     };
 
     fetchInfo = async () => {
@@ -64,10 +71,23 @@ class Console extends React.Component {
             activeTeam: response.user.activeTeam,
             activeProject: activeProject,
             team: response.team,
+            usrId: response.user._id,
         });
     };
 
     componentDidMount() {
+        document.addEventListener("mouseup", function (e) {
+            const consoleDropdown = document.getElementById("dropdownDiv");
+            if (!consoleDropdown.contains(e.target)) {
+                consoleDropdown.style.display = "none";
+            }
+        });
+        document.addEventListener("mouseup", function (e) {
+            const notBox = document.getElementById("notificationsBox");
+            if (!notBox.contains(e.target)) {
+                notBox.style.display = "none";
+            }
+        });
         this.fetchInfo();
         document.title = "Console";
     }
@@ -84,9 +104,6 @@ class Console extends React.Component {
                             <img src={bug} alt="Logo" />
                         </Link>
                         <ul>
-                            <li>
-                                <Link to="*">Home</Link>
-                            </li>
                             <li>
                                 <select name="project" id="currentProject">
                                     {this.state.team.projects.map((project) => {
@@ -113,28 +130,6 @@ class Console extends React.Component {
                     </div>
                     <div>
                         <ul>
-                            <li>
-                                <Link to="newTeam">Create Or Join Team</Link>
-                            </li>
-                            <li>
-                                <Link to="team">Team</Link>
-                            </li>
-                            <li>
-                                <button onClick={() => this.darkmode()}>
-                                    Dark Mode
-                                </button>
-                            </li>
-                            <li>
-                                <Link to="*">Settings</Link>
-                            </li>
-                            <li>
-                                <form
-                                    action={`${apiUrl}/logout?_method=DELETE`}
-                                    method="post"
-                                >
-                                    <button type="submit">Log Out</button>
-                                </form>
-                            </li>
                             <li id="notificationsItem">
                                 <span
                                     id="notificationButton"
@@ -146,31 +141,85 @@ class Console extends React.Component {
                                     </span>
                                 </span>
 
-                                <div id="notificationsBox" className="hidden">
-                                    {this.state.notifications.map((notif) => {
-                                        return (
-                                            <div className="notificationItem">
-                                                <p>{notif[0]}</p>
-                                                <p className="notifDate">
-                                                    {notif[1]}
-                                                </p>
-                                            </div>
-                                        );
-                                    })}
-                                    {/*
-                                    <div className="notificationItem">
-                                        <p>This is a test notification</p>
-                                        <p className="notifDate">
-                                            12:11 30/3/2022
+                                <div
+                                    id="notificationsBox"
+                                    style={{ display: "none" }}
+                                >
+                                    {this.state.notifications.length != 0 ? (
+                                        this.state.notifications.map(
+                                            (notif) => {
+                                                return (
+                                                    <div className="notificationItem">
+                                                        <p>{notif[0]}</p>
+                                                        <p className="notifDate">
+                                                            {notif[1]}
+                                                        </p>
+                                                    </div>
+                                                );
+                                            }
+                                        )
+                                    ) : (
+                                        <p id="notBoxEmpty">
+                                            You have no new notifications
                                         </p>
-                                    </div>
-                                    */}
+                                    )}
                                 </div>
                             </li>
                             <li id="user">
-                                <a href="*">
+                                <button
+                                    onClick={() => {
+                                        this.handleConsoleDropdown();
+                                    }}
+                                >
                                     <span className="avatar"></span>
-                                </a>
+                                </button>
+                                <div
+                                    id="dropdownDiv"
+                                    style={{ display: "none" }}
+                                >
+                                    <ul>
+                                        <li>
+                                            <p>
+                                                You are signed in as
+                                                <strong>
+                                                    {` ${this.state.usrName}`}
+                                                </strong>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <Link to="newTeam">
+                                                Create Or Join Team
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="team">Team</Link>
+                                        </li>
+                                        <li>
+                                            <div id="darkmodeDiv">
+                                                <p>Dark Mode</p>
+                                                <label className="switch">
+                                                    <input
+                                                        style={{
+                                                            display: "none",
+                                                        }}
+                                                        type="checkbox"
+                                                    />
+                                                    <span className="slider"></span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <form
+                                                action={`${apiUrl}/logout?_method=DELETE`}
+                                                method="post"
+                                            >
+                                                <button type="submit">
+                                                    Log Out
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -203,18 +252,18 @@ class Console extends React.Component {
                                 </Link>
                             </li>
                             <li>
-                                <a href="*">
-                                    <img src={feed} alt="Home" />
+                                <Link to="feed">
+                                    <img src={feed} alt="Feed" />
                                     <p>Feed</p>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                         <ul>
                             <li>
-                                <a href="*">
+                                <Link to="settings">
                                     <img src={cog} />
                                     <p>Settings</p>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -244,6 +293,10 @@ class Console extends React.Component {
                             <Route
                                 path="bug/:bId"
                                 element={<Bug consoleState={this.state} />}
+                            />
+                            <Route
+                                path="settings"
+                                element={<Settings consoleState={this.state} />}
                             />
                             <Route path="*" element={<NotFound />} />
                         </Routes>

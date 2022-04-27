@@ -1,5 +1,5 @@
 import React from "react";
-import "../Home.css";
+import "../css/Home.css";
 import bugSvg from "../res/svg/bugPic.svg";
 
 import { Link } from "react-router-dom";

@@ -96,6 +96,11 @@
     right: 0;
     z-index: 999;
 }
+
+#console #notificationsBox #notBoxEmpty {
+    padding: 10px;
+}
+
 #console .notificationItem {
     border-bottom: 1px solid rgba(0, 0, 0, 0.26);
     padding: 20px;
@@ -111,6 +116,98 @@
     opacity: 0.7;
     text-align: end;
     padding: 8px 0 3px 0;
+}
+
+#user{
+    position: relative;
+}
+
+#console #dropdownDiv{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-height: 100px;
+    min-width: 100px;
+    width: 30ch;
+    background-color: white;
+    box-shadow: 0px 0px 5px black;
+    z-index: 99999;
+    border-radius: 3px;
+}
+
+#console #dropdownDiv #darkmodeDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+#console #dropdownDiv #darkmodeDiv .switch{
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+}
+#console #dropdownDiv #darkmodeDiv .switch .slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 12px;
+}
+
+#console #dropdownDiv #darkmodeDiv .switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 11px;
+    width: 11px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+#console #dropdownDiv #darkmodeDiv input:checked+.slider {
+    background-color: #000f1c;
+}
+
+#console #dropdownDiv #darkmodeDiv input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+#console #dropdownDiv #darkmodeDiv input:checked+.slider:before {
+    -webkit-transform: translateX(11px);
+    -ms-transform: translateX(11px);
+    transform: translateX(11px);
+}
+
+#console #dropdownDiv ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#console #dropdownDiv ul li{
+    margin: 0;
+    font-size: .9rem;
+    padding: 8px 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.202);
+    width: 100%;
+}
+
+#console #dropdownDiv ul li:first-of-type{
+    opacity: .5;
+    border: none;
+}
+
+#console #dropdownDiv ul li a, #console #dropdownDiv ul li button{
+    color: black;
+    font-size: .9rem;
 }
 
 /* screen */

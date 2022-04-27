@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Dashboard.css";
+import "../../css/Dashboard.css";
 
 import Search from "../../res/svg/search.svg";
 import plus from "../../res/svg/plus.svg";
@@ -184,9 +184,9 @@ class Dashboard extends React.Component {
                     <h2>Feed</h2>
                     <div id="dashboardFeedText">
                         {this.props.consoleState.team.feed.map((item) => {
-                            const dateObj = new Date(item.date)
+                            const dateObj = new Date(item.date);
                             const date = dateObj.toLocaleDateString();
-                            const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`
+                            const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`;
                             return (
                                 <div className="feedItem">
                                     <div>
@@ -197,32 +197,8 @@ class Dashboard extends React.Component {
                                     </div>
                                     <p>{item.feedText}</p>
                                 </div>
-                            )
+                            );
                         })}
-                        {/*
-                        <div className="feedItem">
-                            <div>
-                                <h4>Update Source</h4>
-                                <span className="updateTime">
-                                    7:12 PM 25/3/2022
-                                </span>
-                            </div>
-                            <p>This is a placeholder update to take up space</p>
-                        </div>
-                        <div className="feedItem">
-                            <div>
-                                <h4>Update Source</h4>
-                                <span className="updateTime">
-                                    7:12 PM 25/3/2022
-                                </span>
-                            </div>
-                            <p>
-                                This is a placeholder update to take up space
-                                just like the upper one except longer
-                            </p>
-                        </div>
-                         */}
-                        
                     </div>
                 </div>
             </div>

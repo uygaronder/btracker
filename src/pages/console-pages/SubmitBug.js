@@ -1,5 +1,5 @@
 import React from "react";
-import "../../SubmitBug.css";
+import "../../css/SubmitBug.css";
 var apiUrl = process.env.REACT_APP_APIURL;
 class Submit extends React.Component {
     closeSubmit = () => {

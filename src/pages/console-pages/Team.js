@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Team.css";
+import "../../css/Team.css";
 
 import Search from "../../res/svg/search.svg";
 import more from "../../res/svg/more.svg";

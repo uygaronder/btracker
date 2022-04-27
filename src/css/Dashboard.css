@@ -11,6 +11,7 @@
         "dBugs feed"
         "dBugs feed";
     width: 100%;
+    max-height: 91.1vh; /* bad solution change */
 }
 
 #dashboard #dashboardInfo {
@@ -279,6 +280,19 @@
     box-shadow: inset 0px 0px 10px rgba(128, 128, 128, 0.466);
     border-radius: 12px;
     padding: 15px;
+    overflow-y: auto;
+}
+
+#dashboard #dashboardFeed #dashboardFeedText::-webkit-scrollbar {
+    width: 0;
+}
+
+#dashboard #dashboardFeed #dashboardFeedText::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#dashboard #dashboardFeed #dashboardFeedText::-webkit-scrollbar-thumb {
+    background-color: transparent;
 }
 
 #dashboard #dashboardFeed #dashboardFeedText .feedItem {
