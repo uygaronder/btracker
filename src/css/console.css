@@ -27,7 +27,7 @@
 }
 
 #console nav li a {
-    color: white;
+    color: var(--fontColor);
     text-decoration: none;
 }
 
@@ -90,7 +90,8 @@
     position: absolute;
     top: 100%;
     width: 300px;
-    background-color: white;
+    background-color: var(--backgroundColor);
+    color: var(--fontColor);
     border-radius: 6px;
     box-shadow: 0px 0px 5px black;
     right: 0;
@@ -129,7 +130,7 @@
     min-height: 100px;
     min-width: 100px;
     width: 30ch;
-    background-color: white;
+    background-color: var(--backgroundColor);
     box-shadow: 0px 0px 5px black;
     z-index: 99999;
     border-radius: 3px;
@@ -196,8 +197,10 @@
     margin: 0;
     font-size: .9rem;
     padding: 8px 10px;
-    border-top: 1px solid rgba(0, 0, 0, 0.202);
+    border-top: 1px solid var(--borderBottomColorLight);
     width: 100%;
+    background-color: var(--backgroundColor);
+    color: var(--fontColor);
 }
 
 #console #dropdownDiv ul li:first-of-type{
@@ -206,7 +209,7 @@
 }
 
 #console #dropdownDiv ul li a, #console #dropdownDiv ul li button{
-    color: black;
+    color: var(--fontColor);
     font-size: .9rem;
 }
 
@@ -215,6 +218,7 @@
 #console #screen {
     display: flex;
     flex-grow: 1;
+    background-color: var(--backgroundColor);
 }
 
 #console #screen #consoleScreen {

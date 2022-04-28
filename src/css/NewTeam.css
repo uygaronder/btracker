@@ -1,4 +1,6 @@
 #newTeam{
+    background-color: var(--backgroundColor);
+    color: var(fontColor);
     display: flex;
     flex-direction: column;
     width: 100%;

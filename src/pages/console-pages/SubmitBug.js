@@ -48,8 +48,9 @@ class Submit extends React.Component {
                         placeholder="Description..."
                         cols="30"
                         rows="10"
+                        defaultValue={this.props.bug ? this.props.bug.description : ""}
                     >
-                        {this.props.bug ? this.props.bug.description : ""}
+                        
                     </textarea>
                     <input
                         name="labels"

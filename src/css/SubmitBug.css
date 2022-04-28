@@ -1,4 +1,5 @@
 #submitBug {
+    background-color: var(--backgroundColor);
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -48,16 +49,24 @@
     font-size: 1.2rem;
     border: none;
     resize: none;
-    background-color: rgb(245, 245, 245);
+    background-color: var(--inputBackground);
+    color: var(--fontColor);
     border-radius: 3px;
 }
 
 #submitBug input[type="submit"] {
     color: white;
     border: none;
-    background-color: #001f07;
+    background-color: var(--buttonColorDarkGreen);
     padding: 10px;
     border-radius: 16px;
     width: 20ch;
+    transition: .2s ease;
+    cursor: pointer;
+}
+
+
+#submitBug input[type="submit"]:hover {
+    background-color: var(--buttonColorDarkGreenHover);
 }
 

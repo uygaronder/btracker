@@ -7,21 +7,72 @@
 
     --red: #de553d;
     --green: #6fc580;
+    --greenDarker: #358044;
     --lightBlue: rgb(206, 255, 239);
     --darkBlue: #02353c;
-    --searchBack: #e0d5e1;
+    
+    /* dark theme stuff */
+    /*
+    --fontColor: #fff;
+    --notFont: rgb(39, 39, 39);
+    --backgroundColor: #181818;
+    --dashBackground: #e4e4e4;
+    --borderBottomColor: rgba(0, 0, 0, 0.75);
+    --borderBottomColorLight: rgba(0, 0, 0, 0.25);
+    --insetBoxShadow: inset 0px 0px 10px rgba(0, 0, 0, 0.904);
+    --tableHover: rgb(41, 41, 41);
+    --searchBack: #303030;
+    --inputBackground: rgb(29, 29, 29);
 
+    --svgFilter: brightness(0) invert(1);
+    */
     /* default theme colors */
+
+    
     --consoleUpper: #02353c;
     --consoleSide: #001316;
     --fontColor: #000;
+    --notFont: rgb(172, 172, 172);
     --backgroundColor: #fff;
+    --dashBackground: #e4e4e4;
+    --borderBottomColor: rgba(0, 0, 0, 0.75);
+    --borderBottomColorLight: rgba(0, 0, 0, 0.25);
+    --insetBoxShadow: inset 0px 0px 10px rgba(128, 128, 128, 0.5);
+    --tableHover: rgb(238, 238, 238);
+    --searchBack: #e0d5e1;
+    --inputBackground: rgb(245, 245, 245);
+
+    --openBug: rgb(214, 212, 58);
+    --openFont: rgb(82, 82, 0);
+    --closeBug: rgb(115, 214, 58);
+    --closeColor: rgb(0, 75, 0);
+
+    --statusOpen: rgb(103, 204, 103);
+    --statusOpenFont: rgba(0, 88, 0, 0.541);
+    --statusClose: rgba(103, 204, 103, 0.548);
+    --statusCloseFont: rgba(1, 59, 1, 0.541);
+    --statusOver: rgb(219, 103, 68);
+    --statusOverFont: rgb(88, 18, 0);
+    --statusDay: rgb(204, 197, 103);
+    --statusDayFont: rgb(70, 59, 0);
+    --statusWeek: rgb(154, 253, 154);
+    --statusWeekFont: rgb(0, 88, 0);
+
+    --priorityLow: #6fc580;
+    --priorityMed: rgb(241, 196, 97);
+    --priorityHigh: #de553d;
+
+    --buttonColorDarkGreen: rgb(0, 41, 10);
+    --buttonColorDarkGreenHover: rgb(2, 109, 25);
+    
+    --svgFilter: empty;
 
     --BGGradient: linear-gradient(
         236deg,
         rgba(111, 197, 128, 1) 0%,
         rgba(3, 80, 91, 1) 100%
     );
+    /* ------------------------------------------------ */
 }
 
 * {
@@ -32,7 +83,7 @@
 }
 
 a {
-    color: black;
+    color: var(--fontColor);
 }
 
 .avatar {
@@ -69,11 +120,11 @@ table tr:last-of-type {
 }
 
 table tr:first-of-type:hover {
-    background-color: white;
+    background-color: transparent;
 }
 
 table tr:hover {
-    background-color: rgb(238, 238, 238);
+    background-color: var(--tableHover);
 }
 
 table td {
@@ -94,7 +145,7 @@ table td:last-of-type {
     font-size: 0.6rem;
     font-weight: 600;
     display: flex;
-    background-color: #e4e4e4;
+    background-color: var(--dashBackground);
     border-radius: 8px;
     justify-content: center;
     text-transform: uppercase;
@@ -140,15 +191,15 @@ table td:last-of-type {
 }
 
 .low .priority {
-    background-color: green;
+    background-color: var(--priorityLow);
 }
 
 .med .priority {
-    background-color: rgb(172, 117, 0);
+    background-color: var(--priorityMed);
 }
 
 .high .priority {
-    background-color: rgb(170, 0, 0);
+    background-color: var(--priorityHigh);
 }
 
 .hidden {
@@ -167,7 +218,7 @@ table td:last-of-type {
     background-color: rgb(27, 27, 0);
     width: 10ch;
     border-radius: 8px;
-    color: white;
+    color: var(--fontColor);
     font-weight: 600;
     padding: 4px 16px;
     margin: auto;

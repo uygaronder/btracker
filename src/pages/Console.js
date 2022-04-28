@@ -50,11 +50,30 @@ class Console extends React.Component {
         body: JSON.stringify({
             darkTheme: darkCheck.checked
         }),})
-
+        this.darkTheme()
     };
 
     darkTheme = () => {
-
+        console.log(this.state.settings.darkTheme)
+        if(this.state.settings.darkTheme){
+            document.documentElement.style.setProperty('--backgroundColor', '#181818');
+            document.documentElement.style.setProperty('--fontColor', '#fff');
+            document.documentElement.style.setProperty('--notFont', 'rgb(39, 39, 39)');
+            document.documentElement.style.setProperty('--insetBoxShadow', 'inset 0px 0px 10px rgba(0, 0, 0, 0.904)');
+            document.documentElement.style.setProperty('--tableHover', 'rgb(41, 41, 41)');
+            document.documentElement.style.setProperty('--searchBack', '#303030');
+            document.documentElement.style.setProperty('--inputBackground', 'rgb(29, 29, 29)');
+            document.documentElement.style.setProperty('--svgFilter', 'brightness(0) invert(1)');
+        }   else {
+            document.documentElement.style.setProperty('--backgroundColor', '#fff');
+            document.documentElement.style.setProperty('--fontColor', '#000');
+            document.documentElement.style.setProperty('--notFont', 'rgb(39, 39, 39)');
+            document.documentElement.style.setProperty('--insetBoxShadow', 'inset 0px 0px 10px rgba(128, 128, 128, 0.5)');
+            document.documentElement.style.setProperty('--tableHover', 'rgb(238, 238, 238)');
+            document.documentElement.style.setProperty('--searchBack', '#e0d5e1');
+            document.documentElement.style.setProperty('--inputBackground', 'rgb(29, 29, 29)');
+            document.documentElement.style.setProperty('--svgFilter', 'empty');
+        }
     }
 
     handleConsoleDropdown = () => {
@@ -76,6 +95,7 @@ class Console extends React.Component {
         if (activeProject == undefined) {
             activeProject = response.team.projects[0][1];
         }
+        
         this.setState({
             usrName: response.user.name,
             notifications: response.user.notifications,
@@ -85,7 +105,13 @@ class Console extends React.Component {
             activeProject: activeProject,
             team: response.team,
             usrId: response.user._id,
+            settings: response.user.settings
         });
+        document.getElementById("darkCheck").checked = this.state.settings.darkTheme;
+        document.getElementById("darkCheck").addEventListener("change", ()=> {this.darkmodeApi()})
+        if(this.state.settings.darkTheme){
+            this.darkTheme()
+        }
     };
 
     componentDidMount() {
@@ -102,6 +128,7 @@ class Console extends React.Component {
             }
         });
         this.fetchInfo();
+        
         document.title = "Console";
     }
 

@@ -98,8 +98,8 @@ class Dashboard extends React.Component {
                             <td>Due</td>
                         </tr>
                         {this.state.project.bugs.map((bug) => {
-                            let due = new Date(bug.due).toLocaleDateString();
-                            console.log(bug);
+                            const dateObj = new Date(bug.due);
+                            let due = dateObj.toLocaleDateString();
                             if (bug.status == "open") {
                                 this.state.open++;
                             } else if (bug.status == "closed") {
