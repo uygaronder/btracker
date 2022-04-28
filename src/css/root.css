@@ -1,3 +1,7 @@
+*{
+    transition: .1s ease;
+}
+
 :root {
     --monospace: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
@@ -73,6 +77,21 @@
         rgba(3, 80, 91, 1) 100%
     );
     /* ------------------------------------------------ */
+}
+
+:root .dark{
+    --fontColor: #fff;
+    --notFont: rgb(39, 39, 39);
+    --backgroundColor: #181818;
+    --dashBackground: #e4e4e4;
+    --borderBottomColor: rgba(0, 0, 0, 0.75);
+    --borderBottomColorLight: rgba(0, 0, 0, 0.25);
+    --insetBoxShadow: inset 0px 0px 10px rgba(0, 0, 0, 0.904);
+    --tableHover: rgb(41, 41, 41);
+    --searchBack: #303030;
+    --inputBackground: rgb(29, 29, 29);
+
+    --svgFilter: brightness(0) invert(1);
 }
 
 * {

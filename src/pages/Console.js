@@ -55,25 +55,9 @@ class Console extends React.Component {
 
     darkTheme = () => {
         console.log(this.state.settings.darkTheme)
-        if(this.state.settings.darkTheme){
-            document.documentElement.style.setProperty('--backgroundColor', '#181818');
-            document.documentElement.style.setProperty('--fontColor', '#fff');
-            document.documentElement.style.setProperty('--notFont', 'rgb(39, 39, 39)');
-            document.documentElement.style.setProperty('--insetBoxShadow', 'inset 0px 0px 10px rgba(0, 0, 0, 0.904)');
-            document.documentElement.style.setProperty('--tableHover', 'rgb(41, 41, 41)');
-            document.documentElement.style.setProperty('--searchBack', '#303030');
-            document.documentElement.style.setProperty('--inputBackground', 'rgb(29, 29, 29)');
-            document.documentElement.style.setProperty('--svgFilter', 'brightness(0) invert(1)');
-        }   else {
-            document.documentElement.style.setProperty('--backgroundColor', '#fff');
-            document.documentElement.style.setProperty('--fontColor', '#000');
-            document.documentElement.style.setProperty('--notFont', 'rgb(39, 39, 39)');
-            document.documentElement.style.setProperty('--insetBoxShadow', 'inset 0px 0px 10px rgba(128, 128, 128, 0.5)');
-            document.documentElement.style.setProperty('--tableHover', 'rgb(238, 238, 238)');
-            document.documentElement.style.setProperty('--searchBack', '#e0d5e1');
-            document.documentElement.style.setProperty('--inputBackground', 'rgb(29, 29, 29)');
-            document.documentElement.style.setProperty('--svgFilter', 'empty');
-        }
+        const consoleDiv = this.consoleDiv;
+
+        (this.darkCheck.checked)?consoleDiv.classList.add("dark"):consoleDiv.classList.remove("dark")
     }
 
     handleConsoleDropdown = () => {
@@ -137,7 +121,7 @@ class Console extends React.Component {
             return <Loading />;
         }
         return (
-            <div id="console">
+            <div id="console" ref={div => this.consoleDiv = div}>
                 <nav>
                     <div>
                         <Link to="/">
@@ -244,6 +228,7 @@ class Console extends React.Component {
                                                             display: "none",
                                                         }}
                                                         type="checkbox"
+                                                        ref={input => this.darkCheck = input}
                                                     />
                                                     <span className="slider"></span>
                                                 </label>

@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-#bug #bugInfo span:first-of-type{
+#bug #bugInfo span:first-of-type{   
     margin: 0 5px;
 }
 
@@ -194,6 +194,7 @@
 #bug .reply .replyButtons button{
     font-weight: 700;
     margin: 0 10px;
+    color: var(--fontColor);
 }
 
 
@@ -204,7 +205,7 @@
 
 #bug #comments .comment{
     padding: 5px 0 0 10px;
-    border-left: 1px solid rgb(207, 207, 207);
+    border-left: 1px solid var(--borderBottomColor);
 }
 #bug #comments .comment > *{
     margin: 5px 0;
