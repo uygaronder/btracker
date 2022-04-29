@@ -41,24 +41,28 @@ class Console extends React.Component {
     };
 
     darkmodeApi = () => {
-        const darkCheck = document.getElementById("darkCheck")
-        fetch(`${apiUrl}/darkmode`, { method: "post",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            darkTheme: darkCheck.checked
-        }),})
-        this.darkTheme()
+        const darkCheck = document.getElementById("darkCheck");
+        fetch(`${apiUrl}/darkmode`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                darkTheme: darkCheck.checked,
+            }),
+        });
+        this.darkTheme();
     };
 
     darkTheme = () => {
-        console.log(this.state.settings.darkTheme)
+        console.log(this.state.settings.darkTheme);
         const consoleDiv = this.consoleDiv;
 
-        (this.darkCheck.checked)?consoleDiv.classList.add("dark"):consoleDiv.classList.remove("dark")
-    }
+        this.darkCheck.checked
+            ? consoleDiv.classList.add("dark")
+            : consoleDiv.classList.remove("dark");
+    };
 
     handleConsoleDropdown = () => {
         const consoleDropdown = document.getElementById("dropdownDiv");
@@ -79,7 +83,7 @@ class Console extends React.Component {
         if (activeProject == undefined) {
             activeProject = response.team.projects[0][1];
         }
-        
+
         this.setState({
             usrName: response.user.name,
             notifications: response.user.notifications,
@@ -89,12 +93,15 @@ class Console extends React.Component {
             activeProject: activeProject,
             team: response.team,
             usrId: response.user._id,
-            settings: response.user.settings
+            settings: response.user.settings,
         });
-        document.getElementById("darkCheck").checked = this.state.settings.darkTheme;
-        document.getElementById("darkCheck").addEventListener("change", ()=> {this.darkmodeApi()})
-        if(this.state.settings.darkTheme){
-            this.darkTheme()
+        document.getElementById("darkCheck").checked =
+            this.state.settings.darkTheme;
+        document.getElementById("darkCheck").addEventListener("change", () => {
+            this.darkmodeApi();
+        });
+        if (this.state.settings.darkTheme) {
+            this.darkTheme();
         }
     };
 
@@ -112,16 +119,16 @@ class Console extends React.Component {
             }
         });
         this.fetchInfo();
-        
+
         document.title = "Console";
     }
 
     render() {
         if (this.state.loading) {
-            return <Loading />;
+            return <Loading classList="dark" />;
         }
         return (
-            <div id="console" ref={div => this.consoleDiv = div}>
+            <div id="console" ref={(div) => (this.consoleDiv = div)}>
                 <nav>
                     <div>
                         <Link to="/">
@@ -228,7 +235,10 @@ class Console extends React.Component {
                                                             display: "none",
                                                         }}
                                                         type="checkbox"
-                                                        ref={input => this.darkCheck = input}
+                                                        ref={(input) =>
+                                                            (this.darkCheck =
+                                                                input)
+                                                        }
                                                     />
                                                     <span className="slider"></span>
                                                 </label>

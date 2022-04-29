@@ -159,8 +159,9 @@ function confirmedAction(action, id, state) {
             projectId: state.activeProject,
             state: state,
         }),
-    })
-        .then(() => {window.location.reload()});
+    }).then(() => {
+        window.location.reload();
+    });
 }
 
 const Bug = ({ consoleState }) => {
@@ -221,7 +222,14 @@ const Bug = ({ consoleState }) => {
                                 }
                                 {data.labels.map((label) => {
                                     return (
-                                        <span className="label">{label}</span>
+                                        <span
+                                            className="label"
+                                            style={{
+                                                backgroundColor: label[1],
+                                            }}
+                                        >
+                                            {label[0]}
+                                        </span>
                                     );
                                 })}
                             </div>

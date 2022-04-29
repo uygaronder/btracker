@@ -2,6 +2,15 @@ import React from "react";
 import "../../css/SubmitBug.css";
 var apiUrl = process.env.REACT_APP_APIURL;
 class Submit extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            labelsString: !this.props.bug
+                ? ""
+                : this.props.bug.labels.map((label) => label[0]).join(","),
+        };
+    }
+
     closeSubmit = () => {
         document.getElementById("submitBugPopup").classList.add("submitClosed");
     };
@@ -16,14 +25,18 @@ class Submit extends React.Component {
             <div id="submitBug">
                 <div id="newBug">
                     <h3>{!this.props.bug ? "New Bug" : "Edit Bug"} </h3>
-                    <div
-                        id="submitClose"
-                        onClick={() => {
-                            this.closeSubmit();
-                        }}
-                    >
-                        &#10005;
-                    </div>
+                    {!this.props.bug ? (
+                        <div
+                            id="submitClose"
+                            onClick={() => {
+                                this.closeSubmit();
+                            }}
+                        >
+                            &#10005;
+                        </div>
+                    ) : (
+                        <div />
+                    )}
                 </div>
                 <form
                     method="post"
@@ -48,14 +61,15 @@ class Submit extends React.Component {
                         placeholder="Description..."
                         cols="30"
                         rows="10"
-                        defaultValue={this.props.bug ? this.props.bug.description : ""}
-                    >
-                        
-                    </textarea>
+                        defaultValue={
+                            this.props.bug ? this.props.bug.description : ""
+                        }
+                    ></textarea>
                     <input
                         name="labels"
                         type={"text"}
                         placeholder="Labels (usage:label1,label2)"
+                        defaultValue={this.state.labelsString}
                     />
                     <span>
                         <span>

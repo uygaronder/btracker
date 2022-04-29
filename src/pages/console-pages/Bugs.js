@@ -97,7 +97,7 @@ class Bugs extends React.Component {
                         <td id="bId">#</td>
                         <td>Bug</td>
                         <td>Labels</td>
-                        <td>Assigned</td>
+                        <td>Comments</td>
                         <td>Priority</td>
                         <td>Status</td>
                         <td>Due</td>
@@ -114,8 +114,13 @@ class Bugs extends React.Component {
                                 <td>
                                     {bug.labels.map((label) => {
                                         return (
-                                            <span className="label">
-                                                {label}
+                                            <span
+                                                className="label"
+                                                style={{
+                                                    backgroundColor: label[1],
+                                                }}
+                                            >
+                                                {label[0]}
                                             </span>
                                         );
                                     })}
