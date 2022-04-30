@@ -287,7 +287,9 @@ table a{
     text-align: center;
 }
 
-
+.submitClosed {
+    display: none;
+}
 
 ::-webkit-scrollbar {
     width: 10px;

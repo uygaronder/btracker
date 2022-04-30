@@ -1,3 +1,30 @@
+#bugs{
+    color: var(--fontColor);
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+}
+
+#bugs #bugDivContainer{
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    height: 100%;
+}
+
+#bugs #bugDivContainer > div{
+    box-shadow: var(--insetBoxShadow);
+    border-radius: 6px;
+    display: flex;
+    padding: 8px;
+}
+
+#bugs #bugDivContainer > div{
+    border: var(--insetBoxShadow);
+}
+
+/*
 #bugs {
     display: flex;
     flex-direction: column;
@@ -95,10 +122,6 @@
     filter: brightness(0) invert(1);
 }
 
-.submitClosed {
-    display: none;
-}
-
 #bugs #submitBugPopup {
     position: absolute;
     top: 120%;
@@ -108,3 +131,4 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.719);
     border-radius: 8px;
 }
+*/

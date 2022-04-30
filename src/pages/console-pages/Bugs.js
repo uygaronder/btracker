@@ -66,7 +66,27 @@ class Bugs extends React.Component {
         if (this.state.loading) return <Loading />;
         return (
             <div id="bugs">
-                <div id="bugsUp">
+                <div id="bugDivContainer">
+                    <div id="openBugs">
+                        <h3>Open Bugs</h3>
+                    </div>
+                    <div id="ongoingBugs">
+                        <h3>Ongoing Bugs</h3>
+                    </div>
+                    <div id="closeBugs">
+                        <h3>Closed Bugs</h3>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default Bugs;
+
+/*
+
+<div id="bugsUp">
                     <div id="bugsInfo">
                         <h3>{this.state.project.name}</h3>
                         <span />
@@ -147,9 +167,5 @@ class Bugs extends React.Component {
                         );
                     })}
                 </table>
-            </div>
-        );
-    }
-}
 
-export default Bugs;
+*/
