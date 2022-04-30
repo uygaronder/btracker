@@ -205,7 +205,7 @@
 
 #bug #comments .comment{
     padding: 5px 0 0 10px;
-    border-left: 1px solid var(--borderBottomColor);
+    border-left: 1px solid var(--fontColor);
 }
 #bug #comments .comment > *{
     margin: 5px 0;
@@ -230,6 +230,7 @@
     opacity: .75;
     font-size: .8rem;
     cursor: pointer;
+    color: var(--fontColor);
 }
 
 #bug .open {
@@ -261,4 +262,9 @@
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+#bug #confirmationBox{
+    color: var(--fontColor);
+    background-color: var(--backgroundColor);
 }

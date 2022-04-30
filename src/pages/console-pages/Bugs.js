@@ -111,7 +111,7 @@ class Bugs extends React.Component {
                             >
                                 <td className="bId">{bug.bugId}</td>
                                 <td>{bug.bugTitle}</td>
-                                <td>
+                                <td className="bugsLabel">
                                     {bug.labels.map((label) => {
                                         return (
                                             <span

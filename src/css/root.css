@@ -1,3 +1,8 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+
 *{
     transition: .1s ease;
 }
@@ -14,24 +19,6 @@
     --greenDarker: #358044;
     --lightBlue: rgb(206, 255, 239);
     --darkBlue: #02353c;
-    
-    /* dark theme stuff */
-    /*
-    --fontColor: #fff;
-    --notFont: rgb(39, 39, 39);
-    --backgroundColor: #181818;
-    --dashBackground: #e4e4e4;
-    --borderBottomColor: rgba(0, 0, 0, 0.75);
-    --borderBottomColorLight: rgba(0, 0, 0, 0.25);
-    --insetBoxShadow: inset 0px 0px 10px rgba(0, 0, 0, 0.904);
-    --tableHover: rgb(41, 41, 41);
-    --searchBack: #303030;
-    --inputBackground: rgb(29, 29, 29);
-
-    --svgFilter: brightness(0) invert(1);
-    */
-    /* default theme colors */
-
     
     --consoleUpper: #02353c;
     --consoleSide: #001316;
@@ -157,6 +144,10 @@ table td:first-of-type {
 
 table td:last-of-type {
     width: 13ch;
+}
+
+textarea{
+    resize: none;
 }
 
 .status {
@@ -301,9 +292,9 @@ table a{
 }
 
 ::-webkit-scrollbar-track {
-    background-color: white;
+    background-color: var(--notFont);
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--fontColor);
 }

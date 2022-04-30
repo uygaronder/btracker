@@ -19,6 +19,7 @@ import Bug from "./console-pages/Bug";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
 import Settings from "./Settings";
+import Feed from "./console-pages/Feed";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 
@@ -320,6 +321,10 @@ class Console extends React.Component {
                             <Route
                                 path="bugs"
                                 element={<Bugs consoleState={this.state} />}
+                            />
+                            <Route
+                                path="feed"
+                                element={<Feed consoleState={this.state} />}
                             />
                             <Route
                                 path="team"

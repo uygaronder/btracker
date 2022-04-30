@@ -143,6 +143,8 @@ class Dashboard extends React.Component {
                             );
                         })}
                     </table>
+                </div>
+                <div id="buttonPlacementDiv">
                     <button
                         id="submitBug"
                         onClick={() => {
@@ -183,22 +185,24 @@ class Dashboard extends React.Component {
                 <div id="dashboardFeed">
                     <h2>Feed</h2>
                     <div id="dashboardFeedText">
-                        {this.props.consoleState.team.feed.map((item) => {
-                            const dateObj = new Date(item.date);
-                            const date = dateObj.toLocaleDateString();
-                            const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`;
-                            return (
-                                <div className="feedItem">
-                                    <div>
-                                        <h4>{item.source.sourceString}</h4>
-                                        <span className="updateTime">
-                                            {`${time} ${date}`}
-                                        </span>
+                        {this.props.consoleState.team.feed
+                            .slice(0, 20)
+                            .map((item) => {
+                                const dateObj = new Date(item.date);
+                                const date = dateObj.toLocaleDateString();
+                                const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`;
+                                return (
+                                    <div className="feedItem">
+                                        <div>
+                                            <h4>{item.source.sourceString}</h4>
+                                            <span className="updateTime">
+                                                {`${time} ${date}`}
+                                            </span>
+                                        </div>
+                                        <p>{item.feedText}</p>
                                     </div>
-                                    <p>{item.feedText}</p>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
                     </div>
                 </div>
             </div>

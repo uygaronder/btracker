@@ -12,7 +12,7 @@
         "dBugs feed"
         "dBugs feed";
     width: 100%;
-    max-height: 91.1vh; /* bad solution change */
+    max-height: 91.2vh; /* bad solution change */
     color: var(--fontColor);
 }
 
@@ -76,16 +76,80 @@
     grid-area: dBugs;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     padding: 10px;
     border-radius: 8px;
     box-shadow: var(--insetBoxShadow);
+    overflow-y: auto;
     position: relative;
+}
+
+#dashboard #dashboardBugs::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#dashboard #dashboardBugs::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+#dashboard #buttonPlacementDiv{
+    grid-area: dBugs;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 15px;
+    position: relative;
+}
+
+#dashboard #submitBugPopup {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 4px var(--borderBottomColor);
+    background-color: var(--backgroundColor);
+    border-radius: 8px;
+    z-index: 9999;
+}
+
+#dashboard #buttonPlacementDiv button {
+    position: sticky;
+    width: 18ch;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 8px;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--buttonColorDarkGreen);
+    color: white;
+    transition: 0.2s ease;
+    font-weight: 600;
+    align-self: flex-end;
+    bottom: 0%;
+    right: 0%;
+    z-index: 999;
+}
+
+#dashboard #buttonPlacementDiv button:hover {
+    background-color: var(--buttonColorDarkGreenHover);
+}
+
+#dashboard #buttonPlacementDiv button img {
+    height: 20px;
+    width: 20px;
+    margin-right: 3px;
+    filter: brightness(0) invert(1);
 }
 
 #dashboard #dashboardBugs table {
     font-size: 1rem;
     border-collapse: collapse;
+    z-index: 99;
 }
 
 #dashboard #dashboardBugs table tr {
@@ -173,34 +237,6 @@
 
 #dashboard .high .priority {
     background-color: var(--priorityHigh);
-}
-
-#dashboard #dashboardBugs button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    flex-direction: row;
-    padding: 5px 8px;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 12px;
-    border: none;
-    background-color: var(--buttonColorDarkGreen);
-    color: white;
-    transition: 0.2s ease;
-    font-weight: 600;
-}
-
-#dashboard #dashboardBugs button:hover {
-    background-color: var(--buttonColorDarkGreenHover);
-}
-
-#dashboard #dashboardBugs button img {
-    height: 20px;
-    width: 20px;
-    margin-right: 3px;
-    filter: brightness(0) invert(1);
 }
 
 /* bug status */
@@ -300,15 +336,4 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-#dashboard #submitBugPopup{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0px 0px 4px var(--borderBottomColor);
-    background-color: var(--backgroundColor);
-    border-radius: 8px;
 }

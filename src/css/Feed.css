@@ -1,0 +1,66 @@
+#feed{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    margin: 15px;
+    height: 86vh; /* placeholder */
+}
+
+#feed form{
+    position: relative;
+    box-shadow: var(--insetBoxShadow);
+    padding: 15px;
+    border-radius: 12px;
+    width: 100%;
+}
+
+#feed textarea{
+    background-color: transparent;
+    color: var(--fontColor);
+    border: none;
+    min-height: 15ch;
+    width: 100%;
+    font-size: 1rem;
+}
+#feed textarea:focus{
+    outline: none;
+}
+
+#feed form button{
+    border-radius: 50%;
+    padding: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+#feed form button:active{
+    background-color: var(--fontColor);
+}
+
+#feed form button img{
+    filter: var(--svgFilter);
+    height: 22px;
+    width: 22px;
+    transform: rotate(45deg) translateX(-2px) translateY(2px);
+}
+
+#feed #feedDiv{
+    color: var(--fontColor);
+}
+
+#feed #feedDiv > div{
+    margin-top: 15px;
+}
+
+#feed #feedDiv .feedItem > div{
+    display: flex;
+    align-items: center;
+}
+
+#feed #feedDiv .feedItem > div span{
+    font-size: .7rem;
+    margin-left: 15px;
+}
