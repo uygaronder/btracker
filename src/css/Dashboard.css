@@ -153,7 +153,7 @@
 }
 
 #dashboard #dashboardBugs table tr {
-    border-bottom: 1px solid var(--borderBottomColorLight);
+    border-bottom: 1px solid var(--borderColor);
     transition: 0.2s ease;
 }
 
@@ -299,41 +299,38 @@
     flex-direction: column;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+#dashboard #dashboardFeed #feedDiv {
     box-shadow: var(--insetBoxShadow);
     border-radius: 12px;
     padding: 15px;
     overflow-y: auto;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText::-webkit-scrollbar {
+#dashboard #dashboardFeed #feedDiv::-webkit-scrollbar {
     width: 0;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText::-webkit-scrollbar-track {
+#dashboard #dashboardFeed #feedDiv::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText::-webkit-scrollbar-thumb {
+#dashboard #dashboardFeed #feedDiv::-webkit-scrollbar-thumb {
     background-color: transparent;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText .feedItem {
+#dashboard #dashboardFeed #feedDiv .feedItem {
     margin: 5px 0;
     align-items: center;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText .feedItem .updateTime {
+#dashboard #dashboardFeed #feedDiv .feedItem .updateTime {
     font-size: 0.6rem;
     opacity: 0.5;
     font-weight: 600;
 }
 
-#dashboard #dashboardFeed #dashboardFeedText .feedItem > div {
+#dashboard .feedItem{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--borderColor);
 }

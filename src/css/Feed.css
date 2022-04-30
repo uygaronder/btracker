@@ -3,8 +3,8 @@
     flex-direction: column;
     width: 100%;
     overflow-y: auto;
-    margin: 15px;
-    height: 86vh; /* placeholder */
+    padding: 15px;
+    height: 91vh; /* placeholder */
 }
 
 #feed form{
@@ -47,20 +47,5 @@
     transform: rotate(45deg) translateX(-2px) translateY(2px);
 }
 
-#feed #feedDiv{
-    color: var(--fontColor);
-}
 
-#feed #feedDiv > div{
-    margin-top: 15px;
-}
 
-#feed #feedDiv .feedItem > div{
-    display: flex;
-    align-items: center;
-}
-
-#feed #feedDiv .feedItem > div span{
-    font-size: .7rem;
-    margin-left: 15px;
-}

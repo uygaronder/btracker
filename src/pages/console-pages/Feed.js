@@ -9,6 +9,10 @@ class Feed extends React.Component {
         super(props);
     }
 
+    returnAvatar(item) {
+        console.log(item);
+    }
+
     render() {
         return (
             <div id="feed">
@@ -29,13 +33,24 @@ class Feed extends React.Component {
                             const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`;
                             return (
                                 <div className="feedItem">
-                                    <div>
-                                        <h4>{item.source.sourceString}</h4>
-                                        <span className="updateTime">
-                                            {`${time} ${date}`}
-                                        </span>
+                                    <div className={`feedAvatarBack`}>
+                                        <div
+                                            className={`feedAvatar ${item.type}`}
+                                        ></div>
+                                        {item.type
+                                            ? this.returnAvatar(item)
+                                            : ""}
                                     </div>
-                                    <p>{item.feedText}</p>
+                                    <div className="feedText">
+                                        <div>
+                                            <h4>{item.source.sourceString}</h4>
+                                            <span className="updateTime">
+                                                {`${time} ${date}`}
+                                            </span>
+                                        </div>
+                                        <p>{item.feedText}</p>
+                                        <div className="feedButtons"></div>
+                                    </div>
                                 </div>
                             );
                         })}

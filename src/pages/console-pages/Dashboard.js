@@ -64,6 +64,10 @@ class Dashboard extends React.Component {
         window.location.href = `/console/bug/${bId}`;
     }
 
+    returnAvatar(item) {
+        console.log(item);
+    }
+
     render() {
         if (this.state.loading) {
             return <Loading />;
@@ -184,7 +188,7 @@ class Dashboard extends React.Component {
                 </div>
                 <div id="dashboardFeed">
                     <h2>Feed</h2>
-                    <div id="dashboardFeedText">
+                    <div id="feedDiv">
                         {this.props.consoleState.team.feed
                             .slice(0, 20)
                             .map((item) => {
@@ -193,13 +197,26 @@ class Dashboard extends React.Component {
                                 const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`;
                                 return (
                                     <div className="feedItem">
-                                        <div>
-                                            <h4>{item.source.sourceString}</h4>
-                                            <span className="updateTime">
-                                                {`${time} ${date}`}
-                                            </span>
+                                        <div className={`feedAvatarBack`}>
+                                            <div
+                                                className={`feedAvatar ${item.type}`}
+                                            ></div>
+                                            {item.type
+                                                ? this.returnAvatar(item)
+                                                : ""}
                                         </div>
-                                        <p>{item.feedText}</p>
+                                        <div className="feedText">
+                                            <div>
+                                                <h4>
+                                                    {item.source.sourceString}
+                                                </h4>
+                                                <span className="updateTime">
+                                                    {`${time} ${date}`}
+                                                </span>
+                                            </div>
+                                            <p>{item.feedText}</p>
+                                            <div className="feedButtons"></div>
+                                        </div>
                                     </div>
                                 );
                             })}

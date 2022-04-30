@@ -32,6 +32,7 @@ html{
     --tableHover: rgb(238, 238, 238);
     --searchBack: #e0d5e1;
     --inputBackground: rgb(245, 245, 245);
+    --borderColor: rgba(0, 0, 0, 0.211);
 
     --openBug: rgb(214, 212, 58);
     --openFont: rgb(82, 82, 0);
@@ -77,6 +78,7 @@ html{
     --tableHover: rgb(41, 41, 41);
     --searchBack: #303030;
     --inputBackground: rgb(29, 29, 29);
+    --borderColor: rgba(255, 255, 255, 0.226);
 
     --svgFilter: brightness(0) invert(1);
 }
@@ -297,4 +299,82 @@ table a{
 }
 ::-webkit-scrollbar-thumb {
     background-color: var(--fontColor);
+}
+
+#feedDiv .feedItem .feedAvatarBack {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+}
+
+#feedDiv .feedAvatar {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background-image: url("../res/svg/system.svg");
+    background-position: center;
+    background-size: contain;
+    filter: var(--svgFilter);
+}
+
+#feedDiv .feedAvatarBack .new {
+    background-image: url("../res/svg/plus.svg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+#feedDiv .feedAvatarBack .close {
+    background-image: url("../res/svg/tick.svg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+#feedDiv .feedAvatarBack .reopen {
+    background-image: url("../res/svg/reopen.svg");
+    background-repeat: no-repeat;
+}
+
+#feedDiv .feedAvatarBack .edit {
+    background-image: url("../res/svg/edit.svg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+#feedDiv .feedAvatarBack .user {
+    background-image: url("../res/svg/user.svg");
+}
+
+#feedDiv .feedAvatarBack .project {
+    background-image: url("../res/svg/project.svg");
+}
+
+#feedDiv .feedItem .feedAvatarBack img {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+}
+
+#feed #feedDiv {
+    color: var(--fontColor);
+}
+
+#feed #feedDiv .feedItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+#feedDiv .feedItem>div {
+    margin-left: 5px;
+}
+
+#feedDiv .feedItem>div>div {
+    display: flex;
+    align-items: center;
+}
+
+#feedDiv .feedItem>div span {
+    font-size: .7rem;
+    margin-left: 15px;
 }
