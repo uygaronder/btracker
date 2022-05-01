@@ -3,6 +3,7 @@
     height: 100%;
     width: 100%;
     padding: 15px;
+    max-height: 91vh;
 }
 
 #bugs #bugDivContainer{
@@ -22,10 +23,29 @@
     flex-direction: column;
     padding: 8px;
     max-width: 31vw;
+    overflow: auto;
+    transition: .2s ease;
+}
+
+#bugs #bugDivContainer .inReviewHidden{
+    height: 0;
+    overflow: hidden;
+}
+
+#bugs #bugDivContainer > div .inReview{
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
 }
 
 #bugs #bugDivContainer .bugsDiv{
     margin-top: 5px;
+}
+
+#bugs #bugDivContainer .bugsDivUpper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #bugs #bugDivContainer .bugsDiv .bug{
@@ -34,6 +54,10 @@
     margin: 5px 0;
     border-radius: 6px;
     cursor: pointer;
+}
+
+#bugs #bugDivContainer .bugsDiv .bug:hover{
+    background-color: var(--backgroundHover);
 }
 
 #bugs #bugDivContainer .bugsDiv .bugDescription{
@@ -56,10 +80,54 @@
     font-weight: 600;
 }
 
+#bugs #bugDivContainer .bugsDiv .labels {
+    display: flex;
+    margin: 5px 0;
+}
+
 #bugs #bugDivContainer .bugsDiv .bugBottomInfo {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+}
+
+#bugs #bugDivContainer .inReview .bugsDivUpper .inReviewInfo{
+    display: flex;
+    align-items: center;
+}
+
+#bugs #bugDivContainer .inReview .bugsDivUpper .inReviewInfo p{
+    margin-right: 5px;
+}
+
+#bugs #bugDivContainer .inReview button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+
+#bugs #bugDivContainer .inReview .bugsDivUpper .inReviewButtonActive{
+    transform: rotate(0deg);
+}
+
+#bugs #bugDivContainer .inReview .bugsDivUpper button img{
+    filter: var(--svgFilter);
+    height: 10px;
+    width: 12px;
+}
+
+#bugs ::-webkit-scrollbar {
+    width: 0px;
+}
+
+#bugs ::-webkit-scrollbar-track {
+    background-color: var(--notFont);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#bugs ::-webkit-scrollbar-thumb {
+    background-color: var(--fontColor);
 }
 
 

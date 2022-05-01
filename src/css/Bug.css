@@ -26,26 +26,12 @@
     margin-right: 10px;
 }
 
-#bug #identifiers{
+#bug .labels{
     display: flex;
 }
 
-#bug #identifiers > *{
+#bug .labels > *{
     margin: 0 2px;   
-}
-
-
-#bug #identifiers .low {
-    background-color: var(--priorityLow);
-    
-}
-
-#bug #identifiers .med {
-    background-color: var(--priorityMed);
-}
-
-#bug #identifiers .high {
-    background-color: var(--priorityHigh);
 }
 
 #bug #bugTitleStuff{

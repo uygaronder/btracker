@@ -33,6 +33,7 @@ html{
     --searchBack: #e0d5e1;
     --inputBackground: rgb(245, 245, 245);
     --borderColor: rgba(0, 0, 0, 0.211);
+    --backgroundHover: #ececec;
 
     --openBug: rgb(214, 212, 58);
     --openFont: rgb(82, 82, 0);
@@ -79,6 +80,7 @@ html{
     --searchBack: #303030;
     --inputBackground: rgb(29, 29, 29);
     --borderColor: rgba(255, 255, 255, 0.226);
+    --backgroundHover: #262626;
 
     --svgFilter: brightness(0) invert(1);
 }
@@ -233,7 +235,7 @@ textarea{
     color: var(--fontColor);
     font-weight: 600;
     padding: 4px 16px;
-    margin: auto;
+    margin-right: 3px;
 }
 
 table a{
@@ -379,4 +381,18 @@ table a{
 #feedDiv .feedItem>div span {
     font-size: .7rem;
     margin-left: 15px;
+}
+
+.labels .low {
+    background-color: var(--priorityLow);
+    font-weight: 600;
+
+}
+
+.labels .med {
+    background-color: var(--priorityMed);
+}
+
+.labels .high {
+    background-color: var(--priorityHigh);
 }

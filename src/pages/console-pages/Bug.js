@@ -209,7 +209,7 @@ const Bug = ({ consoleState }) => {
                     <div id="bugTitleStuff">
                         <div id="bugTitleDiv">
                             <h2 id="bugTitle">{data.bugTitle}</h2>
-                            <div id="identifiers">
+                            <div className="labels">
                                 {
                                     <span className={`label ${data.status}`}>
                                         {data.status}
