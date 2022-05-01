@@ -69,12 +69,46 @@ class Bugs extends React.Component {
                 <div id="bugDivContainer">
                     <div id="openBugs">
                         <h3>Open Bugs</h3>
+                        <div className="bugsDiv">
+                            {this.state.project.bugs
+                                .filter((bug) => bug.status == "open")
+                                .map((bug) => {
+                                    let due = new Date(
+                                        bug.due
+                                    ).toLocaleDateString();
+                                    return (
+                                        <div
+                                            className="bug"
+                                            onClick={() =>
+                                                this.handleClick(bug._id)
+                                            }
+                                        >
+                                            <div className="bugUpperInfo">
+                                                <span>{bug.bugTitle}</span>
+                                                <span>
+                                                    {bug.author.authorName}
+                                                </span>
+                                            </div>
+
+                                            <div className="bugDescription">
+                                                <p>{bug.description}</p>
+                                            </div>
+                                            <div className="bugBottomInfo">
+                                                <div>{due}</div>
+                                                <div>{bug.bugId}</div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                        </div>
                     </div>
                     <div id="ongoingBugs">
                         <h3>Ongoing Bugs</h3>
+                        <div className="bugsDiv"></div>
                     </div>
                     <div id="closeBugs">
                         <h3>Closed Bugs</h3>
+                        <div className="bugsDiv"></div>
                     </div>
                 </div>
             </div>
