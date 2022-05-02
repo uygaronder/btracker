@@ -54,6 +54,7 @@ class Dashboard extends React.Component {
         })
             .then((res) => res.json())
             .then((data) => this.setState({ project: data, loading: false }));
+        console.log(this.state.project);
     };
 
     componentDidMount() {
@@ -199,7 +200,7 @@ class Dashboard extends React.Component {
                                     <div className="feedItem">
                                         <div className={`feedAvatarBack`}>
                                             <div
-                                                className={`feedAvatar ${item.type}`}
+                                                className={`feedAvatar ${item.feedType}`}
                                             ></div>
                                             {item.type
                                                 ? this.returnAvatar(item)

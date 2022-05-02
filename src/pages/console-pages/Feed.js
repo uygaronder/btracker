@@ -35,7 +35,7 @@ class Feed extends React.Component {
                                 <div className="feedItem">
                                     <div className={`feedAvatarBack`}>
                                         <div
-                                            className={`feedAvatar ${item.type}`}
+                                            className={`feedAvatar ${item.feedType}`}
                                         ></div>
                                         {item.type
                                             ? this.returnAvatar(item)

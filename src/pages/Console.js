@@ -5,7 +5,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import "../css/console.css";
 import bug from "../res/svg/bug.svg";
 import dashboard from "../res/svg/dashboard.svg";
-import calendar from "../res/svg/calendar.svg";
+import archive from "../res/svg/archive.svg";
 import stopwatch from "../res/svg/stopwatch.svg";
 import cog from "../res/svg/cog.svg";
 import feed from "../res/svg/feed.svg";
@@ -104,6 +104,7 @@ class Console extends React.Component {
         if (this.state.settings.darkTheme) {
             this.darkTheme();
         }
+        console.log(this.state);
     };
 
     componentDidMount() {
@@ -126,7 +127,7 @@ class Console extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return <Loading classList="dark" />;
+            return <Loading />;
         }
         return (
             <div id="console" ref={(div) => (this.consoleDiv = div)}>
@@ -277,9 +278,9 @@ class Console extends React.Component {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="*">
-                                    <img src={calendar} alt="Home" />
-                                    <p>Calendar</p>
+                                <Link to="archive">
+                                    <img src={archive} alt="Archive" />
+                                    <p>Archive</p>
                                 </Link>
                             </li>
                             <li>

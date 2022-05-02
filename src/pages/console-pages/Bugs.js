@@ -20,7 +20,6 @@ class Bugs extends React.Component {
     }
 
     setData = () => {
-        console.log(this.props.consoleState);
         const projectId =
             this.props.consoleState.activeProject != undefined
                 ? this.props.consoleState.activeProject
@@ -59,6 +58,7 @@ class Bugs extends React.Component {
                     }
                 }
                 this.setState({
+                    changes: [],
                     open: open,
                     ongoing: ongoing,
                     inReview: inReview,
@@ -93,13 +93,80 @@ class Bugs extends React.Component {
         window.location.href = `/console/bug/${bId}`;
     }
 
+    allowDrop(e) {
+        e.preventDefault();
+    }
+
+    drag(e) {
+        e.dataTransfer.setData("bugDiv", e.target.id);
+    }
+
+    resetCommit() {
+        function getBugDiv(parentName) {
+            return document
+                .getElementById(parentName)
+                .getElementsByClassName("bugsDiv")[0];
+        }
+        console.log(getBugDiv("openBugs"));
+        console.log(this.renderBugs(this.state.open));
+        getBugDiv("openBugs").innerHTML = this.renderBugs(this.state.open);
+
+        console.log(getBugDiv("openBugs").innerHTML);
+
+        this.state.changes = [];
+        this.commitConfirmation();
+    }
+
+    commitConfirmation() {
+        const commitBox = document.getElementById("commitChanges");
+        this.state.changes.length > 0
+            ? commitBox.classList.remove("commitHidden")
+            : commitBox.classList.add("commitHidden");
+    }
+
+    drop(e) {
+        e.preventDefault();
+        let data = e.dataTransfer.getData("bugDiv");
+        const target = document
+            .getElementById(e.target.id)
+            .getElementsByClassName("bugsDiv")[0];
+        console.log(e.target.id);
+
+        this.state.changes = this.state.changes.filter(
+            (change) => change[0] != data
+        );
+        this.state.changes.push([data, e.target.id]);
+        this.commitConfirmation();
+        switch (e.target.id) {
+            case "openBugs":
+            case "ongoingBugs":
+                target.appendChild(document.getElementById(data));
+                break;
+            case "closeBugs":
+                const inReview = document
+                    .getElementById(e.target.id)
+                    .getElementsByClassName("bugsDiv")[0];
+                true
+                    ? document
+                          .getElementById(e.target.id)
+                          .getElementsByClassName("bugsDiv")[1]
+                          .appendChild(document.getElementById(data))
+                    : inReview.appendChild(document.getElementById(data));
+
+                break;
+        }
+    }
+
     renderBugs(array) {
         return array.map((bug) => {
             let due = new Date(bug.due).toLocaleDateString();
+            console.log(bug.labels);
             return (
                 <div
+                    id={bug._id}
                     className="bug"
                     draggable="true"
+                    onDragStart={(e) => this.drag(e)}
                     onClick={() => this.handleClick(bug._id)}
                 >
                     <div className="bugUpperInfo">
@@ -155,8 +222,44 @@ class Bugs extends React.Component {
         if (this.state.loading) return <Loading />;
         return (
             <div id="bugs">
+                <div id="bugsUpper">
+                    <div id="bugsButton">
+                        <button
+                            onClick={() => {
+                                this.openSubmit();
+                            }}
+                        >
+                            <img src={plus} alt="+" /> Submit a bug
+                        </button>
+                        <span id="submitBugPopup" className="submitClosed">
+                            <Submit consoleState={this.props.consoleState} />
+                        </span>
+                    </div>
+                    <div id="commitChanges" className="commitHidden">
+                        <p>Are you sure You want to commit these changes?</p>
+                        <button>Accept</button>
+                        <button
+                            onClick={() => {
+                                this.resetCommit();
+                            }}
+                        >
+                            Reset
+                        </button>
+                    </div>
+                    <form action="">
+                        <input type="text" placeholder="Filter" />
+                    </form>
+                </div>
                 <div id="bugDivContainer">
-                    <div id="openBugs">
+                    <div
+                        id="openBugs"
+                        onDrop={(e) => {
+                            this.drop(e);
+                        }}
+                        onDragOver={(e) => {
+                            this.allowDrop(e);
+                        }}
+                    >
                         <div className="bugsDivUpper">
                             <h3>Open Bugs</h3>
                             <p>{this.state.open.length} available</p>
@@ -165,7 +268,15 @@ class Bugs extends React.Component {
                             {this.renderBugs(this.state.open)}
                         </div>
                     </div>
-                    <div id="ongoingBugs">
+                    <div
+                        id="ongoingBugs"
+                        onDrop={(e) => {
+                            this.drop(e);
+                        }}
+                        onDragOver={(e) => {
+                            this.allowDrop(e);
+                        }}
+                    >
                         <div className="bugsDivUpper">
                             <h3>Ongoing Bugs</h3>
                             <p>{this.state.ongoing.length} available</p>
@@ -174,7 +285,15 @@ class Bugs extends React.Component {
                             {this.renderBugs(this.state.ongoing)}
                         </div>
                     </div>
-                    <div id="closeBugs">
+                    <div
+                        id="closeBugs"
+                        onDrop={(e) => {
+                            this.drop(e);
+                        }}
+                        onDragOver={(e) => {
+                            this.allowDrop(e);
+                        }}
+                    >
                         <div className="inReview">
                             <div className="bugsDivUpper">
                                 <h3>In Review</h3>

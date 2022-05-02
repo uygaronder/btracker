@@ -21,6 +21,7 @@ class Submit extends React.Component {
     };
 
     render() {
+        console.log(this.props);
         return (
             <div id="submitBug">
                 <div id="newBug">

@@ -15,6 +15,7 @@ html{
     sans-serif;
 
     --red: #de553d;
+    --redDarker: #7f2313;
     --green: #6fc580;
     --greenDarker: #358044;
     --lightBlue: rgb(206, 255, 239);
@@ -39,6 +40,10 @@ html{
     --openFont: rgb(82, 82, 0);
     --closeBug: rgb(115, 214, 58);
     --closeColor: rgb(0, 75, 0);
+    --ongoingBug: rgb(2, 0, 91);
+    --ongoingColor: rgb(109, 181, 235);
+    --inReviewBug: rgb(0, 170, 186);
+    --inReviewColor: rgb(4, 0, 126);
 
     --statusOpen: rgb(103, 204, 103);
     --statusOpenFont: rgba(0, 88, 0, 0.541);
@@ -51,9 +56,9 @@ html{
     --statusWeek: rgb(154, 253, 154);
     --statusWeekFont: rgb(0, 88, 0);
 
-    --priorityLow: #6fc580;
-    --priorityMed: rgb(241, 196, 97);
-    --priorityHigh: #de553d;
+    --priorityLow: #30753d;
+    --priorityMed: rgb(168, 115, 0);
+    --priorityHigh: #9d321f;
 
     --buttonColorDarkGreen: rgb(0, 41, 10);
     --buttonColorDarkGreenHover: rgb(2, 109, 25);
@@ -230,11 +235,11 @@ textarea{
     display: flex;
     justify-content: center;
     background-color: rgb(27, 27, 0);
-    width: 10ch;
+    min-width: fit-content;
     border-radius: 8px;
-    color: var(--fontColor);
+    color: white;
     font-weight: 600;
-    padding: 4px 16px;
+    padding: 4px 5px;
     margin-right: 3px;
 }
 
@@ -340,6 +345,12 @@ table a{
 
 #feedDiv .feedAvatarBack .edit {
     background-image: url("../res/svg/edit.svg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+#feedDiv .feedAvatarBack .delete {
+    background-image: url("../res/svg/trash.svg");
     background-size: 80%;
     background-repeat: no-repeat;
 }
