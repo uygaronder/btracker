@@ -36,10 +36,10 @@ html{
     --borderColor: rgba(0, 0, 0, 0.211);
     --backgroundHover: #ececec;
 
-    --openBug: rgb(214, 212, 58);
-    --openFont: rgb(82, 82, 0);
-    --closeBug: rgb(115, 214, 58);
-    --closeColor: rgb(0, 75, 0);
+    --openBug: rgb(111, 110, 26);
+    --openFont: rgb(253, 253, 253);
+    --closeBug: rgb(38, 74, 18);
+    --closeColor: rgb(251, 251, 251);
     --ongoingBug: rgb(2, 0, 91);
     --ongoingColor: rgb(109, 181, 235);
     --inReviewBug: rgb(0, 170, 186);
@@ -311,6 +311,7 @@ table a{
 }
 
 #feedDiv .feedItem .feedAvatarBack {
+    align-self: baseline;
     height: 24px;
     width: 24px;
     border-radius: 50%;
@@ -361,6 +362,10 @@ table a{
 
 #feedDiv .feedAvatarBack .project {
     background-image: url("../res/svg/project.svg");
+}
+
+#feedDiv .feedAvatarBack .change {
+    background-image: url("../res/svg/change.svg");
 }
 
 #feedDiv .feedItem .feedAvatarBack img {

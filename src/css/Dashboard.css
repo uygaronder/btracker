@@ -6,13 +6,13 @@
     grid-template-columns: 7fr 4fr;
     grid-template-rows: 1fr 1fr 4fr 1fr 1fr;
     grid-template-areas:
-        "header status"
-        "dBugs status"
-        "dBugs feed"
-        "dBugs feed"
-        "dBugs feed";
+        "header side"
+        "dBugs side"
+        "dBugs side"
+        "dBugs side"
+        "dBugs side";
     width: 100%;
-    max-height: 91.2vh; /* bad solution change */
+    max-height: calc(100vh - 58px);
     color: var(--fontColor);
 }
 
@@ -210,7 +210,17 @@
 
 #dashboard #dashboardBugs .closed .status {
     background-color: var(--closeBug);
-    color: var(--closeFont);
+    color: var(--closeColor);
+}
+
+#dashboard #dashboardBugs .ongoing .status {
+    background-color: var(--ongoingBug);
+    color: var(--ongoingColor);
+}
+
+#dashboard #dashboardBugs .inReview .status {
+    background-color: var(--inReviewBug);
+    color: var(--inReviewColor);
 }
 
 #dashboard .priority {
@@ -241,55 +251,134 @@
 
 /* bug status */
 
-#dashboard #dashboardStats {
-    grid-area: status;
-}
-
-#dashboard #dashboardStatus {
+#dashboard #side{
+    grid-area: side;
     display: flex;
-    justify-content: space-between;
-    margin-top: 12px;
+    flex-direction: column;
 }
 
-#dashboard #dashboardStatus li {
-    background-color: var(--dashBackground);
-    padding: 10px 5px;
-    text-align: center;
-    border-radius: 12px;
+#dashboard #dashboardStats #bugFilters{
+    display: flex;
+    padding-top: 10px;
+    flex-wrap: wrap;
+}
+
+#dashboard #bugFilters .filter{
+    width: fit-content;
+    padding: 5px 10px;
+    padding-bottom: 7px;
+    border-radius: 16px;
     cursor: pointer;
-    transition: 0.2s ease;
+    font-size: .8rem;
+    margin: 2px 2px;
+    color: white;
+    border: 1px solid;
 }
 
-#dashboard #dashboardStatus li:hover {
-    opacity: 0.75;
+#dashboard #bugFilters .filter strong{
+    font-size: .8rem;
 }
 
-#dashboard #dashboardStatus #openStatus {
-    background-color: var(--statusOpen);
-    color: var(--statusOpenFont);
+#dashboard #bugFilters .openFilter{
+    background-color: var(--openBug);
+    border-color: var(--openBug);
 }
 
-#dashboard #dashboardStatus #closeStatus {
-    background-color: var(--statusClose);
-    color: var(--statusCloseFont);
+#dashboard #bugFilters .ongoingFilter{
+    background-color: var(--ongoingBug);
+    border-color: var(--ongoingBug);
 }
 
-#dashboard #dashboardStatus #overStatus {
-    background-color: var(--statusOver);
-    color: var(--statusOverFont);
+#dashboard #bugFilters .closeFilter{
+    background-color: var(--closeBug);
+    border-color: var(--closeBug);
 }
 
-#dashboard #dashboardStatus #dayStatus {
-    background-color: var(--statusDay);
-    color: var(--statusDayFont);
+#dashboard #bugFilters .inReviewFilter{
+    background-color: var(--inReviewBug);
+    border-color: var(--inReviewBug);
 }
 
-#dashboard #dashboardStatus #weekStatus {
-    background-color: var(--statusWeek);
-    color: var(--statusWeekFont);
+#dashboard #bugFilters .lowFilter{
+    background-color: var(--priorityLow);
+    border-color: var(--priorityLow);
 }
 
+#dashboard #bugFilters .medFilter{
+    background-color: var(--priorityMed);
+    border-color: var(--priorityMed);
+}
 
+#dashboard #bugFilters .highFilter{
+    background-color: var(--priorityHigh);
+    border-color: var(--priorityHigh);
+}
+
+#dashboard #bugFilters .overdueFilter{
+    background-color: var(--statusOverFont);
+    border-color: var(--statusOverFont);
+}
+
+#dashboard #bugFilters .dayFilter{
+    background-color: var(--statusDayFont);
+    border-color: var(--statusDayFont);
+}
+
+#dashboard #bugFilters .weekFilter{
+    background-color: var(--statusWeekFont);
+    border-color: var(--statusWeekFont);
+}
+
+#dashboard #dashboardStats #bugFilters button{
+    border: 1px solid var(--borderColor);
+    color: var(--fontColor);
+    background-color: transparent;
+}
+
+#dashboard #dashboardStats #bugFilters button:hover{
+    background-color: var(--tableHover);
+}
+
+#dashboard #bugFilters .toggled{
+    background-color: transparent !important;
+    border-color: var(--borderColor) !important;
+    color: var(--fontColor);
+}
+
+#dashboard #bugFilters #teamFilters{
+    position: relative;
+}
+
+#dashboard #bugFilters .teamFilter{
+    width: max-content;
+    display: flex;
+}
+
+#dashboard #bugFilters #teamFiltersContainer{
+    min-height: 5ch;
+    min-width: 300px;
+    max-width: 800px;
+    background-color: var(--backgroundColor);
+    box-shadow: 0px 0px 3px var(--notFont);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: none;
+    z-index: 99999;
+    border-radius: 12px;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+#dashboard #dashboardStats #bugFilters .teamFiltersActive{
+    display: flex;
+}
+
+#dashboard #dashboardStats #bugFilters .teamFiltersActive ~ button{
+    background-color: rgb(5, 61, 122); 
+    border-color: rgb(5, 61, 122);
+    color: white;
+}
 
 /* feed */
 
@@ -297,6 +386,11 @@
     grid-area: feed;
     display: flex;
     flex-direction: column;
+    overflow: auto;
+}
+
+#dashboard #dashboardFeed h2{
+    padding: 3px 0;
 }
 
 #dashboard #dashboardFeed #feedDiv {

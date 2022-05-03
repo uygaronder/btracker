@@ -220,28 +220,23 @@
 }
 
 #bug .open {
-    background-color: rgb(214, 212, 58);
-    color: rgb(82, 82, 0);
+    background-color: var(--openBug);
+    color: var(--openColor);
 }
 
 #bug .closed {
-    background-color: rgb(115, 214, 58);
-    color: rgb(0, 75, 0);
+    background-color: var(--closeBug);
+    color: var(--closeColor);
 }
 
-#bug .overdue {
-    background-color: rgb(252, 81, 58);
-    color: rgb(75, 9, 0);
+#bug .ongoing {
+    background-color: var(--ongoingBug);
+    color: var(--ongoingColor);
 }
 
-#bug .pending {
-    background-color: rgb(58, 158, 252);
-    color: rgb(6, 0, 83);
-}
-
-#bug .new {
-    background-color: rgb(58, 213, 252);
-    color: rgb(6, 0, 83);
+#bug .inReview {
+    background-color: var(--inReviewBug);
+    color: var(--inReviewColor);
 }
 
 #submit{

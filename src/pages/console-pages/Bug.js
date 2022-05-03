@@ -15,6 +15,7 @@ import del from "../../res/svg/delete.svg";
 import Submit from "./SubmitBug";
 
 var apiUrl = process.env.REACT_APP_APIURL;
+var appUrl = process.env.APP_URL;
 
 function editBug() {
     const submitDiv = document.getElementById("submit");
@@ -144,6 +145,20 @@ function confirmationBox(action, id, state) {
                 confirmedAction(action, id, state);
             };
             break;
+        case "markBugOngoing":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you want to mark this bug as ongoing?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
+            break;
+        case "markInReview":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you want send this bug to review?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
+            break;
     }
 }
 
@@ -160,12 +175,14 @@ function confirmedAction(action, id, state) {
             state: state,
         }),
     }).then(() => {
-        window.location.reload();
+        action == "deleteBug"
+            ? window.location.assign(`${appUrl}/console`)
+            : window.location.assign(window.location.pathname);
     });
 }
 
 const Bug = ({ consoleState }) => {
-    console.log(consoleState.usrId);
+    console.log(consoleState);
     const { bId } = useParams();
     const [data, setData] = useState();
     useEffect(() => {
@@ -225,10 +242,13 @@ const Bug = ({ consoleState }) => {
                                         <span
                                             className="label"
                                             style={{
-                                                backgroundColor: label[1],
+                                                backgroundColor:
+                                                    consoleState.team.labels[
+                                                        label
+                                                    ],
                                             }}
                                         >
-                                            {label[0]}
+                                            {label}
                                         </span>
                                     );
                                 })}
@@ -244,18 +264,63 @@ const Bug = ({ consoleState }) => {
                                 )}
                             </span>
                             {data.status != "closed" ? (
-                                <button
-                                    id="complete"
-                                    onClick={() => {
-                                        confirmationBox(
-                                            "markBugComplete",
-                                            data._id,
-                                            consoleState
-                                        );
-                                    }}
-                                >
-                                    Mark As Complete
-                                </button>
+                                <div>
+                                    {data.status != "ongoing" ? (
+                                        <button
+                                            id="ongoing"
+                                            onClick={() => {
+                                                confirmationBox(
+                                                    "markBugOngoing",
+                                                    data._id,
+                                                    consoleState
+                                                );
+                                            }}
+                                        >
+                                            Mark Bug Ongoing
+                                        </button>
+                                    ) : (
+                                        <button
+                                            id="open"
+                                            onClick={() => {
+                                                confirmationBox(
+                                                    "markBugOpen",
+                                                    data._id,
+                                                    consoleState
+                                                );
+                                            }}
+                                        >
+                                            Mark Bug Open
+                                        </button>
+                                    )}
+                                    {/* lead close / dev send to review */}
+                                    {true ? (
+                                        <button
+                                            id="complete"
+                                            onClick={() => {
+                                                confirmationBox(
+                                                    "markBugComplete",
+                                                    data._id,
+                                                    consoleState
+                                                );
+                                            }}
+                                        >
+                                            Mark Bug as Close
+                                        </button>
+                                    ) : (
+                                        <button
+                                            id="inReview"
+                                            onClick={() => {
+                                                confirmationBox(
+                                                    "markInReview",
+                                                    data._id,
+                                                    consoleState
+                                                );
+                                            }}
+                                        >
+                                            Send To Review
+                                        </button>
+                                    )}
+                                </div>
                             ) : (
                                 <button
                                     onClick={() => {

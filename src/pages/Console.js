@@ -10,6 +10,7 @@ import stopwatch from "../res/svg/stopwatch.svg";
 import cog from "../res/svg/cog.svg";
 import feed from "../res/svg/feed.svg";
 import notification from "../res/svg/notification.svg";
+import chevron from "../res/svg/chevron-up.svg";
 
 import Dashboard from "./console-pages/Dashboard";
 import Bugs from "./console-pages/Bugs";
@@ -57,7 +58,6 @@ class Console extends React.Component {
     };
 
     darkTheme = () => {
-        console.log(this.state.settings.darkTheme);
         const consoleDiv = this.consoleDiv;
 
         this.darkCheck.checked
@@ -104,7 +104,6 @@ class Console extends React.Component {
         if (this.state.settings.darkTheme) {
             this.darkTheme();
         }
-        console.log(this.state);
     };
 
     componentDidMount() {
@@ -205,6 +204,9 @@ class Console extends React.Component {
                                     }}
                                 >
                                     <span className="avatar"></span>
+                                    <span>
+                                        <img src={chevron} alt="" />
+                                    </span>
                                 </button>
                                 <div
                                     id="dropdownDiv"

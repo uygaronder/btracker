@@ -15,6 +15,7 @@ class Bugs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            key: 0,
             loading: true,
         };
     }
@@ -107,9 +108,9 @@ class Bugs extends React.Component {
                 .getElementById(parentName)
                 .getElementsByClassName("bugsDiv")[0];
         }
-        console.log(getBugDiv("openBugs"));
-        console.log(this.renderBugs(this.state.open));
-        getBugDiv("openBugs").innerHTML = this.renderBugs(this.state.open);
+
+        //for bugsDiv rerender
+        this.setState({ key: Math.random() });
 
         console.log(getBugDiv("openBugs").innerHTML);
 
@@ -122,6 +123,23 @@ class Bugs extends React.Component {
         this.state.changes.length > 0
             ? commitBox.classList.remove("commitHidden")
             : commitBox.classList.add("commitHidden");
+    }
+
+    commit(changes, project, state) {
+        fetch(`${apiUrl}/commit`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                changes: changes,
+                projectId: project,
+                state: state,
+            }),
+        }).then(() => {
+            window.location.reload();
+        });
     }
 
     drop(e) {
@@ -157,10 +175,10 @@ class Bugs extends React.Component {
         }
     }
 
-    renderBugs(array) {
+    renderBugs(array, state) {
+        console.log(state.team.labels);
         return array.map((bug) => {
             let due = new Date(bug.due).toLocaleDateString();
-            console.log(bug.labels);
             return (
                 <div
                     id={bug._id}
@@ -184,10 +202,11 @@ class Bugs extends React.Component {
                                 <span
                                     className="label"
                                     style={{
-                                        backgroundColor: label[1],
+                                        backgroundColor:
+                                            state.team.labels[label],
                                     }}
                                 >
-                                    {label[0]}
+                                    {label}
                                 </span>
                             );
                         })}
@@ -237,7 +256,17 @@ class Bugs extends React.Component {
                     </div>
                     <div id="commitChanges" className="commitHidden">
                         <p>Are you sure You want to commit these changes?</p>
-                        <button>Accept</button>
+                        <button
+                            onClick={() => {
+                                this.commit(
+                                    this.state.changes,
+                                    this.props.consoleState.activeProject,
+                                    this.props.consoleState
+                                );
+                            }}
+                        >
+                            Accept
+                        </button>
                         <button
                             onClick={() => {
                                 this.resetCommit();
@@ -264,8 +293,11 @@ class Bugs extends React.Component {
                             <h3>Open Bugs</h3>
                             <p>{this.state.open.length} available</p>
                         </div>
-                        <div className="bugsDiv">
-                            {this.renderBugs(this.state.open)}
+                        <div className="bugsDiv" key={this.state.key}>
+                            {this.renderBugs(
+                                this.state.open,
+                                this.props.consoleState
+                            )}
                         </div>
                     </div>
                     <div
@@ -281,8 +313,11 @@ class Bugs extends React.Component {
                             <h3>Ongoing Bugs</h3>
                             <p>{this.state.ongoing.length} available</p>
                         </div>
-                        <div className="bugsDiv">
-                            {this.renderBugs(this.state.ongoing)}
+                        <div className="bugsDiv" key={this.state.key}>
+                            {this.renderBugs(
+                                this.state.ongoing,
+                                this.props.consoleState
+                            )}
                         </div>
                     </div>
                     <div
@@ -314,16 +349,23 @@ class Bugs extends React.Component {
                             <div
                                 className="bugsDiv inReviewHidden"
                                 id="inReviewBugs"
+                                key={this.state.key}
                             >
-                                {this.renderBugs(this.state.inReview)}
+                                {this.renderBugs(
+                                    this.state.inReview,
+                                    this.props.consoleState
+                                )}
                             </div>
                         </div>
                         <div className="bugsDivUpper">
                             <h3>Closed Bugs</h3>
                             <p>{this.state.closed.length} available</p>
                         </div>
-                        <div className="bugsDiv">
-                            {this.renderBugs(this.state.closed)}
+                        <div className="bugsDiv" key={this.state.key}>
+                            {this.renderBugs(
+                                this.state.closed,
+                                this.props.consoleState
+                            )}
                         </div>
                     </div>
                 </div>
