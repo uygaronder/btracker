@@ -53,6 +53,7 @@ class Submit extends React.Component {
                         defaultValue={
                             this.props.bug ? this.props.bug.bugTitle : ""
                         }
+                        required
                     />
 
                     <textarea
@@ -93,6 +94,7 @@ class Submit extends React.Component {
                             <input name="due" type={"date"} />
                         </span>
                     </span>
+                    <input type="file" multiple />
                     <input
                         type="hidden"
                         name="project"

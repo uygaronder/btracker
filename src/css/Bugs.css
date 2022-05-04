@@ -215,7 +215,7 @@
 
 #bugs #submitBugPopup {
     position: absolute;
-    top: 150%;
+    top: 105%;
     left: 300px;
     padding: 10px;
     background-color: var(--backgroundColor);
