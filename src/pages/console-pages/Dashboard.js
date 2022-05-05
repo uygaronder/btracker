@@ -172,6 +172,7 @@ class Dashboard extends React.Component {
                         );
                     }
                     break;
+                //broken
                 case "date":
                     switch (activeFilter[0]) {
                         case "overdue":

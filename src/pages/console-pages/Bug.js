@@ -351,7 +351,7 @@ const Bug = ({ consoleState }) => {
                             </div>
                         </div>
                     ) : (
-                        <div />
+                        <div/>
                     )}
 
                     <div id="assignedButtons">
