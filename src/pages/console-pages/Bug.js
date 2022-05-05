@@ -337,6 +337,14 @@ const Bug = ({ consoleState }) => {
                         </div>
                     </div>
                 </div>
+                <div className="images">
+                    <form enctype="multipart/form-data">
+                        <input type="file" name="images" multiple/>
+                        <input type="hidden" name="bugId"/>
+                        <input type="submit" />
+                    </form>
+                    
+                </div>
                 <div id="bugDescDiv">
                     <p id="description">{data.description}</p>
                 </div>

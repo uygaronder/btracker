@@ -1,4 +1,4 @@
-import React from "react";
+import React,  {useState} from "react";
 import "../../css/SubmitBug.css";
 var apiUrl = process.env.REACT_APP_APIURL;
 class Submit extends React.Component {
@@ -8,9 +8,10 @@ class Submit extends React.Component {
             labelsString: !this.props.bug
                 ? ""
                 : this.props.bug.labels.map((label) => label).join(","),
+            images: []
         };
+        
     }
-
     closeSubmit = () => {
         document.getElementById("submitBugPopup").classList.add("submitClosed");
     };
@@ -19,15 +20,6 @@ class Submit extends React.Component {
             .getElementById("submitBugPopup")
             .classList.remove("submitClosed");
     };
-
-    encodeImage(element){
-        const ImageInput = document.getElementById("ImageInput");
-        var file = element.files[0];
-        var reader = new FileReader();
-        reader.onloadend = function() {
-            console.log('RESULT', reader.result)
-        }
-    }
 
     render() {
         return (
@@ -103,7 +95,6 @@ class Submit extends React.Component {
                             <input name="due" type={"date"} />
                         </span>
                     </span>
-                    <input type="file" onChange={(e)=>this.encodeImage(e)} multiple id="fileInput" />
                     <input
                         type="hidden"
                         name="project"
@@ -123,7 +114,7 @@ class Submit extends React.Component {
                     ) : (
                         <input type={"hidden"} />
                     )}
-                    <input type={"submit"} value="Submit Bug" />
+                    <input type={"submit"} value="Submit Bug" onClick={()=>this.checkAndSendImages()}/>
                 </form>
             </div>
         );

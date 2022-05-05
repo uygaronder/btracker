@@ -82,6 +82,10 @@
     margin-right: 5px;
 }
 
+#bug #images input{
+    
+}
+
 #bug #bugDescDiv{
     padding: 5px 0;
 }
@@ -174,7 +178,7 @@
 
 #bug .reply .replyButtons{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     padding-bottom: 5px;
 }
 #bug .reply .replyButtons button{
