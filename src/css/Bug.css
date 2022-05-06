@@ -82,8 +82,52 @@
     margin-right: 5px;
 }
 
-#bug #images input{
-    
+#bug #fileInput{
+   display: none; 
+}
+
+
+#bug #addImageLabel{
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border: 1px solid var(--fontColor);
+    border-radius: 3px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+ }
+
+ #bug #addImageLabel:hover{
+    background-color: var(--notFont);
+ }
+
+#bug #addImageLabel img{
+    filter: var(--svgFilter);
+    align-self: center;
+ }
+
+#bug #addImageLabel #previewImages{
+    display: flex;
+ }
+
+
+#bug #imageStuff{
+    display: flex;
+    position: relative;
+ }
+
+#bug #previewImages img{
+    height: 30px;
+    cursor: pointer;
+    margin: 0 3px;
+    position: absolute;
+}
+
+#bug #previewImages img:hover{
+    height: 300px;
+    position: absolute;
+    top: 0;
 }
 
 #bug #bugDescDiv{

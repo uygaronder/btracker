@@ -4,13 +4,14 @@ import "../../css/Bug.css";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
 
-import Search from "../../res/svg/search.svg";
 import assign from "../../res/svg/assign.svg";
 import chevronUp from "../../res/svg/chevron-up.svg";
 import bell from "../../res/svg/bell.svg";
 import edit from "../../res/svg/edit.svg";
 import bellOn from "../../res/svg/notification.svg";
 import del from "../../res/svg/delete.svg";
+import plus from "../../res/svg/plus.svg";
+
 
 import Submit from "./SubmitBug";
 
@@ -23,10 +24,6 @@ function editBug() {
         ? (submitDiv.style.display = "block")
         : (submitDiv.style.display = "none");
 }
-
-function handleNotif() {}
-
-function filterBugs(bugs, filter) {}
 
 function renderComment(comments, state, data) {
     return comments.map((comment) => {
@@ -185,6 +182,7 @@ const Bug = ({ consoleState }) => {
     console.log(consoleState);
     const { bId } = useParams();
     const [data, setData] = useState();
+    const [preview, setPreview] = useState();
     useEffect(() => {
         fetch(`${apiUrl}/getBug`, {
             method: "post",
@@ -203,6 +201,32 @@ const Bug = ({ consoleState }) => {
                 setData(data);
             });
     }, []);
+
+
+function handleImageSubmit(){
+    console.log("image submit")
+}
+
+function handleImageChange(e){
+    const submitButton = document.getElementById("imageSubmitButton")
+    if(e.target.files.length > 0){
+        submitButton.style.display = "block";
+        previewImages(e.target.files)
+    } else {
+        submitButton.style.display = "none";
+        setPreview();
+    }
+}
+
+function previewImages(source) {
+    const reader = new FileReader();
+    reader.readAsDataURL(source[0])
+        reader.onloadend = () => {
+            setPreview(reader.result);
+        }
+    
+}
+
 
     if (!data) return <Loading />;
     return (
@@ -337,16 +361,27 @@ const Bug = ({ consoleState }) => {
                         </div>
                     </div>
                 </div>
-                <div className="images">
-                    <form enctype="multipart/form-data">
-                        <input type="file" name="images" multiple/>
-                        <input type="hidden" name="bugId"/>
-                        <input type="submit" />
-                    </form>
-                    
-                </div>
+                
                 <div id="bugDescDiv">
                     <p id="description">{data.description}</p>
+                </div>
+                <div className="images">
+                    <form encType="multipart/form-data" onSubmit={()=> handleImageSubmit()}>
+                        <div>
+                            <div id="imageStuff">
+                                <label htmlFor="fileInput" id="addImageLabel">
+                                    <img src={plus} alt="+"/>
+                                </label>
+                                <div id="previewImages">{preview && (
+                                    <img src={preview} />
+                                )}</div>
+                            </div>
+                            <input id="fileInput" type="file" name="images" onChange={(event)=> handleImageChange(event)} multiple/>
+                        </div>
+                        <input type="hidden" name="bugId"/>
+                        <input id="imageSubmitButton" type="submit" style={{display: "none"}}/>
+                    </form>
+                    
                 </div>
                 <div id="assigned">
                     {data.assignedTo > 0 ? (
