@@ -203,28 +203,30 @@ const Bug = ({ consoleState }) => {
     }, []);
 
 
-function handleImageSubmit(){
-    console.log("image submit")
-}
-
 function handleImageChange(e){
     const submitButton = document.getElementById("imageSubmitButton")
     if(e.target.files.length > 0){
         submitButton.style.display = "block";
-        previewImages(e.target.files)
+        const pic = e.target.files[0]
+        const reader = new FileReader();
+        reader.onloadend = () => {setPreview(reader.result)}
+        reader.readAsDataURL(pic)
     } else {
         submitButton.style.display = "none";
         setPreview();
     }
 }
 
-function previewImages(source) {
-    const reader = new FileReader();
-    reader.readAsDataURL(source[0])
-        reader.onloadend = () => {
-            setPreview(reader.result);
-        }
-    
+async function handleSubmit(e){
+    try {
+        await fetch(`${apiUrl}/uploadImage`, {
+            method: "POST",
+            body: JSON.stringify({data: preview, projectId: consoleState.activeProject, bugId: data._id}),
+            headers: {'Content-Type': 'application/json'}
+        })
+    } catch (e) {
+        console.error(e)
+    }
 }
 
 
@@ -366,20 +368,21 @@ function previewImages(source) {
                     <p id="description">{data.description}</p>
                 </div>
                 <div className="images">
-                    <form encType="multipart/form-data" onSubmit={()=> handleImageSubmit()}>
-                        <div>
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <div id="allImagesContainer">
+                            <label htmlFor="fileInput" id="addImageLabel">
+                                <img src={plus} alt="+"/>
+                            </label>
                             <div id="imageStuff">
-                                <label htmlFor="fileInput" id="addImageLabel">
-                                    <img src={plus} alt="+"/>
-                                </label>
                                 <div id="previewImages">{preview && (
-                                    <img src={preview} />
+                                    <div className="imgContainer"><img src={preview} /></div>
                                 )}</div>
+                                <div id="bugImages">{data.pictures && data.pictures.map(picture => <div className="imgContainer"><img src={picture}/></div>)}</div>
                             </div>
-                            <input id="fileInput" type="file" name="images" onChange={(event)=> handleImageChange(event)} multiple/>
                         </div>
-                        <input type="hidden" name="bugId"/>
-                        <input id="imageSubmitButton" type="submit" style={{display: "none"}}/>
+                        <input id="fileInput" type="file" name="image" onChange={(event)=> handleImageChange(event)}/>
+
+                        <input id="imageSubmitButton" type="submit" style={{display: "none"}} value="Upload Image" />
                     </form>
                     
                 </div>

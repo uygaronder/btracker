@@ -24,6 +24,12 @@
     padding-bottom: 15px;
 }
 
+
+#bugs .thumbnail{
+    width: 100%;
+}
+
+
 #bugs #bugsUpper #bugsButton{
     position: relative;
 }

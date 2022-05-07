@@ -112,22 +112,30 @@
  }
 
 
-#bug #imageStuff{
+#bug #allImagesContainer ,#bug #imageStuff{
     display: flex;
-    position: relative;
  }
 
-#bug #previewImages img{
+#bug #imageStuff .imgContainer{
     height: 30px;
-    cursor: pointer;
-    margin: 0 3px;
-    position: absolute;
+    position: relative;
+    margin-left: 3px;
 }
 
-#bug #previewImages img:hover{
+#bug #imageStuff img{
+    height: 30px;
+    cursor: pointer;
+}
+
+#bug #imageStuff #bugImages{
+    display: flex;
+}
+
+#bug #imageStuff img:hover{
     height: 300px;
     position: absolute;
     top: 0;
+    z-index: 99;
 }
 
 #bug #bugDescDiv{

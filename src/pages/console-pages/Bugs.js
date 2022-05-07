@@ -17,6 +17,7 @@ class Bugs extends React.Component {
         this.state = {
             key: 0,
             loading: true,
+            thumbnail:true
         };
     }
 
@@ -211,6 +212,7 @@ class Bugs extends React.Component {
                             );
                         })}
                     </div>
+                    {(bug.pictures && bug.pictures.length > 0 && this.state.thumbnail) && <img className="thumbnail" src={bug.pictures[0]} draggable="false"/>}
                     <div className="bugDescription">
                         <p>{bug.description}</p>
                     </div>

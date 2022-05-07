@@ -1,0 +1,44 @@
+#settings{
+    padding: 15px;
+}
+
+h3 , h4{
+    color: var(--fontColor);
+}
+
+#settings .settingClass{
+    margin-bottom: 10px;
+}
+
+#settings .settingsContainer{
+    border-left: 1px solid var(--fontColor);
+    padding: 5px;
+}
+
+#settings .setting{
+    padding: 5px;
+}
+
+
+#settings input[type="file"]{
+    display: none;
+}
+
+#settings .changeAvatar{
+    margin-top: 5px;
+    display: flex;
+}
+
+#settings .changeAvatar .avatar{
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+#settings .changeAvatar .avatar img{
+    width: 100%;
+    margin: auto
+}
