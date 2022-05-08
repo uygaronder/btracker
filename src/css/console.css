@@ -132,11 +132,25 @@
     display: flex;
     align-items: center;
 }
+
 #user button img{
     display: flex;
     transform: rotate(180deg) translateY(-10px);
     height: 10px;
     width: 10px;
+}
+
+
+#console #user .avatar{
+    align-items: center;
+    overflow: hidden;
+}
+
+#console #user .avatar img{
+    height: 100%;
+    width: 100%;
+    filter: none;
+    transform: none;
 }
 
 #console #dropdownDiv{

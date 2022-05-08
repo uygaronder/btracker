@@ -12,6 +12,7 @@ import feed from "../res/svg/feed.svg";
 import notification from "../res/svg/notification.svg";
 import chevron from "../res/svg/chevron-up.svg";
 
+import Archive from "./console-pages/Archive";
 import Dashboard from "./console-pages/Dashboard";
 import Bugs from "./console-pages/Bugs";
 import Team from "./console-pages/Team";
@@ -95,6 +96,7 @@ class Console extends React.Component {
             team: response.team,
             usrId: response.user._id,
             settings: response.user.settings,
+            avatar: response.user.avatarURL,
         });
         document.getElementById("darkCheck").checked =
             this.state.settings.darkTheme;
@@ -203,7 +205,7 @@ class Console extends React.Component {
                                         this.handleConsoleDropdown();
                                     }}
                                 >
-                                    <span className="avatar"></span>
+                                    <span className="avatar">{this.state.avatar && <img src={this.state.avatar} key={this.state.avatar}/>}</span>
                                     <span>
                                         <img src={chevron} alt="" />
                                     </span>
@@ -280,7 +282,7 @@ class Console extends React.Component {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="archive">
+                                <Link to="/console/archive">
                                     <img src={archive} alt="Archive" />
                                     <p>Archive</p>
                                 </Link>
@@ -324,6 +326,10 @@ class Console extends React.Component {
                             <Route
                                 path="bugs"
                                 element={<Bugs consoleState={this.state} />}
+                            />
+                            <Route
+                                path="archive"
+                                element={<Archive consoleState={this.state} />}
                             />
                             <Route
                                 path="feed"

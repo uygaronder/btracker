@@ -7,7 +7,7 @@ class Settings extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            avatar: ""
+            avatar: this.props.consoleState.avatarURL
         };
     }
 
@@ -25,19 +25,19 @@ class Settings extends React.Component {
     async handleAvatarSubmit(){
         try {
             await fetch(`${apiUrl}/changeAvatar` , {
-                method: "post",
-                credentials: "include",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
+                    user: this.props.consoleState.usrId,
                     data: this.state.avatar,
                 }),})
         } catch (error) {
             console.error(error)
         }
     }
-
+            
     render() {
         return (
             <div id="settings">
@@ -46,10 +46,10 @@ class Settings extends React.Component {
                     <div className="settingsContainer">
                         <div className="setting">
                             <h4>Change Avatar</h4>
-                            <form className="changeAvatar">
-                                <label htmlFor="avatar"><div className="avatar" key={this.state.avatar}>{this.state.avatar && <img src={this.state.avatar}/>}</div></label>
+                            <form className="changeAvatar" onSubmit={()=>{this.handleAvatarSubmit()}}>
+                                <label htmlFor="avatar"><div className="avatar" key={this.state.avatar}>{<img src={this.props.consoleState.avatar}/>}</div></label>
                                 <input type="file" onChange={(e)=> this.handleAvatarChange(e)} accept="image/*" id="avatar" />
-                                <input type="submit" id="avatarSubmit" value="Change Avatar" style={{display:"none"}} onSubmit={()=>{this.handleAvatarSubmit()}} />
+                                <input type="submit" id="avatarSubmit" value="Change Avatar" style={{display:"none"}}  />
                             </form>
                         </div>
                     </div>

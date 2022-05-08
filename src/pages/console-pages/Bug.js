@@ -11,6 +11,7 @@ import edit from "../../res/svg/edit.svg";
 import bellOn from "../../res/svg/notification.svg";
 import del from "../../res/svg/delete.svg";
 import plus from "../../res/svg/plus.svg";
+import archive  from "../../res/svg/archive.svg";
 
 
 import Submit from "./SubmitBug";
@@ -152,6 +153,13 @@ function confirmationBox(action, id, state) {
         case "markInReview":
             document.getElementById("confirmationP").innerText =
                 "Are you sure you want send this bug to review?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
+            break;
+        case "archive":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you to archive this bug? (will automatically be closed)";
             document.getElementById("confirmButton").onclick = () => {
                 confirmedAction(action, id, state);
             };
@@ -407,6 +415,18 @@ async function handleSubmit(e){
                         <button>
                             <img className="down" src={chevronUp} /> Self Assign
                             This Bug
+                        </button>
+                        <button
+                            onClick={() => {
+                                confirmationBox(
+                                    "archive",
+                                    data._id,
+                                    consoleState
+                                );
+                            }}
+                        >
+                            <img src={archive} />
+                            Archive This Bug
                         </button>
                         <button
                             onClick={() => {
