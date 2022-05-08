@@ -186,13 +186,12 @@ function confirmedAction(action, id, state) {
     });
 }
 
-const Bug = ({ consoleState }) => {
-    console.log(consoleState);
+const Bug = ({ consoleState, archive }) => {
     const { bId } = useParams();
     const [data, setData] = useState();
     const [preview, setPreview] = useState();
     useEffect(() => {
-        fetch(`${apiUrl}/getBug`, {
+        fetch(`${apiUrl}/${archive?`getArchivedBug`:`getBug`}`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -254,7 +253,8 @@ async function handleSubmit(e){
                         </p>
                         <span>|</span>
                         <span id="due">
-                            due at {new Date(data.due).toLocaleDateString()}
+                            {data.status=="closed" ? `closed at ${new Date(data.closeDate).toLocaleDateString()}`:`due at ${new Date(data.due).toLocaleDateString()}`}
+                            
                         </span>
                     </div>
                     <div id="bugTitleStuff">

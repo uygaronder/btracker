@@ -342,7 +342,11 @@ class Console extends React.Component {
                             <Route path="newTeam" element={<NewTeam />} />
                             <Route
                                 path="bug/:bId"
-                                element={<Bug consoleState={this.state} />}
+                                element={<Bug consoleState={this.state} archive={false}/>}
+                            />
+                            <Route
+                                path="bug/archive/:bId"
+                                element={<Bug consoleState={this.state} archive={true}/>}
                             />
                             <Route
                                 path="settings"

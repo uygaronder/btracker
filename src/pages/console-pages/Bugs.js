@@ -177,7 +177,6 @@ class Bugs extends React.Component {
     }
 
     renderBugs(array, state) {
-        console.log(state.team.labels);
         return array.map((bug) => {
             let due = new Date(bug.due).toLocaleDateString();
             return (

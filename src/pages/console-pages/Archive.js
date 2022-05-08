@@ -15,6 +15,18 @@ class Archive extends React.Component {
 
     fetchArchive(){
         console.log("Fetching archive...")
+        fetch(`${apiUrl}/getArchivedBugs`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                project: this.props.consoleState.activeProject,
+            }),
+        }).then(res => res.json()).then((data) => {
+            this.setState({loading: false, bugs: data.bugs[0] });
+        });
     }
     
     componentDidMount() {
@@ -22,14 +34,19 @@ class Archive extends React.Component {
         this.fetchArchive()
     }
 
+    handleClick(bId) {
+        window.location.href = `/console/bug/archive/${bId}`;
+    }
+
     render() {
+        if(this.state.loading){return <Loading />}
         return (
             <div id="archive">
                 <div id="bugsUp">
                     <div id="bugsInfo">
-                        <h3>fdsa</h3>
+                        <h3>Project name placeholder</h3>
                         <span />
-                        <h4>Total Bugs: {"1"}</h4>
+                        <h4>Archived Bugs: {this.state.bugs.length}</h4>
                     </div>
                     <div id="bugsFilter">
                         <input
@@ -42,13 +59,20 @@ class Archive extends React.Component {
                     <tr>
                         <td id="bId">#</td>
                         <td>Bug</td>
-                        <td>Labels</td>
-                        <td>Comments</td>
-                        <td>Priority</td>
-                        <td>Status</td>
-                        <td>Due</td>
+                        <td>Author</td>
+                        <td>Close Date</td>
                     </tr>
-                    
+                    {this.state.bugs.map((bug) => {
+                        const closeDate = new Date(bug.closeDate).toLocaleDateString();
+                        return (
+                        <tr 
+                        onClick={() => this.handleClick(bug._id)}>
+                            <td>{bug.bugId}</td>
+                            <td>{bug.bugTitle}</td>
+                            <td>{bug.author.authorName}</td>
+                            <td>{closeDate}</td>
+                        </tr>
+                    )})}
                 </table>
 
             </div>

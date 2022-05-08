@@ -1,0 +1,107 @@
+
+#archive {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 10px;
+    color: var(--fontColor);
+}
+
+#archive table td:nth-of-type(3),
+#archive table td:nth-of-type(4) {
+    width: 9ch;
+}
+#archive table td:nth-of-type(5) {
+    width: 10ch;
+    text-align: center;
+}
+
+#archive table td:nth-of-type(6){
+    width: 8ch;
+    text-align: center;
+}
+
+#archive table td:nth-of-type(7) {
+    width: 15ch;
+    text-align: center;
+}
+
+#archive table .bugsLabel{
+    display: flex;
+}
+
+#bugsUp {
+    display: flex;
+    justify-content: space-between;
+}
+
+#archive table tr:first-of-type img {
+    max-height: 24px;
+    max-width: 24px;
+}
+
+#archive table tr:first-of-type {
+    font-size: .9rem;
+}
+
+#bugsUp div {
+    display: flex;
+    align-items: center;
+}
+
+#bugsUp #bugsFilter input{
+    font-size: 1rem;
+    padding: 3px;
+    width: 30ch;
+}
+
+#bugsUp #bugsButton button {
+    margin-left: 5px;
+}
+
+#bugsUp #bugsInfo span {
+    height: 3ch;
+    width: 1px;
+    display: block;
+    background-color: var(--backgroundColor);
+    margin: 0 10px;
+}
+
+#bugsButton {
+    position: relative;
+}
+
+#bugsUp #bugsButton button {
+    display: flex;
+    padding: 5px 8px;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--buttonColorDarkGreen);
+    color: white;
+    transition: 0.2s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+#bugsUp button:hover {
+    background-color: var(--buttonColorDarkGreenHover);
+}
+
+#bugsUp button img {
+    height: 20px;
+    width: 20px;
+    margin-right: 3px;
+    filter: brightness(0) invert(1);
+}
+
+#archive #submitBugPopup {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    padding: 10px;
+    background-color: var(--backgroundColor);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.719);
+    border-radius: 8px;
+}
