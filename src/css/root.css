@@ -49,6 +49,8 @@ html{
     --statusOpenFont: rgba(0, 88, 0, 0.541);
     --statusClose: rgba(103, 204, 103, 0.548);
     --statusCloseFont: rgba(1, 59, 1, 0.541);
+    --statusArchived: rgba(41, 0, 163, 0.541);
+    --statusArchivedFont: rgba(255, 255, 255, 0.541);
     --statusOver: rgb(219, 103, 68);
     --statusOverFont: rgb(88, 18, 0);
     --statusDay: rgb(204, 197, 103);
@@ -173,6 +175,11 @@ textarea{
 .open .status {
     background-color: rgb(214, 212, 58);
     color: rgb(82, 82, 0);
+}
+
+.archived .status {
+    background-color: var(--statusArchived);
+    color: var(--statusArchivedFont);
 }
 
 .closed .status {

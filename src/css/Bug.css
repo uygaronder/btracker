@@ -285,6 +285,11 @@
     color: var(--closeColor);
 }
 
+#bug .archived {
+    background-color: var(--statusArchived);
+    color: var(--statusArchivedFont);
+}
+
 #bug .ongoing {
     background-color: var(--ongoingBug);
     color: var(--ongoingColor);

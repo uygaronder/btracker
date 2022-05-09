@@ -1,8 +1,8 @@
 import React from "react";
 
-import "../../css/Archive.css"
+import "../../css/Archive.css";
 
-import Loading from "../Loading"
+import Loading from "../Loading";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 class Archive extends React.Component {
@@ -10,11 +10,10 @@ class Archive extends React.Component {
         super(props);
         this.state = {
             loading: true,
-        }
+        };
     }
 
-    fetchArchive(){
-        console.log("Fetching archive...")
+    fetchArchive() {
         fetch(`${apiUrl}/getArchivedBugs`, {
             method: "post",
             credentials: "include",
@@ -24,22 +23,26 @@ class Archive extends React.Component {
             body: JSON.stringify({
                 project: this.props.consoleState.activeProject,
             }),
-        }).then(res => res.json()).then((data) => {
-            this.setState({loading: false, bugs: data.bugs[0] });
-        });
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({ loading: false, bugs: data.bugs });
+            });
     }
-    
+
     componentDidMount() {
-        console.log(this.props)
-        this.fetchArchive()
+        console.log(this.props);
+        this.fetchArchive();
     }
 
     handleClick(bId) {
-        window.location.href = `/console/bug/archive/${bId}`;
+        window.location.href = `/console/archive/${bId}`;
     }
 
     render() {
-        if(this.state.loading){return <Loading />}
+        if (this.state.loading) {
+            return <Loading />;
+        }
         return (
             <div id="archive">
                 <div id="bugsUp">
@@ -63,18 +66,19 @@ class Archive extends React.Component {
                         <td>Close Date</td>
                     </tr>
                     {this.state.bugs.map((bug) => {
-                        const closeDate = new Date(bug.closeDate).toLocaleDateString();
+                        const closeDate = new Date(
+                            bug.closeDate
+                        ).toLocaleDateString();
                         return (
-                        <tr 
-                        onClick={() => this.handleClick(bug._id)}>
-                            <td>{bug.bugId}</td>
-                            <td>{bug.bugTitle}</td>
-                            <td>{bug.author.authorName}</td>
-                            <td>{closeDate}</td>
-                        </tr>
-                    )})}
+                            <tr onClick={() => this.handleClick(bug._id)}>
+                                <td>{bug.bugId}</td>
+                                <td>{bug.bugTitle}</td>
+                                <td>{bug.author.authorName}</td>
+                                <td>{closeDate}</td>
+                            </tr>
+                        );
+                    })}
                 </table>
-
             </div>
         );
     }

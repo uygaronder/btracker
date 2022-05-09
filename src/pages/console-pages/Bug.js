@@ -4,6 +4,7 @@ import "../../css/Bug.css";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
 
+import archiveSvg from "../../res/svg/archive.svg";
 import assign from "../../res/svg/assign.svg";
 import chevronUp from "../../res/svg/chevron-up.svg";
 import bell from "../../res/svg/bell.svg";
@@ -11,8 +12,6 @@ import edit from "../../res/svg/edit.svg";
 import bellOn from "../../res/svg/notification.svg";
 import del from "../../res/svg/delete.svg";
 import plus from "../../res/svg/plus.svg";
-import archive  from "../../res/svg/archive.svg";
-
 
 import Submit from "./SubmitBug";
 
@@ -159,7 +158,14 @@ function confirmationBox(action, id, state) {
             break;
         case "archive":
             document.getElementById("confirmationP").innerText =
-                "Are you sure you to archive this bug? (will automatically be closed)";
+                "Are you sure you to archive this bug?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
+            break;
+        case "unarchive":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you to unarchive this bug?";
             document.getElementById("confirmButton").onclick = () => {
                 confirmedAction(action, id, state);
             };
@@ -191,7 +197,7 @@ const Bug = ({ consoleState, archive }) => {
     const [data, setData] = useState();
     const [preview, setPreview] = useState();
     useEffect(() => {
-        fetch(`${apiUrl}/${archive?`getArchivedBug`:`getBug`}`, {
+        fetch(`${apiUrl}/${archive ? `getArchivedBug` : `getBug`}`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -203,39 +209,43 @@ const Bug = ({ consoleState, archive }) => {
             }),
         })
             .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setData(data);
+            .then((bugData) => {
+                console.log(bugData);
+                setData(bugData);
             });
     }, []);
 
-
-function handleImageChange(e){
-    const submitButton = document.getElementById("imageSubmitButton")
-    if(e.target.files.length > 0){
-        submitButton.style.display = "block";
-        const pic = e.target.files[0]
-        const reader = new FileReader();
-        reader.onloadend = () => {setPreview(reader.result)}
-        reader.readAsDataURL(pic)
-    } else {
-        submitButton.style.display = "none";
-        setPreview();
+    function handleImageChange(e) {
+        const submitButton = document.getElementById("imageSubmitButton");
+        if (e.target.files.length > 0) {
+            submitButton.style.display = "block";
+            const pic = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            };
+            reader.readAsDataURL(pic);
+        } else {
+            submitButton.style.display = "none";
+            setPreview();
+        }
     }
-}
 
-async function handleSubmit(e){
-    try {
-        await fetch(`${apiUrl}/uploadImage`, {
-            method: "POST",
-            body: JSON.stringify({data: preview, projectId: consoleState.activeProject, bugId: data._id}),
-            headers: {'Content-Type': 'application/json'}
-        })
-    } catch (e) {
-        console.error(e)
+    async function handleSubmit(e) {
+        try {
+            await fetch(`${apiUrl}/uploadImage`, {
+                method: "POST",
+                body: JSON.stringify({
+                    data: preview,
+                    projectId: consoleState.activeProject,
+                    bugId: data._id,
+                }),
+                headers: { "Content-Type": "application/json" },
+            });
+        } catch (e) {
+            console.error(e);
+        }
     }
-}
-
 
     if (!data) return <Loading />;
     return (
@@ -253,8 +263,13 @@ async function handleSubmit(e){
                         </p>
                         <span>|</span>
                         <span id="due">
-                            {data.status=="closed" ? `closed at ${new Date(data.closeDate).toLocaleDateString()}`:`due at ${new Date(data.due).toLocaleDateString()}`}
-                            
+                            {data.status == "closed"
+                                ? `closed at ${new Date(
+                                      data.closeDate
+                                  ).toLocaleDateString()}`
+                                : `due at ${new Date(
+                                      data.due
+                                  ).toLocaleDateString()}`}
                         </span>
                     </div>
                     <div id="bugTitleStuff">
@@ -371,7 +386,7 @@ async function handleSubmit(e){
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="bugDescDiv">
                     <p id="description">{data.description}</p>
                 </div>
@@ -379,20 +394,40 @@ async function handleSubmit(e){
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div id="allImagesContainer">
                             <label htmlFor="fileInput" id="addImageLabel">
-                                <img src={plus} alt="+"/>
+                                <img src={plus} alt="+" />
                             </label>
                             <div id="imageStuff">
-                                <div id="previewImages">{preview && (
-                                    <div className="imgContainer"><img src={preview} /></div>
-                                )}</div>
-                                <div id="bugImages">{data.pictures && data.pictures.map(picture => <div className="imgContainer"><img src={picture}/></div>)}</div>
+                                <div id="previewImages">
+                                    {preview && (
+                                        <div className="imgContainer">
+                                            <img src={preview} />
+                                        </div>
+                                    )}
+                                </div>
+                                <div id="bugImages">
+                                    {data.pictures &&
+                                        data.pictures.map((picture) => (
+                                            <div className="imgContainer">
+                                                <img src={picture} />
+                                            </div>
+                                        ))}
+                                </div>
                             </div>
                         </div>
-                        <input id="fileInput" type="file" name="image" onChange={(event)=> handleImageChange(event)}/>
+                        <input
+                            id="fileInput"
+                            type="file"
+                            name="image"
+                            onChange={(event) => handleImageChange(event)}
+                        />
 
-                        <input id="imageSubmitButton" type="submit" style={{display: "none"}} value="Upload Image" />
+                        <input
+                            id="imageSubmitButton"
+                            type="submit"
+                            style={{ display: "none" }}
+                            value="Upload Image"
+                        />
                     </form>
-                    
                 </div>
                 <div id="assigned">
                     {data.assignedTo > 0 ? (
@@ -405,7 +440,7 @@ async function handleSubmit(e){
                             </div>
                         </div>
                     ) : (
-                        <div/>
+                        <div />
                     )}
 
                     <div id="assignedButtons">
@@ -416,18 +451,34 @@ async function handleSubmit(e){
                             <img className="down" src={chevronUp} /> Self Assign
                             This Bug
                         </button>
-                        <button
-                            onClick={() => {
-                                confirmationBox(
-                                    "archive",
-                                    data._id,
-                                    consoleState
-                                );
-                            }}
-                        >
-                            <img src={archive} />
-                            Archive This Bug
-                        </button>
+                        {archive ? (
+                            <button
+                                onClick={() => {
+                                    confirmationBox(
+                                        "unarchive",
+                                        data._id,
+                                        consoleState
+                                    );
+                                }}
+                            >
+                                <img src={archiveSvg} />
+                                Unarchive This Bug
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() => {
+                                    confirmationBox(
+                                        "archive",
+                                        data._id,
+                                        consoleState
+                                    );
+                                }}
+                            >
+                                <img src={archiveSvg} />
+                                Archive This Bug
+                            </button>
+                        )}
+
                         <button
                             onClick={() => {
                                 confirmationBox(

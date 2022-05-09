@@ -205,7 +205,14 @@ class Console extends React.Component {
                                         this.handleConsoleDropdown();
                                     }}
                                 >
-                                    <span className="avatar">{this.state.avatar && <img src={this.state.avatar} key={this.state.avatar}/>}</span>
+                                    <span className="avatar">
+                                        {this.state.avatar && (
+                                            <img
+                                                src={this.state.avatar}
+                                                key={this.state.avatar}
+                                            />
+                                        )}
+                                    </span>
                                     <span>
                                         <img src={chevron} alt="" />
                                     </span>
@@ -342,11 +349,21 @@ class Console extends React.Component {
                             <Route path="newTeam" element={<NewTeam />} />
                             <Route
                                 path="bug/:bId"
-                                element={<Bug consoleState={this.state} archive={false}/>}
+                                element={
+                                    <Bug
+                                        consoleState={this.state}
+                                        archive={false}
+                                    />
+                                }
                             />
                             <Route
-                                path="bug/archive/:bId"
-                                element={<Bug consoleState={this.state} archive={true}/>}
+                                path="archive/:bId"
+                                element={
+                                    <Bug
+                                        consoleState={this.state}
+                                        archive={true}
+                                    />
+                                }
                             />
                             <Route
                                 path="settings"
