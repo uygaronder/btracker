@@ -14,13 +14,13 @@ class Team extends React.Component {
             <div id="team">
                 <div id="teamHeader">
                     <h3>{this.props.consoleState.team.name}</h3>
-                    <div><button>Invite New People</button></div>
                 </div>
                 <div id="teamTabs">
                     <div id="teamUsers">
 
                         <table>
                             <tr>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Role</th>
                                 <th>Bug #</th>
@@ -28,12 +28,15 @@ class Team extends React.Component {
                             </tr>
                             {this.props.consoleState.team.users.map(user => {
                                 return (<tr>
+                                    <th><div className="avatar">{user.avatar && <img src={user.avatar}></img>}</div></th>
                                     <th>{user[2]}</th>
                                     <th>{user[1]}</th>
                                     <th>0</th>
+                                    <th><img src={more}/></th>
                                 </tr>)
                                 
                             })}
+                            <button>Invite New People</button>
                         </table>
                     </div>
 
@@ -52,13 +55,13 @@ class Team extends React.Component {
                             <tr>
                                 <th>Project Name</th>
                                 <th>Open Bugs</th>
-                                <th></th>
+                                <th>In Review</th>
                                 <th></th>
                             </tr>
                             {this.props.consoleState.team.projects.map(project => {
                                 return (<tr>
                                     <th>{project[0]}</th>
-                                    <th>ph</th>
+                                    <th></th>
                                 </tr>)
                                 
                             })}

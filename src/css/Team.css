@@ -24,8 +24,12 @@
 #team #teamTabs > div{
     width: 100%;
     height: 100%;
-    padding: 10px;
+    padding: 20px;
+    box-shadow: var(--insetBoxShadow);
+    margin: 0 5px;
+    border-radius: 12px;
 }
+
 
 
 
@@ -37,9 +41,15 @@
     flex-direction: column;
 }
 
+#team table button{
+    margin-top: 10px;
+}
+
+
 #team table tr {
     display: flex;
-    
+    padding: 10px 0;
+    align-items: center;
 }
 
 #team table tr {
@@ -48,7 +58,6 @@
 
 #team table th{
     min-width:10ch;
-    
 }
 
 #team table th:last-of-type{
@@ -62,6 +71,7 @@
     width: 5px;  
     cursor: pointer;
 }
+
 #team table th img{
     height: 15px;
     width: 15px;
@@ -71,7 +81,7 @@
     min-width: 5ch;
 }
 
-#team table th:first-of-type{
+#team #teamProjects table th:first-of-type{
     min-width: 20ch;
 }
 
@@ -111,4 +121,30 @@
 }
 #team #teamTabs table tr th:last-of-type{
     width: 5px;
+}
+
+#team #teamUsers table{
+    position: relative;
+}
+
+
+#team #teamUsers table tr{
+    display: flex;
+}
+
+
+
+#team #teamUsers table th:first-of-type{
+    min-width: 30px;
+    padding: 0 5px;
+}
+
+
+
+#team #teamUsers table th:last-of-type{
+    justify-self: flex-end;
+}
+
+#team #teamUsers table th img{
+    filter: var(--svgFilter);
 }

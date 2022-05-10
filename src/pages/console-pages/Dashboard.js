@@ -518,29 +518,3 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
-
-// old feed code to not convelute the code
-{
-    /* <ul id="dashboardStatus">
-                        <li id="openStatus">
-                            <h2>{this.state.open}</h2>
-                            <p>Open Bugs</p>
-                        </li>
-                        <li id="closeStatus">
-                            <h2>{this.state.closed}</h2>
-                            <p>Closed Bugs</p>
-                        </li>
-                        <li id="overStatus">
-                            <h2>{this.state.overdue}</h2>
-                            <p>Overdue</p>
-                        </li>
-                        <li id="dayStatus">
-                            <h2>{this.state.dueDay}</h2>
-                            <p>Due Today</p>
-                        </li>
-                        <li id="weekStatus">
-                            <h2>{this.state.dueWeek}</h2>
-                            <p>Due This Week</p>
-                        </li>
-                    </ul> */
-}
