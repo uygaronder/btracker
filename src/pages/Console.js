@@ -29,9 +29,8 @@ class Console extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            theme: "default",
-            teamOptions: [["tOptHold", "phold"]],
-            notifications: [["nTextHold", "phold"]],
+            teamOptions: [],
+            notifications: [],
             loading: true,
         };
     }
@@ -79,10 +78,15 @@ class Console extends React.Component {
             .then((res) => res.json())
             .then((data) => (response = data));
 
-        var activeProject = response.team.projects.filter(
-            (project) => project[0][1] == response.user.activeProject
-        )[0];
-        if (activeProject == undefined) {
+        console.log(response);
+        var activeProject =
+            response.team != null
+                ? response.team.projects.filter(
+                      (project) => project[0][1] == response.user.activeProject
+                  )[0]
+                : null;
+
+        if (activeProject == undefined && response.team != null) {
             activeProject = response.team.projects[0][1];
         }
 
@@ -147,17 +151,22 @@ class Console extends React.Component {
                                             </option>
                                         );
                                     })}
+                                    <option>New Team</option>
                                 </select>
                             </li>
                             <li>
                                 <select name="project" id="currentProject">
-                                    {this.state.team.projects.map((project) => {
-                                        return (
-                                            <option value={project[1]}>
-                                                {project[0]}
-                                            </option>
-                                        );
-                                    })}
+                                    {this.state.team &&
+                                        this.state.team.projects.map(
+                                            (project) => {
+                                                return (
+                                                    <option value={project[1]}>
+                                                        {project[0]}
+                                                    </option>
+                                                );
+                                            }
+                                        )}
+                                    <option>New Project</option>
                                 </select>
                             </li>
                         </ul>

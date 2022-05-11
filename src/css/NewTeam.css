@@ -1,6 +1,6 @@
 #newTeam{
     background-color: var(--backgroundColor);
-    color: var(fontColor);
+    color: var(--fontColor);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -15,6 +15,10 @@
     display: flex;
     justify-content: space-around;
     height: 100%;
+}
+
+#newTeam #teamOpt h2{
+    margin-bottom: 10px;
 }
 
 #newTeam  #teamOpt > div{
@@ -35,7 +39,8 @@
     overflow: hidden;
     height: 30px;
     width: max-content;
-    background-color: rgb(228, 228, 228);
+    background-color: var(--notFont);
+    padding: 18px 0;
 }
 #newTeam .textSearch button{
     width: 30px;
@@ -43,22 +48,19 @@
     border: hidden;
     background-color: var(--green);
     cursor: pointer;
-    
 }
 #newTeam .textSearch button img{
-    filter: brightness(0) invert(1);
+    filter: var(--svgFilter);
     text-align: center;
     padding-top: 5px;
 }
-
-
 
 #teamFound{
     height: 100%;
     margin-top: 10px;
     padding: 10px;
     border-radius: 6px;
-    background-color: #f5f5f5;
+    background-color: var(--backgroundColor);
     display: flex;
     flex-direction: column;
 }
@@ -66,7 +68,7 @@
 #newTeam .team{
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(211, 211, 211);
+    border-bottom: 1px solid var(--borderColor);
     padding: 10px;
     align-items: center;
 }
@@ -91,7 +93,7 @@
     width: max-content;
     padding: 5px 0;
     align-items: center;
-    background-color: rgb(228, 228, 228);
+    background-color: var(--notFont);
     border-radius: 3px;
 }
 
@@ -103,7 +105,7 @@
     align-items: center;
     padding: 10px;
     border-radius: 6px;
-    color: white;
+    color: var(--fontColor);
     font-size: 1rem;
     
 }
@@ -112,7 +114,7 @@
     height: 16px;
     width: 16px;
     margin-left: 4px;
-    filter: brightness(0) invert(1);
+    filter: var(--svgFilter);
 }
 
 .CustomInput {
@@ -133,9 +135,11 @@
     color: rgb(90, 90, 90);
 }
 
-#createAndInvitations{
-    justify-content: space-between;
+#createAndInvitations > div:first-of-type{
+    margin-bottom: 10px;
 }
-#createAndInvitations #invitations{
-    height: 40%;
+
+#newTeam input {
+    background-color: var(--notFont);
+    color: var(--fontColor);
 }

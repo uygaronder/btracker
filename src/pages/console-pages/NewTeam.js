@@ -1,11 +1,59 @@
 import React from "react";
 import "../../css/NewTeam.css";
 
+import Loading from "../Loading";
+
 import Search from "../../res/svg/search.svg";
 import Plus from "../../res/svg/plus.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
 
 class NewTeam extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            teams: [],
+            teamsLoading: false,
+        };
+    }
+
+    searchTeams(query) {
+        if (query == "") return;
+        this.setState({ teamsLoading: true });
+
+        fetch(`${apiUrl}/searchTeams`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                query: query,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({ teams: data.team, teamsLoading: false });
+            });
+    }
+
+    join(teamId) {
+        fetch(`${apiUrl}/joinTeam`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                team: teamId,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                this.setState({ teamsLoading: false, teams: data });
+            });
+    }
+
     render() {
         return (
             <div id="newTeam">
@@ -17,18 +65,42 @@ class NewTeam extends React.Component {
                                 className="CustomInput"
                                 placeholder="Name"
                                 type="text"
+                                id="teamSearch"
                             />
-                            <button id="findSearch">
+                            <button
+                                id="findSearch"
+                                onClick={() => {
+                                    this.searchTeams(
+                                        document.getElementById("teamSearch")
+                                            .value
+                                    );
+                                }}
+                            >
                                 <img src={Search} />
                             </button>
                         </div>
-                        <div id="teamFound">
-                            <div className="FoundTeamsList">
-                                <div className="team">
-                                    <h3>Placeholder Team</h3>
-                                    <button>Join</button>
+                        <div id="teamFound" key={this.state.teams}>
+                            {this.state.teamsLoading ? (
+                                <Loading />
+                            ) : (
+                                <div className="FoundTeamsList">
+                                    {this.state.teams.map((team) => {
+                                        return (
+                                            <div className="team" key={team.id}>
+                                                <h3>{team.team}</h3>
+                                                <button
+                                                    id={team.teamId}
+                                                    onClick={() => {
+                                                        this.join(team.teamId);
+                                                    }}
+                                                >
+                                                    Join
+                                                </button>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                     <div id="createAndInvitations">
@@ -41,6 +113,7 @@ class NewTeam extends React.Component {
                                         type="text"
                                         name="teamName"
                                         placeholder="Team Name"
+                                        required
                                     />
                                 </div>
                                 <button type="submit">

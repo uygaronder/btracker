@@ -7,7 +7,7 @@ var apiUrl = process.env.REACT_APP_APIURL;
 console.log(apiUrl);
 class Team extends React.Component {
     componentDidMount() {
-        console.log(this.props)
+        console.log(this.props.consoleState);
     }
     render() {
         return (
@@ -17,7 +17,6 @@ class Team extends React.Component {
                 </div>
                 <div id="teamTabs">
                     <div id="teamUsers">
-
                         <table>
                             <tr>
                                 <th></th>
@@ -26,17 +25,39 @@ class Team extends React.Component {
                                 <th>Bug #</th>
                                 <th></th>
                             </tr>
-                            {this.props.consoleState.team.users.map(user => {
-                                return (<tr>
-                                    <th><div className="avatar">{user.avatar && <img src={user.avatar}></img>}</div></th>
-                                    <th>{user[2]}</th>
-                                    <th>{user[1]}</th>
-                                    <th>0</th>
-                                    <th><img src={more}/></th>
-                                </tr>)
-                                
+                            {this.props.consoleState.team.users.map((user) => {
+                                return (
+                                    <tr>
+                                        <th>
+                                            <div className="avatar">
+                                                {user.avatar && (
+                                                    <img
+                                                        src={user.avatar}
+                                                    ></img>
+                                                )}
+                                            </div>
+                                        </th>
+                                        <th>{user[2]}</th>
+                                        <th>{user[1]}</th>
+                                        <th>0</th>
+                                        <th>
+                                            <img src={more} />
+                                        </th>
+                                    </tr>
+                                );
                             })}
                             <button>Invite New People</button>
+                            {this.props.consoleState.team.invites &&
+                                this.props.consoleState.team.invites.map(
+                                    (invite) => {
+                                        return (
+                                            <tr>
+                                                <th>{invite.name}</th>
+                                                <th>buttons</th>
+                                            </tr>
+                                        );
+                                    }
+                                )}
                         </table>
                     </div>
 
@@ -58,13 +79,16 @@ class Team extends React.Component {
                                 <th>In Review</th>
                                 <th></th>
                             </tr>
-                            {this.props.consoleState.team.projects.map(project => {
-                                return (<tr>
-                                    <th>{project[0]}</th>
-                                    <th></th>
-                                </tr>)
-                                
-                            })}
+                            {this.props.consoleState.team.projects.map(
+                                (project) => {
+                                    return (
+                                        <tr>
+                                            <th>{project[0]}</th>
+                                            <th></th>
+                                        </tr>
+                                    );
+                                }
+                            )}
                         </table>
                     </div>
                 </div>
