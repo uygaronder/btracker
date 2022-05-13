@@ -7,23 +7,16 @@
     color: var(--fontColor);
 }
 
-#archive table td:nth-of-type(3),
-#archive table td:nth-of-type(4) {
-    width: 9ch;
-}
-#archive table td:nth-of-type(5) {
-    width: 10ch;
-    text-align: center;
+
+
+#archive table td:nth-of-type(3){
+    width: 18ch;
 }
 
-#archive table td:nth-of-type(6){
-    width: 8ch;
-    text-align: center;
-}
 
-#archive table td:nth-of-type(7) {
-    width: 15ch;
-    text-align: center;
+
+#archive table td:last-of-type {
+    width: 12ch;
 }
 
 #archive table .bugsLabel{

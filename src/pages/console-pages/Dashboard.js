@@ -29,7 +29,6 @@ class Dashboard extends React.Component {
         };
     }
 
-
     openSubmit = () => {
         if (
             !document
@@ -51,9 +50,14 @@ class Dashboard extends React.Component {
             this.props.consoleState.activeProject != undefined
                 ? this.props.consoleState.activeProject
                 : "";
-        if(!this.props.consoleState.team){window.location.href = `${APP_URL}/console/gettingStarted`}
-        console.log(this.props.consoleState)
-        else if(this.props.consoleState.team.projects.length == 0){window.location.locationhref = `${APP_URL}/console/addProject`}
+        console.log(this.props.consoleState);
+        if (!this.props.consoleState.team) {
+            window.location.href = `${APP_URL}/console/gettingStarted`;
+        } else if (this.props.consoleState.team.projects.length == 0) {
+            console.log(APP_URL);
+            window.location.href = `${APP_URL}/console/addProject`;
+        }
+
         fetch(`${apiUrl}/getProjectInfo`, {
             method: "post",
             credentials: "include",
@@ -427,6 +431,11 @@ class Dashboard extends React.Component {
                             </span>
                             <div id="teamFilters">
                                 <span id="teamFiltersContainer">
+                                    {this.state.filters.length == 0 && (
+                                        <p id="emptyFiltersPrompt">
+                                            There are no Team filters
+                                        </p>
+                                    )}
                                     {this.state.filters.map((filter) => {
                                         return (
                                             <span

@@ -23,9 +23,10 @@ import Loading from "./Loading";
 import Settings from "./Settings";
 import Feed from "./console-pages/Feed";
 import GettingStarted from "./console-pages/GetStarted";
-import AddProject from "./console-pages/AddProjectPrompt";
+import AddProject from "./console-pages/AddProject";
 
 var apiUrl = process.env.REACT_APP_APIURL;
+var APP_URL = process.env.REACT_APP_APPURL;
 class Console extends React.Component {
     constructor(props) {
         super(props);
@@ -73,6 +74,48 @@ class Console extends React.Component {
             : (consoleDropdown.style.display = "none");
     };
 
+    handleTeamChange = () => {
+        switch (document.getElementById("teamSelect").value) {
+            case "new":
+                window.location.href = `${APP_URL}/console/newTeam`;
+                break;
+            default:
+                fetch(`${apiUrl}/changeTeam`, {
+                    method: "post",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        teamId: document.getElementById("teamSelect").value,
+                    }),
+                });
+                break;
+        }
+    };
+
+    handleProjectChange = () => {
+        console.log(document.getElementById("projectSelect").value);
+        switch (document.getElementById("projectSelect").value) {
+            case "new":
+                window.location.href = `${APP_URL}/console/team`;
+                break;
+            default:
+                fetch(`${apiUrl}/changeProject`, {
+                    method: "post",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        projectId:
+                            document.getElementById("projectSelect").value,
+                    }),
+                });
+                break;
+        }
+    };
+
     fetchInfo = async () => {
         var response;
         await fetch(`${apiUrl}/getConsoleInfo`, { credentials: "include" })
@@ -85,9 +128,11 @@ class Console extends React.Component {
                       (project) => project[0][1] == response.user.activeProject
                   )[0]
                 : null;
-        console.log(response);
-        if (activeProject == undefined && response.team != null && response.team.projects.length > 0) {
-            
+        if (
+            activeProject == undefined &&
+            response.team != null &&
+            response.team.projects.length > 0
+        ) {
             activeProject = response.team.projects[0][1];
         }
 
@@ -127,7 +172,6 @@ class Console extends React.Component {
             }
         });
         this.fetchInfo();
-
         document.title = "Console";
     }
 
@@ -144,7 +188,10 @@ class Console extends React.Component {
                         </Link>
                         <ul>
                             <li>
-                                <select>
+                                <select
+                                    id="teamSelect"
+                                    onChange={() => this.handleTeamChange()}
+                                >
                                     {this.state.teamOptions.map((team) => {
                                         return (
                                             <option value={team[1]}>
@@ -152,11 +199,18 @@ class Console extends React.Component {
                                             </option>
                                         );
                                     })}
-                                    <option>New Team</option>
+                                    <option value="new">New Team</option>
                                 </select>
                             </li>
                             <li>
-                                <select name="project" id="currentProject">
+                                <select
+                                    name="project"
+                                    id="projectSelect"
+                                    onChange={() => this.handleProjectChange()}
+                                    defaultValue={{
+                                        value: this.state.activeProject,
+                                    }}
+                                >
                                     {this.state.team &&
                                         this.state.team.projects.map(
                                             (project) => {
@@ -167,7 +221,7 @@ class Console extends React.Component {
                                                 );
                                             }
                                         )}
-                                    <option>New Project</option>
+                                    <option value="new">New Project</option>
                                 </select>
                             </li>
                         </ul>

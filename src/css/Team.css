@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--borderBottomColor);
+    border-bottom: 1px solid var(--notFont);
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
@@ -19,6 +19,16 @@
 #team #teamTabs{
     display: flex;
     flex-grow: 1;
+}
+
+#team .teamTabDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+#team #teamTabs .teamTabDiv .teamTabName{
+    border: none;
+    margin: auto 0;
 }
 
 #team #teamTabs > div{
@@ -35,7 +45,6 @@
 
 #team table {
     width: 100%;
-    max-width: 700px;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -45,15 +54,10 @@
     margin-top: 10px;
 }
 
-
 #team table tr {
     display: flex;
     padding: 10px 0;
     align-items: center;
-}
-
-#team table tr {
-    display: flex;
 }
 
 #team table th{

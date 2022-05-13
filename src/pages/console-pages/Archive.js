@@ -47,8 +47,6 @@ class Archive extends React.Component {
             <div id="archive">
                 <div id="bugsUp">
                     <div id="bugsInfo">
-                        <h3>Project name placeholder</h3>
-                        <span />
                         <h4>Archived Bugs: {this.state.bugs.length}</h4>
                     </div>
                     <div id="bugsFilter">
