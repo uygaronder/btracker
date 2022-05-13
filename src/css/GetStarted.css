@@ -1,0 +1,13 @@
+#getStarted{
+    color: var(--fontColor);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#getStarted .newTeamDiv{
+    display: flex;
+    height: 100%;
+}

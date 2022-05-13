@@ -7,6 +7,7 @@ import plus from "../../res/svg/plus.svg";
 import Submit from "./SubmitBug";
 import Loading from "../Loading";
 const apiUrl = process.env.REACT_APP_APIURL;
+const APP_URL = process.env.REACT_APP_APPURL;
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -27,6 +28,7 @@ class Dashboard extends React.Component {
             key: Math.random(),
         };
     }
+
 
     openSubmit = () => {
         if (
@@ -49,6 +51,9 @@ class Dashboard extends React.Component {
             this.props.consoleState.activeProject != undefined
                 ? this.props.consoleState.activeProject
                 : "";
+        if(!this.props.consoleState.team){window.location.href = `${APP_URL}/console/gettingStarted`}
+        console.log(this.props.consoleState)
+        else if(this.props.consoleState.team.projects.length == 0){window.location.locationhref = `${APP_URL}/console/addProject`}
         fetch(`${apiUrl}/getProjectInfo`, {
             method: "post",
             credentials: "include",

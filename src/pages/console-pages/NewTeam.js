@@ -121,10 +121,11 @@ class NewTeam extends React.Component {
                                 </button>
                             </form>
                         </div>
-                        <div id="invitations">
+                        {!this.props.newUser && <div id="invitations">
                             <h3>Invitations</h3>
                             <p>You have 0 invitations</p>
-                        </div>
+                        </div>}
+                        
                     </div>
                 </div>
             </div>

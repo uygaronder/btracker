@@ -22,9 +22,10 @@ import NotFound from "./NotFound";
 import Loading from "./Loading";
 import Settings from "./Settings";
 import Feed from "./console-pages/Feed";
+import GettingStarted from "./console-pages/GetStarted";
+import AddProject from "./console-pages/AddProjectPrompt";
 
 var apiUrl = process.env.REACT_APP_APIURL;
-
 class Console extends React.Component {
     constructor(props) {
         super(props);
@@ -78,15 +79,15 @@ class Console extends React.Component {
             .then((res) => res.json())
             .then((data) => (response = data));
 
-        console.log(response);
         var activeProject =
             response.team != null
                 ? response.team.projects.filter(
                       (project) => project[0][1] == response.user.activeProject
                   )[0]
                 : null;
-
-        if (activeProject == undefined && response.team != null) {
+        console.log(response);
+        if (activeProject == undefined && response.team != null && response.team.projects.length > 0) {
+            
             activeProject = response.team.projects[0][1];
         }
 
@@ -377,6 +378,24 @@ class Console extends React.Component {
                             <Route
                                 path="settings"
                                 element={<Settings consoleState={this.state} />}
+                            />
+                            <Route
+                                path="gettingStarted"
+                                element={
+                                    <GettingStarted
+                                        consoleState={this.state}
+                                        archive={true}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="addProject"
+                                element={
+                                    <AddProject
+                                        consoleState={this.state}
+                                        archive={true}
+                                    />
+                                }
                             />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
