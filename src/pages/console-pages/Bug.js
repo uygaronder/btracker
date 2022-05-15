@@ -174,6 +174,7 @@ function confirmationBox(action, id, state) {
 }
 
 function confirmedAction(action, id, state) {
+    console.log(id, state.activeProject)
     fetch(`${apiUrl}/${action}`, {
         method: "post",
         credentials: "include",

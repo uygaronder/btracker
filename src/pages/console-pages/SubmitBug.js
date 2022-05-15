@@ -70,7 +70,7 @@ class Submit extends React.Component {
                     <input
                         name="labels"
                         type={"text"}
-                        placeholder="Labels (usage:label1,label2)"
+                        placeholder="Labels (usage example:bug, front-end)"
                         defaultValue={this.state.labelsString}
                     />
                     <span>

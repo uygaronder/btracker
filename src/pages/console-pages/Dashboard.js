@@ -318,7 +318,7 @@ class Dashboard extends React.Component {
                                     Ongoing
                                 </p>
                             </span>
-                            <span
+                            {/* <span
                                 className="filter closeFilter"
                                 id="closedFB"
                                 onClick={() =>
@@ -332,7 +332,7 @@ class Dashboard extends React.Component {
                                 <p>
                                     <strong>{this.state.closed}</strong> Closed
                                 </p>
-                            </span>
+                            </span> */}
                             <span
                                 className="filter inReviewFilter"
                                 id="inReviewFB"
