@@ -187,9 +187,17 @@ function confirmedAction(action, id, state) {
             state: state,
         }),
     }).then(() => {
-        action == "deleteBug"
-            ? window.location.assign(`${appUrl}/console`)
-            : window.location.assign(window.location.pathname);
+        switch (action){
+            case "deleteBug":
+                window.location.assign(`${appUrl}/console`);
+                break;
+            case "markBugComplete":
+                window.location.assign(`${appUrl}/console`);
+                break;
+            default:
+                window.location.assign(window.location.pathname);
+                break;
+        }
     });
 }
 

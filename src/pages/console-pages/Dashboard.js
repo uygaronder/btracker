@@ -170,14 +170,14 @@ class Dashboard extends React.Component {
                 case "status":
                     for (let filter of this.state.activeFilters) {
                         this.state.bugs = this.state.bugs.filter(
-                            (bug) => bug[filter[1]] != filter[0]
+                            (bug) => bug[filter[1]] == filter[0]
                         );
                     }
                     break;
                 case "labels":
                     for (let filter of this.state.activeFilters) {
                         this.state.bugs = this.state.bugs.filter(
-                            (bug) => !bug[filter[1]].includes(filter[0])
+                            (bug) => bug[filter[1]].includes(filter[0])
                         );
                     }
                     break;
@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
                     switch (activeFilter[0]) {
                         case "overdue":
                             this.state.bugs = this.state.bugs.filter(
-                                (bug) => Date.parse(bug.due) > Date.now()
+                                (bug) => Date.parse(bug.due) < Date.now()
                             );
                             break;
                         case "day":
