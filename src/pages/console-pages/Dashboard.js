@@ -111,6 +111,7 @@ class Dashboard extends React.Component {
                             this.state.dueWeek++;
                         }
                     }
+                    console.log(bug.labels);
                     for (let label of bug.labels) {
                         let includes = false;
                         for (let filter of this.state.filters) {

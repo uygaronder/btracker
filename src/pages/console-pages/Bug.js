@@ -16,7 +16,7 @@ import plus from "../../res/svg/plus.svg";
 import Submit from "./SubmitBug";
 
 var apiUrl = process.env.REACT_APP_APIURL;
-var appUrl = process.env.APP_URL;
+var appUrl = process.env.REACT_APP_APPURL;
 
 function editBug() {
     const submitDiv = document.getElementById("submit");
@@ -194,8 +194,11 @@ function confirmedAction(action, id, state) {
             case "markBugComplete":
                 window.location.assign(`${appUrl}/console`);
                 break;
+            case "openBug":
+                window.location.assign(`${appUrl}/console/bug/${id}`);
+                break;
             default:
-                window.location.assign(window.location.pathname);
+                window.location.assign(`${window.location.href}`);
                 break;
         }
     });
@@ -341,13 +344,13 @@ const Bug = ({ consoleState, archive }) => {
                                             id="open"
                                             onClick={() => {
                                                 confirmationBox(
-                                                    "markBugOpen",
+                                                    "openBug",
                                                     data._id,
                                                     consoleState
                                                 );
                                             }}
                                         >
-                                            Mark Bug Open
+                                            Open This Bug
                                         </button>
                                     )}
                                     {/* lead close / dev send to review */}
@@ -460,34 +463,6 @@ const Bug = ({ consoleState, archive }) => {
                             <img className="down" src={chevronUp} /> Self Assign
                             This Bug
                         </button>
-                        {archive ? (
-                            <button
-                                onClick={() => {
-                                    confirmationBox(
-                                        "unarchive",
-                                        data._id,
-                                        consoleState
-                                    );
-                                }}
-                            >
-                                <img src={archiveSvg} />
-                                Unarchive This Bug
-                            </button>
-                        ) : (
-                            <button
-                                onClick={() => {
-                                    confirmationBox(
-                                        "archive",
-                                        data._id,
-                                        consoleState
-                                    );
-                                }}
-                            >
-                                <img src={archiveSvg} />
-                                Archive This Bug
-                            </button>
-                        )}
-
                         <button
                             onClick={() => {
                                 confirmationBox(
