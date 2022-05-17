@@ -137,6 +137,7 @@ class Console extends React.Component {
         ) {
             activeProject = response.team.projects[0][1];
         }
+        
         console.log(activeProject)
 
         this.setState({
