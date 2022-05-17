@@ -104,17 +104,9 @@ class Bugs extends React.Component {
     }
 
     resetCommit() {
-        function getBugDiv(parentName) {
-            return document
-                .getElementById(parentName)
-                .getElementsByClassName("bugsDiv")[0];
-        }
-
         //for bugsDiv rerender
         this.setState({ key: Math.random() });
-
-        console.log(getBugDiv("openBugs").innerHTML);
-
+        //--------------------
         this.state.changes = [];
         this.commitConfirmation();
     }
@@ -146,20 +138,30 @@ class Bugs extends React.Component {
     drop(e) {
         e.preventDefault();
         let data = e.dataTransfer.getData("bugDiv");
-        const target = document
+
+        const divs = ["openBugs", "ongoingBugs", "closeBugs", "inReview"]
+        let bugsDiv = e.target;
+        console.log(!e.target.id)
+        if(e.target.id && divs.includes(e.target.id)){
+            bugsDiv = document
             .getElementById(e.target.id)
             .getElementsByClassName("bugsDiv")[0];
-        console.log(e.target.id);
-
+        } else {
+            while(!bugsDiv.classList.contains("bugsDiv")) {
+                bugsDiv = bugsDiv.parentNode
+            }
+        }
+        
+        
         this.state.changes = this.state.changes.filter(
             (change) => change[0] != data
         );
         this.state.changes.push([data, e.target.id]);
         this.commitConfirmation();
-        switch (e.target.id) {
+        switch (bugsDiv.parentNode.id) {
             case "openBugs":
             case "ongoingBugs":
-                target.appendChild(document.getElementById(data));
+                bugsDiv.appendChild(document.getElementById(data));
                 break;
             case "closeBugs":
                 const inReview = document
@@ -330,7 +332,7 @@ class Bugs extends React.Component {
                             this.allowDrop(e);
                         }}
                     >
-                        <div className="inReview">
+                        <div className="inReview bugsDiv">
                             <div className="bugsDivUpper">
                                 <h3>In Review</h3>
                                 <div className="inReviewInfo">
@@ -348,7 +350,7 @@ class Bugs extends React.Component {
                                 </div>
                             </div>
                             <div
-                                className="bugsDiv inReviewHidden"
+                                className="inReviewHidden"
                                 id="inReviewBugs"
                                 key={this.state.key}
                             >
@@ -360,7 +362,7 @@ class Bugs extends React.Component {
                         </div>
                         <div className="bugsDivUpper">
                             <h3>Closed Bugs</h3>
-                            <p>{this.state.closed.length} available</p>
+                            <p>Last Closed</p>
                         </div>
                         <div className="bugsDiv" key={this.state.key}>
                             {this.renderBugs(

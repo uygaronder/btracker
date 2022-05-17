@@ -21,7 +21,7 @@ class AddProject extends React.Component {
         }
         return (
             <div id="getStarted">
-                <div>
+                <div id="upper">
                     <h1>Add a Project</h1>
                     <p>Create a new project to start adding bugs</p>
                 </div>

@@ -24,7 +24,7 @@ class GettingStarted extends React.Component {
             return <Loading />;
         }
         return <div id="getStarted">
-            <div>
+            <div id="upper">
                 <h1>GettingStarted</h1>
                 <p>To Get Started You must first join or create a Team</p>
             </div>

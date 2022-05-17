@@ -1,10 +1,14 @@
 #getStarted{
     color: var(--fontColor);
-    padding: 15px;
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
+}
+
+#upper{
+    padding: 0px 25px;
+    padding-top: 15px;
 }
 
 #getStarted .newTeamDiv{

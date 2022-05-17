@@ -1,0 +1,54 @@
+#invite{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#invite form {
+    margin: 10px 0;
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#invite form input[type="text"]{
+    background-color: var(--notFont);
+    color: var(--fontColor);
+    padding: 5px 8px;
+    font-size: 1rem;
+    border: none;
+    width: 30ch;
+}
+
+#invite form input[type="submit"]{
+    background-color: var(--green);
+    color: var(--fontColor);
+    font-weight: 700;
+    border: none;
+    padding: 5px;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+}
+
+
+#invite form input[type="submit"]:hover{
+    background-color: var(--greenDarker);
+    color: var(--fontColor);
+    font-weight: 700;
+}
+
+#invite #searchUsers{
+    display: flex;
+    flex-direction: column;
+}
+
+#invite #searchResults{
+    display: flex;
+    border-radius: 6px;
+    padding: 10px;
+    color: var(--fontColor);
+    box-shadow: var(--insetBoxShadow);
+    height: 100%;
+}

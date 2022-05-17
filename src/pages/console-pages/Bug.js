@@ -142,6 +142,13 @@ function confirmationBox(action, id, state) {
                 confirmedAction(action, id, state);
             };
             break;
+        case "markBugOpen":
+            document.getElementById("confirmationP").innerText =
+                "Are you sure you want to open this bug?";
+            document.getElementById("confirmButton").onclick = () => {
+                confirmedAction(action, id, state);
+            };
+            break;
         case "markBugOngoing":
             document.getElementById("confirmationP").innerText =
                 "Are you sure you want to mark this bug as ongoing?";
@@ -198,7 +205,7 @@ function confirmedAction(action, id, state) {
                 window.location.assign(`${appUrl}/console/bug/${id}`);
                 break;
             default:
-                window.location.assign(`${window.location.href}`);
+                window.location.assign(`${appUrl}/console/bug/${id}`);
                 break;
         }
     });
@@ -344,13 +351,13 @@ const Bug = ({ consoleState, archive }) => {
                                             id="open"
                                             onClick={() => {
                                                 confirmationBox(
-                                                    "openBug",
+                                                    "markBugOpen",
                                                     data._id,
                                                     consoleState
                                                 );
                                             }}
                                         >
-                                            Open This Bug
+                                            Mark Bug Open
                                         </button>
                                     )}
                                     {/* lead close / dev send to review */}

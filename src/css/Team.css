@@ -58,6 +58,8 @@
     display: flex;
     padding: 10px 0;
     align-items: center;
+    position: relative;
+    width: 100%;
 }
 
 #team table th{
@@ -68,17 +70,18 @@
     align-self: flex-end;
 }
 
-
-
 #team table th:last-of-type{
     background-color: transparent;
-    width: 5px;  
     cursor: pointer;
+    position: absolute;
+    text-align: end;
+    right: 15px;
 }
 
 #team table th img{
     height: 15px;
     width: 15px;
+    position: relative;
 }
 
 #team table th:nth-of-type(3){
@@ -99,6 +102,10 @@
     font-size: 1rem;
     padding: 5px;
     margin-right: 3px;
+    background-color: var(--notFont);
+    color: var(--fontColor);
+    border: none;
+    border-radius: 3px
 }
 
 #team > div button{
@@ -122,6 +129,7 @@
 
 #team table tr th{
     max-width: 10ch;
+    padding: 0 3px;
 }
 #team #teamTabs table tr th:last-of-type{
     width: 5px;
@@ -149,6 +157,32 @@
     justify-self: flex-end;
 }
 
-#team #teamUsers table th img{
+#team table th img{
     filter: var(--svgFilter);
+}
+
+#morePrompt{
+    position: absolute;
+    z-index: 99969999;
+    left: -20px;
+    top: 0;
+    background-color: var(--backgroundColor);
+    padding: 5px 15px;
+    box-shadow: var(--insetBoxShadow);
+    border-radius: 3px;
+    display: flex;
+}
+
+#morePrompt p{
+    font-size: .75rem;
+    font-weight: 400;
+    opacity: .6;
+}
+
+#morePrompt p:hover{
+    opacity: 1;
+}
+
+.moreHidden{
+    display: none;
 }

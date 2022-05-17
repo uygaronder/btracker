@@ -24,6 +24,7 @@ import Settings from "./Settings";
 import Feed from "./console-pages/Feed";
 import GettingStarted from "./console-pages/GetStarted";
 import AddProject from "./console-pages/AddProject";
+import Invite from "./console-pages/invitePeople";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 var APP_URL = process.env.REACT_APP_APPURL;
@@ -75,6 +76,7 @@ class Console extends React.Component {
     };
 
     handleTeamChange = () => {
+        console.log(this.state)
         switch (document.getElementById("teamSelect").value) {
             case "new":
                 window.location.href = `${APP_URL}/console/newTeam`;
@@ -89,13 +91,13 @@ class Console extends React.Component {
                     body: JSON.stringify({
                         teamId: document.getElementById("teamSelect").value,
                     }),
-                });
+                }).then(window.location.href = `${APP_URL}/console`);;
                 break;
         }
     };
 
     handleProjectChange = () => {
-        console.log(document.getElementById("projectSelect").value);
+        console.log(document.getElementById("projectSelect").value)
         switch (document.getElementById("projectSelect").value) {
             case "new":
                 window.location.href = `${APP_URL}/console/team`;
@@ -111,7 +113,7 @@ class Console extends React.Component {
                         projectId:
                             document.getElementById("projectSelect").value,
                     }),
-                });
+                }).then(window.location.href = `${APP_URL}/console`);
                 break;
         }
     };
@@ -121,20 +123,21 @@ class Console extends React.Component {
         await fetch(`${apiUrl}/getConsoleInfo`, { credentials: "include" })
             .then((res) => res.json())
             .then((data) => (response = data));
-
-        var activeProject =
+        
+        var activeProject = response.team.projects.length != 0 ? 
             response.team != null
                 ? response.team.projects.filter(
-                      (project) => project[0][1] == response.user.activeProject
-                  )[0]
-                : null;
+                      (project) => project[1] == response.user.activeProject
+                  )[0][1]
+                : null : null
         if (
-            activeProject == undefined &&
+            activeProject == null &&
             response.team != null &&
             response.team.projects.length > 0
         ) {
             activeProject = response.team.projects[0][1];
         }
+        console.log(activeProject)
 
         this.setState({
             usrName: response.user.name,
@@ -191,6 +194,7 @@ class Console extends React.Component {
                                 <select
                                     id="teamSelect"
                                     onChange={() => this.handleTeamChange()}
+                                    defaultValue={this.state.activeTeam}
                                 >
                                     {this.state.teamOptions.map((team) => {
                                         return (
@@ -207,9 +211,8 @@ class Console extends React.Component {
                                     name="project"
                                     id="projectSelect"
                                     onChange={() => this.handleProjectChange()}
-                                    defaultValue={{
-                                        value: this.state.activeProject,
-                                    }}
+                                    defaultValue={this.state.activeProject
+                                    }
                                 >
                                     {this.state.team &&
                                         this.state.team.projects.map(
@@ -406,6 +409,15 @@ class Console extends React.Component {
                                 path="feed"
                                 element={<Feed consoleState={this.state} />}
                             />
+                            <Route
+                                path="team/invite"
+                                element={
+                                    <Invite
+                                        consoleState={this.state}
+                                        archive={true}
+                                    />
+                                }
+                                />
                             <Route
                                 path="team"
                                 element={<Team consoleState={this.state} />}
