@@ -180,6 +180,11 @@ function confirmationBox(action, id, state) {
     }
 }
 
+function followBug(){
+    fetch(`${apiUrl}/followBug`)
+
+}
+
 function confirmedAction(action, id, state) {
     console.log(id, state.activeProject)
     fetch(`${apiUrl}/${action}`, {
@@ -323,7 +328,7 @@ const Bug = ({ consoleState, archive }) => {
                             </div>
                         </div>
                         <div id="bugButtons">
-                            <span id="notify">
+                            <span id="notify" key={data.followedBy} onClick={()=> followBug()}>
                                 {data.followedBy &&
                                 data.followedBy.includes(consoleState.usrId) ? (
                                     <img src={bellOn} />

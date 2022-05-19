@@ -53,7 +53,7 @@
 
 #bug #bugButtons #notify{
     display: flex;
-    
+    cursor: pointer;
 }
 
 #bug #bugButtons #notify img{

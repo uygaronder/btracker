@@ -137,8 +137,6 @@ class Console extends React.Component {
         ) {
             activeProject = response.team.projects[0][1];
         }
-        
-        console.log(activeProject)
 
         this.setState({
             usrName: response.user.name,
@@ -252,9 +250,9 @@ class Console extends React.Component {
                                             (notif) => {
                                                 return (
                                                     <div className="notificationItem">
-                                                        <p>{notif[0]}</p>
+                                                        <p>{notif.text}</p>
                                                         <p className="notifDate">
-                                                            {notif[1]}
+                                                            {notif.date}
                                                         </p>
                                                     </div>
                                                 );
