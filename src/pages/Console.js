@@ -76,7 +76,7 @@ class Console extends React.Component {
     };
 
     handleTeamChange = () => {
-        console.log(this.state)
+        console.log(this.state);
         switch (document.getElementById("teamSelect").value) {
             case "new":
                 window.location.href = `${APP_URL}/console/newTeam`;
@@ -91,13 +91,13 @@ class Console extends React.Component {
                     body: JSON.stringify({
                         teamId: document.getElementById("teamSelect").value,
                     }),
-                }).then(window.location.href = `${APP_URL}/console`);;
+                }).then((window.location.href = `${APP_URL}/console`));
                 break;
         }
     };
 
     handleProjectChange = () => {
-        console.log(document.getElementById("projectSelect").value)
+        console.log(document.getElementById("projectSelect").value);
         switch (document.getElementById("projectSelect").value) {
             case "new":
                 window.location.href = `${APP_URL}/console/team`;
@@ -113,7 +113,7 @@ class Console extends React.Component {
                         projectId:
                             document.getElementById("projectSelect").value,
                     }),
-                }).then(window.location.href = `${APP_URL}/console`);
+                }).then((window.location.href = `${APP_URL}/console`));
                 break;
         }
     };
@@ -123,13 +123,15 @@ class Console extends React.Component {
         await fetch(`${apiUrl}/getConsoleInfo`, { credentials: "include" })
             .then((res) => res.json())
             .then((data) => (response = data));
-        
-        var activeProject = response.team.projects.length != 0 ? 
-            response.team != null
-                ? response.team.projects.filter(
-                      (project) => project[1] == response.user.activeProject
-                  )[0][1]
-                : null : null
+
+        var activeProject =
+            response.team.projects.length != 0
+                ? response.team != null
+                    ? response.team.projects.filter(
+                          (project) => project[1] == response.user.activeProject
+                      )[0][1]
+                    : null
+                : null;
         if (
             activeProject == null &&
             response.team != null &&
@@ -210,8 +212,7 @@ class Console extends React.Component {
                                     name="project"
                                     id="projectSelect"
                                     onChange={() => this.handleProjectChange()}
-                                    defaultValue={this.state.activeProject
-                                    }
+                                    defaultValue={this.state.activeProject}
                                 >
                                     {this.state.team &&
                                         this.state.team.projects.map(
@@ -416,7 +417,7 @@ class Console extends React.Component {
                                         archive={true}
                                     />
                                 }
-                                />
+                            />
                             <Route
                                 path="team"
                                 element={<Team consoleState={this.state} />}

@@ -180,13 +180,23 @@ function confirmationBox(action, id, state) {
     }
 }
 
-function followBug(){
-    fetch(`${apiUrl}/followBug`)
-
+function followBug(data, state) {
+    console.log(state);
+    fetch(`${apiUrl}/followBug`, {
+        method: "post",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            bugId: `${data._id}`,
+            projectId: state.activeProject,
+        }),
+    }).then((window.location.href = `${appUrl}/console/bug/${data._id}`));
 }
 
 function confirmedAction(action, id, state) {
-    console.log(id, state.activeProject)
+    console.log(id, state.activeProject);
     fetch(`${apiUrl}/${action}`, {
         method: "post",
         credentials: "include",
@@ -199,7 +209,7 @@ function confirmedAction(action, id, state) {
             state: state,
         }),
     }).then(() => {
-        switch (action){
+        switch (action) {
             case "deleteBug":
                 window.location.assign(`${appUrl}/console`);
                 break;
@@ -234,7 +244,6 @@ const Bug = ({ consoleState, archive }) => {
         })
             .then((res) => res.json())
             .then((bugData) => {
-                console.log(bugData);
                 setData(bugData);
             });
     }, []);
@@ -328,7 +337,11 @@ const Bug = ({ consoleState, archive }) => {
                             </div>
                         </div>
                         <div id="bugButtons">
-                            <span id="notify" key={data.followedBy} onClick={()=> followBug()}>
+                            <span
+                                id="notify"
+                                key={data.followedBy}
+                                onClick={() => followBug(data, consoleState)}
+                            >
                                 {data.followedBy &&
                                 data.followedBy.includes(consoleState.usrId) ? (
                                     <img src={bellOn} />
