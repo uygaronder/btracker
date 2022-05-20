@@ -96,8 +96,17 @@ class Console extends React.Component {
         }
     };
 
+    clearNotifications = () => {
+        fetch(`${apiUrl}/clearNotifs`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(this.setState({ notifications: [] }));
+    };
+
     handleProjectChange = () => {
-        console.log(document.getElementById("projectSelect").value);
         switch (document.getElementById("projectSelect").value) {
             case "new":
                 window.location.href = `${APP_URL}/console/team`;
@@ -160,9 +169,6 @@ class Console extends React.Component {
         if (this.state.settings.darkTheme) {
             this.darkTheme();
         }
-    };
-
-    componentDidMount() {
         document.addEventListener("mouseup", function (e) {
             const consoleDropdown = document.getElementById("dropdownDiv");
             if (!consoleDropdown.contains(e.target)) {
@@ -175,6 +181,9 @@ class Console extends React.Component {
                 notBox.style.display = "none";
             }
         });
+    };
+
+    componentDidMount() {
         this.fetchInfo();
         document.title = "Console";
     }
@@ -237,7 +246,10 @@ class Console extends React.Component {
                                     onClick={this.notificationhandle}
                                 >
                                     <img src={notification} />
-                                    <span id="notification">
+                                    <span
+                                        id="notification"
+                                        key={this.state.notifications}
+                                    >
                                         {this.state.notifications.length}
                                     </span>
                                 </span>
@@ -245,15 +257,36 @@ class Console extends React.Component {
                                 <div
                                     id="notificationsBox"
                                     style={{ display: "none" }}
+                                    key={this.state.notifications}
                                 >
+                                    {this.state.notifications.length != 0 ? (
+                                        <div className="clearDiv">
+                                            <button
+                                                onClick={() =>
+                                                    this.clearNotifications()
+                                                }
+                                            >
+                                                Clear Notifications
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div />
+                                    )}
                                     {this.state.notifications.length != 0 ? (
                                         this.state.notifications.map(
                                             (notif) => {
+                                                console.log(notif);
                                                 return (
                                                     <div className="notificationItem">
+                                                        <p className="notifSource">
+                                                            {notif.team.name}/
+                                                            {notif.project.name}
+                                                        </p>
                                                         <p>{notif.text}</p>
                                                         <p className="notifDate">
-                                                            {notif.date}
+                                                            {new Date(
+                                                                notif.date
+                                                            ).toLocaleString()}
                                                         </p>
                                                     </div>
                                                 );
