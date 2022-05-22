@@ -151,6 +151,7 @@ table td {
 
 table td:first-of-type {
     width: 8ch;
+    text-transform: uppercase;
 }
 
 table td:last-of-type {
