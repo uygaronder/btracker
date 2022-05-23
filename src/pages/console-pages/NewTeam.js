@@ -15,7 +15,6 @@ class NewTeam extends React.Component {
             teamsLoading: false,
         };
     }
-
     searchTeams(query) {
         if (query == "") return;
         this.setState({ teamsLoading: true });
@@ -55,6 +54,7 @@ class NewTeam extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div id="newTeam">
                 <div id="teamOpt">
@@ -121,11 +121,34 @@ class NewTeam extends React.Component {
                                 </button>
                             </form>
                         </div>
-                        {!this.props.newUser && <div id="invitations">
-                            <h3>Invitations</h3>
-                            <p>You have 0 invitations</p>
-                        </div>}
-                        
+                        {!this.props.newUser && (
+                            <div id="invitations">
+                                <h3>Invitations</h3>
+                                <p>
+                                    You have{" "}
+                                    {this.props.consoleState.invites
+                                        ? this.props.consoleState.invites.length
+                                        : 0}{" "}
+                                    invitations
+                                </p>
+                                <table>
+                                    {this.props.consoleState.invites.map(
+                                        (invite) => {
+                                            const date = new Date(invite.date);
+                                            return (
+                                                <td>
+                                                    <td>{invite.team.name}</td>
+                                                    <td>
+                                                        {date.toLocaleString()}
+                                                    </td>
+                                                    <td></td>
+                                                </td>
+                                            );
+                                        }
+                                    )}
+                                </table>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

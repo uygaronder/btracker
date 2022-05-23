@@ -8,8 +8,50 @@ class InvitePeople extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            results: []
+            results: [],
         };
+    }
+
+    fetchUsers() {
+        console.log(this.props.consoleState);
+        const query = document.getElementById("userSearch");
+        !query.value
+            ? (query.placeholder = "This space is required")
+            : fetch(`${apiUrl}/searchUsers`, {
+                  method: "post",
+                  credentials: "include",
+                  headers: {
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                      query: query.value,
+                  }),
+              })
+                  .then((res) => res.json())
+                  .then((data) => this.setState({ results: data.users }));
+    }
+
+    inviteUser(e, id) {
+        if (!e.target.classList.contains("sent")) {
+            fetch(`${apiUrl}/inviteUser`, {
+                method: "post",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    team: {
+                        id: this.props.consoleState.team._id,
+                        name: this.props.consoleState.team.name,
+                    },
+                    id: id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((data) => this.setState({ results: data.users }));
+        }
+        e.target.classList.add = "sent";
+        e.target.innerHTML = "Sent";
     }
 
     render() {
@@ -17,18 +59,50 @@ class InvitePeople extends React.Component {
             <div id="invite">
                 {!this.props.newUser && (
                     <div id="teamHeader">
-                        <h3>{this.props.consoleState.team.name}</h3>
+                        <h3>Invite to {this.props.consoleState.team.name}</h3>
                     </div>
                 )}
 
                 <div id="searchUsers">
-                    <form method="post" action={`${apiUrl}/searchUsers`}>
-                        <input type="text" name="search" placeholder="Search for users..." />
-                        <input type="submit" value="Search"></input>
+                    <form>
+                        <input
+                            type="text"
+                            name="query"
+                            placeholder="Search for users..."
+                            id="userSearch"
+                        />
+                        <input
+                            type="button"
+                            onClick={() => this.fetchUsers()}
+                            value="Search"
+                        ></input>
                     </form>
                 </div>
                 <div id="searchResults" key={this.state.results}>
-                    {this.state.results.map((result) => <div className="user">{result.name}</div>)}
+                    <table>
+                        {this.state.results.map((result) => (
+                            <tr className="user">
+                                <div className="info">
+                                    <td className="avatar">
+                                        {result.avatar && (
+                                            <img src={result.avatar} />
+                                        )}
+                                    </td>
+                                    <td className="username">{result.user}</td>
+                                </div>
+
+                                <td>
+                                    <button
+                                        onClick={(e) =>
+                                            this.inviteUser(e, result.userId)
+                                        }
+                                    >
+                                        Invite
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </table>
                 </div>
             </div>
         );

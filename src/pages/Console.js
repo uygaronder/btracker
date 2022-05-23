@@ -160,6 +160,7 @@ class Console extends React.Component {
             usrId: response.user._id,
             settings: response.user.settings,
             avatar: response.user.avatarURL,
+            invites: response.user.invites,
         });
         document.getElementById("darkCheck").checked =
             this.state.settings.darkTheme;
@@ -455,7 +456,10 @@ class Console extends React.Component {
                                 path="team"
                                 element={<Team consoleState={this.state} />}
                             />
-                            <Route path="newTeam" element={<NewTeam />} />
+                            <Route
+                                path="newTeam"
+                                element={<NewTeam consoleState={this.state} />}
+                            />
                             <Route
                                 path="bug/:bId"
                                 element={

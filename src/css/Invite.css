@@ -22,7 +22,7 @@
     width: 30ch;
 }
 
-#invite form input[type="submit"]{
+#invite form input[type="button"]{
     background-color: var(--green);
     color: var(--fontColor);
     font-weight: 700;
@@ -33,7 +33,7 @@
 }
 
 
-#invite form input[type="submit"]:hover{
+#invite form input[type="button"]:hover{
     background-color: var(--greenDarker);
     color: var(--fontColor);
     font-weight: 700;
@@ -46,9 +46,74 @@
 
 #invite #searchResults{
     display: flex;
+    flex-direction: column;
     border-radius: 6px;
     padding: 10px;
     color: var(--fontColor);
     box-shadow: var(--insetBoxShadow);
     height: 100%;
+}
+
+#invite .user{
+    display: flex;
+    min-height: 30px;
+    padding: 10px 0;
+}
+
+#invite .user .info {
+    display: flex;
+    align-items: center;
+}
+
+#invite .user .avatar {
+    overflow: hidden;
+}
+
+#invite .user .avatar img {
+    width: 24px
+}
+
+#invite .user button {
+    background-color: var(--green);
+    color: var(--fontColor);
+    font-weight: 700;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 7ch;
+}
+
+
+#invite .user button:hover {
+    background-color: var(--greenDarker);
+    color: var(--fontColor);
+    font-weight: 700;
+}
+
+#invite table tr{
+    display: flex;
+    align-items: center;
+    cursor: default;
+}
+
+#invite table td:first-of-type{
+    width: 24px;
+}
+
+
+#invite table td:first-of-type {
+    text-transform: none;
+}
+
+#invite table tr:last-of-type {
+    border-bottom: none;
+}
+
+#invite table tr:first-of-type:hover {
+    background-color: var(--tableHover);
+}
+
+#invite table tr:hover {
+    background-color: var(--tableHover);
 }

@@ -143,3 +143,7 @@
     background-color: var(--notFont);
     color: var(--fontColor);
 }
+
+#newTeam table td:first-of-type {
+    text-transform: none;
+}
