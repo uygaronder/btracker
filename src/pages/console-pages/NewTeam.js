@@ -131,22 +131,36 @@ class NewTeam extends React.Component {
                                         : 0}{" "}
                                     invitations
                                 </p>
-                                <table>
+                                <div id="invites">
                                     {this.props.consoleState.invites.map(
                                         (invite) => {
                                             const date = new Date(invite.date);
                                             return (
-                                                <td>
-                                                    <td>{invite.team.name}</td>
+                                                <div className="invite">
+                                                    <div>
+                                                        <h3>
+                                                            {invite.team.name}
+                                                        </h3>
+                                                        <p>
+                                                            {date.toLocaleDateString()}
+                                                        </p>
+                                                    </div>
+
                                                     <td>
-                                                        {date.toLocaleString()}
+                                                        <div className="inviteButtons">
+                                                            <button>
+                                                                Accept
+                                                            </button>
+                                                            <button>
+                                                                Ignore
+                                                            </button>
+                                                        </div>
                                                     </td>
-                                                    <td></td>
-                                                </td>
+                                                </div>
                                             );
                                         }
                                     )}
-                                </table>
+                                </div>
                             </div>
                         )}
                     </div>

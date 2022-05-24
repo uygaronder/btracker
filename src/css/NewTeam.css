@@ -40,7 +40,7 @@
     height: 30px;
     width: max-content;
     background-color: var(--notFont);
-    padding: 18px 0;
+    padding: 15px 0;
 }
 #newTeam .textSearch button{
     width: 30px;
@@ -50,7 +50,7 @@
     cursor: pointer;
 }
 #newTeam .textSearch button img{
-    filter: var(--svgFilter);
+    filter: brightness(0) invert(1);
     text-align: center;
     padding-top: 5px;
 }
@@ -97,24 +97,27 @@
     border-radius: 3px;
 }
 
-#newTeam #createTeam button{
+#newTeam button{
     background-color: var(--green);
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px;
-    border-radius: 6px;
-    color: var(--fontColor);
+    border-radius: 3px;
+    color: white;
     font-size: 1rem;
-    
+}
+
+#newTeam button:hover {
+    background-color: var(--greenDarker);
 }
 
 #newTeam #createTeam button img{
     height: 16px;
     width: 16px;
     margin-left: 4px;
-    filter: var(--svgFilter);
+    filter: brightness(0) invert(1);
 }
 
 .CustomInput {
@@ -146,4 +149,43 @@
 
 #newTeam table td:first-of-type {
     text-transform: none;
+}
+
+#newTeam .invite {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--borderColor);
+    padding: 10px 0;
+    margin: 3px 0;
+}
+
+#newTeam .invite:first-of-type {
+    border-top: none;
+}
+
+#newTeam .invite h3{
+    margin-right: 5px;
+}
+
+#newTeam .invite p{
+    font-size: .9rem;
+}
+
+#newTeam .invite div{
+    display: flex;
+    align-items: center;
+}
+
+#newTeam .invite .inviteButtons button{
+    margin-left: 5px;
+    height: 30px;
+}
+
+#newTeam .invite .inviteButtons button:last-of-type{
+    background-color: var(--red);
+}
+
+#newTeam .invite .inviteButtons button:last-of-type:hover{
+    background-color: var(--redDarker);
 }
