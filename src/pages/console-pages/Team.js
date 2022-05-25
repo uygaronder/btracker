@@ -20,7 +20,7 @@ class Team extends React.Component {
     }
 
     contactServer(action, id, team) {
-        //add are you sure prompt to delete
+        //add are you sure prompt to dele
         fetch(`${apiUrl}/${action}`, {
             method: "post",
             credentials: "include",
