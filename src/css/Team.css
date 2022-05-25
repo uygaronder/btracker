@@ -84,8 +84,13 @@
     position: relative;
 }
 
+#team table th:nth-of-type(2){
+    min-width: 15ch;
+}
+
 #team table th:nth-of-type(3){
     min-width: 5ch;
+    text-transform: capitalize;
 }
 
 #team #teamProjects table th:first-of-type{
@@ -153,8 +158,9 @@
 
 
 
-#team #teamUsers table th:last-of-type{
+#team table th:last-of-type{
     justify-self: flex-end;
+    min-width: 5ch;
 }
 
 #team table th img{
@@ -164,8 +170,9 @@
 #morePrompt{
     position: absolute;
     z-index: 99969999;
-    left: -20px;
-    top: 0;
+    min-width: 15ch;
+    left: -100px;
+    top: 15px;
     background-color: var(--backgroundColor);
     padding: 5px 15px;
     box-shadow: var(--insetBoxShadow);

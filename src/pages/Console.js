@@ -25,6 +25,7 @@ import Feed from "./console-pages/Feed";
 import GettingStarted from "./console-pages/GetStarted";
 import AddProject from "./console-pages/AddProject";
 import Invite from "./console-pages/invitePeople";
+import { act } from "react-dom/test-utils";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 var APP_URL = process.env.REACT_APP_APPURL;
@@ -132,15 +133,24 @@ class Console extends React.Component {
         await fetch(`${apiUrl}/getConsoleInfo`, { credentials: "include" })
             .then((res) => res.json())
             .then((data) => (response = data));
+        console.log(response);
+        console.log(
+            response.team.projects.filter(
+                (project) => project[1] == response.user.activeProject
+            )
+        );
 
-        var activeProject =
-            response.team.projects.length != 0
-                ? response.team != null
-                    ? response.team.projects.filter(
-                          (project) => project[1] == response.user.activeProject
-                      )[0][1]
-                    : null
-                : null;
+        let activeProject;
+        if (response.team == null) {
+            activeProject = null;
+        }
+
+        let res = response.team.projects.filter(
+            (project) => project[1] == response.user.activeProject
+        );
+        if (res.length > 0) {
+            activeProject = res[0][1];
+        }
         if (
             activeProject == null &&
             response.team != null &&

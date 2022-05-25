@@ -6,6 +6,7 @@ import Loading from "../Loading";
 import Search from "../../res/svg/search.svg";
 import Plus from "../../res/svg/plus.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
+var APP_URL = process.env.REACT_APP_APPURL;
 
 class NewTeam extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class NewTeam extends React.Component {
         this.state = {
             teams: [],
             teamsLoading: false,
+            invites: this.props.consoleState.invites,
         };
     }
     searchTeams(query) {
@@ -53,6 +55,38 @@ class NewTeam extends React.Component {
             });
     }
 
+    acceptInvite(teamId) {
+        fetch(`${apiUrl}/acceptTeamInvite`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                teamId: teamId,
+            }),
+        }).then(() => {
+            window.location.href = `${APP_URL}/console`;
+        });
+    }
+
+    ignoreTeamInvite(teamId) {
+        fetch(`${apiUrl}/ignoreTeamInvite`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                team: teamId,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({ invites: data.data });
+            });
+    }
+
     render() {
         console.log(this.props);
         return (
@@ -88,14 +122,25 @@ class NewTeam extends React.Component {
                                         return (
                                             <div className="team" key={team.id}>
                                                 <h3>{team.team}</h3>
-                                                <button
-                                                    id={team.teamId}
-                                                    onClick={() => {
-                                                        this.join(team.teamId);
-                                                    }}
-                                                >
-                                                    Join
-                                                </button>
+                                                {this.props.consoleState.teamOptions.filter(
+                                                    (inTeam) => {
+                                                        return (
+                                                            inTeam[1] ==
+                                                            team.teamId
+                                                        );
+                                                    }
+                                                ).length == 0 && (
+                                                    <button
+                                                        id={team.teamId}
+                                                        onClick={() => {
+                                                            this.join(
+                                                                team.teamId
+                                                            );
+                                                        }}
+                                                    >
+                                                        Join
+                                                    </button>
+                                                )}
                                             </div>
                                         );
                                     })}
@@ -122,44 +167,57 @@ class NewTeam extends React.Component {
                             </form>
                         </div>
                         {!this.props.newUser && (
-                            <div id="invitations">
+                            <div id="invitations" key={this.state.invites}>
                                 <h3>Invitations</h3>
                                 <p>
                                     You have{" "}
                                     {this.props.consoleState.invites
-                                        ? this.props.consoleState.invites.length
+                                        ? this.state.invites.length
                                         : 0}{" "}
                                     invitations
                                 </p>
                                 <div id="invites">
-                                    {this.props.consoleState.invites.map(
-                                        (invite) => {
-                                            const date = new Date(invite.date);
-                                            return (
-                                                <div className="invite">
-                                                    <div>
-                                                        <h3>
-                                                            {invite.team.name}
-                                                        </h3>
-                                                        <p>
-                                                            {date.toLocaleDateString()}
-                                                        </p>
-                                                    </div>
-
-                                                    <td>
-                                                        <div className="inviteButtons">
-                                                            <button>
-                                                                Accept
-                                                            </button>
-                                                            <button>
-                                                                Ignore
-                                                            </button>
-                                                        </div>
-                                                    </td>
+                                    {this.state.invites.map((invite) => {
+                                        const date = new Date(invite.date);
+                                        return (
+                                            <div
+                                                className="invite"
+                                                id={invite.team.id}
+                                            >
+                                                <div>
+                                                    <h3>{invite.team.name}</h3>
+                                                    <p>
+                                                        {date.toLocaleDateString()}
+                                                    </p>
                                                 </div>
-                                            );
-                                        }
-                                    )}
+
+                                                <td>
+                                                    <div className="inviteButtons">
+                                                        <button
+                                                            onClick={() =>
+                                                                this.acceptInvite(
+                                                                    invite.team
+                                                                        .id
+                                                                )
+                                                            }
+                                                        >
+                                                            Accept
+                                                        </button>
+                                                        <button
+                                                            onClick={() =>
+                                                                this.ignoreTeamInvite(
+                                                                    invite.team
+                                                                        .id
+                                                                )
+                                                            }
+                                                        >
+                                                            Ignore
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}

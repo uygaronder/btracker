@@ -10,45 +10,58 @@ console.log(apiUrl);
 class Team extends React.Component {
     componentDidMount() {
         document.addEventListener("mouseup", function (e) {
-            if(document.getElementById("morePrompt")){
-                const prompt = document.getElementById("morePrompt")
+            if (document.getElementById("morePrompt")) {
+                const prompt = document.getElementById("morePrompt");
                 if (!prompt.contains(e.target)) {
-                    prompt.remove()
+                    prompt.remove();
                 }
             }
         });
     }
 
-    sendAction(action, data) {
-        fetch(`${apiUrl}/${action}`, function(){
-            
-        })
+    contactServer(action, id, team) {
+        //add are you sure prompt to delete
+        fetch(`${apiUrl}/${action}`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: `${id}`,
+                activeTeam: team,
+            }),
+        });
     }
 
-    userPrompt(e ,item) {
+    userPrompt(e, item, contactServer) {
+        const team = this.props.consoleState.activeTeam;
         const prompt = document.createElement("div");
-        prompt.id="morePrompt";
+
+        prompt.id = "morePrompt";
         const userRole = document.createElement("p");
         userRole.innerText = "Change user role";
-        userRole.onclick = function(){
-            console.log("Change user role")
-        }
+        userRole.onclick = function () {
+            contactServer("changeRole", item, team);
+        };
         prompt.appendChild(userRole);
+
         e.target.parentNode.appendChild(prompt);
-        console.log(prompt);
     }
 
-    projectPrompt(e ,item) {
+    projectPrompt(e, item, contactServer) {
+        const team = this.props.consoleState.activeTeam;
         const prompt = document.createElement("div");
-        prompt.id="morePrompt";
+        prompt.id = "morePrompt";
+
         const userRole = document.createElement("p");
-        userRole.innerText = "Switch to Project";
-        userRole.onclick = function(){
-            console.log("Switch to Project")
-        }
+        userRole.innerText = "Delete Project";
+        userRole.onclick = function () {
+            contactServer("deleteProject", item, team);
+        };
         prompt.appendChild(userRole);
+
         e.target.parentNode.appendChild(prompt);
-        console.log(prompt);
     }
 
     render() {
@@ -89,13 +102,28 @@ class Team extends React.Component {
                                                 <th>{user[2]}</th>
                                                 <th>{user[1]}</th>
                                                 <th>
-                                                    <img onClick={(e)=> this.userPrompt(e, user)} src={more} />
+                                                    <img
+                                                        onClick={(e) =>
+                                                            this.userPrompt(
+                                                                e,
+                                                                user,
+                                                                this
+                                                                    .contactServer
+                                                            )
+                                                        }
+                                                        src={more}
+                                                    />
                                                 </th>
                                             </tr>
                                         );
                                     }
                                 )}
-                                <Link to="invite"><button>Invite New People</button></Link>
+                                <div>
+                                    <Link to="invite">
+                                        <button>Invite New People</button>
+                                    </Link>
+                                </div>
+
                                 {this.props.consoleState.team.invites &&
                                     this.props.consoleState.team.invites.map(
                                         (invite) => {
@@ -143,7 +171,19 @@ class Team extends React.Component {
                                     return (
                                         <tr>
                                             <th>{project[0]}</th>
-                                            <th><img onClick={(e)=> this.projectPrompt(e)} src={more}></img></th>
+                                            <th></th>
+                                            <th>
+                                                <img
+                                                    onClick={(e) =>
+                                                        this.projectPrompt(
+                                                            e,
+                                                            1,
+                                                            this.contactServer
+                                                        )
+                                                    }
+                                                    src={more}
+                                                ></img>
+                                            </th>
                                         </tr>
                                     );
                                 }

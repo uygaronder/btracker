@@ -111,7 +111,6 @@ class Dashboard extends React.Component {
                             this.state.dueWeek++;
                         }
                     }
-                    console.log(bug.labels);
                     for (let label of bug.labels) {
                         let includes = false;
                         for (let filter of this.state.filters) {
@@ -153,6 +152,17 @@ class Dashboard extends React.Component {
         console.log(item);
     }
 
+    filterBugs(e) {
+        console.log(e.target.value);
+        this.state.bugs = this.state.project.bugs;
+        const filtered = this.state.bugs.filter((bug) => {
+            return bug.bugTitle
+                .toLowerCase()
+                .includes(e.target.value.toLowerCase());
+        });
+        this.setState({ bugs: filtered });
+    }
+
     applyFilter(id, filterName, filterBy) {
         this.state.bugs = this.state.project.bugs;
         const div = document.getElementById(id);
@@ -177,8 +187,8 @@ class Dashboard extends React.Component {
                     break;
                 case "labels":
                     for (let filter of this.state.activeFilters) {
-                        this.state.bugs = this.state.bugs.filter(
-                            (bug) => bug[filter[1]].includes(filter[0])
+                        this.state.bugs = this.state.bugs.filter((bug) =>
+                            bug[filter[1]].includes(filter[0])
                         );
                     }
                     break;
@@ -198,14 +208,7 @@ class Dashboard extends React.Component {
                                     Date.parse(bug.due) > Date.now()
                             );
                             break;
-                        case "week":
-                            this.state.bugs = this.state.bugs.filter(
-                                (bug) =>
-                                    Date.parse(bug.due) <
-                                        Date.now() + 1000 * 60 * 60 * 24 * 7 &&
-                                    Date.parse(bug.due) >
-                                        Date.now() + 1000 * 60 * 60 * 24 * 1
-                            );
+
                             break;
                     }
                     break;
@@ -234,6 +237,7 @@ class Dashboard extends React.Component {
                             id="bugSearch"
                             name="search"
                             placeholder="Search Bugs"
+                            onChange={(e) => this.filterBugs(e)}
                         />
                         <label htmlFor="search">
                             <img src={Search} />
