@@ -35,7 +35,6 @@ class Archive extends React.Component {
     }
 
     filterBugs(e) {
-        console.log(e.target.value);
         this.state.fBugs = this.state.bugs;
         const filtered = this.state.bugs.filter((bug) => {
             return bug.bugTitle

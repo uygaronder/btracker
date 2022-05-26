@@ -47,12 +47,7 @@ class NewTeam extends React.Component {
             body: JSON.stringify({
                 team: teamId,
             }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                this.setState({ teamsLoading: false, teams: data });
-            });
+        });
     }
 
     acceptInvite(teamId) {

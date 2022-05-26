@@ -87,7 +87,7 @@ class Team extends React.Component {
                                 {this.props.consoleState.team.users.map(
                                     (user) => {
                                         return (
-                                            <tr>
+                                            <tr className="user">
                                                 <th>
                                                     <div className="avatar">
                                                         {user.avatar && (
@@ -128,7 +128,18 @@ class Team extends React.Component {
                                     this.props.consoleState.team.invites.map(
                                         (invite) => {
                                             return (
-                                                <tr>
+                                                <tr className="invite">
+                                                    <th>
+                                                        <div className="avatar">
+                                                            {invite.avatar && (
+                                                                <img
+                                                                    src={
+                                                                        invite.avatar
+                                                                    }
+                                                                ></img>
+                                                            )}
+                                                        </div>
+                                                    </th>
                                                     <th>{invite.name}</th>
                                                     <th className="buttons">
                                                         <button>Accept</button>

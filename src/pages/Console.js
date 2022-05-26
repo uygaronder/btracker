@@ -3,6 +3,7 @@ import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
 
 import "../css/console.css";
+import logo from "../res/anteater.png";
 import bug from "../res/svg/bug.svg";
 import dashboard from "../res/svg/dashboard.svg";
 import archive from "../res/svg/archive.svg";
@@ -208,7 +209,7 @@ class Console extends React.Component {
                 <nav>
                     <div>
                         <Link to="/">
-                            <img src={bug} alt="Logo" />
+                            <img src={logo} alt="Logo" />
                         </Link>
                         <ul>
                             <li>

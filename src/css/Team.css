@@ -123,10 +123,26 @@
     cursor: pointer;
 }
 
+#team .invite{
+    display: flex;
+    align-items: center;
+}
+
+#team .buttons button{
+    padding: 5px;
+}
+
 #team > div button:hover{
     background-color: var(--greenDarker);
 }
 
+#team .buttons button:last-of-type {
+    background-color: var(--red);
+}
+
+#team > div button:last-of-type:hover{
+    background-color: var(--redDarker);
+}
 
 #team table tr{
     cursor: default;
@@ -136,7 +152,7 @@
     max-width: 10ch;
     padding: 0 3px;
 }
-#team #teamTabs table tr th:last-of-type{
+#team #teamTabs table .user th:last-of-type{
     width: 5px;
 }
 
@@ -168,7 +184,6 @@
 
 #team .buttons{
     display: flex;
-
 }
 
 #team .buttons button{
