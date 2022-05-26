@@ -160,11 +160,20 @@
 
 #team table th:last-of-type{
     justify-self: flex-end;
-    min-width: 5ch;
 }
 
 #team table th img{
     filter: var(--svgFilter);
+}
+
+#team .buttons{
+    display: flex;
+
+}
+
+#team .buttons button{
+    padding: 3px 10px;
+    margin-left: 5px;
 }
 
 #morePrompt{

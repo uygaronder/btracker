@@ -4,25 +4,40 @@ import "../../css/Feed.css";
 import Post from "../../res/svg/post.svg";
 
 var apiUrl = process.env.REACT_APP_APIURL;
+var APP_URL = process.env.REACT_APP_APPURL;
 class Feed extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    returnAvatar(item) {
-        console.log(item);
+    returnAvatar(item) {}
+
+    postToFeed() {
+        fetch(`${apiUrl}/postToFeed`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                feed: document.getElementById("feedInput").value,
+                team: this.props.consoleState.activeTeam,
+            }),
+        }).then((window.location.href = `${APP_URL}/console/feed`));
     }
 
     render() {
         return (
             <div id="feed">
                 <div>
-                    <form action={`${apiUrl}/postToFeed`} method="post">
+                    <form>
                         <textarea
+                            id="feedInput"
                             name="feedInput"
                             placeholder="Share your thoughts"
+                            required
                         ></textarea>
-                        <button type="submit">
+                        <button type="button" onClick={() => this.postToFeed()}>
                             <img src={Post} alt="Post" />
                         </button>
                     </form>

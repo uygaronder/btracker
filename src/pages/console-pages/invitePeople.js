@@ -90,15 +90,21 @@ class InvitePeople extends React.Component {
                                     </td>
                                     <td className="username">{result.user}</td>
                                 </div>
-
                                 <td>
-                                    <button
-                                        onClick={(e) =>
-                                            this.inviteUser(e, result.userId)
-                                        }
-                                    >
-                                        Invite
-                                    </button>
+                                    {this.props.consoleState.team.users.filter(
+                                        (user) => user[0] == result.userId
+                                    ).length == 0 && (
+                                        <button
+                                            onClick={(e) =>
+                                                this.inviteUser(
+                                                    e,
+                                                    result.userId
+                                                )
+                                            }
+                                        >
+                                            Invite
+                                        </button>
+                                    )}
                                 </td>
                             </tr>
                         ))}

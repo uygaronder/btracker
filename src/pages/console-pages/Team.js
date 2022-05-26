@@ -20,7 +20,7 @@ class Team extends React.Component {
     }
 
     contactServer(action, id, team) {
-        //add are you sure prompt to dele
+        //add are you sure prompt to delete
         fetch(`${apiUrl}/${action}`, {
             method: "post",
             credentials: "include",
@@ -130,7 +130,10 @@ class Team extends React.Component {
                                             return (
                                                 <tr>
                                                     <th>{invite.name}</th>
-                                                    <th>buttons</th>
+                                                    <th className="buttons">
+                                                        <button>Accept</button>
+                                                        <button>Ignore</button>
+                                                    </th>
                                                 </tr>
                                             );
                                         }

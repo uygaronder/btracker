@@ -208,7 +208,14 @@ class Dashboard extends React.Component {
                                     Date.parse(bug.due) > Date.now()
                             );
                             break;
-
+                        case "week":
+                            this.state.bugs = this.state.bugs.filter(
+                                (bug) =>
+                                    Date.parse(bug.due) >
+                                        Date.now() + 1000 * 60 * 60 * 24 * 1 &&
+                                    Date.parse(bug.due) <
+                                        Date.now() + 1000 * 60 * 60 * 24 * 7
+                            );
                             break;
                     }
                     break;
@@ -323,21 +330,6 @@ class Dashboard extends React.Component {
                                     Ongoing
                                 </p>
                             </span>
-                            {/* <span
-                                className="filter closeFilter"
-                                id="closedFB"
-                                onClick={() =>
-                                    this.applyFilter(
-                                        "closedFB",
-                                        "closed",
-                                        "status"
-                                    )
-                                }
-                            >
-                                <p>
-                                    <strong>{this.state.closed}</strong> Closed
-                                </p>
-                            </span> */}
                             <span
                                 className="filter inReviewFilter"
                                 id="inReviewFB"
@@ -491,6 +483,7 @@ class Dashboard extends React.Component {
                             {this.props.consoleState.team.feed
                                 .slice(0, 20)
                                 .map((item) => {
+                                    console.log(item);
                                     const dateObj = new Date(item.date);
                                     const date = dateObj.toLocaleDateString();
                                     const time = dateObj.toLocaleTimeString(

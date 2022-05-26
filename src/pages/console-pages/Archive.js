@@ -26,8 +26,23 @@ class Archive extends React.Component {
         })
             .then((res) => res.json())
             .then((data) => {
-                this.setState({ loading: false, bugs: data.bugs });
+                this.setState({
+                    loading: false,
+                    bugs: data.bugs,
+                    fBugs: data.bugs,
+                });
             });
+    }
+
+    filterBugs(e) {
+        console.log(e.target.value);
+        this.state.fBugs = this.state.bugs;
+        const filtered = this.state.bugs.filter((bug) => {
+            return bug.bugTitle
+                .toLowerCase()
+                .includes(e.target.value.toLowerCase());
+        });
+        this.setState({ fBugs: filtered });
     }
 
     componentDidMount() {
@@ -53,6 +68,7 @@ class Archive extends React.Component {
                         <input
                             id="filter"
                             placeholder="Filter labels,ids,etc"
+                            onChange={(e) => this.filterBugs(e)}
                         />
                     </div>
                 </div>
@@ -63,7 +79,7 @@ class Archive extends React.Component {
                         <td>Author</td>
                         <td>Close Date</td>
                     </tr>
-                    {this.state.bugs.map((bug) => {
+                    {this.state.fBugs.map((bug) => {
                         const closeDate = new Date(
                             bug.closeDate
                         ).toLocaleDateString();
