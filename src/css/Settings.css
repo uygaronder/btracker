@@ -19,6 +19,11 @@ h3 , h4{
     padding: 5px;
 }
 
+#settings .setting p{
+    color: white;
+    font-weight: 300;
+}
+
 
 #settings input[type="file"]{
     display: none;
@@ -57,18 +62,18 @@ h3 , h4{
     margin: auto
 }
 
-#settings #labels{
+#settings .labels{
     display: flex;
     margin-top: 12px;
 }
 
-#settings #labels label{
+#settings .labels .label{
     font-size: .7rem;
     cursor: pointer;
     position: relative;
 }
 
-#settings #labels > div input[type="color"]{
+#settings .labels > div input[type="color"]{
     position: absolute;
     opacity: 0;
     z-index: -100;
@@ -98,4 +103,9 @@ h3 , h4{
 
 #settings .buttons button:last-of-type:hover{
     background-color: var(--redDarker);
+}
+
+#settings .selectedToDel{
+    opacity: .4;
+    background-color: red !important;
 }
