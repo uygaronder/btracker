@@ -19,9 +19,28 @@ h3 , h4{
     padding: 5px;
 }
 
+#settings .setting p{
+    color: white;
+    font-weight: 300;
+}
+
 
 #settings input[type="file"]{
     display: none;
+}
+
+#settings input[type="submit"]{
+    background-color: var(--green);
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 12px;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+#settings input[type="submit"]:hover{
+    background-color: var(--greenDarker);
 }
 
 #settings .changeAvatar{
@@ -41,4 +60,52 @@ h3 , h4{
 #settings .changeAvatar .avatar img{
     width: 100%;
     margin: auto
+}
+
+#settings .labels{
+    display: flex;
+    margin-top: 12px;
+}
+
+#settings .labels .label{
+    font-size: .7rem;
+    cursor: pointer;
+    position: relative;
+}
+
+#settings .labels > div input[type="color"]{
+    position: absolute;
+    opacity: 0;
+    z-index: -100;
+}
+
+#settings .buttons{
+    margin-top: 12px;
+}
+
+#settings .buttons button{
+    background-color: var(--green);
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    margin-right: 5px;
+    border-radius: 6px;
+}
+
+#settings .buttons button:hover{
+    background-color: var(--greenDarker);
+}
+
+#settings .buttons button:last-of-type{
+    background-color: var(--red);
+}
+
+#settings .buttons button:last-of-type:hover{
+    background-color: var(--redDarker);
+}
+
+#settings .selectedToDel{
+    opacity: .4;
+    background-color: red !important;
 }

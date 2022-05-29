@@ -110,6 +110,15 @@ a {
     background-image: url("../res/svg/user.svg");
     background-color: white;
     border-radius: 50%;
+    align-items: center;
+        overflow: hidden;
+}
+
+.avatar img {
+    height: 100%;
+    width: 100%;
+    filter: none;
+    transform: none;
 }
 
 /* table */
