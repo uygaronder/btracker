@@ -152,6 +152,13 @@
     max-width: 10ch;
     padding: 0 3px;
 }
+
+#team table .invite th{
+    max-width: 110ch;
+    padding: 0 3px;
+}
+
+
 #team #teamTabs table .user th:last-of-type{
     width: 5px;
 }
@@ -180,6 +187,14 @@
 
 #team table th img{
     filter: var(--svgFilter);
+}
+
+#team table .invite {
+    border-top: 1px solid var(--borderColor);
+}
+
+#team .invite:first-of-type {
+    margin-top: 51px;
 }
 
 #team .buttons{

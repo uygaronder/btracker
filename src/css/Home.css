@@ -63,27 +63,47 @@ body #home {
     display: flex;
     height: calc(100vh - 50px);
     position: relative;
+    align-items: center;
 }
 
 #home #hero > div:first-of-type {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: white;
 }
 
 #home #hero div:first-of-type p {
     margin: 5px 0;
     opacity: 0.7;
     font-size: 1.4rem;
-    font-weight: 300;
+    width: 80%;
 }
 
 #home #hero h2 {
     font-size: 3rem;
 }
 
+#home #hero #heroCTA {
+    width: 55vw;
+    background-color: rgba(63, 63, 63, 0.747);
+    padding: 0 20px;
+    height: 50%;
+    border-radius: 6px;
+}
+
+#home #hero #heroImage {
+    position: absolute;
+    z-index: -10;
+    right: 0;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
 #home #hero img {
     width: 55vw;
+    border-radius: 6px;
 }
 
 #home #hero button {
@@ -117,6 +137,74 @@ body #home {
 
 /* feature section */
 
-#home #features #featureHero{
-    background-color: red;
+#home #features h3{
+    font-size: 2rem;
+}
+
+#home #features h3, #home #features h2{
+    margin-bottom: 12px;
+}
+
+#home #features p{
+    font-size: 1.3rem;
+}
+
+#home #features .featureHero{
+    margin: 30px 30%;
+}
+
+#home #features .featureHero h2{
+    font-size: 2.2rem;
+}
+
+#home #features .featuresContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+#home #features .featuresContainer > div{
+    display: flex;
+    align-items: center;
+    padding: 25px 20px;
+    box-shadow: 0px 0px 15px rgb(56, 56, 56) inset;
+    border-radius: 12px;
+
+}
+
+#home #features .featuresContainer > div > div{
+    height: 100%;
+}
+
+#home #features .featuresContainer img{
+    height: 100px;
+    width: 100px;
+    margin-right: 15px;
+    padding: 3px;
+}
+
+/* footerCta sect */
+
+#home #footerCTA{
+    display: flex;
+    margin: 50px 0;
+    padding: 50px 25px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#home #footerCTA h2{
+    font-size: 3.5rem;
+    width: 8ch;
+}
+
+#home #footerCTA button{
+    color: white;
+    border: none;
+    padding: 11px 25px;
+    margin-top: 15px;
+    background: rgb(111, 197, 128);
+    background: var(--BGGradient);
+    font-size: 1.5rem;
+    font-weight: 700;
 }
