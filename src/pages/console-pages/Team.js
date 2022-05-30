@@ -118,7 +118,7 @@ class Team extends React.Component {
                                         );
                                     }
                                 )}
-                                <div>
+                                <div id="inviteButton">
                                     <Link to="invite">
                                         <button>Invite New People</button>
                                     </Link>

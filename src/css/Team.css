@@ -123,6 +123,10 @@
     cursor: pointer;
 }
 
+#team #inviteButton{
+    margin-bottom: 12px;
+}
+
 #team .invite{
     display: flex;
     align-items: center;
