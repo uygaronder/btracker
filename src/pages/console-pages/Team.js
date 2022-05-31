@@ -171,7 +171,9 @@ class Team extends React.Component {
                                     placeholder="New Project Name"
                                     required
                                 />
-                                <button>New Project</button>
+                                <button id="newProjectButton">
+                                    New Project
+                                </button>
                             </form>
                         </div>
 

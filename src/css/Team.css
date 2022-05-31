@@ -140,6 +140,10 @@
     background-color: var(--greenDarker);
 }
 
+#team > div #inviteButton button:hover, #team #newProjectButton:hover{
+    background-color: var(--greenDarker);
+}
+
 #team .buttons button:last-of-type {
     background-color: var(--red);
 }
