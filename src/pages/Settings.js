@@ -74,11 +74,10 @@ class Settings extends React.Component {
 
     resetDelete() {
         const elements = document.getElementsByClassName("selectedToDel");
-
-        for (var i = 0; i < elements.length; i++) {
+        const len = elements.length;
+        for (var i = 0; i < len; i++) {
             elements[0].classList.remove("selectedToDel");
         }
-
         this.setState({ deleteOrders: [], labelDeleteUpdate: Math.random() });
     }
 

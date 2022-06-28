@@ -137,14 +137,14 @@ function confirmationBox(action, id, state) {
             break;
         case "openBug":
             document.getElementById("confirmationP").innerText =
-                "Are you sure you want to open this bug?";
+                "Are you sure you want to reopen this bug?";
             document.getElementById("confirmButton").onclick = () => {
                 confirmedAction(action, id, state);
             };
             break;
         case "markBugOpen":
             document.getElementById("confirmationP").innerText =
-                "Are you sure you want to open this bug?";
+                "Are you sure you want to mark this bug open?";
             document.getElementById("confirmButton").onclick = () => {
                 confirmedAction(action, id, state);
             };

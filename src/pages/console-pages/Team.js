@@ -64,6 +64,26 @@ class Team extends React.Component {
         e.target.parentNode.appendChild(prompt);
     }
 
+    ignoreUserRequest(id, e) {
+        fetch(`${apiUrl}/ignoreUserRequest`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: `${id}`,
+                activeTeam: this.props.consoleState.activeTeam,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    document.getElementById(id + "divId").remove();
+                }
+            });
+    }
+
     render() {
         return (
             <div id="team">
@@ -127,8 +147,9 @@ class Team extends React.Component {
                                 {this.props.consoleState.team.invites &&
                                     this.props.consoleState.team.invites.map(
                                         (invite) => {
+                                            let id = invite.id + "divId";
                                             return (
-                                                <tr className="invite">
+                                                <tr className="invite" id={id}>
                                                     <th>
                                                         <div className="avatar">
                                                             {invite.avatar && (
@@ -143,7 +164,16 @@ class Team extends React.Component {
                                                     <th>{invite.name}</th>
                                                     <th className="buttons">
                                                         <button>Accept</button>
-                                                        <button>Ignore</button>
+                                                        <button
+                                                            onClick={(e) =>
+                                                                this.ignoreUserRequest(
+                                                                    invite.id,
+                                                                    e
+                                                                )
+                                                            }
+                                                        >
+                                                            Ignore
+                                                        </button>
                                                     </th>
                                                 </tr>
                                             );
