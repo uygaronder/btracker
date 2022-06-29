@@ -225,6 +225,12 @@
     box-shadow: var(--insetBoxShadow);
     border-radius: 3px;
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#morePrompt > *{
+    margin: 2px;
 }
 
 #morePrompt p{

@@ -34,7 +34,31 @@ class Team extends React.Component {
         });
     }
 
-    userPrompt(e, item, contactServer) {
+    removeUser(id, team, state) {
+        console.log(state);
+        if ((id = this.props.consoleState._id)) {
+            return;
+        }
+        /*fetch(`${apiUrl}/removeUser`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: `${id[0]}`,
+                activeTeam: team,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    document.getElementById("user" + id).remove();
+                }
+            });*/
+    }
+
+    userPrompt(e, item, contactServer, removeUser) {
         const team = this.props.consoleState.activeTeam;
         const prompt = document.createElement("div");
 
@@ -45,6 +69,17 @@ class Team extends React.Component {
             contactServer("changeRole", item, team);
         };
         prompt.appendChild(userRole);
+
+        const userRemove = document.createElement("p");
+        userRemove.innerText = "Remove User";
+        userRemove.onclick = function () {
+            removeUser(item, team, this.props.consoleState);
+        };
+
+        console.log(this.props.consoleState);
+        console.log(item);
+        if (this.props.consoleState.usrId != item[0])
+            prompt.appendChild(userRemove);
 
         e.target.parentNode.appendChild(prompt);
     }
@@ -84,12 +119,39 @@ class Team extends React.Component {
             });
     }
 
+    acceptUserRequest(id, e) {
+        fetch(`${apiUrl}/acceptUserRequest`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: `${id}`,
+                activeTeam: this.props.consoleState.activeTeam,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    window.location.reload();
+                }
+            });
+    }
+
+    leaveTeam() {
+        console.log("leave Team");
+    }
+
     render() {
         return (
             <div id="team">
                 {!this.props.newUser && (
                     <div id="teamHeader">
                         <h3>{this.props.consoleState.team.name}</h3>
+                        <button onClick={() => this.leaveTeam()}>
+                            Leave Team
+                        </button>
                     </div>
                 )}
 
@@ -106,9 +168,14 @@ class Team extends React.Component {
 
                                 {this.props.consoleState.team.users.map(
                                     (user) => {
+                                        console.log(user);
                                         return (
-                                            <tr className="user">
+                                            <tr
+                                                className="user"
+                                                id={"user" + user[0]}
+                                            >
                                                 <th>
+                                                    {/* avatar is not stored in the user array this is a bug */}
                                                     <div className="avatar">
                                                         {user.avatar && (
                                                             <img
@@ -118,6 +185,7 @@ class Team extends React.Component {
                                                             ></img>
                                                         )}
                                                     </div>
+                                                    {/* ------------------------- */}
                                                 </th>
                                                 <th>{user[2]}</th>
                                                 <th>{user[1]}</th>
@@ -128,7 +196,8 @@ class Team extends React.Component {
                                                                 e,
                                                                 user,
                                                                 this
-                                                                    .contactServer
+                                                                    .contactServer,
+                                                                this.removeUser
                                                             )
                                                         }
                                                         src={more}
@@ -163,7 +232,16 @@ class Team extends React.Component {
                                                     </th>
                                                     <th>{invite.name}</th>
                                                     <th className="buttons">
-                                                        <button>Accept</button>
+                                                        <button
+                                                            onClick={(e) =>
+                                                                this.acceptUserRequest(
+                                                                    invite.id,
+                                                                    e
+                                                                )
+                                                            }
+                                                        >
+                                                            Accept
+                                                        </button>
                                                         <button
                                                             onClick={(e) =>
                                                                 this.ignoreUserRequest(

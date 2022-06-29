@@ -37,7 +37,7 @@ class NewTeam extends React.Component {
             });
     }
 
-    join(teamId) {
+    join(teamId, e) {
         fetch(`${apiUrl}/joinTeam`, {
             method: "post",
             credentials: "include",
@@ -47,7 +47,13 @@ class NewTeam extends React.Component {
             body: JSON.stringify({
                 team: teamId,
             }),
-        });
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    e.target.innerText = "Sent";
+                }
+            });
     }
 
     acceptInvite(teamId) {
@@ -83,7 +89,6 @@ class NewTeam extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <div id="newTeam">
                 <div id="teamOpt">
@@ -127,9 +132,10 @@ class NewTeam extends React.Component {
                                                 ).length == 0 && (
                                                     <button
                                                         id={team.teamId}
-                                                        onClick={() => {
+                                                        onClick={(e) => {
                                                             this.join(
-                                                                team.teamId
+                                                                team.teamId,
+                                                                e
                                                             );
                                                         }}
                                                     >
