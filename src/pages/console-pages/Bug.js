@@ -51,7 +51,7 @@ function renderComment(comments, state, data) {
                     >
                         <form
                             className={`replyTextbox`}
-                            action={`${apiUrl}/postReply`}
+                            action={`${apiUrl}/bug/postReply`}
                             method="post"
                         >
                             <textarea
@@ -182,7 +182,7 @@ function confirmationBox(action, id, state) {
 
 function followBug(data, state) {
     console.log(state);
-    fetch(`${apiUrl}/followBug`, {
+    fetch(`${apiUrl}/bug/followBug`, {
         method: "post",
         credentials: "include",
         headers: {
@@ -197,7 +197,7 @@ function followBug(data, state) {
 
 function confirmedAction(action, id, state) {
     console.log(id, state.activeProject);
-    fetch(`${apiUrl}/${action}`, {
+    fetch(`${apiUrl}/bug/${action}`, {
         method: "post",
         credentials: "include",
         headers: {
@@ -231,7 +231,7 @@ const Bug = ({ consoleState, archive }) => {
     const [data, setData] = useState();
     const [preview, setPreview] = useState();
     useEffect(() => {
-        fetch(`${apiUrl}/${archive ? `getArchivedBug` : `getBug`}`, {
+        fetch(`${apiUrl}/bug/${archive ? `getArchivedBug` : `getBug`}`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -266,7 +266,7 @@ const Bug = ({ consoleState, archive }) => {
 
     async function handleSubmit(e) {
         try {
-            await fetch(`${apiUrl}/uploadImage`, {
+            await fetch(`${apiUrl}/bug/uploadImage`, {
                 method: "POST",
                 body: JSON.stringify({
                     data: preview,
@@ -514,7 +514,7 @@ const Bug = ({ consoleState, archive }) => {
             <form
                 id="addComment"
                 method="post"
-                action={`${apiUrl}/postComment`}
+                action={`${apiUrl}/bug/postComment`}
             >
                 <textarea
                     id="commentBox"

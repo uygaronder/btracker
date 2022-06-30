@@ -33,7 +33,7 @@ class InvitePeople extends React.Component {
 
     inviteUser(e, id) {
         if (!e.target.classList.contains("sent")) {
-            fetch(`${apiUrl}/inviteUser`, {
+            fetch(`${apiUrl}/team/inviteUser`, {
                 method: "post",
                 credentials: "include",
                 headers: {

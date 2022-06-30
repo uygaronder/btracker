@@ -14,7 +14,7 @@ class Archive extends React.Component {
     }
 
     fetchArchive() {
-        fetch(`${apiUrl}/getArchivedBugs`, {
+        fetch(`${apiUrl}/bug/getArchivedBugs`, {
             method: "post",
             credentials: "include",
             headers: {

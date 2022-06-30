@@ -15,7 +15,7 @@ const register = function () {
                 You can register down below or if you already have an account{" "}
                 <Link to="/login">sign in</Link>
             </p>
-            <form method="post" action={`${apiUrl}/register`}>
+            <form method="post" action={`${apiUrl}/login/register`}>
                 <span className="formText">
                     <input
                         type={"text"}

@@ -17,7 +17,7 @@ class Bugs extends React.Component {
         this.state = {
             key: 0,
             loading: true,
-            thumbnail:true
+            thumbnail: true,
         };
     }
 
@@ -26,7 +26,7 @@ class Bugs extends React.Component {
             this.props.consoleState.activeProject != undefined
                 ? this.props.consoleState.activeProject
                 : "";
-        fetch(`${apiUrl}/getProjectInfo`, {
+        fetch(`${apiUrl}/console/getProjectInfo`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -119,7 +119,7 @@ class Bugs extends React.Component {
     }
 
     commit(changes, project, state) {
-        fetch(`${apiUrl}/commit`, {
+        fetch(`${apiUrl}/bug/commit`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -130,29 +130,32 @@ class Bugs extends React.Component {
                 projectId: project,
                 state: state,
             }),
-        }).then(() => {
-            window.location.reload();
-        });
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    window.location.reload();
+                }
+            });
     }
 
     drop(e) {
         e.preventDefault();
         let data = e.dataTransfer.getData("bugDiv");
 
-        const divs = ["openBugs", "ongoingBugs", "closeBugs", "inReview"]
+        const divs = ["openBugs", "ongoingBugs", "closeBugs", "inReview"];
         let bugsDiv = e.target;
-        console.log(!e.target.id)
-        if(e.target.id && divs.includes(e.target.id)){
+        console.log(!e.target.id);
+        if (e.target.id && divs.includes(e.target.id)) {
             bugsDiv = document
-            .getElementById(e.target.id)
-            .getElementsByClassName("bugsDiv")[0];
+                .getElementById(e.target.id)
+                .getElementsByClassName("bugsDiv")[0];
         } else {
-            while(!bugsDiv.classList.contains("bugsDiv")) {
-                bugsDiv = bugsDiv.parentNode
+            while (!bugsDiv.classList.contains("bugsDiv")) {
+                bugsDiv = bugsDiv.parentNode;
             }
         }
-        
-        
+
         this.state.changes = this.state.changes.filter(
             (change) => change[0] != data
         );
@@ -213,7 +216,15 @@ class Bugs extends React.Component {
                             );
                         })}
                     </div>
-                    {(bug.pictures && bug.pictures.length > 0 && this.state.thumbnail) && <img className="thumbnail" src={bug.pictures[0]} draggable="false"/>}
+                    {bug.pictures &&
+                        bug.pictures.length > 0 &&
+                        this.state.thumbnail && (
+                            <img
+                                className="thumbnail"
+                                src={bug.pictures[0]}
+                                draggable="false"
+                            />
+                        )}
                     <div className="bugDescription">
                         <p>{bug.description}</p>
                     </div>

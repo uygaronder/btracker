@@ -1,4 +1,4 @@
-import React,  {useState} from "react";
+import React, { useState } from "react";
 import "../../css/SubmitBug.css";
 var apiUrl = process.env.REACT_APP_APIURL;
 class Submit extends React.Component {
@@ -8,9 +8,8 @@ class Submit extends React.Component {
             labelsString: !this.props.bug
                 ? ""
                 : this.props.bug.labels.map((label) => label).join(","),
-            images: []
+            images: [],
         };
-        
     }
     closeSubmit = () => {
         document.getElementById("submitBugPopup").classList.add("submitClosed");
@@ -41,7 +40,7 @@ class Submit extends React.Component {
                 </div>
                 <form
                     method="post"
-                    action={`${apiUrl}/${
+                    action={`${apiUrl}/bug/${
                         this.props.bug ? "editBug" : "postBug"
                     }`}
                     autoComplete="off"
@@ -114,7 +113,11 @@ class Submit extends React.Component {
                     ) : (
                         <input type={"hidden"} />
                     )}
-                    <input type={"submit"} value="Submit Bug" onClick={()=>this.checkAndSendImages()}/>
+                    <input
+                        type={"submit"}
+                        value="Submit Bug"
+                        onClick={() => this.checkAndSendImages()}
+                    />
                 </form>
             </div>
         );

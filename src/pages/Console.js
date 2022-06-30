@@ -49,7 +49,7 @@ class Console extends React.Component {
 
     darkmodeApi = () => {
         const darkCheck = document.getElementById("darkCheck");
-        fetch(`${apiUrl}/darkmode`, {
+        fetch(`${apiUrl}/settings/darkmode`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -84,7 +84,7 @@ class Console extends React.Component {
                 window.location.href = `${APP_URL}/console/newTeam`;
                 break;
             default:
-                fetch(`${apiUrl}/changeTeam`, {
+                fetch(`${apiUrl}/console/changeTeam`, {
                     method: "post",
                     credentials: "include",
                     headers: {
@@ -93,7 +93,13 @@ class Console extends React.Component {
                     body: JSON.stringify({
                         teamId: document.getElementById("teamSelect").value,
                     }),
-                }).then((window.location.href = `${APP_URL}/console`));
+                })
+                    .then((res) => res.text())
+                    .then((data) => {
+                        if (data == "success") {
+                            window.location.reload();
+                        }
+                    });
                 break;
         }
     };
@@ -114,7 +120,7 @@ class Console extends React.Component {
                 window.location.href = `${APP_URL}/console/team`;
                 break;
             default:
-                fetch(`${apiUrl}/changeProject`, {
+                fetch(`${apiUrl}/console/changeProject`, {
                     method: "post",
                     credentials: "include",
                     headers: {
@@ -124,14 +130,22 @@ class Console extends React.Component {
                         projectId:
                             document.getElementById("projectSelect").value,
                     }),
-                }).then((window.location.href = `${APP_URL}/console`));
+                })
+                    .then((res) => res.text())
+                    .then((data) => {
+                        if (data == "success") {
+                            window.location.reload();
+                        }
+                    });
                 break;
         }
     };
 
     fetchInfo = async () => {
         var response;
-        await fetch(`${apiUrl}/getConsoleInfo`, { credentials: "include" })
+        await fetch(`${apiUrl}/console/getConsoleInfo`, {
+            credentials: "include",
+        })
             .then((res) => res.json())
             .then((data) => (response = data));
         console.log(response);
@@ -371,7 +385,7 @@ class Console extends React.Component {
                                         </li>
                                         <li>
                                             <form
-                                                action={`${apiUrl}/logout?_method=DELETE`}
+                                                action={`${apiUrl}/login/logout?_method=DELETE`}
                                                 method="post"
                                             >
                                                 <button type="submit">

@@ -14,7 +14,7 @@ const sign = function () {
                 You can sign in below or{" "}
                 <Link to="/login/register">register</Link> a new account
             </p>
-            <form method="POST" action={`${apiUrl}/login`}>
+            <form method="POST" action={`${apiUrl}/login/login`}>
                 <span className="formText">
                     <input
                         type={"text"}

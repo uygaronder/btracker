@@ -39,7 +39,7 @@ class Team extends React.Component {
         if ((id = this.props.consoleState._id)) {
             return;
         }
-        /*fetch(`${apiUrl}/removeUser`, {
+        /*fetch(`${apiUrl}/team/removeUser`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -100,7 +100,7 @@ class Team extends React.Component {
     }
 
     ignoreUserRequest(id, e) {
-        fetch(`${apiUrl}/ignoreUserRequest`, {
+        fetch(`${apiUrl}/team/ignoreUserRequest`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -120,7 +120,7 @@ class Team extends React.Component {
     }
 
     acceptUserRequest(id, e) {
-        fetch(`${apiUrl}/acceptUserRequest`, {
+        fetch(`${apiUrl}/team/acceptUserRequest`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -270,7 +270,7 @@ class Team extends React.Component {
                             )}
                             <form
                                 method="post"
-                                action={`${apiUrl}/createProject`}
+                                action={`${apiUrl}/team/createProject`}
                             >
                                 <input
                                     type="text"

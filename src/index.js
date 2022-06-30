@@ -49,7 +49,7 @@ function ProtectedRoute({ toSend, loggedIn, children }) {
     useEffect(() => {
         const auth = async () => {
             try {
-                const promise = await fetch(`${apiUrl}/auth`, {
+                const promise = await fetch(`${apiUrl}/login/auth`, {
                     credentials: "include",
                 }).then((res) => res.json());
                 setAuth(promise.err === 0 ? true : false);

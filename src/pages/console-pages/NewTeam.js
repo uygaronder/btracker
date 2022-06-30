@@ -38,7 +38,7 @@ class NewTeam extends React.Component {
     }
 
     join(teamId, e) {
-        fetch(`${apiUrl}/joinTeam`, {
+        fetch(`${apiUrl}/team/joinTeam`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -57,7 +57,7 @@ class NewTeam extends React.Component {
     }
 
     acceptInvite(teamId) {
-        fetch(`${apiUrl}/acceptTeamInvite`, {
+        fetch(`${apiUrl}/team/acceptTeamInvite`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -72,7 +72,7 @@ class NewTeam extends React.Component {
     }
 
     ignoreTeamInvite(teamId) {
-        fetch(`${apiUrl}/ignoreTeamInvite`, {
+        fetch(`${apiUrl}/team/ignoreTeamInvite`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -152,7 +152,10 @@ class NewTeam extends React.Component {
                     <div id="createAndInvitations">
                         <div id="createTeam">
                             <h2>Create Team</h2>
-                            <form method="post" action={`${apiUrl}/createTeam`}>
+                            <form
+                                method="post"
+                                action={`${apiUrl}/team/createTeam`}
+                            >
                                 <div className="formField">
                                     <input
                                         className="CustomInput"

@@ -51,13 +51,61 @@ class Settings extends React.Component {
         }
     }
 
+    saveLabelColorChanges() {
+        fetch(`${apiUrl}/settings/saveLabelColorChanges`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                changes: this.state.labelColorChanges,
+                activeTeam: this.props.consoleState.activeTeam,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    window.location.reload();
+                }
+            });
+    }
+
+    deleteSelectedLabels() {
+        console.log(this.state.deleteOrders);
+        fetch(`${apiUrl}/deleteSelectedLabels`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                toDelete: this.state.deleteOrders,
+                activeTeam: this.props.consoleState.activeTeam,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    window.location.reload();
+                }
+            });
+    }
+
     labelColorChanged(e, key) {
         const id = e.target.id + "Label";
         const label = document.getElementById(id);
         label.style.backgroundColor = e.target.value;
-        this.state.labelColorChanges[key] = e.target.value;
+        this.state.labelColorChanges[key] = this.hexToRGB(e.target.value);
         this.setState({ colorChangeUpdate: Math.random() });
         console.log(this.state.labelColorChanges);
+    }
+
+    hexToRGB(hex) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgb(${r}, ${g}, ${b})`;
     }
 
     resetLabels() {
@@ -167,7 +215,13 @@ class Settings extends React.Component {
                                 {Object.keys(this.state.labelColorChanges)
                                     .length > 0 && (
                                     <div className="buttons">
-                                        <button>Save Changes</button>
+                                        <button
+                                            onClick={() =>
+                                                this.saveLabelColorChanges()
+                                            }
+                                        >
+                                            Save Changes
+                                        </button>
                                         <button
                                             onClick={() => {
                                                 this.resetLabels();
@@ -223,7 +277,13 @@ class Settings extends React.Component {
                             <div key={this.state.labelDeleteUpdate}>
                                 {this.state.deleteOrders.length > 0 && (
                                     <div className="buttons">
-                                        <button>Delete Selected </button>
+                                        <button
+                                            onClick={() => {
+                                                this.deleteSelectedLabels();
+                                            }}
+                                        >
+                                            Delete Selected{" "}
+                                        </button>
                                         <button
                                             onClick={() => {
                                                 this.resetDelete();

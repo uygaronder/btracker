@@ -58,7 +58,7 @@ class Dashboard extends React.Component {
             window.location.href = `${APP_URL}/console/addProject`;
         }
 
-        fetch(`${apiUrl}/getProjectInfo`, {
+        fetch(`${apiUrl}/console/getProjectInfo`, {
             method: "post",
             credentials: "include",
             headers: {
