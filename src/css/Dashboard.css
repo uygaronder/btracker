@@ -317,16 +317,19 @@
 #dashboard #bugFilters .overdueFilter{
     background-color: var(--statusOverFont);
     border-color: var(--statusOverFont);
+    text-transform: capitalize;
 }
 
 #dashboard #bugFilters .dayFilter{
     background-color: var(--statusDayFont);
     border-color: var(--statusDayFont);
+    text-transform: capitalize;
 }
 
 #dashboard #bugFilters .weekFilter{
     background-color: var(--statusWeekFont);
     border-color: var(--statusWeekFont);
+    text-transform: capitalize;
 }
 
 #dashboard #dashboardStats #bugFilters button{
@@ -347,6 +350,7 @@
 
 #dashboard #bugFilters #teamFilters{
     position: relative;
+    
 }
 
 #dashboard #bugFilters .teamFilter{
@@ -368,6 +372,7 @@
     border-radius: 12px;
     flex-wrap: wrap;
     padding: 5px;
+    text-transform: capitalize;
 }
 
 #dashboard #bugFilters #teamFiltersContainer #emptyFiltersPrompt{

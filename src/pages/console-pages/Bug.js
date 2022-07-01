@@ -479,15 +479,19 @@ const Bug = ({ consoleState, archive }) => {
                     ) : (
                         <div />
                     )}
-
                     <div id="assignedButtons">
-                        <button>
-                            <img src={assign} /> Assign This Bug
-                        </button>
-                        <button>
-                            <img className="down" src={chevronUp} /> Self Assign
-                            This Bug
-                        </button>
+                        {!archive && (
+                            <button>
+                                <img src={assign} /> Assign This Bug
+                            </button>
+                        )}
+                        {!archive && (
+                            <button>
+                                <img className="down" src={chevronUp} /> Self
+                                Assign This Bug
+                            </button>
+                        )}
+
                         <button
                             onClick={() => {
                                 confirmationBox(
@@ -510,30 +514,31 @@ const Bug = ({ consoleState, archive }) => {
                     </div>
                 </div>
             </div>
-
-            <form
-                id="addComment"
-                method="post"
-                action={`${apiUrl}/bug/postComment`}
-            >
-                <textarea
-                    id="commentBox"
-                    name="comment"
-                    placeholder="Type a comment"
-                />
-                <input type={"hidden"} name={"bugId"} value={data._id} />
-                <input
-                    type={"hidden"}
-                    name={"project"}
-                    value={consoleState.activeProject}
-                />
-                <input
-                    type={"hidden"}
-                    name={"name"}
-                    value={consoleState.usrName}
-                />
-                <button type={"submit"}>Post Comment</button>
-            </form>
+            {!archive && (
+                <form
+                    id="addComment"
+                    method="post"
+                    action={`${apiUrl}/bug/postComment`}
+                >
+                    <textarea
+                        id="commentBox"
+                        name="comment"
+                        placeholder="Type a comment"
+                    />
+                    <input type={"hidden"} name={"bugId"} value={data._id} />
+                    <input
+                        type={"hidden"}
+                        name={"project"}
+                        value={consoleState.activeProject}
+                    />
+                    <input
+                        type={"hidden"}
+                        name={"name"}
+                        value={consoleState.usrName}
+                    />
+                    <button type={"submit"}>Post Comment</button>
+                </form>
+            )}
 
             <div id="comments">
                 <h3>Comments</h3>

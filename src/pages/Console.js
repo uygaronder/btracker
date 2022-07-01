@@ -49,7 +49,7 @@ class Console extends React.Component {
 
     darkmodeApi = () => {
         const darkCheck = document.getElementById("darkCheck");
-        fetch(`${apiUrl}/settings/darkmode`, {
+        fetch(`${apiUrl}/console/darkmode`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -68,6 +68,9 @@ class Console extends React.Component {
         this.darkCheck.checked
             ? consoleDiv.classList.add("dark")
             : consoleDiv.classList.remove("dark");
+        this.darkCheck.checked
+            ? consoleDiv.classList.remove("light")
+            : consoleDiv.classList.add("light");
     };
 
     handleConsoleDropdown = () => {
@@ -402,44 +405,49 @@ class Console extends React.Component {
                 <div id="screen">
                     <div id="sideNav">
                         <ul>
-                            <li>
-                                <Link to="/console/dashboard">
+                            <Link className="link" to="/console/dashboard">
+                                <span>
                                     <img src={dashboard} alt="Home" />
                                     <p>Dashboard</p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/console/bugs">
+                                </span>
+                            </Link>
+
+                            <Link className="link" to="/console/bugs">
+                                <span>
                                     <img src={bug} alt="Bugs" />
                                     <p>Bugs</p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/console/archive">
+                                </span>
+                            </Link>
+
+                            <Link className="link" to="/console/archive">
+                                <span>
                                     <img src={archive} alt="Archive" />
                                     <p>Archive</p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="*">
+                                </span>
+                            </Link>
+                            {/* 
+                            <Link className="link" to="*">
+                                <span>
                                     <img src={stopwatch} alt="Home" />
                                     <p>Timesheet</p>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="feed">
+                                </span>
+                            </Link>
+                            */}
+
+                            <Link className="link" to="feed">
+                                <span>
                                     <img src={feed} alt="Feed" />
                                     <p>Feed</p>
-                                </Link>
-                            </li>
+                                </span>
+                            </Link>
                         </ul>
                         <ul>
-                            <li>
-                                <Link to="settings">
+                            <Link className="link" to="settings">
+                                <span>
                                     <img src={cog} />
                                     <p>Settings</p>
-                                </Link>
-                            </li>
+                                </span>
+                            </Link>
                         </ul>
                     </div>
                     <div id="consoleScreen">

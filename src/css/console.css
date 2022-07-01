@@ -291,7 +291,7 @@
     flex-direction: column;
 }
 
-#console #sideNav ul li {
+#console #sideNav ul span {
     padding: 5px;
     transition: 0.2s ease;
 }
@@ -306,12 +306,12 @@
 }
 
 
-#console #sideNav ul li:hover {
+#console #sideNav ul span:hover {
     background-color: #00252b;
     cursor: pointer;
 }
 
-#console #sideNav ul li a {
+#console #sideNav ul span {
     margin: 5px 0;
     color: white;
     text-decoration: none;
@@ -319,11 +319,16 @@
     flex-direction: column;
     align-items: center;
 }
-#console #sideNav ul li a {
+
+#console #sideNav ul span {
     text-align: center;
 }
 
-#console #sideNav ul li a img {
+#console #sideNav a{
+    text-decoration: none;
+}
+
+#console #sideNav ul span img {
     height: 30px;
     width: 30px;
     filter: brightness(0) invert(1);
@@ -333,6 +338,6 @@
     background-color: #00252b;
 }
 
-#console #sideNav ul li a p {
-    font-size: 0.6rem;
+#console #sideNav ul span p {
+    font-size: 0.75rem;
 }

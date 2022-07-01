@@ -7,6 +7,29 @@ import letter from "../../res/svg/letter.svg";
 const apiUrl = process.env.REACT_APP_APIURL;
 
 const register = function () {
+    function checkUsername(e) {
+        if (document.getElementById("regEmail").value == "") return;
+        fetch(`${apiUrl}/login/usernameCheck`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: document.getElementById("regEmail").value,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                console.log(e.target.parentElement);
+                if (data == "userExists") {
+                    e.target.parentElement.classList.add("userExists");
+                } else {
+                    e.target.parentElement.classList.remove("userExists");
+                }
+            });
+    }
+
     document.title = `BTrack | Register`;
     return (
         <div className="formDiv">
@@ -35,6 +58,7 @@ const register = function () {
                         name="email"
                         placeholder="E-Mail"
                         required
+                        onChange={(e) => checkUsername(e)}
                     />
                     <label htmlFor="email">
                         <img src={at} alt="@" />

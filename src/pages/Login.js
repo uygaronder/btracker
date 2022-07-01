@@ -16,7 +16,7 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <span id="login">
+            <span id="login" className="dark">
                 <div id="loginHero"></div>
                 <div id="loginForm">
                     <Routes>

@@ -92,6 +92,23 @@ html{
     --svgFilter: brightness(0) invert(1);
 }
 
+:root html body .light{
+    --fontColor: #000;
+    --notFont: rgb(172, 172, 172);
+    --backgroundColor: #fff;
+    --dashBackground: #e4e4e4;
+    --borderBottomColor: rgba(0, 0, 0, 0.75);
+    --borderBottomColorLight: rgba(0, 0, 0, 0.25);
+    --insetBoxShadow: inset 0px 0px 10px rgba(128, 128, 128, 0.5);
+    --tableHover: rgb(238, 238, 238);
+    --searchBack: #e0d5e1;
+    --inputBackground: rgb(245, 245, 245);
+    --borderColor: rgba(0, 0, 0, 0.211);
+    --backgroundHover: #ececec;
+
+    --svgFilter: brightness(0);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;

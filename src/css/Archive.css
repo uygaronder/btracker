@@ -5,6 +5,8 @@
     flex-grow: 1;
     padding: 10px;
     color: var(--fontColor);
+    max-height: calc(100vh - 58px);
+    overflow-y: auto;
 }
 
 

@@ -73,7 +73,7 @@ class Settings extends React.Component {
 
     deleteSelectedLabels() {
         console.log(this.state.deleteOrders);
-        fetch(`${apiUrl}/deleteSelectedLabels`, {
+        fetch(`${apiUrl}/settings/deleteSelectedLabels`, {
             method: "post",
             credentials: "include",
             headers: {

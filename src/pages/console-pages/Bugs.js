@@ -153,13 +153,16 @@ class Bugs extends React.Component {
         } else {
             while (!bugsDiv.classList.contains("bugsDiv")) {
                 bugsDiv = bugsDiv.parentNode;
+                console.log(bugsDiv);
             }
         }
 
         this.state.changes = this.state.changes.filter(
             (change) => change[0] != data
         );
-        this.state.changes.push([data, e.target.id]);
+
+        this.state.changes.push([data, bugsDiv.parentNode.id]);
+        console.log(this.state.changes);
         this.commitConfirmation();
         switch (bugsDiv.parentNode.id) {
             case "openBugs":
