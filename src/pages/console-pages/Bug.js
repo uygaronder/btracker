@@ -14,12 +14,20 @@ import del from "../../res/svg/delete.svg";
 import plus from "../../res/svg/plus.svg";
 
 import Submit from "./SubmitBug";
+import AssignBug from "./AssignBug";
 
 var apiUrl = process.env.REACT_APP_APIURL;
 var appUrl = process.env.REACT_APP_APPURL;
 
 function editBug() {
     const submitDiv = document.getElementById("submit");
+    submitDiv.style.display == "none"
+        ? (submitDiv.style.display = "block")
+        : (submitDiv.style.display = "none");
+}
+
+function assignDiv() {
+    const submitDiv = document.getElementById("assign");
     submitDiv.style.display == "none"
         ? (submitDiv.style.display = "block")
         : (submitDiv.style.display = "none");
@@ -481,7 +489,11 @@ const Bug = ({ consoleState, archive }) => {
                     )}
                     <div id="assignedButtons">
                         {!archive && (
-                            <button>
+                            <button
+                                onClick={() => {
+                                    assignDiv();
+                                }}
+                            >
                                 <img src={assign} /> Assign This Bug
                             </button>
                         )}
@@ -511,6 +523,9 @@ const Bug = ({ consoleState, archive }) => {
                         >
                             <img src={edit} /> Edit This Bug
                         </button>
+                        <div id="assign" style={{ display: "none" }}>
+                            <AssignBug consoleState={consoleState} bug={data} />
+                        </div>
                     </div>
                 </div>
             </div>

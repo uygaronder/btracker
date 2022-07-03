@@ -1,0 +1,11 @@
+#assignBug .assignUser{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    padding: 5px 0;
+}
+
+#assignBug .assignUser:first-of-type{
+    margin-top: 5px;
+}
