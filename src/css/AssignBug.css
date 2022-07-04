@@ -2,10 +2,49 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid black;
+    border-top: 1px solid var(--borderColor);
     padding: 5px 0;
+    z-index: 99999;
+}
+
+#assignBug #userSearch{
+    background-color: transparent;
+    color: var(--fontColor);
+    display: flex;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+}
+
+#assignBug #userSearch:focus{
+    outline: none;
 }
 
 #assignBug .assignUser:first-of-type{
     margin-top: 5px;
+}
+
+#bug #assigned #assignedButtons #assignBug .assignUser button{
+    padding: 5px;
+    opacity: 1;
+    border: none;
+    border-radius: 3px;
+    font-weight: 700;
+    color: white;
+}
+
+#bug #assigned #assignedButtons #assignBug .assignUser .assign{
+    background-color: var(--green);
+}
+
+#bug #assigned #assignedButtons #assignBug .assignUser .assign:hover{
+    background-color: var(--greenDarker);
+}
+
+#bug #assigned #assignedButtons #assignBug .assignUser .unassign{
+    background-color: var(--red);
+}
+
+#bug #assigned #assignedButtons #assignBug .assignUser .unassign:hover{
+    background-color: var(--redDarker);
 }

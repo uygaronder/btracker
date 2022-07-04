@@ -49,6 +49,7 @@
 #loginForm p,
 #loginForm h1 {
     text-align: center;
+    color: white;
 }
 
 #loginForm input {

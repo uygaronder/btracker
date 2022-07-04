@@ -126,7 +126,7 @@ function handleReplyDiv(id) {
     document.getElementById(`${id}:tarea`).value = "";
 }
 
-function confirmationBox(action, id, state) {
+function confirmationBox(action, id, state, user) {
     document.getElementById("confirmationBoxDiv").style.display = "flex";
     switch (action) {
         case "deleteBug":
@@ -189,7 +189,6 @@ function confirmationBox(action, id, state) {
 }
 
 function followBug(data, state) {
-    console.log(state);
     fetch(`${apiUrl}/bug/followBug`, {
         method: "post",
         credentials: "include",
@@ -287,7 +286,7 @@ const Bug = ({ consoleState, archive }) => {
             console.error(e);
         }
     }
-
+    console.log(consoleState);
     if (!data) return <Loading />;
     return (
         <div id="bug">
@@ -475,12 +474,15 @@ const Bug = ({ consoleState, archive }) => {
                     </form>
                 </div>
                 <div id="assigned">
-                    {data.assignedTo > 0 ? (
+                    {data.assigned.length > 0 ? (
                         <div id="assignedText">
                             <h4>Assigned To:</h4>
                             <div id="assignedUsers">
                                 {data.assigned.map((person) => {
-                                    return <span>{person}</span>;
+                                    const name = consoleState.team.users.filter(
+                                        (usr) => usr[0] == person
+                                    )[0][2];
+                                    return <span>{name}</span>;
                                 })}
                             </div>
                         </div>
@@ -495,12 +497,6 @@ const Bug = ({ consoleState, archive }) => {
                                 }}
                             >
                                 <img src={assign} /> Assign This Bug
-                            </button>
-                        )}
-                        {!archive && (
-                            <button>
-                                <img className="down" src={chevronUp} /> Self
-                                Assign This Bug
                             </button>
                         )}
 

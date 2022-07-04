@@ -6,10 +6,11 @@ class Assign extends React.Component {
         super(props);
         this.state = {
             users: [],
+            usersFb: [],
         };
     }
 
-    fetchUsers() {
+    fetchUsers(refetch) {
         fetch(`${apiUrl}/bug/fetchUsers`, {
             method: "post",
             credentials: "include",
@@ -21,32 +22,68 @@ class Assign extends React.Component {
             }),
         })
             .then((res) => res.json())
-            .then((data) => this.setState({ users: data.users }));
+            .then((data) => {
+                !refetch
+                    ? this.setState({ users: data.users, usersFb: data.users })
+                    : this.setState({ usersFb: data.users });
+            });
     }
 
     componentWillMount() {
-        this.fetchUsers();
+        this.fetchUsers(false);
     }
 
     userQuery(e) {
-        console.log(e.target.value);
-        console.log(this.state.users);
+        let filteredUsers = this.state.usersFb.filter((user) =>
+            user[2].toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        this.setState({ users: filteredUsers });
     }
 
-    assignUser(user) {}
+    assignUser(user, e) {
+        e.target.onClick = "";
+        if (!this.props.bug.assigned.includes(user)) {
+            fetch(`${apiUrl}/bug/assign`, {
+                method: "post",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    bugId: `${this.props.bug._id}`,
+                    projectId: this.props.consoleState.activeProject,
+                    teamId: this.props.consoleState.activeTeam,
+                    user: user,
+                    assignedBy: this.props.consoleState.usrName,
+                }),
+            })
+                .then((res) => res.text())
+                .then((data) => {
+                    if (data == "success") {
+                        e.target.classList.remove("assign");
+                        e.target.classList.add("unassign");
+                        e.target.innerText = "Unassign";
+                    }
+                });
+        } else {
+        }
+
+        this.fetchUsers(true);
+    }
 
     render() {
-        console.log(this.props.bug);
         return (
             <div id="assignBug">
                 <div>
                     <input
                         type="text"
                         name="userSearch"
+                        id="userSearch"
+                        placeholder="Filter Users"
                         onChange={(e) => this.userQuery(e)}
                     />
 
-                    <div>
+                    <div key={this.state.users}>
                         {this.state.users.map((user) => {
                             return (
                                 <div className="assignUser">
@@ -59,8 +96,8 @@ class Assign extends React.Component {
                                                 ? "assign"
                                                 : "unassign"
                                         }
-                                        onClick={() => {
-                                            this.assignUser(user[0]);
+                                        onClick={(e) => {
+                                            this.assignUser(user, e);
                                         }}
                                     >
                                         {!this.props.bug.assigned.includes(

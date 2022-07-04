@@ -148,6 +148,7 @@
 
 #bug #assigned #assignedText{
     display: flex;
+    margin: 5px 0;
 }
 #bug #assigned #assignedText h4{
     margin-right: 5px;
