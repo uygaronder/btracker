@@ -131,6 +131,7 @@ body #home {
     animation-name: scroll;
     animation-duration: .8s;
     animation-iteration-count: 2;
+    filter: brightness(0) invert(1);
 }
 
 @keyframes scroll {

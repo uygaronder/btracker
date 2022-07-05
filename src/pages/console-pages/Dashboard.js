@@ -50,7 +50,6 @@ class Dashboard extends React.Component {
             this.props.consoleState.activeProject != undefined
                 ? this.props.consoleState.activeProject
                 : "";
-        console.log(this.props.consoleState);
         if (!this.props.consoleState.team) {
             window.location.href = `${APP_URL}/console/gettingStarted`;
         } else if (this.props.consoleState.team.projects.length == 0) {
@@ -483,7 +482,6 @@ class Dashboard extends React.Component {
                             {this.props.consoleState.team.feed
                                 .slice(0, 20)
                                 .map((item) => {
-                                    console.log(item);
                                     const dateObj = new Date(item.date);
                                     const date = dateObj.toLocaleDateString();
                                     const time = dateObj.toLocaleTimeString(

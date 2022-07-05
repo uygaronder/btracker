@@ -326,8 +326,3 @@
     right: 0;
     bottom: 0;
 }
-
-#bug #confirmationBox{
-    color: var(--fontColor);
-    background-color: var(--backgroundColor);
-}

@@ -107,7 +107,7 @@ class Console extends React.Component {
         }
     };
 
-    clearNotifications = () => {
+    clearNotifications() {
         fetch(`${apiUrl}/clearNotifs`, {
             method: "post",
             credentials: "include",
@@ -115,7 +115,7 @@ class Console extends React.Component {
                 "Content-Type": "application/json",
             },
         }).then(this.setState({ notifications: [] }));
-    };
+    }
 
     handleProjectChange = () => {
         switch (document.getElementById("projectSelect").value) {
@@ -151,12 +151,6 @@ class Console extends React.Component {
         })
             .then((res) => res.json())
             .then((data) => (response = data));
-        console.log(response);
-        console.log(
-            response.team.projects.filter(
-                (project) => project[1] == response.user.activeProject
-            )
-        );
 
         let activeProject;
         if (response.team == null) {
@@ -215,6 +209,18 @@ class Console extends React.Component {
     componentDidMount() {
         this.fetchInfo();
         document.title = "Console";
+        const intervalId = setInterval(() => {
+            fetch(`${apiUrl}/console/checkNotifs`, {
+                method: "post",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => this.setState({ notifications: data.notifs }));
+        }, 30000);
+        this.setState({ intervalId });
     }
 
     render() {

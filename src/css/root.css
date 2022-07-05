@@ -446,3 +446,8 @@ table a{
 .labels .high {
     background-color: var(--priorityHigh);
 }
+
+#confirmationBox {
+    color: var(--fontColor);
+    background-color: var(--backgroundColor);
+}
