@@ -41,8 +41,8 @@ class Assign extends React.Component {
     }
 
     assignUser(user, e) {
-        e.target.onClick = "";
-        if (!this.props.bug.assigned.includes(user)) {
+        console.log(user);
+        if (!this.props.bug.assigned.includes(user[0])) {
             fetch(`${apiUrl}/bug/assign`, {
                 method: "post",
                 credentials: "include",
@@ -60,12 +60,28 @@ class Assign extends React.Component {
                 .then((res) => res.text())
                 .then((data) => {
                     if (data == "success") {
-                        e.target.classList.remove("assign");
-                        e.target.classList.add("unassign");
-                        e.target.innerText = "Unassign";
+                        window.location.reload();
                     }
                 });
         } else {
+            fetch(`${apiUrl}/bug/unassign`, {
+                method: "post",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    bugId: `${this.props.bug._id}`,
+                    projectId: this.props.consoleState.activeProject,
+                    user: user,
+                }),
+            })
+                .then((res) => res.text())
+                .then((data) => {
+                    if (data == "success") {
+                        window.location.reload();
+                    }
+                });
         }
 
         this.fetchUsers(true);

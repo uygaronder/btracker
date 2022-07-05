@@ -482,7 +482,11 @@ const Bug = ({ consoleState, archive }) => {
                                     const name = consoleState.team.users.filter(
                                         (usr) => usr[0] == person
                                     )[0][2];
-                                    return <span>{name}</span>;
+                                    return (
+                                        <span className="assignedUser">
+                                            {name}
+                                        </span>
+                                    );
                                 })}
                             </div>
                         </div>

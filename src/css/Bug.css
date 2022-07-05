@@ -141,6 +141,7 @@
 #bug #bugDescDiv{
     padding: 5px 0;
 }
+
 #bug #bugDescDiv p{
     width: 90vw;
     overflow-wrap: break-word;
@@ -150,17 +151,24 @@
     display: flex;
     margin: 5px 0;
 }
+
 #bug #assigned #assignedText h4{
     margin-right: 5px;
 }
+
 #bug #assigned #assignedText #assignedUsers span{
     margin-left: 2px;
+}
+
+#bug #assigned #assignedText #assignedUsers span:not(:last-of-type):after{
+    content: ",";
 }
 
 #bug #assigned #assignedButtons{
     display: flex;
     position: relative;
 }
+
 #bug #assigned #assignedButtons button{
     display: flex;
     align-items: center;
