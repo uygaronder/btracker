@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Search from "../../res/svg/search.svg";
 import more from "../../res/svg/more.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
+var appUrl = process.env.REACT_APP_APPURL;
 class Team extends React.Component {
     componentDidMount() {
         document.addEventListener("mouseup", function (e) {
@@ -45,7 +46,7 @@ class Team extends React.Component {
                     "confirmationP"
                 ).innerText = `Removing user ${id[2]} from ${state.team.name}?`;
                 document.getElementById("confirmButton").onclick = () => {
-                    this.removeUser(id, state, team);
+                    relFunction(id, team, state);
                 };
                 break;
         }
@@ -67,7 +68,7 @@ class Team extends React.Component {
     }
 
     removeUser(id, team, state) {
-        console.log(state);
+        console.log(state, id, team);
         if ((id = state._id)) {
             return;
         }
@@ -90,7 +91,7 @@ class Team extends React.Component {
             });*/
     }
 
-    userPrompt(e, item, contactServer, removeUser, state, confirmationBox) {
+    userPrompt(e, item, contactServer, state, confirmationBox, removeUser) {
         const team = this.props.consoleState.activeTeam;
         const prompt = document.createElement("div");
 
@@ -106,7 +107,7 @@ class Team extends React.Component {
         const userRemove = document.createElement("p");
         userRemove.innerText = "Remove User";
         userRemove.onclick = function () {
-            confirmationBox("removeUser", item, state, team);
+            confirmationBox("removeUser", item, state, team, "", removeUser);
         };
 
         if (this.props.consoleState.usrId != item[0])
@@ -171,7 +172,22 @@ class Team extends React.Component {
     }
 
     leaveTeam() {
-        console.log("leave Team");
+        fetch(`${apiUrl}/team/leaveTeam`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                team: this.props.consoleState.activeTeam,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    window.location.href = `${appUrl}/console`;
+                }
+            });
     }
 
     render() {
@@ -229,11 +245,11 @@ class Team extends React.Component {
                                                                 user,
                                                                 this
                                                                     .contactServer,
-                                                                this.removeUser,
                                                                 this.props
                                                                     .consoleState,
                                                                 this
-                                                                    .confirmationBox
+                                                                    .confirmationBox,
+                                                                this.removeUser
                                                             )
                                                         }
                                                         src={more}

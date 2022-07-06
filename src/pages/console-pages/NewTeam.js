@@ -21,7 +21,7 @@ class NewTeam extends React.Component {
         if (query == "") return;
         this.setState({ teamsLoading: true });
 
-        fetch(`${apiUrl}/searchTeams`, {
+        fetch(`${apiUrl}/team/searchTeams`, {
             method: "post",
             credentials: "include",
             headers: {
