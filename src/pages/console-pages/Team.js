@@ -38,7 +38,7 @@ class Team extends React.Component {
                     id[1] == "member" ? "Lead" : "Member"
                 }?`;
                 document.getElementById("confirmButton").onclick = () => {
-                    relFunction("changeRole", id, team);
+                    relFunction(id, state.team._id);
                 };
                 break;
             case "removeUser":
@@ -101,8 +101,35 @@ class Team extends React.Component {
                 }
             });
     }
+    changeRole(id, team) {
+        fetch(`${apiUrl}/team/changeRole`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: id,
+                team: team,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if ((data = "success")) {
+                    window.location.reload();
+                }
+            });
+    }
 
-    userPrompt(e, item, contactServer, state, confirmationBox, removeUser) {
+    userPrompt(
+        e,
+        item,
+        contactServer,
+        state,
+        confirmationBox,
+        removeUser,
+        changeRole
+    ) {
         const team = this.props.consoleState.activeTeam;
         const prompt = document.createElement("div");
 
@@ -110,7 +137,7 @@ class Team extends React.Component {
         const userRole = document.createElement("p");
         userRole.innerText = "Change user role";
         userRole.onclick = function () {
-            confirmationBox("changeRole", item, state, team);
+            confirmationBox("changeRole", item, state, team, "", changeRole);
             //contactServer("changeRole", item, team);
         };
         prompt.appendChild(userRole);
@@ -310,7 +337,8 @@ class Team extends React.Component {
                                                                     .consoleState,
                                                                 this
                                                                     .confirmationBox,
-                                                                this.removeUser
+                                                                this.removeUser,
+                                                                this.changeRole
                                                             )
                                                         }
                                                         src={more}

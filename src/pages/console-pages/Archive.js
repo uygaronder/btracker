@@ -45,7 +45,6 @@ class Archive extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         this.fetchArchive();
     }
 

@@ -217,8 +217,14 @@ class Console extends React.Component {
                     "Content-Type": "application/json",
                 },
             })
-                .then((res) => res.json())
-                .then((data) => this.setState({ notifications: data.notifs }));
+                .then((response) => {
+                    if (response.status != 200) {
+                        window.location.reload();
+                    } else {
+                        response.json();
+                    }
+                })
+                .then((data) => this.setState({ notifs: data.notifications }));
         }, 30000);
         this.setState({ intervalId });
     }
