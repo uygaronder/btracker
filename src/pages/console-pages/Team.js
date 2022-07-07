@@ -20,7 +20,7 @@ class Team extends React.Component {
     }
 
     confirmationBox(action, id, state, team, user, relFunction) {
-        console.log(action, id, state, team, user);
+        //console.log(action, id, state, team, user);
         document.getElementById("confirmationBoxDiv").style.display = "flex";
         //const userInfo = state.team.users.filter((user) => user[0] == id)[0];
         switch (action) {
@@ -49,11 +49,22 @@ class Team extends React.Component {
                     relFunction(id, team, state);
                 };
                 break;
+            case "deleteProject":
+                document.getElementById(
+                    "confirmationP"
+                ).innerText = `Are You want to delete project ${
+                    state.team.projects.filter(
+                        (project) => project[1] == id
+                    )[0][0]
+                }?`;
+                document.getElementById("confirmButton").onclick = () => {
+                    relFunction(id, state);
+                };
+                break;
         }
     }
 
     contactServer(action, id, team) {
-        //add are you sure prompt to delete
         fetch(`${apiUrl}/${action}`, {
             method: "post",
             credentials: "include",
@@ -72,7 +83,7 @@ class Team extends React.Component {
         if ((id = state._id)) {
             return;
         }
-        /*fetch(`${apiUrl}/team/removeUser`, {
+        fetch(`${apiUrl}/team/removeUser`, {
             method: "post",
             credentials: "include",
             headers: {
@@ -88,7 +99,7 @@ class Team extends React.Component {
                 if (data == "success") {
                     document.getElementById("user" + id).remove();
                 }
-            });*/
+            });
     }
 
     userPrompt(e, item, contactServer, state, confirmationBox, removeUser) {
@@ -116,19 +127,48 @@ class Team extends React.Component {
         e.target.parentNode.appendChild(prompt);
     }
 
-    projectPrompt(e, item, contactServer, confirmationBox) {
-        const team = this.props.consoleState.activeTeam;
+    projectPrompt(e, item, contactServer, confirmationBox, deleteProject) {
+        const state = this.props.consoleState;
         const prompt = document.createElement("div");
         prompt.id = "morePrompt";
 
-        const userRole = document.createElement("p");
-        userRole.innerText = "Delete Project";
-        userRole.onclick = function () {
-            contactServer("deleteProject", item, team);
+        const deletePrompt = document.createElement("p");
+        deletePrompt.innerText = "Delete Project";
+        deletePrompt.onclick = function () {
+            confirmationBox(
+                "deleteProject",
+                item,
+                state,
+                state.activeTeam,
+                "",
+                deleteProject
+            );
+            //id, state, team, user, relFunction;
+            //action, id, state, team, user, relFunction
         };
-        prompt.appendChild(userRole);
+        prompt.appendChild(deletePrompt);
 
         e.target.parentNode.appendChild(prompt);
+    }
+
+    deleteProject(project, state) {
+        fetch(`${apiUrl}/team/deleteProject`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                projectId: project,
+                activeTeam: state.activeTeam,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    window.location.href = `${appUrl}/console/team`;
+                }
+            });
     }
 
     ignoreUserRequest(id, e) {
@@ -180,6 +220,27 @@ class Team extends React.Component {
             },
             body: JSON.stringify({
                 team: this.props.consoleState.activeTeam,
+            }),
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    window.location.href = `${appUrl}/console`;
+                }
+            });
+    }
+
+    createProject() {
+        if (document.getElementById("projectNameInput").value == "") return;
+        fetch(`${apiUrl}/team/createProject`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                newProjectName:
+                    document.getElementById("projectNameInput").value,
             }),
         })
             .then((res) => res.text())
@@ -320,10 +381,7 @@ class Team extends React.Component {
                                     <h3>{this.props.consoleState.team.name}</h3>
                                 </div>
                             )}
-                            <form
-                                method="post"
-                                action={`${apiUrl}/team/createProject`}
-                            >
+                            <form>
                                 <input
                                     type="text"
                                     name="newProjectName"
@@ -331,7 +389,11 @@ class Team extends React.Component {
                                     placeholder="New Project Name"
                                     required
                                 />
-                                <button id="newProjectButton">
+                                <button
+                                    type="button"
+                                    id="newProjectButton"
+                                    onClick={() => this.createProject()}
+                                >
                                     New Project
                                 </button>
                             </form>
@@ -353,8 +415,11 @@ class Team extends React.Component {
                                                     onClick={(e) =>
                                                         this.projectPrompt(
                                                             e,
-                                                            1,
-                                                            this.contactServer
+                                                            project[1],
+                                                            this.contactServer,
+                                                            this
+                                                                .confirmationBox,
+                                                            this.deleteProject
                                                         )
                                                     }
                                                     src={more}
