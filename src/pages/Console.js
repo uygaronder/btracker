@@ -12,6 +12,7 @@ import cog from "../res/svg/cog.svg";
 import feed from "../res/svg/feed.svg";
 import notification from "../res/svg/notification.svg";
 import chevron from "../res/svg/chevron-up.svg";
+import paper from "../res/svg/paper.svg";
 
 import Archive from "./console-pages/Archive";
 import Dashboard from "./console-pages/Dashboard";
@@ -26,6 +27,7 @@ import Feed from "./console-pages/Feed";
 import GettingStarted from "./console-pages/GetStarted";
 import AddProject from "./console-pages/AddProject";
 import Invite from "./console-pages/invitePeople";
+import InReview from "./console-pages/InReview";
 import { act } from "react-dom/test-utils";
 
 var apiUrl = process.env.REACT_APP_APIURL;
@@ -233,6 +235,7 @@ class Console extends React.Component {
         if (this.state.loading) {
             return <Loading />;
         }
+        console.log(this.state);
         return (
             <div id="console" ref={(div) => (this.consoleDiv = div)}>
                 <nav>
@@ -452,6 +455,16 @@ class Console extends React.Component {
                                     <p>Feed</p>
                                 </span>
                             </Link>
+                            {this.state.team.users.filter(
+                                (user) => user[0] == this.state.usrId
+                            )[0][1] == "lead" && (
+                                <Link className="link" to="/console/inReview">
+                                    <span>
+                                        <img src={paper} alt="Paper" />
+                                        <p>Review</p>
+                                    </span>
+                                </Link>
+                            )}
                         </ul>
                         <ul>
                             <Link className="link" to="settings">
@@ -540,6 +553,15 @@ class Console extends React.Component {
                                 path="addProject"
                                 element={
                                     <AddProject
+                                        consoleState={this.state}
+                                        archive={true}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="inReview"
+                                element={
+                                    <InReview
                                         consoleState={this.state}
                                         archive={true}
                                     />

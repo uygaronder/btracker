@@ -385,8 +385,9 @@ const Bug = ({ consoleState, archive }) => {
                                             Mark Bug Open
                                         </button>
                                     )}
-                                    {/* lead close / dev send to review */}
-                                    {true ? (
+                                    {consoleState.team.users.filter(
+                                        (user) => user[0] == consoleState.usrId
+                                    )[0][1] == "lead" ? (
                                         <button
                                             id="complete"
                                             onClick={() => {
