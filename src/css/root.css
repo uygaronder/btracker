@@ -402,6 +402,12 @@ table a{
     background-image: url("../res/svg/change.svg");
 }
 
+#feedDiv .feedAvatarBack .inReview {
+    background-image: url("../res/svg/paper.svg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
 #feedDiv .feedItem .feedAvatarBack img {
     height: 24px;
     width: 24px;

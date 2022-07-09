@@ -48,6 +48,32 @@ class Team extends React.Component {
         window.location.href = `${appUrl}/console/bug/${id}`;
     }
 
+    closeBug(id) {
+        fetch(`${apiUrl}/bug/closeBug`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                bug: id,
+            }),
+        });
+    }
+
+    reOpenBug(id) {
+        fetch(`${apiUrl}/bug/reOpenBug`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                bug: id,
+            }),
+        });
+    }
+
     render() {
         if (this.state.loading) {
             return <Loading />;
@@ -73,14 +99,13 @@ class Team extends React.Component {
                         <td>Author</td>
                         <td>Closed By</td>
                         <td>Submit Date</td>
-                        <td>accept</td>
-                        <td>decline</td>
+                        <td></td>
                     </tr>
                     {this.state.fBugs.map((bug) => {
                         const closeDate = new Date(
                             bug.closeDate
                         ).toLocaleDateString();
-                        console.log(bug);
+                        //console.log(bug);
                         return (
                             <tr>
                                 <td onClick={() => this.goToBug(bug._id)}>
@@ -98,11 +123,19 @@ class Team extends React.Component {
                                 <td onClick={() => this.goToBug(bug._id)}>
                                     {closeDate}
                                 </td>
-                                <td>
-                                    <button className="accept">Accept</button>
-                                </td>
-                                <td>
-                                    <button className="decline">Decline</button>
+                                <td className="reviewButtons">
+                                    <button
+                                        onClick={() => this.closeBug(bug._id)}
+                                        className="accept"
+                                    >
+                                        Accept
+                                    </button>
+                                    <button
+                                        onClick={() => this.reOpenBug(bug._id)}
+                                        className="decline"
+                                    >
+                                        Decline
+                                    </button>
                                 </td>
                             </tr>
                         );

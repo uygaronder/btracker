@@ -197,6 +197,10 @@
     border-radius: 12px;
 }
 
+#bug .bugButtons{
+    display: flex;
+}
+
 #bug #addComment {
     width: max-content;
     display: flex;

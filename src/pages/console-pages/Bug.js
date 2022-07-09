@@ -357,7 +357,7 @@ const Bug = ({ consoleState, archive }) => {
                                 )}
                             </span>
                             {data.status != "closed" ? (
-                                <div>
+                                <div className="bugButtons">
                                     {data.status != "ongoing" ? (
                                         <button
                                             id="ongoing"
