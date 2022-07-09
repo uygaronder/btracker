@@ -48,7 +48,7 @@ class Team extends React.Component {
         window.location.href = `${appUrl}/console/bug/${id}`;
     }
 
-    closeBug(id) {
+    closeBug(id, state) {
         fetch(`${apiUrl}/bug/closeBug`, {
             method: "post",
             credentials: "include",
@@ -57,11 +57,19 @@ class Team extends React.Component {
             },
             body: JSON.stringify({
                 bug: id,
+                project: state.activeProject,
             }),
-        });
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    document.getElementById("bug" + id).remove();
+                    this.fetchInReview();
+                }
+            });
     }
 
-    reOpenBug(id) {
+    reOpenBug(id, state) {
         fetch(`${apiUrl}/bug/reOpenBug`, {
             method: "post",
             credentials: "include",
@@ -70,8 +78,16 @@ class Team extends React.Component {
             },
             body: JSON.stringify({
                 bug: id,
+                project: state.activeProject,
             }),
-        });
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                if (data == "success") {
+                    document.getElementById("bug" + id).remove();
+                    this.fetchInReview();
+                }
+            });
     }
 
     render() {
@@ -81,7 +97,7 @@ class Team extends React.Component {
         return (
             <div id="inReview">
                 <div id="bugsUp">
-                    <div id="bugsInfo">
+                    <div id="bugsInfo" key={this.state.bugs}>
                         <h4>Bugs To Review: {this.state.bugs.length}</h4>
                     </div>
                     <div id="bugsFilter">
@@ -97,7 +113,7 @@ class Team extends React.Component {
                         <td id="bId">#</td>
                         <td>Bug</td>
                         <td>Author</td>
-                        <td>Closed By</td>
+                        <td>Submitted By</td>
                         <td>Submit Date</td>
                         <td></td>
                     </tr>
@@ -107,7 +123,7 @@ class Team extends React.Component {
                         ).toLocaleDateString();
                         //console.log(bug);
                         return (
-                            <tr>
+                            <tr id={`bug${bug._id}`}>
                                 <td onClick={() => this.goToBug(bug._id)}>
                                     {bug.bugId}
                                 </td>
@@ -125,13 +141,23 @@ class Team extends React.Component {
                                 </td>
                                 <td className="reviewButtons">
                                     <button
-                                        onClick={() => this.closeBug(bug._id)}
+                                        onClick={() =>
+                                            this.closeBug(
+                                                bug._id,
+                                                this.props.consoleState
+                                            )
+                                        }
                                         className="accept"
                                     >
                                         Accept
                                     </button>
                                     <button
-                                        onClick={() => this.reOpenBug(bug._id)}
+                                        onClick={() =>
+                                            this.reOpenBug(
+                                                bug._id,
+                                                this.props.consoleState
+                                            )
+                                        }
                                         className="decline"
                                     >
                                         Decline

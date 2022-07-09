@@ -162,7 +162,7 @@ class Bugs extends React.Component {
         );
 
         this.state.changes.push([data, bugsDiv.parentNode.id]);
-        console.log(this.state.changes);
+        console.log(this.props);
         this.commitConfirmation();
         switch (bugsDiv.parentNode.id) {
             case "openBugs":
@@ -173,7 +173,9 @@ class Bugs extends React.Component {
                 const inReview = document
                     .getElementById(e.target.id)
                     .getElementsByClassName("bugsDiv")[0];
-                true
+                this.props.consoleState.team.users.filter(
+                    (user) => user[0] == this.props.consoleState.usrId
+                )[0][1] == "lead"
                     ? document
                           .getElementById(e.target.id)
                           .getElementsByClassName("bugsDiv")[1]
@@ -273,28 +275,28 @@ class Bugs extends React.Component {
                     </div>
                     <div id="commitChanges" className="commitHidden">
                         <p>Are you sure You want to commit these changes?</p>
-                        <button
-                            onClick={() => {
-                                this.commit(
-                                    this.state.changes,
-                                    this.props.consoleState.activeProject,
-                                    this.props.consoleState
-                                );
-                            }}
-                        >
-                            Accept
-                        </button>
-                        <button
-                            onClick={() => {
-                                this.resetCommit();
-                            }}
-                        >
-                            Reset
-                        </button>
+                        <div>
+                            <button
+                                onClick={() => {
+                                    this.commit(
+                                        this.state.changes,
+                                        this.props.consoleState.activeProject,
+                                        this.props.consoleState
+                                    );
+                                }}
+                            >
+                                Accept
+                            </button>
+                            <button
+                                onClick={() => {
+                                    this.resetCommit();
+                                }}
+                            >
+                                Reset
+                            </button>
+                        </div>
                     </div>
-                    <form action="">
-                        <input type="text" placeholder="Filter" />
-                    </form>
+                    <div></div>
                 </div>
                 <div id="bugDivContainer">
                     <div
@@ -345,6 +347,7 @@ class Bugs extends React.Component {
                         onDragOver={(e) => {
                             this.allowDrop(e);
                         }}
+                        key={this.state.key}
                     >
                         <div className="inReview bugsDiv">
                             <div className="bugsDivUpper">
@@ -355,6 +358,7 @@ class Bugs extends React.Component {
                                     </p>
                                     <button
                                         id="inReviewExtendButton"
+                                        className="inReviewButtonActive"
                                         onClick={() => {
                                             this.toggleInReview();
                                         }}
@@ -364,7 +368,7 @@ class Bugs extends React.Component {
                                 </div>
                             </div>
                             <div
-                                className="inReviewHidden"
+                                className="inReviewButtonActive"
                                 id="inReviewBugs"
                                 key={this.state.key}
                             >

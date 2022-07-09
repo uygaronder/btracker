@@ -481,11 +481,14 @@ const Bug = ({ consoleState, archive }) => {
                             <div id="assignedUsers">
                                 {data.assigned.map((person) => {
                                     const name = consoleState.team.users.filter(
-                                        (usr) => usr[0] == person
+                                        (usr) => usr[0] == person.user
                                     )[0][2];
                                     return (
                                         <span className="assignedUser">
                                             {name}
+                                            <div className="tooltip">
+                                                Assigned By:{person.assignedBy}
+                                            </div>
                                         </span>
                                     );
                                 })}
