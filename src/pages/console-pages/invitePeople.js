@@ -17,7 +17,7 @@ class InvitePeople extends React.Component {
         const query = document.getElementById("userSearch");
         !query.value
             ? (query.placeholder = "This space is required")
-            : fetch(`${apiUrl}/searchUsers`, {
+            : fetch(`${apiUrl}/team/searchUsers`, {
                   method: "post",
                   credentials: "include",
                   headers: {

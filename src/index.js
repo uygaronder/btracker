@@ -13,6 +13,7 @@ import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Console from "./pages/Console.js";
 import Loading from "./pages/Loading.js";
+import Contact from "./pages/Contact.js";
 
 const apiUrl = process.env.REACT_APP_APIURL;
 
@@ -37,6 +38,7 @@ ReactDOM.render(
                         </ProtectedRoute>
                     }
                 />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
         </Router>
     </React.StrictMode>,

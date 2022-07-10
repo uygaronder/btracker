@@ -286,8 +286,8 @@ const Bug = ({ consoleState, archive }) => {
             console.error(e);
         }
     }
-    console.log(consoleState);
     if (!data) return <Loading />;
+    console.log(data);
     return (
         <div id="bug">
             <div id="submit" style={{ display: "none" }}>
@@ -497,8 +497,8 @@ const Bug = ({ consoleState, archive }) => {
                     ) : (
                         <div />
                     )}
-                    <div id="assignedButtons">
-                        {!archive && (
+                    {!archive && (
+                        <div id="assignedButtons">
                             <button
                                 onClick={() => {
                                     assignDiv();
@@ -506,31 +506,34 @@ const Bug = ({ consoleState, archive }) => {
                             >
                                 <img src={assign} /> Assign This Bug
                             </button>
-                        )}
 
-                        <button
-                            onClick={() => {
-                                confirmationBox(
-                                    "deleteBug",
-                                    data._id,
-                                    consoleState
-                                );
-                            }}
-                        >
-                            <img src={del} />
-                            Delete This Bug
-                        </button>
-                        <button
-                            onClick={() => {
-                                editBug();
-                            }}
-                        >
-                            <img src={edit} /> Edit This Bug
-                        </button>
-                        <div id="assign" style={{ display: "none" }}>
-                            <AssignBug consoleState={consoleState} bug={data} />
+                            <button
+                                onClick={() => {
+                                    confirmationBox(
+                                        "deleteBug",
+                                        data._id,
+                                        consoleState
+                                    );
+                                }}
+                            >
+                                <img src={del} />
+                                Delete This Bug
+                            </button>
+                            <button
+                                onClick={() => {
+                                    editBug();
+                                }}
+                            >
+                                <img src={edit} /> Edit This Bug
+                            </button>
+                            <div id="assign" style={{ display: "none" }}>
+                                <AssignBug
+                                    consoleState={consoleState}
+                                    bug={data}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
             {!archive && (

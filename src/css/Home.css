@@ -27,40 +27,6 @@ body #home {
     text-decoration: none;
 }
 
-/* Navbar */
-
-#home nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 10px;
-}
-
-#home nav h2{
-    display: flex;
-    align-items: center;
-}
-
-#home nav img{
-    height: 50px;
-    filter: brightness(0) invert(1);
-}
-
-#home nav ul {
-    display: flex;
-    list-style: none;
-    align-items: center;
-}
-
-#home nav ul li {
-    margin: 0 15px;
-}
-
-#home nav button {
-    background-color: transparent;
-    border: 1px solid white;
-}
-
 /* hero sect */
 
 #home #hero {

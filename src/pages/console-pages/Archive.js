@@ -74,22 +74,30 @@ class Archive extends React.Component {
                     <tr>
                         <td id="bId">#</td>
                         <td>Bug</td>
+                        <td>Closed By</td>
                         <td>Author</td>
                         <td>Close Date</td>
                     </tr>
-                    {this.state.fBugs.map((bug) => {
-                        const closeDate = new Date(
-                            bug.closeDate
-                        ).toLocaleDateString();
-                        return (
-                            <tr onClick={() => this.handleClick(bug._id)}>
-                                <td>{bug.bugId}</td>
-                                <td>{bug.bugTitle}</td>
-                                <td>{bug.author.authorName}</td>
-                                <td>{closeDate}</td>
-                            </tr>
-                        );
-                    })}
+                    {this.state.fBugs
+                        .slice(0)
+                        .reverse()
+                        .map((bug) => {
+                            const closeDate = new Date(
+                                bug.closeDate
+                            ).toLocaleDateString();
+                            const closedByName = !bug.closedBy
+                                ? "Not Set"
+                                : bug.closedBy.name;
+                            return (
+                                <tr onClick={() => this.handleClick(bug._id)}>
+                                    <td>{bug.bugId}</td>
+                                    <td>{bug.bugTitle}</td>
+                                    <td>{closedByName}</td>
+                                    <td>{bug.author.authorName}</td>
+                                    <td>{closeDate}</td>
+                                </tr>
+                            );
+                        })}
                 </table>
             </div>
         );
