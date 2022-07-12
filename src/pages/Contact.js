@@ -54,7 +54,10 @@ class Home extends React.Component {
                             get back to you as soon as I can!
                         </p>
                     </span>
-                    <form action="">
+                    <form
+                        action="https://formspree.io/f/xrgjwrdw"
+                        method="post"
+                    >
                         <input
                             type="text"
                             name="name"
