@@ -24,7 +24,6 @@ class Login extends React.Component {
                         <Route path="register" element={register()} />
                         <Route path="" element={<Navigate to={"signin"} />} />
                     </Routes>
-                    <button>Google</button>
                 </div>
             </span>
         );
