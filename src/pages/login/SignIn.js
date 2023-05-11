@@ -7,6 +7,21 @@ var apiUrl = process.env.REACT_APP_APIURL;
 
 const sign = function () {
     document.title = `BTrack | Login`;
+
+    function login() {
+        fetch(`${apiUrl}/login/login`, {
+            method: "post",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: document.getElementById("signEmail").value,
+                password: document.getElementById("signPassword").value,
+            }),
+        });
+    }
+
     return (
         <div className="formDiv">
             <h1>Login</h1>
@@ -14,7 +29,11 @@ const sign = function () {
                 You can sign in below or{" "}
                 <Link to="/login/register">register</Link> a new account
             </p>
-            <form method="POST" action={`${apiUrl}/login/login`}>
+            <form
+                onSubmit={() => {
+                    login();
+                }}
+            >
                 <span className="formText">
                     <input
                         type={"text"}
