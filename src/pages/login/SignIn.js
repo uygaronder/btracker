@@ -10,11 +10,8 @@ const sign = function () {
 
     function login() {
         fetch(`${apiUrl}/login/login`, {
-            method: "post",
+            method: "POST",
             credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
             body: JSON.stringify({
                 email: document.getElementById("signEmail").value,
                 password: document.getElementById("signPassword").value,
@@ -29,7 +26,11 @@ const sign = function () {
                 You can sign in below or{" "}
                 <Link to="/login/register">register</Link> a new account
             </p>
-            <form method="POST" action={`${apiUrl}/login/login`}>
+            <form
+                method="POST"
+                credentials="include"
+                action={`${apiUrl}/login/login`}
+            >
                 <span className="formText">
                     <input
                         type={"text"}
