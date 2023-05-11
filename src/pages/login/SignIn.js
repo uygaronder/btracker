@@ -16,7 +16,11 @@ const sign = function () {
                 email: document.getElementById("signEmail").value,
                 password: document.getElementById("signPassword").value,
             }),
-        });
+        })
+            .then((res) => res.text())
+            .then((data) => {
+                console.log(data);
+            });
     }
 
     return (
@@ -26,7 +30,7 @@ const sign = function () {
                 You can sign in below or{" "}
                 <Link to="/login/register">register</Link> a new account
             </p>
-            <form method="POST" action={`${apiUrl}/login/login`}>
+            <form onSubmit={() => login()}>
                 <span className="formText">
                     <input
                         type={"text"}
