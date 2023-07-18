@@ -61,7 +61,7 @@ function ProtectedRoute({ toSend, loggedIn, children }) {
                 return e;
             }
         };
-
+        // tests
         auth();
     }, []);
     return fetched ? (
