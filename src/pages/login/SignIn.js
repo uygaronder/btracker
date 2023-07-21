@@ -13,6 +13,9 @@ const sign = function () {
         fetch(`${apiUrl}/login/login`, {
             method: "POST",
             credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
                 email: document.getElementById("signEmail").value,
                 password: document.getElementById("signPassword").value,
@@ -22,6 +25,8 @@ const sign = function () {
             .then((data) => {
                 console.log(data);
             });
+
+            
     }
 
     return (
