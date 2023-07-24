@@ -7,7 +7,7 @@ var apiUrl = process.env.REACT_APP_APIURL;
 document.title = `BTrack | Login`;
 
 const sign = function () {
-
+    /*
     function login() {
         fetch(`${apiUrl}/login/login`, {
             method: "POST",
@@ -28,6 +28,7 @@ const sign = function () {
 
             
     }
+    */
     /* onSubmit={() => login()} */
     return (
         <div className="formDiv">
