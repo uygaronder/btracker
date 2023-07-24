@@ -25,6 +25,8 @@ const sign = function () {
             .then((data) => {
                 console.log(data);
             });
+
+            
     }
     /* onSubmit={() => login()} */
     return (
