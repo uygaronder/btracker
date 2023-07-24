@@ -6,6 +6,8 @@ import asterisk from "../../res/svg/asterisk.svg";
 import letter from "../../res/svg/letter.svg";
 const apiUrl = process.env.REACT_APP_APIURL;
 
+document.title = `BTrack | Register`;
+
 const register = function () {
     function checkUsername(e) {
         if (document.getElementById("regEmail").value == "") return;
@@ -30,7 +32,7 @@ const register = function () {
             });
     }
 
-    document.title = `BTrack | Register`;
+    
     return (
         <div className="formDiv">
             <h1>Register</h1>

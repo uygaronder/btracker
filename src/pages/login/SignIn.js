@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import at from "../../res/svg/at.svg";
 import asterisk from "../../res/svg/asterisk.svg";
 var apiUrl = process.env.REACT_APP_APIURL;
-
+document.title = `BTrack | Login`;
 
 const sign = function () {
-    document.title = `BTrack | Login`;
 
     function login() {
         fetch(`${apiUrl}/login/login`, {
             method: "POST",
             credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+            },
             body: JSON.stringify({
                 email: document.getElementById("signEmail").value,
                 password: document.getElementById("signPassword").value,
@@ -23,7 +26,7 @@ const sign = function () {
                 console.log(data);
             });
     }
-
+    /* onSubmit={() => login()} */
     return (
         <div className="formDiv">
             <h1>Login</h1>
@@ -31,7 +34,8 @@ const sign = function () {
                 You can sign in below or{" "}
                 <Link to="/login/register">register</Link> a new account
             </p>
-            <form onSubmit={() => login()}>
+            
+            <form method="post" action={`${apiUrl}/login/login`}>
                 <span className="formText">
                     <input
                         type={"text"}
