@@ -30,6 +30,7 @@ const sign = function () {
     }
     */
     /* onSubmit={() => login()} */
+    /* method="post" action={`${apiUrl}/login/login`} */
     return (
         <div className="formDiv">
             <h1>Login</h1>
@@ -47,7 +48,7 @@ const sign = function () {
                         placeholder="E-Mail"
                         required
                     />
-                    <label htmlFor="email">
+                    <label htmlFor="signEmail">
                         <img src={at} alt="@" />
                     </label>
                 </span>
@@ -59,7 +60,7 @@ const sign = function () {
                         placeholder="********"
                         required
                     />
-                    <label htmlFor="password">
+                    <label htmlFor="signPassword">
                         <img src={asterisk} alt="*" />
                     </label>
                 </span>
