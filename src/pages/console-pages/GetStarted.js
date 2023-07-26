@@ -16,7 +16,7 @@ class GettingStarted extends React.Component {
     }
 
     componentDidMount() {
-
+        console.log("Getting Started");
     }
 
     render() {
@@ -25,7 +25,7 @@ class GettingStarted extends React.Component {
         }
         return <div id="getStarted">
             <div id="upper">
-                <h1>GettingStarted</h1>
+                <h1>Welcome To Bugsnack</h1>
                 <p>To Get Started You must first join or create a Team</p>
             </div>
             <div class="newTeamDiv">

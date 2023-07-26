@@ -14,6 +14,7 @@ import Login from "./pages/Login.js";
 import Console from "./pages/Console.js";
 import Loading from "./pages/Loading.js";
 import Contact from "./pages/Contact.js";
+import GettingStarted from "./pages/console-pages/GetStarted";
 
 const apiUrl = process.env.REACT_APP_APIURL;
 
@@ -39,6 +40,13 @@ ReactDOM.render(
                         </ProtectedRoute>
                     }
                 />
+                <Route 
+                    path="/gettingStarted"
+                    element={
+                        <ProtectedRoute loggedIn={true}>
+                            <GettingStarted />
+                        </ProtectedRoute>
+                    }/>
                 <Route path="/contact" element={<Contact />} />
             </Routes>
         </Router>

@@ -155,16 +155,20 @@ class Console extends React.Component {
             .then((data) => (response = data));
 
         let activeProject;
+        let activeTeam;
+        console.log(response);
         if (response.team == null) {
             activeProject = null;
+            activeTeam = null;
+        } else {
+            let res = response.team.projects.filter(
+                (project) => project[1] == response.user.activeProject
+            );
+            if (res.length > 0) {
+                activeProject = res[0][1];
+            }
         }
-
-        let res = response.team.projects.filter(
-            (project) => project[1] == response.user.activeProject
-        );
-        if (res.length > 0) {
-            activeProject = res[0][1];
-        }
+        
         if (
             activeProject == null &&
             response.team != null &&
@@ -455,7 +459,7 @@ class Console extends React.Component {
                                     <p>Feed</p>
                                 </span>
                             </Link>
-                            {this.state.team.users.filter(
+                            {this.state.team && this.state.team.users.filter(
                                 (user) => user[0] == this.state.usrId
                             )[0][1] == "lead" && (
                                 <Link className="link" to="/console/inReview">

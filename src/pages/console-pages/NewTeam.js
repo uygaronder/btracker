@@ -11,11 +11,15 @@ var APP_URL = process.env.REACT_APP_APPURL;
 class NewTeam extends React.Component {
     constructor(props) {
         super(props);
+        this.props.team ? 
         this.state = {
             teams: [],
             teamsLoading: false,
             invites: this.props.consoleState.invites,
-        };
+        } : this.state = {
+            teams: [],
+            teamsLoading: false,
+        } 
     }
     searchTeams(query) {
         if (query == "") return;
