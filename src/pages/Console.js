@@ -109,6 +109,13 @@ class Console extends React.Component {
         }
     };
 
+    handleHamburgerMenu(){
+        const hamburgerMenu = document.getElementById("hamburgerMenu");
+        const sideNavMobile = document.getElementById("sideNavMobile");
+        hamburgerMenu.classList.toggle("hamburgerActive");
+        sideNavMobile.classList.toggle("sideNavMobileActive");
+    }
+
     clearNotifications() {
         fetch(`${apiUrl}/clearNotifs`, {
             method: "post",
@@ -248,7 +255,12 @@ class Console extends React.Component {
                             <img src={logo} alt="Logo" />
                         </Link>
                         <ul>
-                            <li>
+                            <li id="hamburgerMenu" onClick={() => this.handleHamburgerMenu()} className="hamburgerMenuButton hamburgerActive showMobile">
+                                <span />
+                                <span />
+                                <span />
+                            </li>
+                            <li className="hideMobile">
                                 <select
                                     id="teamSelect"
                                     onChange={() => this.handleTeamChange()}
@@ -264,7 +276,7 @@ class Console extends React.Component {
                                     <option value="new">New Team</option>
                                 </select>
                             </li>
-                            <li>
+                            <li className="hideMobile">
                                 <select
                                     name="project"
                                     id="projectSelect"
@@ -422,6 +434,11 @@ class Console extends React.Component {
                     </div>
                 </nav>
                 <div id="screen">
+                    <div id="sideNavMobile">
+                        <ul>
+                            testssdfdsa
+                        </ul>
+                    </div>
                     <div id="sideNav">
                         <ul>
                             <Link className="link" to="/console/dashboard">
