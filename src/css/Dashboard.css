@@ -183,6 +183,9 @@
     padding: 5px 8px;
     cursor: pointer;
 }
+#dashboard #dashboardBugs table td:first-of-type {
+    white-space: nowrap;
+}
 
 #dashboard #dashboardBugs table td:first-of-type {
     width: 8ch;

@@ -184,3 +184,44 @@ body #home {
     font-size: 1.5rem;
     font-weight: 700;
 }
+
+#hamburgerButton{
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    body #home{
+        padding: 5px 10px;
+        overflow-x: hidden;
+    }
+    nav{
+        font-size: .9rem;
+    }
+    nav #anchors, #navButtons{
+        display: none;
+    }
+
+    #hamburgerButtons{
+        display: block;
+    }
+
+    #home #hero #heroCTA {
+        width: auto;
+    }
+    #home #hero div:first-of-type p {
+        margin: 5px 0;
+        opacity: 0.7;
+        font-size: 1rem;
+        width: 80%;
+    }
+    #home #hero h2 {
+        font-size: 2rem;
+    }
+    #home #hero #heroImage {
+        position: absolute;
+        z-index: -10;
+        left: 70%;
+        display: flex;
+        align-items: center;
+    }
+}

@@ -41,7 +41,7 @@ class Home extends React.Component {
                         </li>
                     </ul>
                     <ul id="navButtons">
-                        <li>
+                        <li >
                             <Link to="/login">Sign In</Link>
                         </li>
                         <li>
@@ -50,6 +50,14 @@ class Home extends React.Component {
                             </Link>
                         </li>
                     </ul>
+                    <div id="hamburgerButton">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div id="hamburgerMenu">
+
+                    </div>
                 </nav>
                 {/* Hero Section */}
                 <section id="hero">
