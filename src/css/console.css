@@ -46,7 +46,7 @@
     color: white;
     border: none;
     font-size: 0.9rem;
-    font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    font-style: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
         "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
         sans-serif;
     padding: 2px;
@@ -56,9 +56,6 @@
     outline: none;
 }
 
-#console select option{
-    background-color: #00252b;
-}
 #console select option{
     background-color: #00252b;
 }
@@ -269,6 +266,7 @@
     display: flex;
     flex-grow: 1;
     background-color: var(--backgroundColor);
+    position: relative;
 }
 
 #console #screen #consoleScreen {
@@ -291,11 +289,6 @@
     flex-direction: column;
 }
 
-#console #sideNav ul span {
-    padding: 5px;
-    transition: 0.2s ease;
-}
-
 #console nav button{
     background-color: transparent;
     border: none;
@@ -312,15 +305,14 @@
 }
 
 #console #sideNav ul span {
+    padding: 5px;
+    transition: 0.2s ease;
     margin: 5px 0;
     color: white;
     text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#console #sideNav ul span {
     text-align: center;
 }
 
@@ -346,34 +338,27 @@
     display: none;
 }
 
-.hide{
-    display: none;
-}
-
-.showMobile{
-    display: none;
-}
-
 @media screen and (max-width: 700px) {
-    .hideMobile{
-        display: none;
+    #console nav img {
+        height: 15px;
+        width: 15px;
+        margin-right: 5px;
+    }
+    
+    #console nav {
+        padding: 4px 10px;
     }
 
-    .showMobile{
-        display: block;
+    #console #navLogo{
+        height: 30px;
+        width: 30px;
     }
 
     #console #sideNav {
         display: none;
     }
 
-    #console #sideNavMobile {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: white;
-    }
-
+    
     .hamburgerMenuButton span{
         display: block;
         background-color: white;
@@ -383,15 +368,15 @@
         z-index: 9999;
         transition: .2s ease;
     }
-
+    
     .hamburgerActive span:nth-of-type(1){
         transform: rotate(45deg) translate(4px, 4px);
     }
-
+    
     .hamburgerActive span:nth-of-type(2){
         opacity: 0;
     }
-
+    
     .hamburgerActive span:nth-of-type(3){
         transform: rotate(-45deg) translate(4px, -4px);
     }
@@ -399,9 +384,69 @@
     .hamburgerMenuButton span:last-of-type{
         margin-bottom: 0;
     }
-
-    .sideNavMobileActive{
+    
+    #screen #sideNavMobile {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 70%;
+        z-index: 9999;
+        padding: 20px 10px;
+        padding-top: 0;
+        background-color: #001316;
+        box-shadow: inset 0px 5px 10px black;
+        color: white;
+        flex-direction: column;
+        transition: left .2s linear;
+    }
+    
+    #console #screen .sideNavMobileActive{
         display: flex;
+        left: 0;
     }
 
+    #sideNavMobile li{
+        list-style: none;
+        margin-top: 20px;
+        padding: 0 10px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.508);
+    }
+
+    #sideNavMobile li:last-of-type{
+        margin-top: auto;
+        padding-bottom: 0;
+        border: none;
+    }
+
+    #sideNavMobile li span{
+        display: flex;
+        align-items: center;
+    }
+
+    #sideNavMobile li span img{
+        height: 30px;
+        width: 30px;
+        margin-right: 10px;
+        filter: grayscale(0) invert(1);
+    }
+    
+    #sideNavMobile span p{
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
+    
+    #console li select {
+        font-size: 1.2rem;
+        padding: 0;
+    }
+    
+    #console select:focus{
+        outline: none;
+    }
+    
+    #console select option{
+        font-size: 1rem;
+    }
 }
