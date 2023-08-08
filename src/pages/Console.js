@@ -30,8 +30,8 @@ import Invite from "./console-pages/invitePeople";
 import InReview from "./console-pages/InReview";
 import { act } from "react-dom/test-utils";
 
-var apiUrl = process.env.REACT_APP_APIURL;
-var APP_URL = process.env.REACT_APP_APPURL;
+const apiUrl = process.env.REACT_APP_APIURL;
+const APP_URL = process.env.REACT_APP_APPURL;
 class Console extends React.Component {
     constructor(props) {
         super(props);
@@ -116,6 +116,13 @@ class Console extends React.Component {
         sideNavMobile.classList.toggle("sideNavMobileActive");
     }
 
+    closeHamburgerMenu(){
+        const hamburgerMenu = document.getElementById("hamburgerMenu");
+        const sideNavMobile = document.getElementById("sideNavMobile");
+        hamburgerMenu.classList.remove("hamburgerActive");
+        sideNavMobile.classList.remove("sideNavMobileActive");
+    }
+
     clearNotifications() {
         fetch(`${apiUrl}/clearNotifs`, {
             method: "post",
@@ -154,7 +161,7 @@ class Console extends React.Component {
     };
 
     fetchInfo = async () => {
-        var response;
+        let response;
         await fetch(`${apiUrl}/console/getConsoleInfo`, {
             credentials: "include",
         })
@@ -250,10 +257,10 @@ class Console extends React.Component {
                 <nav>
                     <div>
                         <Link to="/">
-                            <img src={logo} alt="Logo" />
+                            <img id="navLogo" src={logo} alt="Logo" />
                         </Link>
                         <ul>
-                            <li id="hamburgerMenu" onClick={() => this.handleHamburgerMenu()} className="hamburgerMenuButton hamburgerActive showMobile">
+                            <li id="hamburgerMenu" onClick={() => this.handleHamburgerMenu()} className="hamburgerMenuButton showMobile">
                                 <span />
                                 <span />
                                 <span />
@@ -433,9 +440,95 @@ class Console extends React.Component {
                 </nav>
                 <div id="screen">
                     <div id="sideNavMobile">
-                        <ul>
-                            testssdfdsa
-                        </ul>
+                        <li>
+                            <select
+                                id="teamSelectMobile"
+                                onChange={() => this.handleTeamChange()}
+                                defaultValue={this.state.activeTeam}
+                            >
+                                {this.state.teamOptions.map((team) => {
+                                    return (
+                                        <option value={team[1]}>
+                                            {team[0]}
+                                        </option>
+                                    );
+                                })}
+                                <option value="new">New Team</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select
+                                name="project"
+                                id="projectSelectMobile"
+                                onChange={() => this.handleProjectChange()}
+                                defaultValue={this.state.activeProject}
+                            >
+                                {this.state.team &&
+                                    this.state.team.projects.map(
+                                        (project) => {
+                                            return (
+                                                <option value={project[1]}>
+                                                    {project[0]}
+                                                </option>
+                                            );
+                                        }
+                                    )}
+                                <option value="new">New Project</option>
+                            </select>
+                        </li>
+                        <li onClick={() => this.closeHamburgerMenu()}>
+                            <Link className="link" to="/console/dashboard">
+                                <span>
+                                    <img src={dashboard} alt="Home" />
+                                    <p>Dashboard</p>
+                                </span>
+                            </Link>
+                        </li>
+                        <li onClick={() => this.closeHamburgerMenu()}>
+                            <Link className="link" to="/console/bugs">
+                                <span>
+                                    <img src={bug} alt="Bugs" />
+                                    <p>Bugs</p>
+                                </span>
+                            </Link>
+                        </li>
+                        <li onClick={() => this.closeHamburgerMenu()}>
+                            <Link className="link" to="/console/archive">
+                                <span>
+                                    <img src={archive} alt="Archive" />
+                                    <p>Archive</p>
+                                </span>
+                            </Link>
+                        </li>
+                        <li onClick={() => this.closeHamburgerMenu()}>
+                            <Link className="link" to="feed">
+                                <span>
+                                    <img src={feed} alt="Feed" />
+                                    <p>Feed</p>
+                                </span>
+                            </Link>
+                        </li>
+                        {this.state.team && this.state.team.users.filter(
+                            (user) => user[0] == this.state.usrId
+                        )[0][1] == "lead" && (
+                            <li onClick={() => this.closeHamburgerMenu()}>
+                                <Link className="link" to="/console/inReview">
+                                <span>
+                                    <img src={paper} alt="Paper" />
+                                    <p>Review</p>
+                                </span>
+                                </Link>
+                            </li>
+                            
+                        )}
+                        <li onClick={() => this.closeHamburgerMenu()}>
+                            <Link className="link" to="settings">
+                                <span>
+                                    <img src={cog} />
+                                    <p>Settings</p>
+                                </span>
+                            </Link>
+                        </li>
                     </div>
                     <div id="sideNav">
                         <ul>
