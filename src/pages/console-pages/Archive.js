@@ -60,7 +60,7 @@ class Archive extends React.Component {
             <div id="archive">
                 <div id="bugsUp">
                     <div id="bugsInfo">
-                        <h4>Archived Bugs: {this.state.bugs.length}</h4>
+                        <h4>Archived Bugs: {!this.state.bugs?0:this.state.bugs.length}</h4>
                     </div>
                     <div id="bugsFilter">
                         <input
@@ -78,7 +78,7 @@ class Archive extends React.Component {
                         <td>Author</td>
                         <td>Close Date</td>
                     </tr>
-                    {this.state.fBugs
+                    {!this.state.bugs?"":this.state.fBugs
                         .slice(0)
                         .reverse()
                         .map((bug) => {

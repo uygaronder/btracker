@@ -11,7 +11,7 @@ var APP_URL = process.env.REACT_APP_APPURL;
 class NewTeam extends React.Component {
     constructor(props) {
         super(props);
-        this.props.team ? 
+        this.props.consoleState ? 
         this.state = {
             teams: [],
             teamsLoading: false,
@@ -24,7 +24,7 @@ class NewTeam extends React.Component {
     searchTeams(query) {
         if (query == "") return;
         this.setState({ teamsLoading: true });
-
+        
         fetch(`${apiUrl}/team/searchTeams`, {
             method: "post",
             credentials: "include",
@@ -35,12 +35,12 @@ class NewTeam extends React.Component {
                 query: query,
             }),
         })
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({ teams: data.team, teamsLoading: false });
-            });
+        .then((res) => res.json())
+        .then((data) => {
+            this.setState({ teams: data.team, teamsLoading: false });
+        });
     }
-
+    
     join(teamId, e) {
         fetch(`${apiUrl}/team/joinTeam`, {
             method: "post",
@@ -52,14 +52,14 @@ class NewTeam extends React.Component {
                 team: teamId,
             }),
         })
-            .then((res) => res.text())
-            .then((data) => {
-                if (data == "success") {
-                    e.target.innerText = "Sent";
-                }
-            });
+        .then((res) => res.text())
+        .then((data) => {
+            if (data == "success") {
+                e.target.innerText = "Sent";
+            }
+        });
     }
-
+    
     acceptInvite(teamId) {
         fetch(`${apiUrl}/team/acceptTeamInvite`, {
             method: "post",
@@ -74,7 +74,7 @@ class NewTeam extends React.Component {
             window.location.href = `${APP_URL}/console`;
         });
     }
-
+    
     ignoreTeamInvite(teamId) {
         fetch(`${apiUrl}/team/ignoreTeamInvite`, {
             method: "post",
@@ -86,13 +86,14 @@ class NewTeam extends React.Component {
                 team: teamId,
             }),
         })
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({ invites: data.data });
-            });
+        .then((res) => res.json())
+        .then((data) => {
+            this.setState({ invites: data.data });
+        });
     }
-
+    
     render() {
+        console.log(this.props)
         return (
             <div id="newTeam">
                 <div id="teamOpt">
@@ -104,16 +105,16 @@ class NewTeam extends React.Component {
                                 placeholder="Name"
                                 type="text"
                                 id="teamSearch"
-                            />
+                                />
                             <button
                                 id="findSearch"
                                 onClick={() => {
                                     this.searchTeams(
                                         document.getElementById("teamSearch")
-                                            .value
-                                    );
-                                }}
-                            >
+                                        .value
+                                        );
+                                    }}
+                                    >
                                 <img src={Search} />
                             </button>
                         </div>

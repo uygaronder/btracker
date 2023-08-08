@@ -163,7 +163,6 @@ class Console extends React.Component {
 
         let activeProject;
         let activeTeam;
-        console.log(response);
         if (response.team == null) {
             activeProject = null;
             activeTeam = null;
@@ -246,7 +245,6 @@ class Console extends React.Component {
         if (this.state.loading) {
             return <Loading />;
         }
-        console.log(this.state);
         return (
             <div id="console" ref={(div) => (this.consoleDiv = div)}>
                 <nav>
