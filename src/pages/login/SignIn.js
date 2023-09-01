@@ -46,6 +46,7 @@ const sign = function () {
                         id="signEmail"
                         name="email"
                         placeholder="E-Mail"
+                        value="demoaccount"
                         required
                     />
                     <label htmlFor="signEmail">
@@ -58,6 +59,7 @@ const sign = function () {
                         type={"password"}
                         name="password"
                         placeholder="********"
+                        value="demoaccount"
                         required
                     />
                     <label htmlFor="signPassword">
